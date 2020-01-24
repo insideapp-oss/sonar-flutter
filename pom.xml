@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonarsource.parent</groupId>
+        <artifactId>parent</artifactId>
+        <version>52</version>
+    </parent>
+    
+    <groupId>fr.insideapp.sonarqube</groupId>
+    <artifactId>sonar-flutter</artifactId>
+    <version>0.1.0</version>
+
+    <packaging>pom</packaging>
+
+    <name>Flutter SonarQube Plugin</name>
+    <description>Enables analysis of Dart and Flutter projects into SonarQube.</description>
+    <url>https://github.com/insideapp-oss/sonar-flutter</url>
+
+    <modules>
+        <module>sonar-flutter-plugin</module>
+        <module>dart-lang</module>
+    </modules>
+
+    <inceptionYear>2020</inceptionYear>
+    <organization>
+        <name>inside|app</name>
+        <url>https://github.com/insideapp-oss</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>GNU LGPL 3</name>
+            <url>http://www.gnu.org/licenses/lgpl.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>zippy1978</id>
+            <name>Gilles Grousset</name>
+            <organization>inside|app</organization>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:insideapp-oss/sonar-flutter.git</connection>
+        <developerConnection>scm:git:git@github.com:insideapp-oss/sonar-flutter.git</developerConnection>
+        <url>https://github.com/insideapp-oss/sonar-flutter</url>
+    </scm>
+
+    <properties>
+        <license.owner>inside|app</license.owner>
+        <license.title>SonarQube Flutter Plugin</license.title>
+        <license.mailto>contact@insideapp.fr</license.mailto>
+
+        <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+
+        <sonarQubeMinVersion>6.7</sonarQubeMinVersion>
+
+        <assertj.version>3.5.2</assertj.version>
+        <guava.version>17.0</guava.version>
+        <junit.version>4.10</junit.version>
+        <logback.version>1.0.13</logback.version>
+        <mockito.version>1.9.0</mockito.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <sonar.version>6.7</sonar.version>
+        <sonar-orchestrator.version>3.22.0.1791</sonar-orchestrator.version>
+        <sonarlint.version>4.0.0.2052</sonarlint.version>
+        <sslr.version>1.23</sslr.version>
+        <sslr-squid-bridge.version>2.6.1</sslr-squid-bridge.version>
+        <ant.version>1.6</ant.version>
+        <analyzer-commons.version>1.10.2.456</analyzer-commons.version>
+        <assertj.version>3.5.2</assertj.version>
+        <jproc.version>2.2.3</jproc.version>
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.sonarsource.sonarqube</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+            <version>${sonar.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.analyzer-commons</groupId>
+            <artifactId>sonar-analyzer-test-commons</artifactId>
+            <version>${analyzer-commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.analyzer-commons</groupId>
+            <artifactId>sonar-analyzer-commons</artifactId>
+            <version>${analyzer-commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.analyzer-commons</groupId>
+            <artifactId>sonar-xml-parsing</artifactId>
+            <version>${analyzer-commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.buildobjects</groupId>
+            <artifactId>jproc</artifactId>
+            <version>${jproc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.sslr</groupId>
+            <artifactId>sslr-core</artifactId>
+            <version>${sslr.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.sslr-squid-bridge</groupId>
+            <artifactId>sslr-squid-bridge</artifactId>
+            <version>${sslr-squid-bridge.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.sonar.sslr</groupId>
+                    <artifactId>sslr-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.codehaus.sonar.sslr</groupId>
+                    <artifactId>sslr-xpath</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.codehaus.sonar</groupId>
+                    <artifactId>sonar-plugin-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.picocontainer</groupId>
+                    <artifactId>picocontainer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.sonarsource.sonarqube</groupId>
+            <artifactId>sonar-testing-harness</artifactId>
+            <version>${sonar.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.sslr</groupId>
+            <artifactId>sslr-testing-harness</artifactId>
+            <version>${sslr.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <properties>
+                        <license.years>${inceptionYear}</license.years>
+                    </properties>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

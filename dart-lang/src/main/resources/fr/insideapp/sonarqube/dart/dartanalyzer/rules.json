@@ -1,0 +1,1108 @@
+[
+    {
+        "key": "avoid_empty_else",
+        "name": "Avoid empty else",
+        "description": "Avoid empty else statements.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_print",
+        "name": "Avoid print",
+        "description": "Avoid print calls in production code.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_relative_lib_imports",
+        "name": "Avoid relative lib imports",
+        "description": "Avoid relative imports for files in lib/.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_returning_null_for_future",
+        "name": "Avoid returning null for future",
+        "description": "Avoid returning null for Future.",
+        "severity": "MAJOR",
+        "type": "BUG"
+    },
+    {
+        "key": "avoid_slow_async_io",
+        "name": "Avoid slow async io",
+        "description": "Avoid slow async dart:io methods.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_types_as_parameter_names",
+        "name": "Avoid types as parameter names",
+        "description": "Avoid types as parameter names.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_web_libraries_in_flutter (experimental)",
+        "name": "Avoid web libraries in flutter (experimental)",
+        "description": "Avoid using web-only libraries outside Flutter web plugin packages.",
+        "severity": "MAJOR",
+        "type": "BUG"
+    },
+    {
+        "key": "cancel_subscriptions",
+        "name": "Cancel subscriptions",
+        "description": "Cancel instances of dart.async.StreamSubscription.",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "close_sinks",
+        "name": "Close sinks",
+        "description": "Close instances of dart.core.Sink.",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "comment_references",
+        "name": "Comment references",
+        "description": "Only reference in scope identifiers in doc comments.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "control_flow_in_finally",
+        "name": "Control flow in finally",
+        "description": "Avoid control flow in finally blocks.",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "diagnostic_describe_all_properties",
+        "name": "Diagnostic describe all properties",
+        "description": "DO reference all public properties in debug methods.",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "empty_statements",
+        "name": "Empty statements",
+        "description": "Avoid empty statements.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "hash_and_equals",
+        "name": "Hash and equals",
+        "description": "Always override hashCode if overriding ==.",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "invariant_booleans (experimental)",
+        "name": "Invariant booleans (experimental)",
+        "description": "Conditions should not unconditionally evaluate to true or to false.",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "iterable_contains_unrelated_type",
+        "name": "Iterable contains unrelated type",
+        "description": "Invocation of Iterable.contains with references of unrelated types.",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "list_remove_unrelated_type",
+        "name": "List remove unrelated type",
+        "description": "Invocation of remove with references of unrelated types.",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "literal_only_boolean_expressions",
+        "name": "Literal only boolean expressions",
+        "description": "Boolean expression composed only with literals.",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "no_adjacent_strings_in_list",
+        "name": "No adjacent strings in list",
+        "description": "Don't use adjacent strings in list.",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "no_duplicate_case_values",
+        "name": "No duplicate case values",
+        "description": "Don't use more than one case with same value.",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "no_logic_in_create_state",
+        "name": "No logic in create state",
+        "description": "Don't put any logic in createState.",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_relative_imports",
+        "name": "Prefer relative imports",
+        "description": "Prefer relative imports for files in lib/.",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_void_to_null",
+        "name": "Prefer void to null",
+        "description": "Don't use the Null type, unless you are positive that you don't want void.",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "test_types_in_equals",
+        "name": "Test types in equals",
+        "description": "Test type arguments in operator ==(Object other).",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "throw_in_finally",
+        "name": "Throw in finally",
+        "description": "Avoid throw in finally block.",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "unnecessary_statements",
+        "name": "Unnecessary statements",
+        "description": "Avoid using unnecessary statements.",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unrelated_type_equality_checks",
+        "name": "Unrelated type equality checks",
+        "description": "Equality operator == invocation with references of unrelated types.",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "unsafe_html",
+        "name": "Unsafe html",
+        "description": "Avoid unsafe HTML APIs.",
+        "severity": "CRITICAL",
+        "type": "VULNERABILITY"
+    },
+    {
+        "key": "use_key_in_widget_constructors",
+        "name": "Use key in widget constructors",
+        "description": "Use key in widget constructors.",
+        "severity": "CRITICAL",
+        "type": "BUG"
+    },
+    {
+        "key": "valid_regexps",
+        "name": "Valid regexps",
+        "description": "Use valid regular expression syntax.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "always_declare_return_types",
+        "name": "Always declare return types",
+        "description": "Declare method return types.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "always_put_control_body_on_new_line",
+        "name": "Always put control body on new line",
+        "description": "Separate the control structure expression from its statement.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "always_put_required_named_parameters_first",
+        "name": "Always put required named parameters first",
+        "description": "Put @required named parameters first.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "always_require_non_null_named_parameters",
+        "name": "Always require non null named parameters",
+        "description": "Specify @required on named parameters without defaults.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "always_specify_types",
+        "name": "Always specify types",
+        "description": "Specify type annotations.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "annotate_overrides",
+        "name": "Annotate overrides",
+        "description": "Annotate overridden members.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_annotating_with_dynamic",
+        "name": "Avoid annotating with dynamic",
+        "description": "Avoid annotating with dynamic when not required.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_as",
+        "name": "Avoid as",
+        "description": "Avoid using as.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_bool_literals_in_conditional_expressions",
+        "name": "Avoid bool literals in conditional expressions",
+        "description": "Avoid bool literals in conditional expressions.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_catches_without_on_clauses",
+        "name": "Avoid catches without on clauses",
+        "description": "Avoid catches without on clauses.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_catching_errors",
+        "name": "Avoid catching errors",
+        "description": "Don't explicitly catch Error or types that implement it.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_classes_with_only_static_members",
+        "name": "Avoid classes with only static members",
+        "description": "Avoid defining a class that contains only static members.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_double_and_int_checks",
+        "name": "Avoid double and int checks",
+        "description": "Avoid double and int checks.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_equals_and_hash_code_on_mutable_classes",
+        "name": "Avoid equals and hash code on mutable classes",
+        "description": "AVOID overloading operator == and hashCode on classes not marked @immutable.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "avoid_field_initializers_in_const_classes",
+        "name": "Avoid field initializers in const classes",
+        "description": "Avoid field initializers in const classes.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_function_literals_in_foreach_calls",
+        "name": "Avoid function literals in foreach calls",
+        "description": "Avoid using forEach with a function literal.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_implementing_value_types",
+        "name": "Avoid implementing value types",
+        "description": "Don't implement classes that override ==.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "avoid_init_to_null",
+        "name": "Avoid init to null",
+        "description": "Don't explicitly initialize variables to null.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_js_rounded_ints",
+        "name": "Avoid js rounded ints",
+        "description": "Avoid JavaScript rounded ints.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "avoid_null_checks_in_equality_operators",
+        "name": "Avoid null checks in equality operators",
+        "description": "Don't check for null in custom == operators.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_positional_boolean_parameters",
+        "name": "Avoid positional boolean parameters",
+        "description": "Avoid positional boolean parameters.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_private_typedef_functions",
+        "name": "Avoid private typedef functions",
+        "description": "Avoid private typedef functions.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_redundant_argument_values",
+        "name": "Avoid redundant argument values",
+        "description": "Avoid redundant argument values.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_renaming_method_parameters",
+        "name": "Avoid renaming method parameters",
+        "description": "Don't rename parameters of overridden methods.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_return_types_on_setters",
+        "name": "Avoid return types on setters",
+        "description": "Avoid return types on setters.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_returning_null",
+        "name": "Avoid returning null",
+        "description": "Avoid returning null from members whose return type is bool, double, int, or num.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "avoid_returning_null_for_void",
+        "name": "Avoid returning null for void",
+        "description": "Avoid returning null for void.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "avoid_returning_this",
+        "name": "Avoid returning this",
+        "description": "Avoid returning this from methods just to enable a fluent interface.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "avoid_setters_without_getters",
+        "name": "Avoid setters without getters",
+        "description": "Avoid setters without getters.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_shadowing_type_parameters",
+        "name": "Avoid shadowing type parameters",
+        "description": "Avoid shadowing type parameters.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_single_cascade_in_expression_statements",
+        "name": "Avoid single cascade in expression statements",
+        "description": "Avoid single cascade in expression statements.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_types_on_closure_parameters",
+        "name": "Avoid types on closure parameters",
+        "description": "Avoid annotating types for function expression parameters.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_unnecessary_containers",
+        "name": "Avoid unnecessary containers",
+        "description": "Avoid unnecessary containers.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_unused_constructor_parameters",
+        "name": "Avoid unused constructor parameters",
+        "description": "Avoid defining unused parameters in constructors.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "avoid_void_async",
+        "name": "Avoid void async",
+        "description": "Avoid async functions that return void.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "await_only_futures",
+        "name": "Await only futures",
+        "description": "Await only futures.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "camel_case_extensions",
+        "name": "Camel case extensions",
+        "description": "Name extensions using UpperCamelCase.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "camel_case_types",
+        "name": "Camel case types",
+        "description": "Name types using UpperCamelCase.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "cascade_invocations",
+        "name": "Cascade invocations",
+        "description": "Cascade consecutive method invocations on the same reference.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "constant_identifier_names",
+        "name": "Constant identifier names",
+        "description": "Prefer using lowerCamelCase for constant names.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "curly_braces_in_flow_control_structures",
+        "name": "Curly braces in flow control structures",
+        "description": "DO use curly braces for all flow control structures.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "directives_ordering",
+        "name": "Directives ordering",
+        "description": "Adhere to Effective Dart Guide directives sorting conventions.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "empty_catches",
+        "name": "Empty catches",
+        "description": "Avoid empty catch blocks.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "empty_constructor_bodies",
+        "name": "Empty constructor bodies",
+        "description": "Use ; instead of {} for empty constructor bodies.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "file_names",
+        "name": "File names",
+        "description": "Name source files using lowercase_with_underscores.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "flutter_style_todos",
+        "name": "Flutter style todos",
+        "description": "Use Flutter TODO format: // TODO(username): message, https://URL-to-issue.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "implementation_imports",
+        "name": "Implementation imports",
+        "description": "Don't import implementation files from another package.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "join_return_with_assignment",
+        "name": "Join return with assignment",
+        "description": "Join return statement with assignment when possible.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "library_names",
+        "name": "Library names",
+        "description": "Name libraries using lowercase_with_underscores.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "library_prefixes",
+        "name": "Library prefixes",
+        "description": "Use lowercase_with_underscores when specifying a library prefix.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "lines_longer_than_80_chars",
+        "name": "Lines longer than 80 chars",
+        "description": "AVOID lines longer than 80 characters.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_constant_identifier_names",
+        "name": "Non constant identifier names",
+        "description": "Name non-constant identifiers using lowerCamelCase.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "null_closures",
+        "name": "Null closures",
+        "description": "Do not pass null as an argument where a closure is expected.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "omit_local_variable_types",
+        "name": "Omit local variable types",
+        "description": "Omit type annotations for local variables.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "one_member_abstracts",
+        "name": "One member abstracts",
+        "description": "Avoid defining a one-member abstract class when a simple function will do.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "only_throw_errors",
+        "name": "Only throw errors",
+        "description": "Only throw instances of classes extending either Exception or Error.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "overridden_fields",
+        "name": "Overridden fields",
+        "description": "Don't override fields.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "package_api_docs",
+        "name": "Package api docs",
+        "description": "Provide doc comments for all public APIs.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "package_prefixed_library_names",
+        "name": "Package prefixed library names",
+        "description": "Prefix library names with the package name and a dot-separated path.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "parameter_assignments",
+        "name": "Parameter assignments",
+        "description": "Don't reassign references to parameters of functions or methods.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "prefer_adjacent_string_concatenation",
+        "name": "Prefer adjacent string concatenation",
+        "description": "Use adjacent strings to concatenate string literals.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_asserts_in_initializer_lists",
+        "name": "Prefer asserts in initializer lists",
+        "description": "Prefer putting asserts in initializer list.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_asserts_with_message",
+        "name": "Prefer asserts with message",
+        "description": "Prefer asserts with message.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_bool_in_asserts (deprecated)",
+        "name": "Prefer bool in asserts (deprecated)",
+        "description": "Prefer using a boolean as the assert condition.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_collection_literals",
+        "name": "Prefer collection literals",
+        "description": "Use collection literals when possible.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_conditional_assignment",
+        "name": "Prefer conditional assignment",
+        "description": "Prefer using ??= over testing for null.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_const_constructors",
+        "name": "Prefer const constructors",
+        "description": "Prefer const with constant constructors.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "prefer_const_constructors_in_immutables",
+        "name": "Prefer const constructors in immutables",
+        "description": "Prefer declaring const constructors on @immutable classes.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "prefer_const_declarations",
+        "name": "Prefer const declarations",
+        "description": "Prefer const over final for declarations.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "prefer_const_literals_to_create_immutables",
+        "name": "Prefer const literals to create immutables",
+        "description": "Prefer const literals as parameters of constructors on @immutable classes.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_constructors_over_static_methods",
+        "name": "Prefer constructors over static methods",
+        "description": "Prefer defining constructors instead of static methods to create instances.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_contains",
+        "name": "Prefer contains",
+        "description": "Use contains for List and String instances.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_double_quotes",
+        "name": "Prefer double quotes",
+        "description": "Prefer double quotes where they won't require escape sequences.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_equal_for_default_values",
+        "name": "Prefer equal for default values",
+        "description": "Use = to separate a named parameter from its default value.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_expression_function_bodies",
+        "name": "Prefer expression function bodies",
+        "description": "Use => for short members whose body is a single return statement.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_final_fields",
+        "name": "Prefer final fields",
+        "description": "Private field could be final.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "prefer_final_in_for_each",
+        "name": "Prefer final in for each",
+        "description": "Prefer final in for-each loop variable if reference is not reassigned.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "prefer_final_locals",
+        "name": "Prefer final locals",
+        "description": "Prefer final for variable declarations if they are not reassigned.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "prefer_for_elements_to_map_fromIterable",
+        "name": "Prefer for elements to map fromIterable",
+        "description": "Prefer for elements when building maps from iterables.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_foreach",
+        "name": "Prefer foreach",
+        "description": "Use forEach to only apply a function to all the elements.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_function_declarations_over_variables",
+        "name": "Prefer function declarations over variables",
+        "description": "Use a function declaration to bind a function to a name.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_generic_function_type_aliases",
+        "name": "Prefer generic function type aliases",
+        "description": "Prefer generic function type aliases.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_if_elements_to_conditional_expressions",
+        "name": "Prefer if elements to conditional expressions",
+        "description": "Prefer if elements to conditional expressions where possible.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_if_null_operators",
+        "name": "Prefer if null operators",
+        "description": "Prefer using if null operators.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_initializing_formals",
+        "name": "Prefer initializing formals",
+        "description": "Use initializing formals when possible.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_inlined_adds",
+        "name": "Prefer inlined adds",
+        "description": "Inline list item declarations where possible.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_int_literals",
+        "name": "Prefer int literals",
+        "description": "Prefer int literals over double literals.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_interpolation_to_compose_strings",
+        "name": "Prefer interpolation to compose strings",
+        "description": "Use interpolation to compose strings and values.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_is_empty",
+        "name": "Prefer is empty",
+        "description": "Use isEmpty for Iterables and Maps.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_is_not_empty",
+        "name": "Prefer is not empty",
+        "description": "Use isNotEmpty for Iterables and Maps.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_is_not_operator",
+        "name": "Prefer is not operator",
+        "description": "Prefer is! operator.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_iterable_whereType",
+        "name": "Prefer iterable whereType",
+        "description": "Prefer to use whereType on iterable.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_mixin",
+        "name": "Prefer mixin",
+        "description": "Prefer using mixins.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "prefer_null_aware_operators",
+        "name": "Prefer null aware operators",
+        "description": "Prefer using null aware operators.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "prefer_single_quotes",
+        "name": "Prefer single quotes",
+        "description": "Only use double quotes for strings containing single quotes.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_spread_collections",
+        "name": "Prefer spread collections",
+        "description": "Use spread collections when possible.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "prefer_typing_uninitialized_variables",
+        "name": "Prefer typing uninitialized variables",
+        "description": "Prefer typing uninitialized variables and fields.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "provide_deprecation_message",
+        "name": "Provide deprecation message",
+        "description": "Provide a deprecation message, via @Deprecated(\"message\").",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "public_member_api_docs",
+        "name": "Public member api docs",
+        "description": "Document all public members.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "recursive_getters",
+        "name": "Recursive getters",
+        "description": "Property getter recursively returns itself.",
+        "severity": "MINOR",
+        "type": "BUG"
+    },
+    {
+        "key": "slash_for_doc_comments",
+        "name": "Slash for doc comments",
+        "description": "Prefer using /// for doc comments.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sort_child_properties_last",
+        "name": "Sort child properties last",
+        "description": "Sort child properties last in widget instance creations.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sort_constructors_first",
+        "name": "Sort constructors first",
+        "description": "Sort constructor declarations before other members.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sort_unnamed_constructors_first",
+        "name": "Sort unnamed constructors first",
+        "description": "Sort unnamed constructor declarations first.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "super_goes_last (deprecated)",
+        "name": "Super goes last (deprecated)",
+        "description": "Place the super call last in a constructor initialization list.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "type_annotate_public_apis",
+        "name": "Type annotate public apis",
+        "description": "Type annotate public APIs.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "type_init_formals",
+        "name": "Type init formals",
+        "description": "Don't type annotate initializing formals.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unawaited_futures",
+        "name": "Unawaited futures",
+        "description": "Future results in async function bodies must be awaited or marked unawaited using package:pedantic.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_await_in_return",
+        "name": "Unnecessary await in return",
+        "description": "Unnecessary await keyword in return.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_brace_in_string_interps",
+        "name": "Unnecessary brace in string interps",
+        "description": "Avoid using braces in interpolation when not needed.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_const",
+        "name": "Unnecessary const",
+        "description": "Avoid const keyword.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_final",
+        "name": "Unnecessary final",
+        "description": "Don't use final for local variables.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_getters_setters",
+        "name": "Unnecessary getters setters",
+        "description": "Avoid wrapping fields in getters and setters just to be \"safe\".",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_lambdas",
+        "name": "Unnecessary lambdas",
+        "description": "Don't create a lambda when a tear-off will do.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_new",
+        "name": "Unnecessary new",
+        "description": "Unnecessary new keyword.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_null_aware_assignments",
+        "name": "Unnecessary null aware assignments",
+        "description": "Avoid null in null-aware assignment.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_null_in_if_null_operators",
+        "name": "Unnecessary null in if null operators",
+        "description": "Avoid using null in if null operators.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_overrides",
+        "name": "Unnecessary overrides",
+        "description": "Don't override a method to do a super method invocation with the same parameters.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_parenthesis",
+        "name": "Unnecessary parenthesis",
+        "description": "Unnecessary parenthesis can be removed.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_this",
+        "name": "Unnecessary this",
+        "description": "Don't access members with this unless avoiding shadowing.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "use_full_hex_values_for_flutter_colors",
+        "name": "Use full hex values for flutter colors",
+        "description": "Prefer an 8-digit hexadecimal integer(0xFFFFFFFF) to instantiate Color.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "use_function_type_syntax_for_parameters",
+        "name": "Use function type syntax for parameters",
+        "description": "Use generic function type syntax for parameters.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "use_rethrow_when_possible",
+        "name": "Use rethrow when possible",
+        "description": "Use rethrow to rethrow a caught exception.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "use_setters_to_change_properties",
+        "name": "Use setters to change properties",
+        "description": "Use a setter for operations that conceptually change a property.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "use_string_buffers",
+        "name": "Use string buffers",
+        "description": "Use string buffers to compose strings.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "use_to_and_as_if_applicable",
+        "name": "Use to and as if applicable",
+        "description": "Start the name of the method with to/_to or as/_as if applicable.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "void_checks",
+        "name": "Void checks",
+        "description": "Don't assign to void.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "package_names",
+        "name": "Package names",
+        "description": "Use lowercase_with_underscores for package names.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    }
+]
