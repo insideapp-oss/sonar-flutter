@@ -1,6 +1,6 @@
 # SonarQube plugin for Flutter / Dart
 
-A plugin to enabable analysis of Dart and Flutter projects into SonarQube.
+A plugin to enable analysis of Dart and Flutter projects into SonarQube.
 
 <p style="text-align: center">
 	<img src="screenshots/dashboard.png" alt="dashboard.png" width="80%"/>
