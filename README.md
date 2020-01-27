@@ -1,4 +1,4 @@
-![Java CI](https://github.com/insideapp-oss/sonar-flutter/workflows/Java%20CI/badge.svg)
+![CI](https://github.com/insideapp-oss/sonar-flutter/workflows/CI/badge.svg)
 ![Coverage](https://codecov.io/gh/insideapp-oss/sonar-flutter/branch/master/graph/badge.svg)
 
 # SonarQube plugin for Flutter / Dart
@@ -6,9 +6,7 @@
 A plugin to enable analysis of Dart and Flutter projects into SonarQube.
 
 <p style="text-align: center">
-	<img src="screenshots/dashboard.png" alt="dashboard.png" width="80%"/>
-	<br/>
-	<img src="screenshots/profile.png" alt="profile" width="300"/>
+	<img src="screenshots/main.png" alt="main.png" width="80%"/>
 </p>
 
 ## Features
