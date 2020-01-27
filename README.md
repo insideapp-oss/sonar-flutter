@@ -1,3 +1,5 @@
+![Java CI](https://github.com/insideapp-oss/sonar-flutter/workflows/Java%20CI/badge.svg)
+
 # SonarQube plugin for Flutter / Dart
 
 A plugin to enable analysis of Dart and Flutter projects into SonarQube.
