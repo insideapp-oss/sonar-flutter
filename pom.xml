@@ -197,7 +197,7 @@
                 <artifactId>license-maven-plugin</artifactId>
                 <configuration>
                     <properties>
-                        <license.years>${inceptionYear}</license.years>
+                        <license.years>${project.inceptionYear}</license.years>
                     </properties>
                 </configuration>
             </plugin>
