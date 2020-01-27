@@ -1,4 +1,5 @@
 ![Java CI](https://github.com/insideapp-oss/sonar-flutter/workflows/Java%20CI/badge.svg)
+![Coverage](https://codecov.io/gh/insideapp-oss/sonar-flutter/branch/master/graph/badge.svg)
 
 # SonarQube plugin for Flutter / Dart
 
@@ -59,19 +60,21 @@ Install sonar-scanner as explained in the official documentation.
 
 Create a **sonar-project.properties** file at the root with this content :
 
-	# Project identification
-	sonar.projectKey=flutter_rocks
-	sonar.projectName=Flutter Rocks
-	sonar.projectVersion=1.0
+```console
+# Project identification
+sonar.projectKey=flutter_rocks
+sonar.projectName=Flutter Rocks
+sonar.projectVersion=1.0
 	
-	# Source code location.
-	# Path is relative to the sonar-project.properties file. Defaults to .
-	# Use commas to specify more than one folder.
-	sonar.sources=lib
-	sonar.tests=test
+# Source code location.
+# Path is relative to the sonar-project.properties file. Defaults to .
+# Use commas to specify more than one folder.
+sonar.sources=lib
+sonar.tests=test
 	
-	# Encoding of the source code. Default is default system encoding.
-	sonar.sourceEncoding=UTF-8
+# Encoding of the source code. Default is default system encoding.
+sonar.sourceEncoding=UTF-8
+```
 
 *For a complete list of available options, please refer to the [SonarQube documentation](https://docs.sonarqube.org/latest/analysis/analysis-parameters/).*
 
@@ -80,14 +83,16 @@ Create a **sonar-project.properties** file at the root with this content :
 
 Use the following commands from the root folder to start an analysis: 
 
-	# Download dependencies 
-	flutter pub get 
-	# Run tests
-	flutter test --machine > tests.output
-	# Compute coverage (--machine and --coverage cannot be run at once...)
-	flutter test --coverage
-	# Run the analysis and publish to the SonarQube server
-	sonar-scanner
+```console
+# Download dependencies 
+flutter pub get 
+# Run tests
+flutter test --machine > tests.output
+# Compute coverage (--machine and --coverage cannot be run at once...)
+flutter test --coverage
+# Run the analysis and publish to the SonarQube server
+sonar-scanner
+```
 	
 ## Contributing
 
