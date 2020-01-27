@@ -19,5 +19,3 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }} #required
-        file: ./sonar-flutter-plugin/target/jacoco.exec #optional
-        fail_ci_if_error: true #optional (default = false)
