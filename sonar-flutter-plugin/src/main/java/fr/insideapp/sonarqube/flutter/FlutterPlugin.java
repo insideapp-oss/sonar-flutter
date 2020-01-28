@@ -19,7 +19,7 @@
  */
 package fr.insideapp.sonarqube.flutter;
 
-import fr.insideapp.sonarqube.dart.lang.api.DartSensor;
+import fr.insideapp.sonarqube.dart.lang.DartSensor;
 import fr.insideapp.sonarqube.dart.lang.issues.DartProfile;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerSensor;

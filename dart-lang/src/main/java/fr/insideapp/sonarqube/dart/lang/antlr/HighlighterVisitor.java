@@ -34,9 +34,9 @@ import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 
 import static java.lang.String.format;
 
-public class AntlrHighlighter implements ParseTreeItemVisitor {
+public class HighlighterVisitor implements ParseTreeItemVisitor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AntlrHighlighter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HighlighterVisitor.class);
     private final KeywordsProvider keywordsProvider = new KeywordsProvider();
 
     @Override

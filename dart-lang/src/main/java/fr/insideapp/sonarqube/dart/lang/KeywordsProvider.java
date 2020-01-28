@@ -19,7 +19,6 @@
  */
 package fr.insideapp.sonarqube.dart.lang;
 
-import fr.insideapp.sonarqube.dart.lang.antlr.AntlrHighlighter;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
