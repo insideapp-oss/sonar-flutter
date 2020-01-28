@@ -20,6 +20,10 @@
 package fr.insideapp.sonarqube.dart.lang.api;
 
 import fr.insideapp.sonarqube.dart.lang.Dart;
+import fr.insideapp.sonarqube.dart.lang.antlr.AntlrContext;
+import fr.insideapp.sonarqube.dart.lang.antlr.AntlrHighlighter;
+import fr.insideapp.sonarqube.dart.lang.antlr.CustomTreeVisitor;
+import fr.insideapp.sonarqube.dart.lang.antlr.ParseTreeItemVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FilePredicate;
@@ -44,6 +48,8 @@ import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.squidbridge.indexer.QueryByType;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -77,8 +83,19 @@ public class DartSensor implements Sensor {
         FilePredicate isMain = sensorContext.fileSystem().predicates().hasType(InputFile.Type.MAIN);
         FilePredicate and = sensorContext.fileSystem().predicates().and(hasDart, isMain);
         List<File> files = new ArrayList<>();
+        final Charset charset = sensorContext.fileSystem().encoding();
         for(InputFile inf : sensorContext.fileSystem().inputFiles(and)){
             files.add(new File(sensorContext.fileSystem().baseDir(), inf.toString()));
+
+            // Visit source file to collect data
+            try {
+                final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
+                ParseTreeItemVisitor visitor = new CustomTreeVisitor(new AntlrHighlighter());
+                visitor.fillContext(sensorContext, antlrContext);
+            } catch (IOException e) {
+                LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
+            }
+
         }
 
         List<SquidAstVisitor<DartGrammar>> visitors = new ArrayList<>(checks.all());
