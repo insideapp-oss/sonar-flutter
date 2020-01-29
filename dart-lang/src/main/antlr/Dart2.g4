@@ -32,7 +32,6 @@ AB: 13-Apr-19; Replaced `type` with `dtype` to fix golang code gen.
 
 grammar Dart2;
 
-
 compilationUnit: libraryDefinition | partDeclaration;
 
 WHITESPACE
@@ -983,10 +982,10 @@ DIGIT
 // 20.1.2 Comments
 SINGLE_LINE_COMMENT
 //  : '//' ~(NEWLINE)* (NEWLINE)? // Origin Syntax
-  : '//' ~[\r\n]*
+  : '//' ~[\r\n]* -> channel(2)
   ;
 MULTI_LINE_COMMENT
 //  : '/*' (MULTI_LINE_COMMENT | ~'*/')* '*/' // Origin Syntax
-  : '/*' .*? '*/'
+  : '/*' .*? '*/' -> channel(2)
   ;
 

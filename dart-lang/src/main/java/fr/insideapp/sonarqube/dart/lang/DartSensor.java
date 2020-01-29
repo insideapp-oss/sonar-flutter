@@ -27,6 +27,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.squidbridge.metrics.ComplexityVisitor;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -56,7 +57,8 @@ public class DartSensor implements Sensor {
             // Visit source files
             try {
                 final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
-                ParseTreeItemVisitor visitor = new CustomTreeVisitor(new HighlighterVisitor(), new SourceLinesVisitor());
+                ParseTreeItemVisitor visitor = new CustomTreeVisitor(new HighlighterVisitor(),
+                        new SourceLinesVisitor(), new CyclomaticComplexityVisitor());
                 visitor.fillContext(sensorContext, antlrContext);
             } catch (IOException e) {
                 LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
