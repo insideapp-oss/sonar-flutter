@@ -34,24 +34,7 @@ import java.io.IOException;
 public class CyclomaticComplexityVisitorTest {
 
     @Test
-    public void complexity1() throws IOException {
-        final CharStream charStream = CharStreams.fromStream(this.getClass().getResourceAsStream("/dart/main.dart"));
-        final Dart2Lexer lexer = new Dart2Lexer(charStream);
-        lexer.removeErrorListeners();
-        final CommonTokenStream stream = new CommonTokenStream(lexer);
-        stream.fill();
-        final Dart2Parser parser = new Dart2Parser(stream);
-        parser.removeErrorListeners();
-        final ParseTree root = parser.compilationUnit();
-
-        CyclomaticComplexityVisitor visitor = new CyclomaticComplexityVisitor();
-        CustomTreeVisitor customTreeVisitor = new CustomTreeVisitor(visitor);
-        customTreeVisitor.visit(root);
-        assertThat(visitor.getComplexity()).isEqualTo(1);
-    }
-
-    @Test
-    public void complexity2() throws IOException {
+    public void complexity() throws IOException {
         final CharStream charStream = CharStreams.fromStream(this.getClass().getResourceAsStream("/dart/complexity.dart"));
         final Dart2Lexer lexer = new Dart2Lexer(charStream);
         lexer.removeErrorListeners();
