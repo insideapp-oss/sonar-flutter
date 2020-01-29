@@ -31,10 +31,14 @@ import org.sonar.squidbridge.metrics.ComplexityVisitor;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class DartSensor implements Sensor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DartSensor.class);
+    private static final int EXECUTOR_TIMEOUT = 10000;
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
@@ -53,29 +57,46 @@ public class DartSensor implements Sensor {
         FilePredicate dartAndMain = sensorContext.fileSystem().predicates().and(hasDart, isMain);
         FilePredicate dartAndTest = sensorContext.fileSystem().predicates().and(hasDart, isTest);
         final Charset charset = sensorContext.fileSystem().encoding();
+
+        final ExecutorService executorService = Executors.newWorkStealingPool();
+
         for(InputFile inf : sensorContext.fileSystem().inputFiles(dartAndMain)){
-            // Visit source files
-            try {
-                final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
-                ParseTreeItemVisitor visitor = new CustomTreeVisitor(new HighlighterVisitor(),
-                        new SourceLinesVisitor(), new CyclomaticComplexityVisitor());
-                visitor.fillContext(sensorContext, antlrContext);
-            } catch (IOException e) {
-                LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
-            }
+
+            executorService.execute(() -> {
+                // Visit source files
+                try {
+                    final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
+                    ParseTreeItemVisitor visitor = new CustomTreeVisitor(new HighlighterVisitor(),
+                            new SourceLinesVisitor(), new CyclomaticComplexityVisitor());
+                    visitor.fillContext(sensorContext, antlrContext);
+                } catch (IOException e) {
+                    LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
+                }
+            });
 
         }
 
         for(InputFile inf : sensorContext.fileSystem().inputFiles(dartAndTest)){
-            // Visit test files (for syntax highlighting only)
-            try {
-                final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
-                ParseTreeItemVisitor visitor = new CustomTreeVisitor(new HighlighterVisitor());
-                visitor.fillContext(sensorContext, antlrContext);
-            } catch (IOException e) {
-                LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
-            }
 
+            executorService.execute(() -> {
+                // Visit test files (for syntax highlighting only)
+                try {
+                    final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
+                    ParseTreeItemVisitor visitor = new CustomTreeVisitor(new HighlighterVisitor());
+                    visitor.fillContext(sensorContext, antlrContext);
+                } catch (IOException e) {
+                    LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
+                }
+            });
+
+        }
+
+        try {
+            executorService.shutdown();
+            executorService.awaitTermination(EXECUTOR_TIMEOUT, TimeUnit.SECONDS);
+            executorService.shutdownNow();
+        } catch (final InterruptedException e) {
+            LOGGER.warn("Unexpected error while running waiting for executor service to finish", e);
         }
 
     }

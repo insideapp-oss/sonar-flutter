@@ -47,7 +47,7 @@ public class CyclomaticComplexityVisitorTest {
         CyclomaticComplexityVisitor visitor = new CyclomaticComplexityVisitor();
         CustomTreeVisitor customTreeVisitor = new CustomTreeVisitor(visitor);
         customTreeVisitor.visit(root);
-        assertThat(visitor.getComplexity()).isEqualTo(5);
+        assertThat(visitor.getComplexity()).isEqualTo(7);
     }
 
 }

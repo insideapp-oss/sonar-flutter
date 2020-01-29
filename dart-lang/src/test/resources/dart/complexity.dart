@@ -20,3 +20,15 @@ void main() {
 void func() {
   print('hello');
 }
+
+class TestClass {
+  var test = 'test';
+
+  TestClass() {
+    // Constructor
+  }
+
+  void method() {
+    return 'ok';
+  }
+}
