@@ -16,3 +16,7 @@ void main() {
   }
 
 }
+
+void func() {
+  print('hello');
+}

@@ -33,7 +33,7 @@ public class CyclomaticComplexityVisitor implements ParseTreeItemVisitor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CyclomaticComplexityVisitor.class);
 
-    private int complexity = 1;
+    private int complexity = 0;
 
     @Override
     public void apply(ParseTree tree) {
@@ -45,7 +45,8 @@ public class CyclomaticComplexityVisitor implements ParseTreeItemVisitor {
                 Dart2Parser.WhileStatementContext.class.equals(classz) ||
                 Dart2Parser.SwitchCaseContext.class.equals(classz) ||
                 Dart2Parser.DefaultCaseContext.class.equals(classz) ||
-                Dart2Parser.DoStatementContext.class.equals(classz)
+                Dart2Parser.DoStatementContext.class.equals(classz) ||
+                Dart2Parser.FunctionBodyContext.class.equals(classz)
         ) {
             complexity++;
         }
