@@ -12,7 +12,9 @@
 
 #### Enhancements
 
-- None
+- Syntax coloration
+- Cyclomatic complexity computation
+- More accurate code line count 
 
 #### Bug Fixes
 

@@ -17,29 +17,21 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package fr.insideapp.sonarqube.dart.lang.api;
+package fr.insideapp.sonarqube.dart.lang;
 
-import org.sonar.squidbridge.api.SquidConfiguration;
+import org.junit.Test;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 
-import java.nio.charset.Charset;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class DartConfiguration extends SquidConfiguration {
+public class DartSensorTest {
 
-    private boolean ignoreHeaderComments;
-
-    public DartConfiguration() {
-        super();
+    @Test
+    public void describe() {
+        DartSensor sensor = new DartSensor();
+        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+        sensor.describe(descriptor);
+        assertThat(descriptor.name()).isEqualTo("Dart sensor");
     }
 
-    public DartConfiguration(Charset charset) {
-        super(charset);
-    }
-
-    public boolean getIgnoreHeaderComments() {
-        return ignoreHeaderComments;
-    }
-
-    public void setIgnoreHeaderComments(boolean ignoreHeaderComments) {
-        this.ignoreHeaderComments = ignoreHeaderComments;
-    }
 }

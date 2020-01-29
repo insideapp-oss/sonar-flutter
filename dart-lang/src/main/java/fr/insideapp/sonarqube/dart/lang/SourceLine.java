@@ -17,16 +17,42 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package fr.insideapp.sonarqube.dart.lang.api;
+package fr.insideapp.sonarqube.dart.lang;
 
-import static com.sonar.sslr.api.GenericTokenType.EOF;
-import static com.sonar.sslr.api.GenericTokenType.LITERAL;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.o2n;
+public final class SourceLine {
 
-public class DartGrammarImpl extends DartGrammar {
+    private final int count;
+    private final int start;
+    private final int end;
+    private final int line;
 
-    public DartGrammarImpl() {
+    public SourceLine(final int line, final int count, final int start, final int end) {
+        this.line = line;
+        this.count = count;
+        this.start = start;
+        this.end = end;
 
-        program.is(o2n(LITERAL), EOF);
     }
+
+    @Override
+    public String toString() {
+        return "SourceLine [line=" + line + ", count=" + count + ", start=" + start + ", end=" + end + "]";
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
 }

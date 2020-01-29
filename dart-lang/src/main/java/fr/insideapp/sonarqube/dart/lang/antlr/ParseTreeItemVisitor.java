@@ -17,38 +17,13 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package fr.insideapp.sonarqube.dart.lang.api;
+package fr.insideapp.sonarqube.dart.lang.antlr;
 
-import org.sonar.squidbridge.measures.CalculatedMetricFormula;
-import org.sonar.squidbridge.measures.MetricDef;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.sonar.api.batch.sensor.SensorContext;
 
-public enum DartMetric implements MetricDef {
+public interface ParseTreeItemVisitor {
+    void apply(ParseTree tree);
 
-    FILES,
-    LINES,
-    LINES_OF_CODE,
-    COMMENT_LINES,
-    STATEMENTS,
-    COMPLEXITY,
-    FUNCTIONS;
-
-    public String getName() {
-        return name();
-    }
-
-    public boolean isCalculatedMetric() {
-        return false;
-    }
-
-    public boolean aggregateIfThereIsAlreadyAValue() {
-        return true;
-    }
-
-    public boolean isThereAggregationFormula() {
-        return true;
-    }
-
-    public CalculatedMetricFormula getCalculatedMetricFormula() {
-        return null;
-    }
+    void fillContext(SensorContext context, AntlrContext antlrContext);
 }
