@@ -14,7 +14,7 @@ A plugin to enable analysis of Dart and Flutter projects into SonarQube.
 | Feature    | Supported              |
 |------------|------------------------|
 | Size       | YES                    |
-| Issues     | YES ([dartanalyer](https://dart.dev/tools/dartanalyzer) rules)|
+| Issues     | YES ([dartanalyzer](https://dart.dev/tools/dartanalyzer) rules)|
 | Tests      | YES                    |
 | Coverage   | YES                    |
 | Complexity | YES                    |
