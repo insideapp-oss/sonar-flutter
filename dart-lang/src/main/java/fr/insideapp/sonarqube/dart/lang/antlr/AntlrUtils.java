@@ -17,18 +17,19 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package fr.insideapp.sonarqube.dart.lang.api;
+package fr.insideapp.sonarqube.dart.lang.antlr;
 
-import com.sonar.sslr.impl.Parser;
+import org.apache.commons.io.IOUtils;
 
-public class DartParser {
-    public static Parser<DartGrammar> create() {
-        return create(new DartConfiguration());
+import java.io.IOException;
+import java.nio.charset.Charset;
+
+public class AntlrUtils {
+
+    public static AntlrContext getRequest(String text) throws IOException {
+        return AntlrContext.fromStreams(null, IOUtils.toInputStream(text, Charset.defaultCharset()),
+                IOUtils.toInputStream(text, Charset.defaultCharset()), Charset.defaultCharset());
+
     }
 
-    public static Parser<DartGrammar> create(DartConfiguration conf) {
-        return Parser.builder((DartGrammar) new DartGrammarImpl())
-                .withLexer(DartLexer.create(conf))
-                .build();
-    }
 }

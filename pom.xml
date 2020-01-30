@@ -74,6 +74,7 @@
         <analyzer-commons.version>1.10.2.456</analyzer-commons.version>
         <assertj.version>3.5.2</assertj.version>
         <jproc.version>2.2.3</jproc.version>
+        <apache-commons.version>2.6</apache-commons.version>
 
     </properties>
 
@@ -105,6 +106,17 @@
             <artifactId>sonar-xml-parsing</artifactId>
             <version>${analyzer-commons.version}</version>
         </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${apache-commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${apache-commons.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
@@ -196,6 +208,11 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.2</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/generated/**</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
