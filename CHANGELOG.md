@@ -12,6 +12,24 @@
 
 #### Enhancements
 
+- None. 
+
+#### Bug Fixes
+
+- None
+
+## 0.2.0
+
+#### Breaking
+
+- None.
+
+#### Experimental
+
+- None.
+
+#### Enhancements
+
 - Syntax coloration
 - Cyclomatic complexity computation
 - More accurate code line count 
