@@ -81,6 +81,8 @@ linter:
     - library_names
     - library_prefixes
     - lines_longer_than_80_chars
+    - missing_whitespace_between_adjacent_strings
+    - no_runtimeType_toString
     - non_constant_identifier_names
     - null_closures
     - omit_local_variable_types
@@ -149,6 +151,7 @@ linter:
     - unnecessary_null_in_if_null_operators
     - unnecessary_overrides
     - unnecessary_parenthesis
+    - unnecessary_string_interpolations
     - unnecessary_this
     - use_full_hex_values_for_flutter_colors
     - use_function_type_syntax_for_parameters
@@ -158,3 +161,165 @@ linter:
     - use_to_and_as_if_applicable
     - void_checks
     - package_names
+    - abstract_super_member_reference
+    - ambiguous_extension_member_access
+    - ambiguous_import
+    - ambiguous_set_or_map_literal_both
+    - ambiguous_set_or_map_literal_either
+    - argument_type_not_assignable
+    - assignment_to_final
+    - assignment_to_final_local
+    - assignment_to_final_no_setter
+    - assignment_to_method
+    - built_in_identifier_as_extension_name
+    - built_in_identifier_as_type
+    - case_block_not_terminated
+    - cast_to_non_type
+    - concrete_class_with_abstract_member
+    - const_constructor_with_non_final_field
+    - const_initialized_with_non_constant_value
+    - const_instance_field
+    - const_not_initialized
+    - const_spread_expected_list_or_set
+    - const_spread_expected_map
+    - const_with_non_const
+    - const_with_non_constant_argument
+    - dead_code
+    - dead_code_catch_following_catch
+    - dead_code_on_catch_subtype
+    - deprecated_member_use
+    - deprecated_member_use_from_same_package
+    - duplicate_constructor
+    - duplicate_definition
+    - duplicate_import
+    - duplicate_named_argument
+    - equal_elements_in_const_set
+    - equal_keys_in_const_map
+    - expression_in_map
+    - extends_non_class
+    - extension_as_expression
+    - extension_conflicting_static_and_instance
+    - extension_declares_abstract_member
+    - extension_declares_constructor
+    - extension_declares_instance_field
+    - extension_declares_member_of_object
+    - extension_override_access_to_static_member
+    - extension_override_argument_not_assignable
+    - extension_override_without_access
+    - extension_override_with_cascade
+    - extra_positional_arguments
+    - extra_positional_arguments_could_be_named
+    - final_not_initialized
+    - final_not_initialized_constructor
+    - for_in_of_invalid_type
+    - implements_non_class
+    - implements_repeated
+    - implicit_this_reference_in_initializer
+    - initializer_for_non_existent_field
+    - initializing_formal_for_non_existent_field
+    - instance_access_to_static_member
+    - instance_member_access_from_factory
+    - instance_member_access_from_static
+    - instantiate_abstract_class
+    - invalid_assignment
+    - invalid_extension_argument_count
+    - invalid_factory_name_not_a_class
+    - invalid_literal_annotation
+    - invalid_override
+    - invalid_reference_to_this
+    - invalid_uri
+    - invalid_use_of_covariant_in_extension
+    - invalid_visibility_annotation
+    - invocation_of_extension_without_call
+    - invocation_of_non_function
+    - invocation_of_non_function_expression
+    - list_element_type_not_assignable
+    - map_entry_not_in_map
+    - map_key_type_not_assignable
+    - map_value_type_not_assignable
+    - missing_enum_constant_in_switch
+    - missing_required_param
+    - missing_return
+    - mixin_of_non_class
+    - mixin_on_sealed_class
+    - mixin_super_class_constraint_non_interface
+    - must_be_immutable
+    - must_call_super
+    - new_with_undefined_constructor_default
+    - non_abstract_class_inherits_abstract_member
+    - non_bool_condition
+    - non_bool_expression
+    - non_bool_negation_expression
+    - non_bool_operand
+    - non_constant_case_expression
+    - non_constant_default_value
+    - non_constant_list_element
+    - non_constant_map_element
+    - non_constant_map_key
+    - non_constant_map_value
+    - non_constant_set_element
+    - non_const_call_to_literal_constructor
+    - non_type_as_type_argument
+    - non_type_in_catch_clause
+    - not_a_type
+    - not_enough_positional_arguments
+    - not_iterable_spread
+    - not_map_spread
+    - no_annotation_constructor_arguments
+    - override_on_non_overriding_member
+    - part_of_non_part
+    - redirect_to_invalid_function_type
+    - redirect_to_invalid_return_type
+    - redirect_to_non_class
+    - referenced_before_declaration
+    - return_of_invalid_type
+    - return_of_invalid_type_from_closure
+    - return_without_value
+    - sdk_version_async_exported_from_core
+    - sdk_version_as_expression_in_const_context
+    - sdk_version_bool_operator_in_const_context
+    - sdk_version_eq_eq_operator_in_const_context
+    - sdk_version_extension_methods
+    - sdk_version_is_expression_in_const_context
+    - sdk_version_set_literal
+    - sdk_version_ui_as_code
+    - sdk_version_ui_as_code_in_const_context
+    - static_access_to_instance_member
+    - super_in_extension
+    - super_in_invalid_context
+    - type_argument_not_matching_bounds
+    - type_test_with_undefined_name
+    - undefined_annotation
+    - undefined_class
+    - undefined_constructor_in_initializer
+    - undefined_extension_getter
+    - undefined_extension_method
+    - undefined_extension_setter
+    - undefined_function
+    - undefined_getter
+    - undefined_hidden_name
+    - undefined_identifier
+    - undefined_method
+    - undefined_named_parameter
+    - undefined_operator
+    - undefined_prefixed_name
+    - undefined_setter
+    - undefined_shown_name
+    - undefined_super_method
+    - unnecessary_cast
+    - unqualified_reference_to_static_member_of_extended_type
+    - unused_catch_clause
+    - unused_catch_stack
+    - unused_element
+    - unused_field
+    - unused_import
+    - unused_label
+    - unused_local_variable
+    - unused_shown_name
+    - uri_does_not_exist
+    - uri_has_not_been_generated
+    - use_of_void_result
+    - variable_type_mismatch
+    - wrong_number_of_parameters_for_operator
+    - wrong_number_of_parameters_for_setter
+    - wrong_number_of_type_arguments
