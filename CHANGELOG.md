@@ -12,7 +12,7 @@
 
 #### Enhancements
 
-- None. 
+- Added diagnostic rules (thanks to [etiennecadicidean](https://github.com/etiennecadicidean))
 
 #### Bug Fixes
 
