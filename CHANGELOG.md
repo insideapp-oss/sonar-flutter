@@ -12,6 +12,24 @@
 
 #### Enhancements
 
+- None
+
+#### Bug Fixes
+
+- None
+
+## 0.2.1
+
+#### Breaking
+
+- None.
+
+#### Experimental
+
+- None.
+
+#### Enhancements
+
 - Added diagnostic rules (thanks to [etiennecadicidean](https://github.com/etiennecadicidean))
 
 #### Bug Fixes
