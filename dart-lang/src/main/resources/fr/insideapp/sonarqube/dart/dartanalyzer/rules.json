@@ -567,6 +567,20 @@
         "type": "CODE_SMELL"
     },
     {
+        "key": "missing_whitespace_between_adjacent_strings",
+        "name": "Missing whitespace between adjacent strings",
+        "description": "Missing whitespace between adjacent strings.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "no_runtimeType_toString",
+        "name": "No runtimeType toString",
+        "description": "Avoid calling toString() on runtimeType.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
         "key": "non_constant_identifier_names",
         "name": "Non constant identifier names",
         "description": "Name non-constant identifiers using lowerCamelCase.",
@@ -963,7 +977,7 @@
         "name": "Unawaited futures",
         "description": "Future results in async function bodies must be awaited or marked unawaited using package:pedantic.",
         "severity": "MINOR",
-        "type": "CODE_SMELL"
+        "type": "BUG"
     },
     {
         "key": "unnecessary_await_in_return",
@@ -1043,6 +1057,13 @@
         "type": "CODE_SMELL"
     },
     {
+        "key": "unnecessary_string_interpolations",
+        "name": "Unnecessary string interpolations",
+        "description": "Unnecessary string interpolation.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
         "key": "unnecessary_this",
         "name": "Unnecessary this",
         "description": "Don't access members with this unless avoiding shadowing.",
@@ -1054,7 +1075,7 @@
         "name": "Use full hex values for flutter colors",
         "description": "Prefer an 8-digit hexadecimal integer(0xFFFFFFFF) to instantiate Color.",
         "severity": "MINOR",
-        "type": "CODE_SMELL"
+        "type": "BUG"
     },
     {
         "key": "use_function_type_syntax_for_parameters",
@@ -1096,12 +1117,1146 @@
         "name": "Void checks",
         "description": "Don't assign to void.",
         "severity": "MINOR",
-        "type": "CODE_SMELL"
+        "type": "BUG"
     },
     {
         "key": "package_names",
         "name": "Package names",
         "description": "Use lowercase_with_underscores for package names.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "abstract_super_member_reference",
+        "name": "Abstract super member reference",
+        "description": "The analyzer produces this diagnostic when an inherited member is\nreferenced using super, but there is no concrete implementation of the\nmember in the superclass chain. Abstract members can\u2019t be invoked.\n @see https://dart.dev/tools/diagnostic-messages#abstract_super_member_reference",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "ambiguous_extension_member_access",
+        "name": "Ambiguous extension member access",
+        "description": "When code refers to a member of an object (for example, o.m() or o.m or\no[i]) where the static type of o doesn\u2019t declare the member (m or\n[], for example), then the analyzer tries to find the member in an\nextension. For example, if the member is m, then the analyzer looks for\nextensions that declare a member named m and have an extended type that\nthe static type of o can be assigned to. When there\u2019s more than one such\nextension in scope, the extension whose extended type is most specific is\nselected.The analyzer produces this diagnostic when none of the extensions has an\nextended type that\u2019s more specific than the extended types of all of the\nother extensions, making the reference to the member ambiguous.\n @see https://dart.dev/tools/diagnostic-messages#ambiguous_extension_member_access",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "ambiguous_import",
+        "name": "Ambiguous import",
+        "description": "The analyzer produces this diagnostic when a name is referenced that is\ndeclared in two or more imported libraries.\n @see https://dart.dev/tools/diagnostic-messages#ambiguous_import",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "ambiguous_set_or_map_literal_both",
+        "name": "Ambiguous set or map literal both",
+        "description": "Because map and set literals use the same delimiters ({ and }), the\nanalyzer looks at the type arguments and the elements to determine which\nkind of literal you meant. When there are no type arguments and all of the\nelements are spread elements (which are allowed in both kinds of literals),\nthen the analyzer uses the types of the expressions that are being spread.\nIf all of the expressions have the type Iterable, then it\u2019s a set\nliteral; if they all have the type Map, then it\u2019s a map literal.The analyzer produces this diagnostic when some of the expressions being\nspread have the type Iterable and others have the type Map, making it\nimpossible for the analyzer to determine whether you are writing a map\nliteral or a set literal.\n @see https://dart.dev/tools/diagnostic-messages#ambiguous_set_or_map_literal_both",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "ambiguous_set_or_map_literal_either",
+        "name": "Ambiguous set or map literal either",
+        "description": "Because map and set literals use the same delimiters ({ and }), the\nanalyzer looks at the type arguments and the elements to determine which\nkind of literal you meant. When there are no type arguments and all of the\nelements are spread elements (which are allowed in both kinds of literals)\nthen the analyzer uses the types of the expressions that are being spread.\nIf all of the expressions have the type Iterable, then it\u2019s a set\nliteral; if they all have the type Map, then it\u2019s a map literal.This diagnostic is produced when none of the expressions being spread have\na type that allows the analyzer to decide whether you were writing a map\nliteral or a set literal.\n @see https://dart.dev/tools/diagnostic-messages#ambiguous_set_or_map_literal_either",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "argument_type_not_assignable",
+        "name": "Argument type not assignable",
+        "description": "The analyzer produces this diagnostic when the static type of an argument\ncan\u2019t be assigned to the static type of the corresponding parameter.\n @see https://dart.dev/tools/diagnostic-messages#argument_type_not_assignable",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "assignment_to_final",
+        "name": "Assignment to final",
+        "description": "The analyzer produces this diagnostic when it finds an invocation of a\nsetter, but there\u2019s no setter because the field with the same name was\ndeclared to be final or const.\n @see https://dart.dev/tools/diagnostic-messages#assignment_to_final",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "assignment_to_final_local",
+        "name": "Assignment to final local",
+        "description": "The analyzer produces this diagnostic when a local variable that was\ndeclared to be final is assigned after it was initialized.\n @see https://dart.dev/tools/diagnostic-messages#assignment_to_final_local",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "assignment_to_final_no_setter",
+        "name": "Assignment to final no setter",
+        "description": "The analyzer produces this diagnostic when a reference to a setter is\nfound; there is no setter defined for the type; but there is a getter\ndefined with the same name.\n @see https://dart.dev/tools/diagnostic-messages#assignment_to_final_no_setter",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "assignment_to_method",
+        "name": "Assignment to method",
+        "description": "The analyzer produces this diagnostic when the target of an assignment is a\nmethod.\n @see https://dart.dev/tools/diagnostic-messages#assignment_to_method",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "built_in_identifier_as_extension_name",
+        "name": "Built in identifier as extension name",
+        "description": "The analyzer produces this diagnostic when the name of an extension is a\nbuilt-in identifier. Built-in identifiers can\u2019t be used as extension names.\n @see https://dart.dev/tools/diagnostic-messages#built_in_identifier_as_extension_name",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "built_in_identifier_as_type",
+        "name": "Built in identifier as type",
+        "description": "The analyzer produces this diagnostic when a built-in identifier is used\nwhere a type name is expected.\n @see https://dart.dev/tools/diagnostic-messages#built_in_identifier_as_type",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "case_block_not_terminated",
+        "name": "Case block not terminated",
+        "description": "The analyzer produces this diagnostic when the last statement in a case\nblock isn\u2019t one of the required terminators: break, continue,\nrethrow, return, or throw.\n @see https://dart.dev/tools/diagnostic-messages#case_block_not_terminated",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "cast_to_non_type",
+        "name": "Cast to non type",
+        "description": "The analyzer produces this diagnostic when the name following the as in a\ncast expression is defined to be something other than a type.\n @see https://dart.dev/tools/diagnostic-messages#cast_to_non_type",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "concrete_class_with_abstract_member",
+        "name": "Concrete class with abstract member",
+        "description": "The analyzer produces this diagnostic when a member of a concrete class is\nfound that doesn\u2019t have a concrete implementation. Concrete classes aren\u2019t\nallowed to contain abstract members.\n @see https://dart.dev/tools/diagnostic-messages#concrete_class_with_abstract_member",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "const_constructor_with_non_final_field",
+        "name": "Const constructor with non final field",
+        "description": "The analyzer produces this diagnostic when a constructor is marked as a\nconst constructor, but the constructor is defined in a class that has at\nleast one non-final instance field (either directly or by inheritance).\n @see https://dart.dev/tools/diagnostic-messages#const_constructor_with_non_final_field",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "const_initialized_with_non_constant_value",
+        "name": "Const initialized with non constant value",
+        "description": "The analyzer produces this diagnostic when a value that isn\u2019t statically\nknown to be a constant is assigned to a variable that\u2019s declared to be a\n\u2018const\u2019 variable.\n @see https://dart.dev/tools/diagnostic-messages#const_initialized_with_non_constant_value",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "const_instance_field",
+        "name": "Const instance field",
+        "description": "The analyzer produces this diagnostic when an instance field is marked as\nbeing const.\n @see https://dart.dev/tools/diagnostic-messages#const_instance_field",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "const_not_initialized",
+        "name": "Const not initialized",
+        "description": "The analyzer produces this diagnostic when a variable that is declared to\nbe a constant doesn\u2019t have an initializer.\n @see https://dart.dev/tools/diagnostic-messages#const_not_initialized",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "const_spread_expected_list_or_set",
+        "name": "Const spread expected list or set",
+        "description": "The analyzer produces this diagnostic when the expression of a spread\noperator in a constant list or set evaluates to something other than a list\nor a set.\n @see https://dart.dev/tools/diagnostic-messages#const_spread_expected_list_or_set",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "const_spread_expected_map",
+        "name": "Const spread expected map",
+        "description": "The analyzer produces this diagnostic when the expression of a spread\noperator in a constant map evaluates to something other than a map.\n @see https://dart.dev/tools/diagnostic-messages#const_spread_expected_map",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "const_with_non_const",
+        "name": "Const with non const",
+        "description": "The analyzer produces this diagnostic when the keyword const is used to\ninvoke a constructor that isn\u2019t marked with const.\n @see https://dart.dev/tools/diagnostic-messages#const_with_non_const",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "const_with_non_constant_argument",
+        "name": "Const with non constant argument",
+        "description": "The analyzer produces this diagnostic when a const constructor is invoked\nwith an argument that isn\u2019t a constant expression.\n @see https://dart.dev/tools/diagnostic-messages#const_with_non_constant_argument",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "dead_code",
+        "name": "Dead code",
+        "description": "The analyzer produces this diagnostic when code is found that won\u2019t be\nexecuted because execution will never reach the code.\n @see https://dart.dev/tools/diagnostic-messages#dead_code",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "dead_code_catch_following_catch",
+        "name": "Dead code catch following catch",
+        "description": "The analyzer produces this diagnostic when a catch clause is found that\ncan\u2019t be executed because it\u2019s after a catch clause of the form catch (e)\nor on Object catch (e). The first catch clause that matches the thrown\nobject is selected, and both of those forms will match any object, so no\ncatch clauses that follow them will be selected.\n @see https://dart.dev/tools/diagnostic-messages#dead_code_catch_following_catch",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "dead_code_on_catch_subtype",
+        "name": "Dead code on catch subtype",
+        "description": "The analyzer produces this diagnostic when a catch clause is found that\ncan\u2019t be executed because it is after a catch clause that catches either\nthe same type or a supertype of the clause\u2019s type. The first catch clause\nthat matches the thrown object is selected, and the earlier clause l always\nmatches anything matchable by the highlighted clause, so the highlighted\nclause will never be selected.\n @see https://dart.dev/tools/diagnostic-messages#dead_code_on_catch_subtype",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "deprecated_member_use",
+        "name": "Deprecated member use",
+        "description": "The analyzer produces this diagnostic when a deprecated library or class\nmember is used in a different package.\n @see https://dart.dev/tools/diagnostic-messages#deprecated_member_use",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "deprecated_member_use_from_same_package",
+        "name": "Deprecated member use from same package",
+        "description": "The analyzer produces this diagnostic when a deprecated library member or\nclass member is used in the same package in which it\u2019s declared.\n @see https://dart.dev/tools/diagnostic-messages#deprecated_member_use_from_same_package",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "duplicate_constructor",
+        "name": "Duplicate constructor",
+        "description": "The analyzer produces this diagnostic when a class declares more than one\nunnamed constructor or when it declares more than one constructor with the\nsame name.\n @see https://dart.dev/tools/diagnostic-messages#duplicate_constructor",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "duplicate_definition",
+        "name": "Duplicate definition",
+        "description": "The analyzer produces this diagnostic when a name is declared, and there is\na previous declaration with the same name in the same scope.\n @see https://dart.dev/tools/diagnostic-messages#duplicate_definition",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "duplicate_import",
+        "name": "Duplicate import",
+        "description": "The analyzer produces this diagnostic when an import directive is found\nthat is the same as an import before it in the file. The second import\ndoesn\u2019t add value and should be removed.\n @see https://dart.dev/tools/diagnostic-messages#duplicate_import",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "duplicate_named_argument",
+        "name": "Duplicate named argument",
+        "description": "The analyzer produces this diagnostic when an invocation has two or more\nnamed arguments that have the same name.\n @see https://dart.dev/tools/diagnostic-messages#duplicate_named_argument",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "equal_elements_in_const_set",
+        "name": "Equal elements in const set",
+        "description": "The analyzer produces this diagnostic when two elements in a constant set\nliteral have the same value. The set can only contain each value once,\nwhich means that one of the values is unnecessary.\n @see https://dart.dev/tools/diagnostic-messages#equal_elements_in_const_set",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "equal_keys_in_const_map",
+        "name": "Equal keys in const map",
+        "description": "The analyzer produces this diagnostic when a key in a constant map is the\nsame as a previous key in the same map. If two keys are the same, then the\nsecond value would overwrite the first value, which makes having both pairs\npointless.\n @see https://dart.dev/tools/diagnostic-messages#equal_keys_in_const_map",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "expression_in_map",
+        "name": "Expression in map",
+        "description": "The analyzer produces this diagnostic when the analyzer finds an\nexpression, rather than a map entry, in what appears to be a map literal.\n @see https://dart.dev/tools/diagnostic-messages#expression_in_map",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extends_non_class",
+        "name": "Extends non class",
+        "description": "The analyzer produces this diagnostic when an extends clause contains a\nname that is declared to be something other than a class.\n @see https://dart.dev/tools/diagnostic-messages#extends_non_class",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extension_as_expression",
+        "name": "Extension as expression",
+        "description": "The analyzer produces this diagnostic when the name of an extension is used\nin an expression other than in an extension override or to qualify an\naccess to a static member of the extension. Because classes define a type,\nthe name of a class can be used to refer to the instance of Type\nrepresenting the type of the class. Extensions, on the other hand, don\u2019t\ndefine a type and can\u2019t be used as a type literal.\n @see https://dart.dev/tools/diagnostic-messages#extension_as_expression",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extension_conflicting_static_and_instance",
+        "name": "Extension conflicting static and instance",
+        "description": "The analyzer produces this diagnostic when an extension declaration\ncontains both an instance member and a static member that have the same\nname. The instance member and the static member can\u2019t have the same name\nbecause it\u2019s unclear which member is being referenced by an unqualified use\nof the name within the body of the extension.\n @see https://dart.dev/tools/diagnostic-messages#extension_conflicting_static_and_instance",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extension_declares_abstract_member",
+        "name": "Extension declares abstract member",
+        "description": "The analyzer produces this diagnostic when an abstract declaration is\ndeclared in an extension. Extensions can declare only concrete members.\n @see https://dart.dev/tools/diagnostic-messages#extension_declares_abstract_member",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extension_declares_constructor",
+        "name": "Extension declares constructor",
+        "description": "The analyzer produces this diagnostic when a constructor declaration is\nfound in an extension. It isn\u2019t valid to define a constructor because\nextensions aren\u2019t classes, and it isn\u2019t possible to create an instance of\nan extension.\n @see https://dart.dev/tools/diagnostic-messages#extension_declares_constructor",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extension_declares_instance_field",
+        "name": "Extension declares instance field",
+        "description": "The analyzer produces this diagnostic when an instance field declaration is\nfound in an extension. It isn\u2019t valid to define an instance field because\nextensions can only add behavior, not state.\n @see https://dart.dev/tools/diagnostic-messages#extension_declares_instance_field",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extension_declares_member_of_object",
+        "name": "Extension declares member of object",
+        "description": "The analyzer produces this diagnostic when an extension declaration\ndeclares a member with the same name as a member declared in the class\nObject. Such a member can never be used because the member in Object is\nalways found first.\n @see https://dart.dev/tools/diagnostic-messages#extension_declares_member_of_object",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extension_override_access_to_static_member",
+        "name": "Extension override access to static member",
+        "description": "The analyzer produces this diagnostic when an extension override is the\ntarget of the invocation of a static member. Similar to static members in\nclasses, the static members of an extension should be accessed using the\nname of the extension, not an extension override.\n @see https://dart.dev/tools/diagnostic-messages#extension_override_access_to_static_member",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extension_override_argument_not_assignable",
+        "name": "Extension override argument not assignable",
+        "description": "The analyzer produces this diagnostic when the argument to an extension\noverride isn\u2019t assignable to the type being extended by the extension.\n @see https://dart.dev/tools/diagnostic-messages#extension_override_argument_not_assignable",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extension_override_without_access",
+        "name": "Extension override without access",
+        "description": "The analyzer produces this diagnostic when an extension override is found\nthat isn\u2019t being used to access one of the members of the extension. The\nextension override syntax doesn\u2019t have any runtime semantics; it only\ncontrols which member is selected at compile time.\n @see https://dart.dev/tools/diagnostic-messages#extension_override_without_access",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extension_override_with_cascade",
+        "name": "Extension override with cascade",
+        "description": "The analyzer produces this diagnostic when an extension override is used as\nthe target of a cascade expression. The value of a cascade expression\ne..m is the value of the target e, but extension overrides are not\nexpressions and don\u2019t have a value.\n @see https://dart.dev/tools/diagnostic-messages#extension_override_with_cascade",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extra_positional_arguments",
+        "name": "Extra positional arguments",
+        "description": "The analyzer produces this diagnostic when a method or function invocation\nhas more positional arguments than the method or function allows.\n @see https://dart.dev/tools/diagnostic-messages#extra_positional_arguments",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "extra_positional_arguments_could_be_named",
+        "name": "Extra positional arguments could be named",
+        "description": "The analyzer produces this diagnostic when a method or function invocation\nhas more positional arguments than the method or function allows, but the\nmethod or function defines named parameters.\n @see https://dart.dev/tools/diagnostic-messages#extra_positional_arguments_could_be_named",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "final_not_initialized",
+        "name": "Final not initialized",
+        "description": "The analyzer produces this diagnostic when a final field or variable isn\u2019t\ninitialized.\n @see https://dart.dev/tools/diagnostic-messages#final_not_initialized",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "final_not_initialized_constructor",
+        "name": "Final not initialized constructor",
+        "description": "The analyzer produces this diagnostic when a class defines one or more\nfinal instance fields without initializers and has at least one constructor\nthat doesn\u2019t initialize those fields. All final instance fields must be\ninitialized when the instance is created, either by the field\u2019s initializer\nor by the constructor.\n @see https://dart.dev/tools/diagnostic-messages#final_not_initialized_constructor",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "for_in_of_invalid_type",
+        "name": "For in of invalid type",
+        "description": "The analyzer produces this diagnostic when the expression following in in\na for-in loop has a type that isn\u2019t a subclass of Iterable.\n @see https://dart.dev/tools/diagnostic-messages#for_in_of_invalid_type",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "implements_non_class",
+        "name": "Implements non class",
+        "description": "The analyzer produces this diagnostic when a name used in the implements\nclause of a class or mixin declaration is defined to be something other\nthan a class or mixin.\n @see https://dart.dev/tools/diagnostic-messages#implements_non_class",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "implements_repeated",
+        "name": "Implements repeated",
+        "description": "The analyzer produces this diagnostic when a single class is specified more\nthan once in an implements clause.\n @see https://dart.dev/tools/diagnostic-messages#implements_repeated",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "implicit_this_reference_in_initializer",
+        "name": "Implicit this reference in initializer",
+        "description": "The analyzer produces this diagnostic when it finds a reference to an\ninstance member in a constructor\u2019s initializer list.\n @see https://dart.dev/tools/diagnostic-messages#implicit_this_reference_in_initializer",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "initializer_for_non_existent_field",
+        "name": "Initializer for non existent field",
+        "description": "The analyzer produces this diagnostic when a constructor initializes a\nfield that isn\u2019t declared in the class containing the constructor.\nConstructors can\u2019t initialize fields that aren\u2019t declared and fields that\nare inherited from superclasses.\n @see https://dart.dev/tools/diagnostic-messages#initializer_for_non_existent_field",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "initializing_formal_for_non_existent_field",
+        "name": "Initializing formal for non existent field",
+        "description": "The analyzer produces this diagnostic when a field formal parameter is\nfound in a constructor in a class that doesn\u2019t declare the field being\ninitialized. Constructors can\u2019t initialize fields that aren\u2019t declared and\nfields that are inherited from superclasses.\n @see https://dart.dev/tools/diagnostic-messages#initializing_formal_for_non_existent_field",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "instance_access_to_static_member",
+        "name": "Instance access to static member",
+        "description": "The analyzer produces this diagnostic when an access operator is used to\naccess a static member through an instance of the class.\n @see https://dart.dev/tools/diagnostic-messages#instance_access_to_static_member",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "instance_member_access_from_factory",
+        "name": "Instance member access from factory",
+        "description": "The analyzer produces this diagnostic when a factory constructor contains\nan unqualified reference to an instance member. In a generative\nconstructor, the instance of the class is created and initialized before\nthe body of the constructor is executed, so the instance can be bound to\nthis and accessed just like it would be in an instance method. But, in a\nfactory constructor, the instance isn\u2019t created before executing the body,\nso this can\u2019t be used to reference it.\n @see https://dart.dev/tools/diagnostic-messages#instance_member_access_from_factory",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "instance_member_access_from_static",
+        "name": "Instance member access from static",
+        "description": "The analyzer produces this diagnostic when a static method contains an\nunqualified reference to an instance member.\n @see https://dart.dev/tools/diagnostic-messages#instance_member_access_from_static",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "instantiate_abstract_class",
+        "name": "Instantiate abstract class",
+        "description": "The analyzer produces this diagnostic when it finds a constructor\ninvocation and the constructor is declared in an abstract class. Even\nthough you can\u2019t create an instance of an abstract class, abstract classes\ncan declare constructors that can be invoked by subclasses.\n @see https://dart.dev/tools/diagnostic-messages#instantiate_abstract_class",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invalid_assignment",
+        "name": "Invalid assignment",
+        "description": "The analyzer produces this diagnostic when the static type of an expression\nthat is assigned to a variable isn\u2019t assignable to the type of the\nvariable.\n @see https://dart.dev/tools/diagnostic-messages#invalid_assignment",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invalid_extension_argument_count",
+        "name": "Invalid extension argument count",
+        "description": "The analyzer produces this diagnostic when an extension override doesn\u2019t\nhave exactly one argument. The argument is the expression used to compute\nthe value of this within the extension method, so there must be one\nargument.\n @see https://dart.dev/tools/diagnostic-messages#invalid_extension_argument_count",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invalid_factory_name_not_a_class",
+        "name": "Invalid factory name not a class",
+        "description": "The analyzer produces this diagnostic when the name of a factory\nconstructor isn\u2019t the same as the name of the surrounding class.\n @see https://dart.dev/tools/diagnostic-messages#invalid_factory_name_not_a_class",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invalid_literal_annotation",
+        "name": "Invalid literal annotation",
+        "description": "The analyzer produces this diagnostic when the @literal annotation is\napplied to anything other than a const constructor.\n @see https://dart.dev/tools/diagnostic-messages#invalid_literal_annotation",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invalid_override",
+        "name": "Invalid override",
+        "description": "The analyzer produces this diagnostic when a member of a class is found\nthat overrides a member from a supertype and the override isn\u2019t valid. An\noverride is valid if all of these are true:\n @see https://dart.dev/tools/diagnostic-messages#invalid_override",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invalid_reference_to_this",
+        "name": "Invalid reference to this",
+        "description": "The analyzer produces this diagnostic when this is used outside of an\ninstance method or a generative constructor. The reserved word this is\nonly defined in the context of an instance method or a generative\nconstructor.\n @see https://dart.dev/tools/diagnostic-messages#invalid_reference_to_this",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invalid_uri",
+        "name": "Invalid uri",
+        "description": "The analyzer produces this diagnostic when a URI in a directive doesn\u2019t\nconform to the syntax of a valid URI.\n @see https://dart.dev/tools/diagnostic-messages#invalid_uri",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invalid_use_of_covariant_in_extension",
+        "name": "Invalid use of covariant in extension",
+        "description": "The analyzer produces this diagnostic when a member declared inside an\nextension uses the keyword covariant in the declaration of a parameter.\nExtensions aren\u2019t classes and don\u2019t have subclasses, so the keyword serves\nno purpose.\n @see https://dart.dev/tools/diagnostic-messages#invalid_use_of_covariant_in_extension",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invalid_visibility_annotation",
+        "name": "Invalid visibility annotation",
+        "description": "The analyzer produces this diagnostic when either the @visibleForTemplate\nor @visibleForTesting annotation is applied to a non-public declaration.\n @see https://dart.dev/tools/diagnostic-messages#invalid_visibility_annotation",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invocation_of_extension_without_call",
+        "name": "Invocation of extension without call",
+        "description": "The analyzer produces this diagnostic when an extension override is used to\ninvoke a function but the extension doesn\u2019t declare a call method.\n @see https://dart.dev/tools/diagnostic-messages#invocation_of_extension_without_call",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invocation_of_non_function",
+        "name": "Invocation of non function",
+        "description": "The analyzer produces this diagnostic when it finds a function invocation,\nbut the name of the function being invoked is defined to be something other\nthan a function.\n @see https://dart.dev/tools/diagnostic-messages#invocation_of_non_function",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "invocation_of_non_function_expression",
+        "name": "Invocation of non function expression",
+        "description": "The analyzer produces this diagnostic when a function invocation is found,\nbut the name being referenced isn\u2019t the name of a function, or when the\nexpression computing the function doesn\u2019t compute a function.\n @see https://dart.dev/tools/diagnostic-messages#invocation_of_non_function_expression",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "list_element_type_not_assignable",
+        "name": "List element type not assignable",
+        "description": "The analyzer produces this diagnostic when the type of an element in a list\nliteral isn\u2019t assignable to the element type of the list.\n @see https://dart.dev/tools/diagnostic-messages#list_element_type_not_assignable",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "map_entry_not_in_map",
+        "name": "Map entry not in map",
+        "description": "The analyzer produces this diagnostic when a map entry (a key/value pair)\nis found in a set literal.\n @see https://dart.dev/tools/diagnostic-messages#map_entry_not_in_map",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "map_key_type_not_assignable",
+        "name": "Map key type not assignable",
+        "description": "The analyzer produces this diagnostic when a key of a key-value pair in a\nmap literal has a type that isn\u2019t assignable to the key type of the map.\n @see https://dart.dev/tools/diagnostic-messages#map_key_type_not_assignable",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "map_value_type_not_assignable",
+        "name": "Map value type not assignable",
+        "description": "The analyzer produces this diagnostic when a value of a key-value pair in a\nmap literal has a type that isn\u2019t assignable to the the value type of the\nmap.\n @see https://dart.dev/tools/diagnostic-messages#map_value_type_not_assignable",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "missing_enum_constant_in_switch",
+        "name": "Missing enum constant in switch",
+        "description": "The analyzer produces this diagnostic when a switch statement for an enum\ndoesn\u2019t include an option for one of the values in the enumeration.Note that null is always a possible value for an enum and therefore also\nmust be handled.\n @see https://dart.dev/tools/diagnostic-messages#missing_enum_constant_in_switch",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "missing_required_param",
+        "name": "Missing required param",
+        "description": "The analyzer produces this diagnostic when a method or function with a\nnamed parameter that is annotated as being required is invoked without\nproviding a value for the parameter.\n @see https://dart.dev/tools/diagnostic-messages#missing_required_param",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "missing_return",
+        "name": "Missing return",
+        "description": "Any function or method that doesn\u2019t end with either an explicit return or a\nthrow implicitly returns null. This is rarely the desired behavior. The\nanalyzer produces this diagnostic when it finds an implicit return.\n @see https://dart.dev/tools/diagnostic-messages#missing_return",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "mixin_of_non_class",
+        "name": "Mixin of non class",
+        "description": "The analyzer produces this diagnostic when a name in a mixin clause is\ndefined to be something other than a mixin or a class.\n @see https://dart.dev/tools/diagnostic-messages#mixin_of_non_class",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "mixin_on_sealed_class",
+        "name": "Mixin on sealed class",
+        "description": "The analyzer produces this diagnostic when the superclass constraint of a\nmixin is a class from a different package that was marked as @sealed.\nClasses that are sealed can\u2019t be extended, implemented, mixed in, or used\nas a superclass constraint.\n @see https://dart.dev/tools/diagnostic-messages#mixin_on_sealed_class",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "mixin_super_class_constraint_non_interface",
+        "name": "Mixin super class constraint non interface",
+        "description": "The analyzer produces this diagnostic when a type following the on\nkeyword in a mixin declaration is neither a class nor a mixin.\n @see https://dart.dev/tools/diagnostic-messages#mixin_super_class_constraint_non_interface",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "must_be_immutable",
+        "name": "Must be immutable",
+        "description": "The analyzer produces this diagnostic when an immutable class defines one\nor more instance fields that aren\u2019t final. A class is immutable if it\u2019s\nmarked as being immutable using the annotation @immutable or if it\u2019s a\nsubclass of an immutable class.\n @see https://dart.dev/tools/diagnostic-messages#must_be_immutable",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "must_call_super",
+        "name": "Must call super",
+        "description": "The analyzer produces this diagnostic when a method that overrides a method\nthat is annotated as @mustCallSuper doesn\u2019t invoke the overridden method\nas required.\n @see https://dart.dev/tools/diagnostic-messages#must_call_super",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "new_with_undefined_constructor_default",
+        "name": "New with undefined constructor default",
+        "description": "The analyzer produces this diagnostic when an unnamed constructor is\ninvoked on a class that defines named constructors but the class doesn\u2019t\nhave an unnamed constructor.\n @see https://dart.dev/tools/diagnostic-messages#new_with_undefined_constructor_default",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_abstract_class_inherits_abstract_member",
+        "name": "Non abstract class inherits abstract member",
+        "description": "The analyzer produces this diagnostic when a concrete class inherits one or\nmore abstract members, and doesn\u2019t provide or inherit an implementation for\nat least one of those abstract members.\n @see https://dart.dev/tools/diagnostic-messages#non_abstract_class_inherits_abstract_member",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_bool_condition",
+        "name": "Non bool condition",
+        "description": "The analyzer produces this diagnostic when a condition, such as an if or\nwhile loop, doesn\u2019t have the static type bool.\n @see https://dart.dev/tools/diagnostic-messages#non_bool_condition",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_bool_expression",
+        "name": "Non bool expression",
+        "description": "The analyzer produces this diagnostic when the first expression in an\nassert has a type other than bool.\n @see https://dart.dev/tools/diagnostic-messages#non_bool_expression",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_bool_negation_expression",
+        "name": "Non bool negation expression",
+        "description": "The analyzer produces this diagnostic when the operand of the unary\nnegation operator (!) doesn\u2019t have the type bool.\n @see https://dart.dev/tools/diagnostic-messages#non_bool_negation_expression",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_bool_operand",
+        "name": "Non bool operand",
+        "description": "The analyzer produces this diagnostic when one of the operands of either\nthe && or || operator doesn\u2019t have the type bool.\n @see https://dart.dev/tools/diagnostic-messages#non_bool_operand",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_constant_case_expression",
+        "name": "Non constant case expression",
+        "description": "The analyzer produces this diagnostic when the expression in a case clause\nisn\u2019t a constant expression.\n @see https://dart.dev/tools/diagnostic-messages#non_constant_case_expression",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_constant_default_value",
+        "name": "Non constant default value",
+        "description": "The analyzer produces this diagnostic when an optional parameter, either\nnamed or positional, has a default value that isn\u2019t a compile-time\nconstant.\n @see https://dart.dev/tools/diagnostic-messages#non_constant_default_value",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_constant_list_element",
+        "name": "Non constant list element",
+        "description": "The analyzer produces this diagnostic when an element in a constant list\nliteral isn\u2019t a constant value. The list literal can be constant either\nexplicitly (because it\u2019s prefixed by the const keyword) or implicitly\n(because it appears in a constant context).\n @see https://dart.dev/tools/diagnostic-messages#non_constant_list_element",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_constant_map_element",
+        "name": "Non constant map element",
+        "description": "The analyzer produces this diagnostic when an if element or a spread\nelement in a constant map isn\u2019t a constant element.\n @see https://dart.dev/tools/diagnostic-messages#non_constant_map_element",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_constant_map_key",
+        "name": "Non constant map key",
+        "description": "The analyzer produces this diagnostic when a key in a constant map literal\nisn\u2019t a constant value.\n @see https://dart.dev/tools/diagnostic-messages#non_constant_map_key",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_constant_map_value",
+        "name": "Non constant map value",
+        "description": "The analyzer produces this diagnostic when a value in a constant map\nliteral isn\u2019t a constant value.\n @see https://dart.dev/tools/diagnostic-messages#non_constant_map_value",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_constant_set_element",
+        "name": "Non constant set element",
+        "description": "The analyzer produces this diagnostic when a constant set literal contains\nan element that isn\u2019t a compile-time constant.\n @see https://dart.dev/tools/diagnostic-messages#non_constant_set_element",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_const_call_to_literal_constructor",
+        "name": "Non const call to literal constructor",
+        "description": "The analyzer produces this diagnostic when a constructor that has the\n@literal annotation is invoked without using the const keyword, but all\nof the arguments to the constructor are constants. The annotation indicates\nthat the constructor should be used to create a constant value whenever\npossible.\n @see https://dart.dev/tools/diagnostic-messages#non_const_call_to_literal_constructor",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_type_as_type_argument",
+        "name": "Non type as type argument",
+        "description": "The analyzer produces this diagnostic when an identifier that isn\u2019t a type\nis used as a type argument.\n @see https://dart.dev/tools/diagnostic-messages#non_type_as_type_argument",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "non_type_in_catch_clause",
+        "name": "Non type in catch clause",
+        "description": "The analyzer produces this diagnostic when the identifier following the\non in a catch clause is defined to be something other than a type.\n @see https://dart.dev/tools/diagnostic-messages#non_type_in_catch_clause",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "not_a_type",
+        "name": "Not a type",
+        "description": "The analyzer produces this diagnostic when a name is used as a type but\ndeclared to be something other than a type.\n @see https://dart.dev/tools/diagnostic-messages#not_a_type",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "not_enough_positional_arguments",
+        "name": "Not enough positional arguments",
+        "description": "The analyzer produces this diagnostic when a method or function invocation\nhas fewer positional arguments than the number of required positional\nparameters.\n @see https://dart.dev/tools/diagnostic-messages#not_enough_positional_arguments",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "not_iterable_spread",
+        "name": "Not iterable spread",
+        "description": "The analyzer produces this diagnostic when the static type of the\nexpression of a spread element that appears in either a list literal or a\nset literal doesn\u2019t implement the type Iterable.\n @see https://dart.dev/tools/diagnostic-messages#not_iterable_spread",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "not_map_spread",
+        "name": "Not map spread",
+        "description": "The analyzer produces this diagnostic when the static type of the\nexpression of a spread element that appears in a map literal doesn\u2019t\nimplement the type Map.\n @see https://dart.dev/tools/diagnostic-messages#not_map_spread",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "no_annotation_constructor_arguments",
+        "name": "No annotation constructor arguments",
+        "description": "The analyzer produces this diagnostic when an annotation consists of a\nsingle identifier, but that identifier is the name of a class rather than a\nvariable. To create an instance of the class, the identifier must be\nfollowed by an argument list.\n @see https://dart.dev/tools/diagnostic-messages#no_annotation_constructor_arguments",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "override_on_non_overriding_member",
+        "name": "Override on non overriding member",
+        "description": "The analyzer produces this diagnostic when a class member is annotated with\nthe @override annotation, but the member isn\u2019t declared in any of the\nsupertypes of the class.\n @see https://dart.dev/tools/diagnostic-messages#override_on_non_overriding_member",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "part_of_non_part",
+        "name": "Part of non part",
+        "description": "The analyzer produces this diagnostic when a part directive is found and\nthe referenced file doesn\u2019t have a part-of directive.\n @see https://dart.dev/tools/diagnostic-messages#part_of_non_part",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "redirect_to_invalid_function_type",
+        "name": "Redirect to invalid function type",
+        "description": "The analyzer produces this diagnostic when a factory constructor attempts\nto redirect to another constructor, but the two have incompatible\nparameters. The parameters are compatible if all of the parameters of the\nredirecting constructor can be passed to the other constructor and if the\nother constructor doesn\u2019t require any parameters that aren\u2019t declared by\nthe redirecting constructor.\n @see https://dart.dev/tools/diagnostic-messages#redirect_to_invalid_function_type",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "redirect_to_invalid_return_type",
+        "name": "Redirect to invalid return type",
+        "description": "The analyzer produces this diagnostic when a factory constructor redirects\nto a constructor whose return type isn\u2019t a subtype of the type that the\nfactory constructor is declared to produce.\n @see https://dart.dev/tools/diagnostic-messages#redirect_to_invalid_return_type",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "redirect_to_non_class",
+        "name": "Redirect to non class",
+        "description": "One way to implement a factory constructor is to redirect to another\nconstructor by referencing the name of the constructor. The analyzer\nproduces this diagnostic when the redirect is to something other than a\nconstructor.\n @see https://dart.dev/tools/diagnostic-messages#redirect_to_non_class",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "referenced_before_declaration",
+        "name": "Referenced before declaration",
+        "description": "The analyzer produces this diagnostic when a variable is referenced before\nit\u2019s declared. In Dart, variables are visible everywhere in the block in\nwhich they are declared, but can only be referenced after they are\ndeclared.The analyzer also produces a context message that indicates where the\ndeclaration is located.\n @see https://dart.dev/tools/diagnostic-messages#referenced_before_declaration",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "return_of_invalid_type",
+        "name": "Return of invalid type",
+        "description": "The analyzer produces this diagnostic when a method or function returns a\nvalue whose type isn\u2019t assignable to the declared return type.\n @see https://dart.dev/tools/diagnostic-messages#return_of_invalid_type",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "return_of_invalid_type_from_closure",
+        "name": "Return of invalid type from closure",
+        "description": "The analyzer produces this diagnostic when the static type of a returned\nexpression isn\u2019t assignable to the return type that the closure is required\nto have.\n @see https://dart.dev/tools/diagnostic-messages#return_of_invalid_type_from_closure",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "return_without_value",
+        "name": "Return without value",
+        "description": "The analyzer produces this diagnostic when it finds a return statement\nwithout an expression in a function that declares a return type.\n @see https://dart.dev/tools/diagnostic-messages#return_without_value",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sdk_version_async_exported_from_core",
+        "name": "Sdk version async exported from core",
+        "description": "The analyzer produces this diagnostic when either the class Future or\nStream is referenced in a library that doesn\u2019t import dart:async in\ncode that has an SDK constraint whose lower bound is less than 2.1.0. In\nearlier versions, these classes weren\u2019t defined in dart:core, so the\nimport was necessary.\n @see https://dart.dev/tools/diagnostic-messages#sdk_version_async_exported_from_core",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sdk_version_as_expression_in_const_context",
+        "name": "Sdk version as expression in const context",
+        "description": "The analyzer produces this diagnostic when an as expression inside a\nconstant context is found in code that has an SDK\nconstraint whose lower bound is less than 2.3.2. Using an as expression in\na constant context wasn\u2019t supported in earlier\nversions, so this code won\u2019t be able to run against earlier versions of the\nSDK.\n @see https://dart.dev/tools/diagnostic-messages#sdk_version_as_expression_in_const_context",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sdk_version_bool_operator_in_const_context",
+        "name": "Sdk version bool operator in const context",
+        "description": "The analyzer produces this diagnostic when any use of the &, | or ^\noperators on the class bool inside a\nconstant context is found in code that has an SDK\nconstraint whose lower bound is less than 2.3.2. Using these operators in a\nconstant context wasn\u2019t supported in earlier versions,\nso this code won\u2019t be able to run against earlier versions of the SDK.\n @see https://dart.dev/tools/diagnostic-messages#sdk_version_bool_operator_in_const_context",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sdk_version_eq_eq_operator_in_const_context",
+        "name": "Sdk version eq eq operator in const context",
+        "description": "The analyzer produces this diagnostic when the operator == is used on a\nnon-primitive type inside a constant context is found\nin code that has an SDK constraint whose lower bound is less than 2.3.2.\nUsing this operator in a constant context wasn\u2019t\nsupported in earlier versions, so this code won\u2019t be able to run against\nearlier versions of the SDK.\n @see https://dart.dev/tools/diagnostic-messages#sdk_version_eq_eq_operator_in_const_context",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sdk_version_extension_methods",
+        "name": "Sdk version extension methods",
+        "description": "The analyzer produces this diagnostic when an extension declaration or an\nextension override is found in code that has an SDK constraint whose lower\nbound is less than 2.6.0. Using extensions wasn\u2019t supported in earlier\nversions, so this code won\u2019t be able to run against earlier versions of the\nSDK.\n @see https://dart.dev/tools/diagnostic-messages#sdk_version_extension_methods",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sdk_version_is_expression_in_const_context",
+        "name": "Sdk version is expression in const context",
+        "description": "The analyzer produces this diagnostic when an is expression inside a\nconstant context is found in code that has an SDK\nconstraint whose lower bound is less than 2.3.2. Using an is expression in\na constant context wasn\u2019t supported in earlier\nversions, so this code won\u2019t be able to run against earlier versions of the\nSDK.\n @see https://dart.dev/tools/diagnostic-messages#sdk_version_is_expression_in_const_context",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sdk_version_set_literal",
+        "name": "Sdk version set literal",
+        "description": "The analyzer produces this diagnostic when a set literal is found in code\nthat has an SDK constraint whose lower bound is less than 2.2.0. Set\nliterals weren\u2019t supported in earlier versions, so this code won\u2019t be able\nto run against earlier versions of the SDK.\n @see https://dart.dev/tools/diagnostic-messages#sdk_version_set_literal",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sdk_version_ui_as_code",
+        "name": "Sdk version ui as code",
+        "description": "The analyzer produces this diagnostic when a for, if, or spread element is\nfound in code that has an SDK constraint whose lower bound is less than\n2.3.0. Using a for, if, or spread element wasn\u2019t supported in earlier\nversions, so this code won\u2019t be able to run against earlier versions of the\nSDK.\n @see https://dart.dev/tools/diagnostic-messages#sdk_version_ui_as_code",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "sdk_version_ui_as_code_in_const_context",
+        "name": "Sdk version ui as code in const context",
+        "description": "The analyzer produces this diagnostic when an if or spread element inside\na constant context is found in code that has an\nSDK constraint whose lower bound is less than 2.5.0. Using an if or\nspread element inside a constant context wasn\u2019t\nsupported in earlier versions, so this code won\u2019t be able to run against\nearlier versions of the SDK.\n @see https://dart.dev/tools/diagnostic-messages#sdk_version_ui_as_code_in_const_context",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "static_access_to_instance_member",
+        "name": "Static access to instance member",
+        "description": "The analyzer produces this diagnostic when a class name is used to access\nan instance field. Instance fields don\u2019t exist on a class; they exist only\non an instance of the class.\n @see https://dart.dev/tools/diagnostic-messages#static_access_to_instance_member",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "super_in_extension",
+        "name": "Super in extension",
+        "description": "The analyzer produces this diagnostic when a member declared inside an\nextension uses the super keyword . Extensions aren\u2019t classes and don\u2019t\nhave superclasses, so the super keyword serves no purpose.\n @see https://dart.dev/tools/diagnostic-messages#super_in_extension",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "super_in_invalid_context",
+        "name": "Super in invalid context",
+        "description": "The analyzer produces this diagnostic when the keyword super is used\noutside of a instance method.\n @see https://dart.dev/tools/diagnostic-messages#super_in_invalid_context",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "type_argument_not_matching_bounds",
+        "name": "Type argument not matching bounds",
+        "description": "The analyzer produces this diagnostic when a type argument isn\u2019t the same\nas or a subclass of the bounds of the corresponding type parameter.\n @see https://dart.dev/tools/diagnostic-messages#type_argument_not_matching_bounds",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "type_test_with_undefined_name",
+        "name": "Type test with undefined name",
+        "description": "The analyzer produces this diagnostic when the name following the is in a\ntype test expression isn\u2019t defined.\n @see https://dart.dev/tools/diagnostic-messages#type_test_with_undefined_name",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_annotation",
+        "name": "Undefined annotation",
+        "description": "The analyzer produces this diagnostic when a name that isn\u2019t defined is\nused as an annotation.\n @see https://dart.dev/tools/diagnostic-messages#undefined_annotation",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_class",
+        "name": "Undefined class",
+        "description": "The analyzer produces this diagnostic when it encounters an identifier that\nappears to be the name of a class but either isn\u2019t defined or isn\u2019t visible\nin the scope in which it\u2019s being referenced.\n @see https://dart.dev/tools/diagnostic-messages#undefined_class",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_constructor_in_initializer",
+        "name": "Undefined constructor in initializer",
+        "description": "The analyzer produces this diagnostic when a superclass constructor is\ninvoked in the initializer list of a constructor, but the superclass\ndoesn\u2019t define the constructor being invoked.\n @see https://dart.dev/tools/diagnostic-messages#undefined_constructor_in_initializer",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_extension_getter",
+        "name": "Undefined extension getter",
+        "description": "The analyzer produces this diagnostic when an extension override is used to\ninvoke a getter, but the getter isn\u2019t defined by the specified extension.\nThe analyzer also produces this diagnostic when a static getter is\nreferenced but isn\u2019t defined by the specified extension.\n @see https://dart.dev/tools/diagnostic-messages#undefined_extension_getter",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_extension_method",
+        "name": "Undefined extension method",
+        "description": "The analyzer produces this diagnostic when an extension override is used to\ninvoke a method, but the method isn\u2019t defined by the specified extension.\nThe analyzer also produces this diagnostic when a static method is\nreferenced but isn\u2019t defined by the specified extension.\n @see https://dart.dev/tools/diagnostic-messages#undefined_extension_method",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_extension_setter",
+        "name": "Undefined extension setter",
+        "description": "The analyzer produces this diagnostic when an extension override is used to\ninvoke a setter, but the setter isn\u2019t defined by the specified extension.\nThe analyzer also produces this diagnostic when a static setter is\nreferenced but isn\u2019t defined by the specified extension.\n @see https://dart.dev/tools/diagnostic-messages#undefined_extension_setter",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_function",
+        "name": "Undefined function",
+        "description": "The analyzer produces this diagnostic when it encounters an identifier that\nappears to be the name of a function but either isn\u2019t defined or isn\u2019t\nvisible in the scope in which it\u2019s being referenced.\n @see https://dart.dev/tools/diagnostic-messages#undefined_function",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_getter",
+        "name": "Undefined getter",
+        "description": "The analyzer produces this diagnostic when it encounters an identifier that\nappears to be the name of a getter but either isn\u2019t defined or isn\u2019t\nvisible in the scope in which it\u2019s being referenced.\n @see https://dart.dev/tools/diagnostic-messages#undefined_getter",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_hidden_name",
+        "name": "Undefined hidden name",
+        "description": "The analyzer produces this diagnostic when a hide combinator includes a\nname that isn\u2019t defined by the library being imported.\n @see https://dart.dev/tools/diagnostic-messages#undefined_hidden_name",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_identifier",
+        "name": "Undefined identifier",
+        "description": "The analyzer produces this diagnostic when it encounters an identifier that\neither isn\u2019t defined or isn\u2019t visible in the scope in which it\u2019s being\nreferenced.\n @see https://dart.dev/tools/diagnostic-messages#undefined_identifier",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_method",
+        "name": "Undefined method",
+        "description": "The analyzer produces this diagnostic when it encounters an identifier that\nappears to be the name of a method but either isn\u2019t defined or isn\u2019t\nvisible in the scope in which it\u2019s being referenced.\n @see https://dart.dev/tools/diagnostic-messages#undefined_method",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_named_parameter",
+        "name": "Undefined named parameter",
+        "description": "The analyzer produces this diagnostic when a method or function invocation\nhas a named argument, but the method or function being invoked doesn\u2019t\ndefine a parameter with the same name.\n @see https://dart.dev/tools/diagnostic-messages#undefined_named_parameter",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_operator",
+        "name": "Undefined operator",
+        "description": "The analyzer produces this diagnostic when a user-definable operator is\ninvoked on an object for which the operator isn\u2019t defined.\n @see https://dart.dev/tools/diagnostic-messages#undefined_operator",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_prefixed_name",
+        "name": "Undefined prefixed name",
+        "description": "The analyzer produces this diagnostic when a prefixed identifier is found\nwhere the prefix is valid, but the identifier isn\u2019t declared in any of the\nlibraries imported using that prefix.\n @see https://dart.dev/tools/diagnostic-messages#undefined_prefixed_name",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_setter",
+        "name": "Undefined setter",
+        "description": "The analyzer produces this diagnostic when it encounters an identifier that\nappears to be the name of a setter but either isn\u2019t defined or isn\u2019t\nvisible in the scope in which the identifier is being referenced.\n @see https://dart.dev/tools/diagnostic-messages#undefined_setter",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_shown_name",
+        "name": "Undefined shown name",
+        "description": "The analyzer produces this diagnostic when a show combinator includes a\nname that isn\u2019t defined by the library being imported.\n @see https://dart.dev/tools/diagnostic-messages#undefined_shown_name",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "undefined_super_method",
+        "name": "Undefined super method",
+        "description": "The analyzer produces this diagnostic when an inherited method is\nreferenced using super, but there\u2019s no method with that name in the\nsuperclass chain.\n @see https://dart.dev/tools/diagnostic-messages#undefined_super_method",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unnecessary_cast",
+        "name": "Unnecessary cast",
+        "description": "The analyzer produces this diagnostic when the value being cast is already\nknown to be of the type that it\u2019s being cast to.\n @see https://dart.dev/tools/diagnostic-messages#unnecessary_cast",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unqualified_reference_to_static_member_of_extended_type",
+        "name": "Unqualified reference to static member of extended type",
+        "description": "The analyzer produces this diagnostic when an undefined name is found, and\nthe name is the same as a static member of the extended type or one of its\nsuperclasses.\n @see https://dart.dev/tools/diagnostic-messages#unqualified_reference_to_static_member_of_extended_type",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unused_catch_clause",
+        "name": "Unused catch clause",
+        "description": "The analyzer produces this diagnostic when a catch clause is found, and\nneither the exception parameter nor the optional stack trace parameter are\nused in the catch block.\n @see https://dart.dev/tools/diagnostic-messages#unused_catch_clause",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unused_catch_stack",
+        "name": "Unused catch stack",
+        "description": "The analyzer produces this diagnostic when the stack trace parameter in a\ncatch clause isn\u2019t referenced within the body of the catch block.\n @see https://dart.dev/tools/diagnostic-messages#unused_catch_stack",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unused_element",
+        "name": "Unused element",
+        "description": "The analyzer produces this diagnostic when a private class, enum, mixin,\ntypedef, top level variable, top level function, or method is declared but\nnever referenced.\n @see https://dart.dev/tools/diagnostic-messages#unused_element",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unused_field",
+        "name": "Unused field",
+        "description": "The analyzer produces this diagnostic when a private field is declared but\nnever read, even if it\u2019s written in one or more places.\n @see https://dart.dev/tools/diagnostic-messages#unused_field",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unused_import",
+        "name": "Unused import",
+        "description": "The analyzer produces this diagnostic when an import isn\u2019t needed because\nnone of the names that are imported are referenced within the importing\nlibrary.\n @see https://dart.dev/tools/diagnostic-messages#unused_import",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unused_label",
+        "name": "Unused label",
+        "description": "The analyzer produces this diagnostic when a label that isn\u2019t used is\nfound.\n @see https://dart.dev/tools/diagnostic-messages#unused_label",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unused_local_variable",
+        "name": "Unused local variable",
+        "description": "The analyzer produces this diagnostic when a local variable is declared but\nnever read, even if it\u2019s written in one or more places.\n @see https://dart.dev/tools/diagnostic-messages#unused_local_variable",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "unused_shown_name",
+        "name": "Unused shown name",
+        "description": "The analyzer produces this diagnostic when a show combinator includes a\nname that isn\u2019t used within the library. Because it isn\u2019t referenced, the\nname can be removed.\n @see https://dart.dev/tools/diagnostic-messages#unused_shown_name",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "uri_does_not_exist",
+        "name": "Uri does not exist",
+        "description": "The analyzer produces this diagnostic when an import, export, or part\ndirective is found where the URI refers to a file that doesn\u2019t exist.\n @see https://dart.dev/tools/diagnostic-messages#uri_does_not_exist",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "uri_has_not_been_generated",
+        "name": "Uri has not been generated",
+        "description": "The analyzer produces this diagnostic when an import, export, or part\ndirective is found where the URI refers to a file that doesn\u2019t exist and\nthe name of the file ends with a pattern that\u2019s commonly produced by code\ngenerators, such as one of the following:\n @see https://dart.dev/tools/diagnostic-messages#uri_has_not_been_generated",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "use_of_void_result",
+        "name": "Use of void result",
+        "description": "The analyzer produces this diagnostic when it finds an expression whose\ntype is void, and the expression is used in a place where a value is\nexpected, such as before a member access or on the right-hand side of an\nassignment.\n @see https://dart.dev/tools/diagnostic-messages#use_of_void_result",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "variable_type_mismatch",
+        "name": "Variable type mismatch",
+        "description": "The analyzer produces this diagnostic when the evaluation of a constant\nexpression would result in a CastException.\n @see https://dart.dev/tools/diagnostic-messages#variable_type_mismatch",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "wrong_number_of_parameters_for_operator",
+        "name": "Wrong number of parameters for operator",
+        "description": "The analyzer produces this diagnostic when a declaration of an operator has\nthe wrong number of parameters.\n @see https://dart.dev/tools/diagnostic-messages#wrong_number_of_parameters_for_operator",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "wrong_number_of_parameters_for_setter",
+        "name": "Wrong number of parameters for setter",
+        "description": "The analyzer produces this diagnostic when a setter is found that doesn\u2019t\ndeclare exactly one required positional parameter.\n @see https://dart.dev/tools/diagnostic-messages#wrong_number_of_parameters_for_setter",
+        "severity": "MINOR",
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "wrong_number_of_type_arguments",
+        "name": "Wrong number of type arguments",
+        "description": "The analyzer produces this diagnostic when a type that has type parameters\nis used and type arguments are provided, but the number of type arguments\nisn\u2019t the same as the number of type parameters.\n @see https://dart.dev/tools/diagnostic-messages#wrong_number_of_type_arguments",
         "severity": "MINOR",
         "type": "CODE_SMELL"
     }

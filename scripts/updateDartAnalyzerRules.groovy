@@ -30,7 +30,7 @@ def assignSeverity(category, key, description) {
             return "MAJOR"
         }
 
-    // Style category
+        // Style category
     } else if (category.contains('Style')) {
         if (key.contains('camel_case')) {
             return "MAJOR"
@@ -69,7 +69,7 @@ def assignType(key) {
      */
 
     def sqale = new XmlSlurper().parseText(sqaleXml.text)
-    def ruleNode = sqale.'**'.find {chc ->
+    def ruleNode = sqale.'**'.find { chc ->
         chc.'rule-key' == key
     }
     if (ruleNode) {
@@ -108,7 +108,7 @@ def parseRules(url) {
     def currentKey = ''
     def currentDescription = ''
     def started = false
-    root."**".findAll { it.name() == "STRONG" || it.name() == "H2" || it.name() == "P" }.each {tag ->
+    root."**".findAll { it.name() == "STRONG" || it.name() == "H2" || it.name() == "P" }.each { tag ->
 
         switch (tag.name()) {
             case 'STRONG':
@@ -139,6 +139,58 @@ def parseRules(url) {
 
     result
 }
+
+/**
+ * Parse rules from the diagnostic messages website
+ * @param url
+ * @return
+ */
+
+def parseRulesFromDiagnostic(url) {
+    def result = []
+
+    def http = new HTTPBuilder(url)
+    def html = http.get([:])
+
+    def root = html."**".find { it.name() == "ARTICLE" }
+
+    def currentKey = ''
+    def currentDescription = ''
+    def descriptionOver = false
+
+    root."**".findAll { it.name() == "H3" || it.name() == "H4" || it.name() == "P" }.each { tag ->
+        switch (tag.name()) {
+            case 'H3':
+                currentKey = tag.text()
+                break
+            case 'H4':
+                if (tag.text() == "Description") {
+                    //We might have several lines of entries
+                    descriptionOver = false
+                    currentDescription = ""
+                } else if (tag.text() == "Examples") {
+                    descriptionOver = true
+                    //When reaching examples, we consider the description over
+                    //todo but we might want to provider nicer description with examples later !
+                    def entry = [:]
+                    entry.key = currentKey
+                    entry.name = currentKey.replace("_", " ").capitalize()
+                    entry.description = currentDescription += "\n @see https://dart.dev/tools/diagnostic-messages#$currentKey"
+                    entry.severity = "MINOR"
+                    entry.type = "CODE_SMELL"
+                    result.add(entry)
+                }
+                break
+            case 'P':
+                if (!descriptionOver) {
+                    currentDescription += tag.text()
+                }
+                break
+        }
+    }
+    result
+}
+
 
 /**
  * Write rules to a JSON file
@@ -178,17 +230,19 @@ def writeProfileDartAnalyzer(rls, file) {
 def writeAnalysisOptions(rls, file) {
     text = "linter:\n"
     text += "  rules:\n"
-    rls.forEach {r ->
+    rls.forEach { r ->
         text += "    - ${r.key}\n"
     }
     file.text = text
 }
 
 def rulesUrl = "https://dart-lang.github.io/linter/lints/"
+def diagnosticRulesUrl = "https://dart.dev/tools/diagnostic-messages"
 File rulesJson = new File('../dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/rules.json')
 File profileXml = new File('../dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/profile-dartanalyzer.xml')
 File analysisOptionsYaml = new File('../dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/analysis_options.yaml')
 def rules = parseRules(rulesUrl)
+rules.addAll(parseRulesFromDiagnostic(diagnosticRulesUrl))
 writeRules(rules, rulesJson)
 writeProfileDartAnalyzer(rules, profileXml)
 writeAnalysisOptions(rules, analysisOptionsYaml)
