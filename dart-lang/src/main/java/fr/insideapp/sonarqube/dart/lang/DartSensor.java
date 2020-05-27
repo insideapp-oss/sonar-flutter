@@ -39,6 +39,7 @@ public class DartSensor implements Sensor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DartSensor.class);
     private static final int EXECUTOR_TIMEOUT = 10000;
+    public static final String DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY = "sonar.dart.analysis.useExistingOptions";
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
