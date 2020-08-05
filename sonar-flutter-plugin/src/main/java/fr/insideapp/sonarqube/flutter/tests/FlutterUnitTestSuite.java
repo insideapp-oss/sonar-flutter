@@ -21,12 +21,14 @@ package fr.insideapp.sonarqube.flutter.tests;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 public class FlutterUnitTestSuite {
 
     private Long id;
     private String path;
-    private List<FlutterUnitTest> tests;
+    private final List<FlutterUnitTest> tests;
 
     public FlutterUnitTestSuite() {
         this.tests = new ArrayList<>();
@@ -52,21 +54,43 @@ public class FlutterUnitTestSuite {
         return tests;
     }
 
+    /**
+     * Returns all tests that are not skipped or hidden.
+     */
+    public List<FlutterUnitTest> getActualTests() {
+        return tests.stream().filter(t -> !t.isHidden()).filter(t -> !t.isSkipped()).collect(Collectors.toList());
+    }
+
+    public long getCount() {
+        return getActualTests().size();
+    }
+
     public long getSkippedCount() {
-        return this.tests.stream().filter(t -> t.isSkipped()).count();
+        return tests.stream().filter(t -> !t.isHidden()).filter(FlutterUnitTest::isSkipped).count();
     }
 
     public long getErrorCount() {
-        return this.tests.stream().filter(t -> t.getResult().equals(FlutterUnitTest.STATUS_ERROR)).count();
+        return getActualTests().stream().filter(t -> t.getResult().equals(FlutterUnitTest.STATUS_ERROR)).count();
     }
 
     public long getFailureCount() {
-        return this.tests.stream().filter(t -> t.getResult().equals(FlutterUnitTest.STATUS_FAILURE)).count();
+        return getActualTests().stream().filter(t -> t.getResult().equals(FlutterUnitTest.STATUS_FAILURE)).count();
     }
 
     public long getDurationMilliseconds() {
-        return  this.tests.stream().mapToLong(t -> t.getTime()).sum();
+        return getActualTests().stream().mapToLong(FlutterUnitTest::getTime).sum();
     }
 
-
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", FlutterUnitTestSuite.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("path='" + path + "'")
+                .add("tests=" + tests)
+                .add("count=" + getCount())
+                .add("skipped=" + getSkippedCount())
+                .add("failures=" + getFailureCount())
+                .add("errors=" + getErrorCount())
+                .toString();
+    }
 }
