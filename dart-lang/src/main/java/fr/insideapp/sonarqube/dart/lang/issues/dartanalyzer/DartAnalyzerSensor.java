@@ -19,6 +19,11 @@
  */
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
+import com.google.common.io.Files;
+import com.google.common.io.Resources;
+import fr.insideapp.sonarqube.dart.lang.Dart;
+import fr.insideapp.sonarqube.dart.lang.DartSensor;
+import org.buildobjects.process.ExternalProcessFailureException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;

@@ -19,6 +19,8 @@
  */
 package fr.insideapp.sonarqube.flutter.tests;
 
+import java.util.StringJoiner;
+
 public class FlutterUnitTest {
 
     public static final String STATUS_SUCCESS = "success";
@@ -27,9 +29,11 @@ public class FlutterUnitTest {
 
     private Long id;
     private String name;
-    private Long time;
+    private Long startTime;
+    private Long endTime;
     private String result;
 
+    private boolean hidden;
     private boolean skipped;
 
     public String getName() {
@@ -56,12 +60,27 @@ public class FlutterUnitTest {
         this.result = result;
     }
 
-    public Long getTime() {
-        return time;
+    public Long getStartTime() {
+        return startTime;
     }
 
-    public void setTime(Long time) {
-        this.time = time;
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
+    }
+
+    public Long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
+    }
+
+    public Long getTime() {
+        if (startTime == null || endTime == null) {
+            return null;
+        }
+        return endTime - startTime;
     }
 
     public boolean isSkipped() {
@@ -72,4 +91,24 @@ public class FlutterUnitTest {
         this.skipped = skipped;
     }
 
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", FlutterUnitTest.class.getSimpleName() + "[", "]")
+                .add("name='" + name + "'")
+                .add("result='" + result + "'")
+                .add("skipped=" + skipped)
+                .add("hidden=" + hidden)
+                .add("started=" + startTime)
+                .add("finished=" + endTime)
+                .add("duration=" + endTime)
+                .toString();
+    }
 }
