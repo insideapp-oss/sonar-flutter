@@ -91,6 +91,18 @@ flutter test --coverage
 # Run the analysis and publish to the SonarQube server
 sonar-scanner
 ```
+
+### Use existing analysis options
+
+The plugin uses its own analysis options file.
+If `analysis_options.yaml` file already exists under the project root, it will be saved during the analysis and then restored to its initial state.
+
+To disable this behavior and use the existing`analysis_options.yaml` file instead, add the following line to `sonar-project.properties` file :
+
+```
+# Use existing options to perform dartanalyzer analysis
+sonar.dart.analysis.useExistingOptions=true
+```
 	
 ## Contributing
 

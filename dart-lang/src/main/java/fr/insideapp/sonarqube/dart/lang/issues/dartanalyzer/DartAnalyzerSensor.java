@@ -22,6 +22,7 @@ package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import fr.insideapp.sonarqube.dart.lang.Dart;
+import fr.insideapp.sonarqube.dart.lang.DartSensor;
 import org.buildobjects.process.ExternalProcessFailureException;
 import org.buildobjects.process.ProcBuilder;
 import org.slf4j.Logger;
@@ -63,12 +64,27 @@ public class DartAnalyzerSensor implements Sensor {
     @Override
     public void execute(SensorContext sensorContext) {
 
-        // Setup a analysis-options.yaml file
-        this.saveCurrentAnalysisOptionsFile(sensorContext);
-        try {
-            this.createAnalysisOptionsFile(sensorContext);
-        } catch (IOException e) {
-            LOGGER.error("Failed to create analysis_options.yaml file", e);
+        boolean useExistingAnalysisOptions = sensorContext.config().getBoolean(DartSensor.DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY).orElse(false);
+        boolean useDefaultAnalysisOptions = !useExistingAnalysisOptions;
+
+        // If option is set to true and analysis-options.yaml already exists, use it
+        if(useExistingAnalysisOptions) {
+            LOGGER.info("Use existing {} file", ANALYSIS_OPTIONS_FILENAME);
+            if(!this.analysisOptionsFileExists(sensorContext)) {
+                LOGGER.warn("File {} does not exists", ANALYSIS_OPTIONS_FILENAME);
+                // Force default analysis-options.yaml file
+                useDefaultAnalysisOptions = true;
+            }
+        }
+        if(useDefaultAnalysisOptions) {
+            LOGGER.info("Either {} option is not set to true or {} file does not exists, use default analysis options instead", DartSensor.DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY, ANALYSIS_OPTIONS_FILENAME);
+            // Setup a analysis-options.yaml file
+            this.saveCurrentAnalysisOptionsFile(sensorContext);
+            try {
+                this.createAnalysisOptionsFile(sensorContext);
+            } catch (IOException e) {
+                LOGGER.error("Failed to create {} file", ANALYSIS_OPTIONS_FILENAME, e);
+            }
         }
 
         // Retrieve source files to analyze
@@ -81,44 +97,48 @@ public class DartAnalyzerSensor implements Sensor {
         List<InputFile> inputFiles = new ArrayList<>();
         fileSystem.inputFiles(mainFilePredicate).forEach(inputFiles::add);
 
-        if (this.verifyCommand()) {
+        try {
+            if (this.verifyCommand()) {
 
-            DartAnalyzerReportParser reportParser = new DartAnalyzerReportParser();
+                DartAnalyzerReportParser reportParser = new DartAnalyzerReportParser();
 
-            // TODO : consider splitting analysis every X files (a command line length limit might occur !)
-            List<String> fileNames = inputFiles.stream().map(i -> i.toString()).collect(Collectors.toList());
-            // Run analysis command
-            String output =  new ProcBuilder(ANALYZER_COMMAND)
-                    .withArgs(fileNames.toArray(new String[0]))
-                    .withTimeoutMillis(ANALYZER_TIMEOUT)
-                    .run()
-                    .getOutputString();
+                // TODO : consider splitting analysis every X files (a command line length limit might occur !)
+                List<String> fileNames = inputFiles.stream().map(i -> i.toString()).collect(Collectors.toList());
+                // Run analysis command
+                String output = new ProcBuilder(ANALYZER_COMMAND)
+                        .withArgs(fileNames.toArray(new String[0]))
+                        .withTimeoutMillis(ANALYZER_TIMEOUT)
+                        .run()
+                        .getOutputString();
 
-            // Parse output
-            List<DartAnalyzerReportIssue> issues = reportParser.parse(output);
+                // Parse output
+                List<DartAnalyzerReportIssue> issues = reportParser.parse(output);
 
-            // Record issues
-            issues.forEach(i -> {
-                File file = new File(sensorContext.fileSystem().baseDir(), i.getFilePath());
-                FilePredicate fp = sensorContext.fileSystem().predicates().hasAbsolutePath(file.getAbsolutePath());
-                if (!sensorContext.fileSystem().hasFiles(fp)) {
-                    LOGGER.warn("File not included in SonarQube {}", file.getAbsoluteFile());
-                } else {
-                    InputFile inputFile = sensorContext.fileSystem().inputFile(fp);
-                    NewIssueLocation nil = new DefaultIssueLocation()
-                            .on(inputFile)
-                            .at(inputFile.selectLine(i.getLineNumber()))
-                            .message(i.getMessage());
-                    sensorContext.newIssue()
-                            .forRule(RuleKey.of(DartAnalyzerRulesDefinition.REPOSITORY_KEY, i.getRuleId()))
-                            .at(nil)
-                            .save();
-                }
-            });
+                // Record issues
+                issues.forEach(i -> {
+                    File file = new File(sensorContext.fileSystem().baseDir(), i.getFilePath());
+                    FilePredicate fp = sensorContext.fileSystem().predicates().hasAbsolutePath(file.getAbsolutePath());
+                    if (!sensorContext.fileSystem().hasFiles(fp)) {
+                        LOGGER.warn("File not included in SonarQube {}", file.getAbsoluteFile());
+                    } else {
+                        InputFile inputFile = sensorContext.fileSystem().inputFile(fp);
+                        NewIssueLocation nil = new DefaultIssueLocation()
+                                .on(inputFile)
+                                .at(inputFile.selectLine(i.getLineNumber()))
+                                .message(i.getMessage());
+                        sensorContext.newIssue()
+                                .forRule(RuleKey.of(DartAnalyzerRulesDefinition.REPOSITORY_KEY, i.getRuleId()))
+                                .at(nil)
+                                .save();
+                    }
+                });
+            }
+        } finally {
+            if(useDefaultAnalysisOptions) {
+                // Remove analysis-options.yaml file
+                this.restoreCurrentAnalysisOptionsFile(sensorContext);
+            }
         }
-
-        // Remove analysis-options.yaml file
-        this.restoreCurrentAnalysisOptionsFile(sensorContext);
 
     }
 
@@ -132,6 +152,11 @@ public class DartAnalyzerSensor implements Sensor {
             LOGGER.error("Unable to run " + ANALYZER_COMMAND + ", make sure it is installed and on the path");
             return false;
         }
+    }
+
+    private boolean analysisOptionsFileExists(SensorContext sensorContext) {
+        File analysisOptionsFile = new File(sensorContext.fileSystem().baseDir(), ANALYSIS_OPTIONS_FILENAME);
+        return analysisOptionsFile.exists();
     }
 
     private void saveCurrentAnalysisOptionsFile(SensorContext sensorContext) {
