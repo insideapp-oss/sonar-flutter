@@ -12,11 +12,13 @@
 
 #### Enhancements
 
-- None
+- Add Flutter 1.20.0 test report compatibility
+- Improve test report parsing
 
 #### Bug Fixes
 
-- None
+- Report the correct test case count
+- Restore Java 8 compatibility required by the sonar-scanner
 
 ## 0.2.1
 
