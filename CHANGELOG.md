@@ -12,14 +12,14 @@
 
 #### Enhancements
 
-- Add Flutter 1.20.0 test report compatibility
-- Improve test report parsing
+- Add Flutter 1.20.0 test report compatibility (thanks to [Peter Leibiger](https://github.com/kuhnroyal])), fixes [#19](https://github.com/insideapp-oss/sonar-flutter/issues/19)
+- Improve test report parsing (thanks to [Peter Leibiger](https://github.com/kuhnroyal]))
+- Ability to use existing analysis options (configurable behavior) (thanks to [Stephane Janicaud](https://github.com/stephanecodes])), fixes [#23](https://github.com/insideapp-oss/sonar-flutter/issues/23)
 
 #### Bug Fixes
 
-- [#17](https://github.com/insideapp-oss/sonar-flutter/issues/17): Error with java.nio.file.Path.of (thanks to [Vasiliy Ditsyak](https://github.com/vasilich6107))
-- Report the correct test case count
-- Restore Java 8 compatibility required by the sonar-scanner
+- Report the correct test case count (thanks to [Peter Leibiger](https://github.com/kuhnroyal]))
+- Restore Java 8 compatibility required by the sonar-scanner (thanks to [Peter Leibiger](https://github.com/kuhnroyal]))
 
 ## 0.2.1
 
