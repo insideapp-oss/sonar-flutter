@@ -32,7 +32,9 @@ import org.sonar.api.resources.Qualifiers;
 
 public class FlutterPlugin implements Plugin {
 
+    public static final String DART_CATEGORY = "Dart";
     public static final String FLUTTER_CATEGORY = "Flutter";
+    public static final String ANALYSIS_SUBCATEGORY = "Analysis";
     public static final String GENERAL_SUBCATEGORY = "General";
     public static final String TESTS_SUBCATEGORY = "Tests";
 
@@ -63,6 +65,16 @@ public class FlutterPlugin implements Plugin {
                         .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
                         .category(FLUTTER_CATEGORY)
                         .subCategory(TESTS_SUBCATEGORY)
+                        .build());
+
+        context.addExtension(
+                PropertyDefinition.builder(DartSensor.DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY)
+                        .name("Use existing analysis_options file")
+                        .description("The SonarQube plugin for Flutter / Dart uses its own analysis_options file, even if it exists under the project root. If you want to use the existing analysis_options file instead, set the value to true.")
+                        .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
+                        .category(DART_CATEGORY)
+                        .subCategory(ANALYSIS_SUBCATEGORY)
+                        .defaultValue("false")
                         .build());
 
         // Tests
