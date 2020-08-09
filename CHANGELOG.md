@@ -13,7 +13,7 @@
 #### Enhancements
 
 - Add Flutter 1.20.0 test report compatibility (thanks to [Peter Leibiger](https://github.com/kuhnroyal])), fixes [#19](https://github.com/insideapp-oss/sonar-flutter/issues/19)
-- Improve test report parsing (thanks to [Peter Leibiger](https://github.com/kuhnroyal]))
+- Improve test report parsing (thanks to [Peter Leibiger](https://github.com/kuhnroyal])), fixes [#13](https://github.com/insideapp-oss/sonar-flutter/issues/13)
 - Ability to use existing analysis options (configurable behavior) (thanks to [Stephane Janicaud](https://github.com/stephanecodes])), fixes [#23](https://github.com/insideapp-oss/sonar-flutter/issues/23), [#18](https://github.com/insideapp-oss/sonar-flutter/issues/18)
 
 #### Bug Fixes
