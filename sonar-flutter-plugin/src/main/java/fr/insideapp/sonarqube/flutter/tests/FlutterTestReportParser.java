@@ -27,6 +27,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -34,7 +35,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FlutterTestReportParser {
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(FlutterTestReportParser.class);
 
     List<FlutterUnitTestSuite> parse(File reportFile) throws IOException {
@@ -52,10 +52,12 @@ public class FlutterTestReportParser {
         
         LOGGER.info("Log absolut path: {}", path.toAbsolutePath());
         
-        Files.lines(path.toAbsolutePath()).forEach(s -> contentBuilder.append(s).append("\n"));
+        Stream<String> stream = Files.lines(path.toAbsolutePath());
+        stream.forEach(s -> contentBuilder.append(s).append("\n"));
         return this.parse(contentBuilder.toString());
 
     }
+
     List<FlutterUnitTestSuite> parse(String input) {
 
         List<FlutterUnitTest> tests = new ArrayList<>();
@@ -64,45 +66,46 @@ public class FlutterTestReportParser {
         // Each line is an event, encoded as JSON
         String[] lines = input.split(System.getProperty("line.separator"));
         for (int i = 0; i < lines.length; i++) {
-            String line = lines[i];
-            JSONObject obj = (JSONObject)JSONValue.parse(line);
+            String line = lines[i].trim();
+            // Ensure lines looks like a parseable json
+            if(line.matches("\\{.*\\}")) {
+                JSONObject obj = (JSONObject)JSONValue.parse(line);
 
-            // Suites
-            if (obj.containsKey("suite")) {
-                JSONObject suiteObj = (JSONObject) obj.get("suite");
-                FlutterUnitTestSuite suite = new FlutterUnitTestSuite();
-                suite.setId((Long)suiteObj.get("id"));
-                suite.setPath((String)suiteObj.get("path"));
-                results.add(suite);
-            }
+                // Suites
+                if (obj.containsKey("suite")) {
+                    JSONObject suiteObj = (JSONObject) obj.get("suite");
+                    FlutterUnitTestSuite suite = new FlutterUnitTestSuite();
+                    suite.setId((Long)suiteObj.get("id"));
+                    suite.setPath((String)suiteObj.get("path"));
+                    results.add(suite);
+                }
 
-            // Tests
-            if (obj.containsKey("test")) {
-                JSONObject testObj = (JSONObject) obj.get("test");
-                FlutterUnitTest testResult = new FlutterUnitTest();
-                testResult.setName((String)testObj.get("name"));
-                testResult.setId((Long)testObj.get("id"));
-                tests.add(testResult);
+                // Tests
+                if (obj.containsKey("test")) {
+                    JSONObject testObj = (JSONObject) obj.get("test");
+                    FlutterUnitTest testResult = new FlutterUnitTest();
+                    testResult.setName((String)testObj.get("name"));
+                    testResult.setId((Long)testObj.get("id"));
+                    tests.add(testResult);
 
-                Long suiteId = (Long)testObj.get("suiteID");
-                Optional<FlutterUnitTestSuite> suite = results.stream().filter(s -> s.getId().equals(suiteId)).findFirst();
-                if (suite.isPresent()) {
-                    suite.get().getTests().add(testResult);
+                    Long suiteId = (Long)testObj.get("suiteID");
+                    Optional<FlutterUnitTestSuite> suite = results.stream().filter(s -> s.getId().equals(suiteId)).findFirst();
+                    if (suite.isPresent()) {
+                        suite.get().getTests().add(testResult);
+                    }
+                }
+
+                // Test finished
+                if (obj.containsKey("testID") && obj.containsKey("result")) {
+                    Long testId = (Long)obj.get("testID");
+                    Optional<FlutterUnitTest> test = tests.stream().filter(t -> t.getId().equals(testId)).findFirst();
+                    if (test.isPresent()) {
+                        test.get().setResult((String)obj.get("result"));
+                        test.get().setTime((Long)obj.get("time"));
+                        test.get().setSkipped((Boolean) obj.get("skipped"));
+                    }
                 }
             }
-
-            // Test finished
-            if (obj.containsKey("testID") && obj.containsKey("result")) {
-                Long testId = (Long)obj.get("testID");
-                Optional<FlutterUnitTest> test = tests.stream().filter(t -> t.getId().equals(testId)).findFirst();
-                if (test.isPresent()) {
-                    test.get().setResult((String)obj.get("result"));
-                    test.get().setTime((Long)obj.get("time"));
-                    test.get().setSkipped((Boolean) obj.get("skipped"));
-                }
-            }
-
-
         }
 
         return results;
