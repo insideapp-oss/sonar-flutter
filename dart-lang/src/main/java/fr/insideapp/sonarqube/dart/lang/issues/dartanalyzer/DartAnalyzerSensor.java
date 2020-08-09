@@ -97,45 +97,47 @@ public class DartAnalyzerSensor implements Sensor {
         List<InputFile> inputFiles = new ArrayList<>();
         fileSystem.inputFiles(mainFilePredicate).forEach(inputFiles::add);
 
-        if (this.verifyCommand()) {
+        try {
+            if (this.verifyCommand()) {
 
-            DartAnalyzerReportParser reportParser = new DartAnalyzerReportParser();
+                DartAnalyzerReportParser reportParser = new DartAnalyzerReportParser();
 
-            // TODO : consider splitting analysis every X files (a command line length limit might occur !)
-            List<String> fileNames = inputFiles.stream().map(i -> i.toString()).collect(Collectors.toList());
-            // Run analysis command
-            String output =  new ProcBuilder(ANALYZER_COMMAND)
-                    .withArgs(fileNames.toArray(new String[0]))
-                    .withTimeoutMillis(ANALYZER_TIMEOUT)
-                    .run()
-                    .getOutputString();
+                // TODO : consider splitting analysis every X files (a command line length limit might occur !)
+                List<String> fileNames = inputFiles.stream().map(i -> i.toString()).collect(Collectors.toList());
+                // Run analysis command
+                String output = new ProcBuilder(ANALYZER_COMMAND)
+                        .withArgs(fileNames.toArray(new String[0]))
+                        .withTimeoutMillis(ANALYZER_TIMEOUT)
+                        .run()
+                        .getOutputString();
 
-            // Parse output
-            List<DartAnalyzerReportIssue> issues = reportParser.parse(output);
+                // Parse output
+                List<DartAnalyzerReportIssue> issues = reportParser.parse(output);
 
-            // Record issues
-            issues.forEach(i -> {
-                File file = new File(sensorContext.fileSystem().baseDir(), i.getFilePath());
-                FilePredicate fp = sensorContext.fileSystem().predicates().hasAbsolutePath(file.getAbsolutePath());
-                if (!sensorContext.fileSystem().hasFiles(fp)) {
-                    LOGGER.warn("File not included in SonarQube {}", file.getAbsoluteFile());
-                } else {
-                    InputFile inputFile = sensorContext.fileSystem().inputFile(fp);
-                    NewIssueLocation nil = new DefaultIssueLocation()
-                            .on(inputFile)
-                            .at(inputFile.selectLine(i.getLineNumber()))
-                            .message(i.getMessage());
-                    sensorContext.newIssue()
-                            .forRule(RuleKey.of(DartAnalyzerRulesDefinition.REPOSITORY_KEY, i.getRuleId()))
-                            .at(nil)
-                            .save();
-                }
-            });
-        }
-
-        if(useDefaultAnalysisOptions) {
-            // Remove analysis-options.yaml file
-            this.restoreCurrentAnalysisOptionsFile(sensorContext);
+                // Record issues
+                issues.forEach(i -> {
+                    File file = new File(sensorContext.fileSystem().baseDir(), i.getFilePath());
+                    FilePredicate fp = sensorContext.fileSystem().predicates().hasAbsolutePath(file.getAbsolutePath());
+                    if (!sensorContext.fileSystem().hasFiles(fp)) {
+                        LOGGER.warn("File not included in SonarQube {}", file.getAbsoluteFile());
+                    } else {
+                        InputFile inputFile = sensorContext.fileSystem().inputFile(fp);
+                        NewIssueLocation nil = new DefaultIssueLocation()
+                                .on(inputFile)
+                                .at(inputFile.selectLine(i.getLineNumber()))
+                                .message(i.getMessage());
+                        sensorContext.newIssue()
+                                .forRule(RuleKey.of(DartAnalyzerRulesDefinition.REPOSITORY_KEY, i.getRuleId()))
+                                .at(nil)
+                                .save();
+                    }
+                });
+            }
+        } finally {
+            if(useDefaultAnalysisOptions) {
+                // Remove analysis-options.yaml file
+                this.restoreCurrentAnalysisOptionsFile(sensorContext);
+            }
         }
 
     }
