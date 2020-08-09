@@ -48,11 +48,27 @@ public class FlutterTestReportParserTest {
 
         assertThat(results.size()).isEqualTo(1);
         assertThat(results.get(0).getTests().size()).isEqualTo(2);
+
+        assertThat(results.get(0).getCount()).isEqualTo(1);
+        assertThat(results.get(0).getActualTests().size()).isEqualTo(1);
+
+        assertThat(results.get(0).getSkippedCount()).isEqualTo(0);
+        assertThat(results.get(0).getFailureCount()).isEqualTo(0);
+        assertThat(results.get(0).getErrorCount()).isEqualTo(0);
+
         assertThat(results.get(0).getTests().get(0).getId()).isEqualTo(1);
         assertThat(results.get(0).getTests().get(0).getName()).isEqualTo("loading /Users/ggrousset/Desktop/inside_face/test/home_view_model_test.dart");
-        assertThat(results.get(0).getTests().get(0).getTime()).isEqualTo(3658);
+        assertThat(results.get(0).getTests().get(0).getTime()).isEqualTo(3658 - 2); // end - start
         assertThat(results.get(0).getTests().get(0).getResult()).isEqualTo("success");
         assertThat(results.get(0).getTests().get(0).isSkipped()).isEqualTo(false);
+        assertThat(results.get(0).getTests().get(0).isHidden()).isEqualTo(true);
+
+        assertThat(results.get(0).getActualTests().get(0).getId()).isEqualTo(4);
+        assertThat(results.get(0).getActualTests().get(0).getName()).isEqualTo("home_view_model Giving an image as input produce and output result");
+        assertThat(results.get(0).getActualTests().get(0).getTime()).isEqualTo(5119 - 3669); // end - start
+        assertThat(results.get(0).getActualTests().get(0).getResult()).isEqualTo("success");
+        assertThat(results.get(0).getActualTests().get(0).isSkipped()).isEqualTo(false);
+        assertThat(results.get(0).getActualTests().get(0).isHidden()).isEqualTo(false);
     }
 
 }

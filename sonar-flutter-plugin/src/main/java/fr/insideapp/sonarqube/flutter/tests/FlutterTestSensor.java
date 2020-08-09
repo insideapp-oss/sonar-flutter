@@ -54,7 +54,7 @@ public class FlutterTestSensor implements Sensor {
 
         FlutterTestReportParser parser = new FlutterTestReportParser();
         try {
-            List<FlutterUnitTestSuite> suites =  parser.parse(reportFile);
+            List<FlutterUnitTestSuite> suites = parser.parse(reportFile);
             suites.forEach(s -> {
                 this.saveSuite(s, sensorContext);
             });
@@ -81,11 +81,10 @@ public class FlutterTestSensor implements Sensor {
 
         LOGGER.debug("Parsing tests from {}", suite.getPath());
 
-        long testsCount = suite.getTests().size() - suite.getSkippedCount();
-        saveMeasure(sensorContext, inputFile, CoreMetrics.SKIPPED_TESTS, (int)suite.getSkippedCount());
-        saveMeasure(sensorContext, inputFile, CoreMetrics.TESTS, (int)testsCount);
-        saveMeasure(sensorContext, inputFile, CoreMetrics.TEST_ERRORS, (int)suite.getErrorCount());
-        saveMeasure(sensorContext, inputFile, CoreMetrics.TEST_FAILURES, (int)suite.getFailureCount());
+        saveMeasure(sensorContext, inputFile, CoreMetrics.SKIPPED_TESTS, (int) suite.getSkippedCount());
+        saveMeasure(sensorContext, inputFile, CoreMetrics.TESTS, (int) (suite.getCount()));
+        saveMeasure(sensorContext, inputFile, CoreMetrics.TEST_ERRORS, (int) suite.getErrorCount());
+        saveMeasure(sensorContext, inputFile, CoreMetrics.TEST_FAILURES, (int) suite.getFailureCount());
         saveMeasure(sensorContext, inputFile, CoreMetrics.TEST_EXECUTION_TIME, suite.getDurationMilliseconds());
     }
 

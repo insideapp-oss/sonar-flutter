@@ -12,11 +12,14 @@
 
 #### Enhancements
 
-- None
+- Add Flutter 1.20.0 test report compatibility
+- Improve test report parsing
 
 #### Bug Fixes
 
 - [#17](https://github.com/insideapp-oss/sonar-flutter/issues/17): Error with java.nio.file.Path.of (thanks to [Vasiliy Ditsyak](https://github.com/vasilich6107))
+- Report the correct test case count
+- Restore Java 8 compatibility required by the sonar-scanner
 
 ## 0.2.1
 
