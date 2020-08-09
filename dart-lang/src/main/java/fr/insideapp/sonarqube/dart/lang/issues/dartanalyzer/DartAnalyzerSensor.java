@@ -159,7 +159,7 @@ public class DartAnalyzerSensor implements Sensor {
 	private Integer getPaginationRemainder(List<String> filesWithAbsolutePath) {
 		Integer remainder = filesWithAbsolutePath.size() % PAGE_SIZE;
 
-		LOGGER.info("Paging remainder: {}", remainder);
+		LOGGER.debug("Paging remainder: {}", remainder);
 
 		return remainder;
 	}
