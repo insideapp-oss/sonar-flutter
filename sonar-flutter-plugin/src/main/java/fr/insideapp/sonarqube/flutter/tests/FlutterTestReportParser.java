@@ -19,30 +19,43 @@
  */
 package fr.insideapp.sonarqube.flutter.tests;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FlutterTestReportParser {
 
-    List<FlutterUnitTestSuite> parse(File reportFile) throws IOException {
+	private static final Logger LOGGER = LoggerFactory.getLogger(FlutterTestReportParser.class);
 
+    List<FlutterUnitTestSuite> parse(File reportFile) throws IOException {
+    	LOGGER.info("Log reportFile: {}", reportFile);
         StringBuilder contentBuilder = new StringBuilder();
-        Stream<String> stream = Files.lines(Path.of(reportFile.toURI()), StandardCharsets.UTF_8);
-        stream.forEach(s -> contentBuilder.append(s).append("\n"));
+        Path path = Paths.get(reportFile.toString());
+        
+        Boolean fileNotExists = Files.notExists(path.toAbsolutePath());
+        
+        LOGGER.info("File exists? {}", fileNotExists);
+        
+        if(fileNotExists) {
+        	Files.createFile(path.toAbsolutePath());
+        }
+        
+        LOGGER.info("Log absolut path: {}", path.toAbsolutePath());
+        
+        Files.lines(path.toAbsolutePath()).forEach(s -> contentBuilder.append(s).append("\n"));
         return this.parse(contentBuilder.toString());
 
     }
-
     List<FlutterUnitTestSuite> parse(String input) {
 
         List<FlutterUnitTest> tests = new ArrayList<>();

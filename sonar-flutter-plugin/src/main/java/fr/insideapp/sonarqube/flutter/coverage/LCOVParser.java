@@ -57,6 +57,9 @@ public class LCOVParser {
     static LCOVParser create(SensorContext context, List<File> files, FileLocator fileLocator) {
         final List<String> lines = new LinkedList<>();
         for (File file : files) {
+        	if(file==null)
+        		continue;
+        	
             try (Stream<String> fileLines = Files.lines(file.toPath())) {
                 lines.addAll(fileLines.collect(Collectors.toList()));
             } catch (IOException e) {

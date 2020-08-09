@@ -54,7 +54,6 @@ public class FlutterCoverageSensor implements Sensor {
 
         List<File> lcovFiles = new ArrayList<>();
         lcovFiles.add(getIOFile(context.fileSystem().baseDir(), reportPath(context)));
-
         saveCoverageFromLcovFiles(context, lcovFiles);
     }
 
@@ -66,6 +65,10 @@ public class FlutterCoverageSensor implements Sensor {
 
     private static void saveCoverageFromLcovFiles(SensorContext context, List<File> lcovFiles) {
         LOGGER.info("Analysing {}", lcovFiles);
+        
+        if(lcovFiles==null)
+        	return;
+        
 
         FileSystem fileSystem = context.fileSystem();
         FilePredicate mainFilePredicate = fileSystem.predicates().and(
