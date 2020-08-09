@@ -16,7 +16,7 @@
 
 #### Bug Fixes
 
-- None
+- [#17](https://github.com/insideapp-oss/sonar-flutter/issues/17): Error with java.nio.file.Path.of (thanks to [Vasiliy Ditsyak](https://github.com/vasilich6107))
 
 ## 0.2.1
 

@@ -26,7 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +37,7 @@ public class FlutterTestReportParser {
     List<FlutterUnitTestSuite> parse(File reportFile) throws IOException {
 
         StringBuilder contentBuilder = new StringBuilder();
-        Stream<String> stream = Files.lines(Path.of(reportFile.toURI()), StandardCharsets.UTF_8);
+        Stream<String> stream = Files.lines(Paths.get(reportFile.toURI()), StandardCharsets.UTF_8);
         stream.forEach(s -> contentBuilder.append(s).append("\n"));
         return this.parse(contentBuilder.toString());
 
