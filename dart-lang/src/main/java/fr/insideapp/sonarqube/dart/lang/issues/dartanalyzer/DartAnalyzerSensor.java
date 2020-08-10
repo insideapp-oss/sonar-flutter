@@ -118,7 +118,7 @@ public class DartAnalyzerSensor implements Sensor {
 						.ignoreExitStatus()
 						.run()
 						.getOutputString();
-				
+
 				issues.addAll(new DartAnalyzerReportParser().parse(output));
 			} catch (Exception e) {
 				throw new IOException(e);
