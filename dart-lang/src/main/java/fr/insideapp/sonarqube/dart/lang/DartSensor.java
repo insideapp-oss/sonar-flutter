@@ -19,7 +19,12 @@
  */
 package fr.insideapp.sonarqube.dart.lang;
 
-import fr.insideapp.sonarqube.dart.lang.antlr.*;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FilePredicate;
@@ -27,19 +32,19 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.squidbridge.metrics.ComplexityVisitor;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import fr.insideapp.sonarqube.dart.lang.antlr.AntlrContext;
+import fr.insideapp.sonarqube.dart.lang.antlr.CustomTreeVisitor;
+import fr.insideapp.sonarqube.dart.lang.antlr.CyclomaticComplexityVisitor;
+import fr.insideapp.sonarqube.dart.lang.antlr.HighlighterVisitor;
+import fr.insideapp.sonarqube.dart.lang.antlr.ParseTreeItemVisitor;
+import fr.insideapp.sonarqube.dart.lang.antlr.SourceLinesVisitor;
 
 public class DartSensor implements Sensor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DartSensor.class);
     private static final int EXECUTOR_TIMEOUT = 10000;
-    public static final String DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY = "sonar.dart.analysis.useExistingOptions";
+	public static final String DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY = "sonar.dart.analysis.useExistingOptions";
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {

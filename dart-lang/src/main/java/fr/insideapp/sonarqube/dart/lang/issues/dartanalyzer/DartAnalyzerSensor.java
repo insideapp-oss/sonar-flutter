@@ -19,11 +19,6 @@
  */
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
-import com.google.common.io.Files;
-import com.google.common.io.Resources;
-import fr.insideapp.sonarqube.dart.lang.Dart;
-import fr.insideapp.sonarqube.dart.lang.DartSensor;
-import org.buildobjects.process.ExternalProcessFailureException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -51,6 +46,7 @@ import com.google.common.io.Files;
 import com.google.common.io.Resources;
 
 import fr.insideapp.sonarqube.dart.lang.Dart;
+import fr.insideapp.sonarqube.dart.lang.DartSensor;
 
 public class DartAnalyzerSensor implements Sensor {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DartAnalyzerSensor.class);
@@ -60,7 +56,8 @@ public class DartAnalyzerSensor implements Sensor {
 	private static final String ANALYSIS_OPTIONS_FILENAME = "analysis_options.yaml";
 	private static final String ANALYSIS_OPTIONS_FILE = "/fr/insideapp/sonarqube/dart/dartanalyzer/analysis_options.yaml";
 	private static final Integer PAGE_SIZE = 10;
-
+	private boolean useExistingAnalysisOptions;
+	
 	@Override
 	public void describe(SensorDescriptor sensorDescriptor) {
 		sensorDescriptor.onlyOnLanguage(Dart.KEY).name("dartanalyzer sensor").onlyOnFileType(Type.MAIN);
@@ -69,18 +66,43 @@ public class DartAnalyzerSensor implements Sensor {
 	@Override
 	public void execute(SensorContext sensorContext) {
 		try {
-			this.verifyDartAnalyzerExists();
+			verifyIfDartAnalyzerExists();
+			
+			selectOptionFileToUse(sensorContext);
 
-			this.saveCurrentAnalysisOptionsFile(sensorContext);
-
-			this.createAnalysisOptionsFile(sensorContext);
+			saveCurrentAnalysisOptionsFile(sensorContext);
 
 			recordIssues(sensorContext, buildIssues(getFilesWithAbsolutePath(sensorContext)));
 
-			this.restoreCurrentAnalysisOptionsFile(sensorContext);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
+		} finally {
+			if (!useExistingAnalysisOptions) {
+				restoreCurrentAnalysisOptionsFile(sensorContext);
+			}
 		}
+	}
+
+	private void selectOptionFileToUse(SensorContext sensorContext) throws IOException {
+		boolean useExistingAnalysisOptions = getUseExistingAnalysisOptions(sensorContext);
+
+		if (useExistingAnalysisOptions && !this.existsAnalysisOptionsFile(sensorContext)) {
+			LOGGER.warn("File {} does not exists", ANALYSIS_OPTIONS_FILENAME);
+			useDefaultAnalysisOptionsFile(sensorContext);
+			useExistingAnalysisOptions = false;
+		}
+	}
+
+	private void useDefaultAnalysisOptionsFile(SensorContext sensorContext) throws IOException {
+		LOGGER.debug("Either {} option is not set to true or {} file does not exists, use default analysis options instead",
+				DartSensor.DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY, ANALYSIS_OPTIONS_FILENAME);
+
+		this.saveCurrentAnalysisOptionsFile(sensorContext);
+		this.createAnalysisOptionsFile(sensorContext);
+	}
+
+	private Boolean getUseExistingAnalysisOptions(SensorContext sensorContext) {
+		return sensorContext.config().getBoolean(DartSensor.DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY).orElse(false);
 	}
 
 	private List<DartAnalyzerReportIssue> buildIssues(List<String> filesWithAbsolutePath)
@@ -101,7 +123,7 @@ public class DartAnalyzerSensor implements Sensor {
 
 				if (exitCode == 0 || exitCode == 1) {
 					output = IOUtils.toString(process.getErrorStream(), Charset.defaultCharset());
-					LOGGER.info("Error output: {}", output);
+					LOGGER.debug("Error output: {}", output);
 					throw new RuntimeException("Error while executing the command: ".concat(command));
 				}
 
@@ -116,7 +138,7 @@ public class DartAnalyzerSensor implements Sensor {
 				}
 			}
 		}
-		LOGGER.info("Found issues: {}", issues.size());
+		LOGGER.debug("Found issues: {}", issues.size());
 		return issues;
 	}
 
@@ -128,16 +150,16 @@ public class DartAnalyzerSensor implements Sensor {
 		Integer pagingStart = 0;
 		Integer pagingRemainder = getPaginationRemainder(filesWithAbsolutePath);
 		Integer totalPages = getPaginationTotalPages(filesWithAbsolutePath, PAGE_SIZE, pagingRemainder);
-		
+
 		for (int i = 0; i < totalPages; i++) {
 			LOGGER.debug("Current index: {}", i);
-			
+
 			LOGGER.debug("Current paging start: {}", pagingStart);
 
 			Integer pagingEnd = getPagingEnd(pagingStart, pagingRemainder, totalPages, i);
-			
+
 			paginated.add(getFilesPathsSplitBySpace(filesWithAbsolutePath, pagingStart, pagingEnd));
-			
+
 			pagingStart += PAGE_SIZE;
 		}
 		return paginated;
@@ -152,9 +174,9 @@ public class DartAnalyzerSensor implements Sensor {
 		return pagingEnd;
 	}
 
-	private String getFilesPathsSplitBySpace(List<String> filesWithAbsolutePath, Integer pagingStart, Integer pagingEnd) {
-		return filesWithAbsolutePath.subList(pagingStart, pagingEnd).stream()
-				.collect(Collectors.joining(" "));
+	private String getFilesPathsSplitBySpace(List<String> filesWithAbsolutePath, Integer pagingStart,
+			Integer pagingEnd) {
+		return filesWithAbsolutePath.subList(pagingStart, pagingEnd).stream().collect(Collectors.joining(" "));
 	}
 
 	private boolean isLastPage(Integer pagingRemainder, Integer totalPages, int i) {
@@ -235,10 +257,14 @@ public class DartAnalyzerSensor implements Sensor {
 		});
 	}
 
-	private void verifyDartAnalyzerExists() {
+	private void verifyIfDartAnalyzerExists() {
 		LOGGER.debug("Verify dart analyser...");
 		new ProcBuilder(ANALYZER_COMMAND).withArg("-h").run();
 		LOGGER.debug("Verify dart analyser done");
+	}
+
+	private boolean existsAnalysisOptionsFile(SensorContext sensorContext) {
+		return new File(sensorContext.fileSystem().baseDir(), ANALYSIS_OPTIONS_FILENAME).exists();
 	}
 
 	private void saveCurrentAnalysisOptionsFile(SensorContext sensorContext) {
@@ -264,7 +290,6 @@ public class DartAnalyzerSensor implements Sensor {
 			currentAnalysisOptionsFile.renameTo(analysisOptionsFile);
 			LOGGER.info("Restored original analysis_options.yaml file");
 		} else {
-			// If no current analysis options file : remove existing one
 			analysisOptionsFile.delete();
 		}
 	}
