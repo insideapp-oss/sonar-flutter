@@ -30,17 +30,17 @@ public class FlutterTestReportParserTest {
     @Test
     public void parse() {
 
-        String input = "{\"protocolVersion\":\"0.1.1\",\"runnerVersion\":null,\"pid\":79619,\"type\":\"start\",\"time\":0}\n" +
-                "{\"suite\":{\"id\":0,\"platform\":\"vm\",\"path\":\"/Users/ggrousset/Desktop/inside_face/test/home_view_model_test.dart\"},\"type\":\"suite\",\"time\":1}\n" +
-                "{\"test\":{\"id\":1,\"name\":\"loading /Users/ggrousset/Desktop/inside_face/test/home_view_model_test.dart\",\"suiteID\":0,\"groupIDs\":[],\"metadata\":{\"skip\":false,\"skipReason\":null},\"line\":null,\"column\":null,\"url\":null},\"type\":\"testStart\",\"time\":2}\n" +
-                "{\"count\":1,\"type\":\"allSuites\",\"time\":6}\n" +
-                "{\"testID\":1,\"result\":\"success\",\"skipped\":false,\"hidden\":true,\"type\":\"testDone\",\"time\":3658}\n" +
-                "{\"group\":{\"id\":2,\"suiteID\":0,\"parentID\":null,\"name\":null,\"metadata\":{\"skip\":false,\"skipReason\":null},\"testCount\":1,\"line\":null,\"column\":null,\"url\":null},\"type\":\"group\",\"time\":3668}\n" +
-                "{\"group\":{\"id\":3,\"suiteID\":0,\"parentID\":2,\"name\":\"home_view_model\",\"metadata\":{\"skip\":false,\"skipReason\":null},\"testCount\":1,\"line\":29,\"column\":3,\"url\":\"file:///Users/ggrousset/Desktop/inside_face/test/home_view_model_test.dart\"},\"type\":\"group\",\"time\":3668}\n" +
-                "{\"test\":{\"id\":4,\"name\":\"home_view_model Giving an image as input produce and output result\",\"suiteID\":0,\"groupIDs\":[2,3],\"metadata\":{\"skip\":false,\"skipReason\":null},\"line\":31,\"column\":5,\"url\":\"file:///Users/ggrousset/Desktop/inside_face/test/home_view_model_test.dart\"},\"type\":\"testStart\",\"time\":3669}\n" +
-                "{\"testID\":1,\"messageType\":\"print\",\"message\":\"{\\\"faces\\\":[]}\",\"type\":\"print\",\"time\":5109}\n" +
-                "{\"testID\":4,\"messageType\":\"print\",\"message\":\"received\",\"type\":\"print\",\"time\":5110}\n" +
-                "{\"testID\":4,\"result\":\"success\",\"skipped\":false,\"hidden\":false,\"type\":\"testDone\",\"time\":5119}\n" +
+        String input = "{\"protocolVersion\":\"0.1.1\",\"runnerVersion\":null,\"pid\":79619,\"type\":\"start\",\"time\":0}\r\n" +
+                "{\"suite\":{\"id\":0,\"platform\":\"vm\",\"path\":\"/Users/ggrousset/Desktop/inside_face/test/home_view_model_test.dart\"},\"type\":\"suite\",\"time\":1}\r\n" +
+                "{\"test\":{\"id\":1,\"name\":\"loading /Users/ggrousset/Desktop/inside_face/test/home_view_model_test.dart\",\"suiteID\":0,\"groupIDs\":[],\"metadata\":{\"skip\":false,\"skipReason\":null},\"line\":null,\"column\":null,\"url\":null},\"type\":\"testStart\",\"time\":2}\r\n" +
+                "{\"count\":1,\"type\":\"allSuites\",\"time\":6}\r\n" +
+                "{\"testID\":1,\"result\":\"success\",\"skipped\":false,\"hidden\":true,\"type\":\"testDone\",\"time\":3658}\r\n" +
+                "{\"group\":{\"id\":2,\"suiteID\":0,\"parentID\":null,\"name\":null,\"metadata\":{\"skip\":false,\"skipReason\":null},\"testCount\":1,\"line\":null,\"column\":null,\"url\":null},\"type\":\"group\",\"time\":3668}\r\n" +
+                "{\"group\":{\"id\":3,\"suiteID\":0,\"parentID\":2,\"name\":\"home_view_model\",\"metadata\":{\"skip\":false,\"skipReason\":null},\"testCount\":1,\"line\":29,\"column\":3,\"url\":\"file:///Users/ggrousset/Desktop/inside_face/test/home_view_model_test.dart\"},\"type\":\"group\",\"time\":3668}\r\n" +
+                "{\"test\":{\"id\":4,\"name\":\"home_view_model Giving an image as input produce and output result\",\"suiteID\":0,\"groupIDs\":[2,3],\"metadata\":{\"skip\":false,\"skipReason\":null},\"line\":31,\"column\":5,\"url\":\"file:///Users/ggrousset/Desktop/inside_face/test/home_view_model_test.dart\"},\"type\":\"testStart\",\"time\":3669}\r\n" +
+                "{\"testID\":1,\"messageType\":\"print\",\"message\":\"{\\\"faces\\\":[]}\",\"type\":\"print\",\"time\":5109}\r\n" +
+                "{\"testID\":4,\"messageType\":\"print\",\"message\":\"received\",\"type\":\"print\",\"time\":5110}\r\n" +
+                "{\"testID\":4,\"result\":\"success\",\"skipped\":false,\"hidden\":false,\"type\":\"testDone\",\"time\":5119}\r\n" +
                 "{\"success\":true,\"type\":\"done\",\"time\":5172}";
 
         FlutterTestReportParser parser = new FlutterTestReportParser();

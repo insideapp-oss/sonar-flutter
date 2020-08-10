@@ -19,35 +19,90 @@
  */
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
-import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerReportIssue;
-import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerReportParser;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
 
 public class DartAnalyzerReportParserTest {
 
-    @Test
-    public void parse() {
+	private static final String FILE_PATH = "lib/main.dart";
+	private static final String RULE_ID_UNUSED_LOCAL_VARIABLE = "unused_local_variable";
+	
+	private DartAnalyzerReportParser parser;
 
-        String input =
-                "  lint • Close instances of `dart.core.Sink`. • lib/main.dart:63:9 • close_sinks\n" +
-                "  hint • The value of the local variable '_controller' isn't used. • lib/main.dart:63:9 • unused_local_variable";
+	public DartAnalyzerReportParserTest() {
+		parser = new DartAnalyzerReportParser();
+	}
 
-        DartAnalyzerReportParser parser = new DartAnalyzerReportParser();
+	@Test
+	public void parseWithCircles() {
 
-        List<DartAnalyzerReportIssue> issues = parser.parse(input);
-        assertThat(issues.size()).isEqualTo(2);
-        assertThat(issues.get(0).getFilePath()).isEqualTo("lib/main.dart");
-        assertThat(issues.get(0).getLineNumber()).isEqualTo(63);
-        assertThat(issues.get(0).getRuleId()).isEqualTo("close_sinks");
-        assertThat(issues.get(0).getMessage()).isEqualTo("Close instances of `dart.core.Sink`.");
-        assertThat(issues.get(1).getFilePath()).isEqualTo("lib/main.dart");
-        assertThat(issues.get(1).getLineNumber()).isEqualTo(63);
-        assertThat(issues.get(1).getRuleId()).isEqualTo("unused_local_variable");
-        assertThat(issues.get(1).getMessage()).isEqualTo("The value of the local variable '_controller' isn't used.");
+		String input = "  lint • Close instances of `dart.core.Sink`. • lib/main.dart:63:9 • close_sinks\n"
+				+ "  hint • The value of the local variable '_controller' isn't used. • lib/main.dart:63:9 • unused_local_variable";
 
+		List<DartAnalyzerReportIssue> issues = parser.parse(input);
+		assertThat(issues.size()).isEqualTo(2);
+		
+		assertFilePath(issues.get(0), FILE_PATH);
+		assertLineNumber(issues.get(0), 63);
+		assertRuleId(issues.get(0), "close_sinks");
+		assertMessage(issues.get(0), "Close instances of `dart.core.Sink`.");
+	
+		assertFilePath(issues.get(1), FILE_PATH);
+		assertLineNumber(issues.get(1), 63);
+		assertRuleId(issues.get(1), RULE_ID_UNUSED_LOCAL_VARIABLE);
+		assertMessage(issues.get(1), "The value of the local variable '_controller' isn't used.");
+
+	}
+
+	@Test
+    public void parseWithTraces() {
+    	String input = "Analyzing main.dart...\r\n" + 
+    			"  error - Target of URI doesn't exist: 'package:flutter/material.dart'. - lib/main.dart:1:8 - uri_does_not_exist\r\n" + 
+    			"  hint - The value of the local variable 'a' isn't used. - lib/main.dart:7:7 - unused_local_variable\r\n" +
+    			"  hint - The value of the local variable 'b' isn't used. - lib/main.dart:8:7 - unused_local_variable\r\n" +
+    			"  hint - The value of the local variable 'c' isn't used. - lib/main.dart:9:7 - unused_local_variable\r\n" +
+    			"  hint - The value of the local variable 'd' isn't used. - lib/main.dart:10:7 - unused_local_variable\r\n" +
+    			"  hint - The value of the local variable 'e' isn't used. - lib/main.dart:11:7 - unused_local_variable\r\n" +
+    			"  hint - The value of the local variable 'f' isn't used. - lib/main.dart:12:7 - unused_local_variable\r\n" +
+    			"  hint - The value of the local variable 'g' isn't used. - lib/main.dart:13:7 - unused_local_variable\r\n" +
+    			"  hint - The value of the local variable 'h' isn't used. - lib/main.dart:14:7 - unused_local_variable\r\n" +
+    			"  hint - The value of the local variable 'i' isn't used. - lib/main.dart:15:7 - unused_local_variable\r\n" +
+    			"  hint - The value of the local variable 'j' isn't used. - lib/main.dart:16:7 - unused_local_variable\r\n" +
+    			"  hint - The value of the local variable 'k' isn't used. - lib/main.dart:17:7 - unused_local_variable\r\n" +
+    			"1 errors and 11 hints found.";
+    	
+    	List<DartAnalyzerReportIssue> issues = parser.parse(input);
+
+    	assertThat(issues.size()).isEqualTo(12);   
+    	
+    	assertFilePath(issues.get(0), FILE_PATH); 
+    	assertLineNumber(issues.get(0), 1);
+    	assertRuleId(issues.get(0), "uri_does_not_exist");
+    	assertMessage(issues.get(0), "Target of URI doesn't exist: 'package:flutter/material.dart'.");
+    	
+    	
+    	assertFilePath(issues.get(10), FILE_PATH); 
+    	assertLineNumber(issues.get(10), 16);
+    	assertRuleId(issues.get(10), RULE_ID_UNUSED_LOCAL_VARIABLE);
+    	assertMessage(issues.get(10), "The value of the local variable 'j' isn't used.");
     }
+	
+	private void assertFilePath(DartAnalyzerReportIssue issue, String expectedPath) {
+		assertThat(issue.getFilePath()).isEqualTo(expectedPath);
+	}
+	
+	private void assertLineNumber(DartAnalyzerReportIssue issue, Integer expectedLine) {
+		assertThat(issue.getLineNumber()).isEqualTo(expectedLine);
+	}
+	
+	private void assertRuleId(DartAnalyzerReportIssue issue, String expectedRuleId) {
+		assertThat(issue.getRuleId()).isEqualTo(expectedRuleId);
+	}
+	
+	private void assertMessage(DartAnalyzerReportIssue issue, String expectedMessage) {
+		assertThat(issue.getMessage()).isEqualTo(expectedMessage);
+	}
 }
