@@ -19,15 +19,10 @@
  */
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.apache.commons.io.IOUtils;
+import com.google.common.io.Files;
+import com.google.common.io.Resources;
+import fr.insideapp.sonarqube.dart.lang.Dart;
+import fr.insideapp.sonarqube.dart.lang.DartSensor;
 import org.buildobjects.process.ProcBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,17 +37,19 @@ import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.batch.sensor.issue.internal.DefaultIssueLocation;
 import org.sonar.api.rule.RuleKey;
 
-import com.google.common.io.Files;
-import com.google.common.io.Resources;
-
-import fr.insideapp.sonarqube.dart.lang.Dart;
-import fr.insideapp.sonarqube.dart.lang.DartSensor;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DartAnalyzerSensor implements Sensor {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DartAnalyzerSensor.class);
 	private static final String ANALYZER_COMMAND = System.getProperty("os.name").toUpperCase().contains("WINDOWS")
 			? "dartanalyzer.bat"
 			: "dartanalyzer";
+	private static final int ANALYZER_TIMEOUT = 10 * 60 * 1000;
 	private static final String ANALYSIS_OPTIONS_FILENAME = "analysis_options.yaml";
 	private static final String ANALYSIS_OPTIONS_FILE = "/fr/insideapp/sonarqube/dart/dartanalyzer/analysis_options.yaml";
 	private static final Integer PAGE_SIZE = 10;
@@ -70,8 +67,6 @@ public class DartAnalyzerSensor implements Sensor {
 			
 			selectOptionFileToUse(sensorContext);
 
-			saveCurrentAnalysisOptionsFile(sensorContext);
-
 			recordIssues(sensorContext, buildIssues(getFilesWithAbsolutePath(sensorContext)));
 
 		} catch (Exception e) {
@@ -84,18 +79,20 @@ public class DartAnalyzerSensor implements Sensor {
 	}
 
 	private void selectOptionFileToUse(SensorContext sensorContext) throws IOException {
-		boolean useExistingAnalysisOptions = getUseExistingAnalysisOptions(sensorContext);
+		useExistingAnalysisOptions = getUseExistingAnalysisOptions(sensorContext);
 
-		if (useExistingAnalysisOptions && !this.existsAnalysisOptionsFile(sensorContext)) {
-			LOGGER.warn("File {} does not exists", ANALYSIS_OPTIONS_FILENAME);
+		// Usage of existing option is required but file is missing
+		// Or usage of existing option is not required
+		if ((useExistingAnalysisOptions && !this.existsAnalysisOptionsFile(sensorContext)) || !useExistingAnalysisOptions) {
 			useDefaultAnalysisOptionsFile(sensorContext);
-			useExistingAnalysisOptions = false;
 		}
 	}
 
 	private void useDefaultAnalysisOptionsFile(SensorContext sensorContext) throws IOException {
 		LOGGER.debug("Either {} option is not set to true or {} file does not exists, use default analysis options instead",
 				DartSensor.DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY, ANALYSIS_OPTIONS_FILENAME);
+
+		useExistingAnalysisOptions = false;
 
 		this.saveCurrentAnalysisOptionsFile(sensorContext);
 		this.createAnalysisOptionsFile(sensorContext);
@@ -106,37 +103,28 @@ public class DartAnalyzerSensor implements Sensor {
 	}
 
 	private List<DartAnalyzerReportIssue> buildIssues(List<String> filesWithAbsolutePath)
-			throws IOException, InterruptedException {
-		List<DartAnalyzerReportIssue> issues = new ArrayList<DartAnalyzerReportIssue>();
+			throws IOException {
+		List<DartAnalyzerReportIssue> issues = new ArrayList<>();
 
 		for (String paginatedFileBatch : getPaginatedFilesPaths(filesWithAbsolutePath)) {
 
 			LOGGER.debug("Current file batch: {}", paginatedFileBatch);
-			Process process = null;
+
 			try {
-				String command = ANALYZER_COMMAND + " " + paginatedFileBatch.toString();
-				process = new ProcessBuilder(ANALYZER_COMMAND, " " + paginatedFileBatch.toString()).start();
-				String output = null;
-				int exitCode = process.waitFor();
-
-				LOGGER.debug("ExitCode: {}", exitCode);
-
-				if (exitCode == 0 || exitCode == 1) {
-					output = IOUtils.toString(process.getErrorStream(), Charset.defaultCharset());
-					LOGGER.debug("Error output: {}", output);
-					throw new RuntimeException("Error while executing the command: ".concat(command));
-				}
-
-				output = IOUtils.toString(process.getInputStream(), Charset.defaultCharset());
-
-				LOGGER.debug("Output: {}", output);
-
+				String output = new ProcBuilder(ANALYZER_COMMAND)
+						.withArgs(paginatedFileBatch.split(" "))
+						.withTimeoutMillis(ANALYZER_TIMEOUT)
+						//.withExpectedExitStatuses(0, 1, 2, 3)
+						.ignoreExitStatus()
+						.run()
+						.getOutputString();
+				
 				issues.addAll(new DartAnalyzerReportParser().parse(output));
-			} finally {
-				if (process != null) {
-					process.destroyForcibly();
-				}
+			} catch (Exception e) {
+				throw new IOException(e);
 			}
+
+
 		}
 		LOGGER.debug("Found issues: {}", issues.size());
 		return issues;
@@ -211,12 +199,12 @@ public class DartAnalyzerSensor implements Sensor {
 
 		String absolutePath = fileSystem.baseDir().getAbsolutePath();
 
-		LOGGER.debug("Files absolut path: {}", absolutePath);
+		LOGGER.debug("Files absolute path: {}", absolutePath);
 
 		fileSystem.inputFiles(mainFilePredicate).forEach(s -> {
 			LOGGER.debug("Input file path: {}", s.toString());
 
-			String fullPath = new StringBuilder(absolutePath).append("\\").append(s.toString().replace("/", "\\"))
+			String fullPath = new StringBuilder(absolutePath).append(File.separator).append(s.toString().replace("/", File.separator))
 					.toString();
 
 			LOGGER.debug("Current file full path: {}", fullPath);

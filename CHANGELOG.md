@@ -12,15 +12,18 @@
 
 #### Enhancements
 
-- Add Flutter 1.20.0 test report compatibility (thanks to [Peter Leibiger](https://github.com/kuhnroyal])), fixes [#19](https://github.com/insideapp-oss/sonar-flutter/issues/19)
-- Improve test report parsing (thanks to [Peter Leibiger](https://github.com/kuhnroyal])), fixes [#13](https://github.com/insideapp-oss/sonar-flutter/issues/13)
+- Add Flutter 1.20.0 test report compatibility (thanks to [Peter Leibiger](https://github.com/kuhnroyal)), fixes [#19](https://github.com/insideapp-oss/sonar-flutter/issues/19)
+- Improve test report parsing (thanks to [Peter Leibiger](https://github.com/kuhnroyal)), fixes [#13](https://github.com/insideapp-oss/sonar-flutter/issues/13)
 - Ability to use existing analysis options (configurable behavior) (thanks to [Stephane Janicaud](https://github.com/stephanecodes])), fixes [#23](https://github.com/insideapp-oss/sonar-flutter/issues/23), [#18](https://github.com/insideapp-oss/sonar-flutter/issues/18)
+- Paginated analysis with dartanalyzer (thanks to [victorgilc](https://github.com/victorgilc))
 
 #### Bug Fixes
 
-- Report the correct test case count (thanks to [Peter Leibiger](https://github.com/kuhnroyal]))
-- Restore Java 8 compatibility required by the sonar-scanner (thanks to [Peter Leibiger](https://github.com/kuhnroyal]))
+- Report the correct test case count (thanks to [Peter Leibiger](https://github.com/kuhnroyal))
+- Better test report parsing (thanks to [victorgilc](https://github.com/victorgilc))
+- Restore Java 8 compatibility required by the sonar-scanner (thanks to [Peter Leibiger](https://github.com/kuhnroyal))
 - Restore the original analysis options file when analysis crashes (thanks to [amond](https://github.com/amondnet))
+- Windows support (thanks to [victorgilc](https://github.com/victorgilc)), fixes [#12](https://github.com/insideapp-oss/sonar-flutter/issues/12), [#24](https://github.com/insideapp-oss/sonar-flutter/issues/24)
 
 ## 0.2.1
 
