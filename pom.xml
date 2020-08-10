@@ -10,7 +10,7 @@
     
     <groupId>fr.insideapp.sonarqube</groupId>
     <artifactId>sonar-flutter</artifactId>
-    <version>0.2.2</version>
+    <version>0.2-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -48,7 +48,7 @@
         <connection>scm:git:git@github.com:insideapp-oss/sonar-flutter.git</connection>
         <developerConnection>scm:git:git@github.com:insideapp-oss/sonar-flutter.git</developerConnection>
         <url>https://github.com/insideapp-oss/sonar-flutter</url>
-      <tag>0.2.2</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <properties>
