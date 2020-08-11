@@ -31,14 +31,14 @@ public class DartAnalyzerReportParser {
         List<DartAnalyzerReportIssue> issues = new ArrayList<>();
 
         String[] lines = input.split(System.getProperty("line.separator"));
-        Pattern pattern = Pattern.compile("(.*)(-|•)(.*)(-|•)(.*):(.*):(.*)(-|•)(.*)");
+        Pattern pattern = Pattern.compile("(error|hint|lint)(.*)(-|•)(.*)(-|•)(.*):(.*):(.*)(-|•)(.*)");
         for (int i = 0; i < lines.length; i++) {
             Matcher matcher = pattern.matcher(lines[i]);
             while (matcher.find()) {
-                String filePath = matcher.group(5).trim();
-                int lineNum = Integer.parseInt(matcher.group(6).trim());
-                String message = matcher.group(3).trim();
-                String ruleId = matcher.group(9).trim();
+                String filePath = matcher.group(6).trim();
+                int lineNum = Integer.parseInt(matcher.group(7).trim());
+                String message = matcher.group(4).trim();
+                String ruleId = matcher.group(10).trim();
 
                 issues.add(new DartAnalyzerReportIssue(ruleId, message, filePath, lineNum));
             }

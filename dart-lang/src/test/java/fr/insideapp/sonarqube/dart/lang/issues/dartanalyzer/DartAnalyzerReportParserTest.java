@@ -59,7 +59,7 @@ public class DartAnalyzerReportParserTest {
 
 	@Test
     public void parseWithTraces() {
-    	String input = "Analyzing main.dart...\r\n" + 
+    	String input = "Analyzing D:\\workspace\\samples-master\\platform_design\\lib\\main.dart, D:\\workspace\\samples-master\\platform_design\\lib\\utils.dart, D:\\workspace\\samples-master\\platform_design\\lib\\songs_tab.dart, D:\\workspace\\samples-master\\platform_design\\lib\\news_tab.dart, D:\\workspace\\samples-master\\platform_design\\lib\\song_detail_tab.dart...\r\n" + 
     			"  error - Target of URI doesn't exist: 'package:flutter/material.dart'. - lib/main.dart:1:8 - uri_does_not_exist\r\n" + 
     			"  hint - The value of the local variable 'a' isn't used. - lib/main.dart:7:7 - unused_local_variable\r\n" +
     			"  hint - The value of the local variable 'b' isn't used. - lib/main.dart:8:7 - unused_local_variable\r\n" +
