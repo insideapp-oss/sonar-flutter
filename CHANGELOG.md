@@ -16,7 +16,7 @@
 
 #### Bug Fixes
 
-- None.
+- Test report parsing fix for Windows (thanks to [victorgilc](https://github.com/victorgilc)).
 
 ## 0.3.0
 
