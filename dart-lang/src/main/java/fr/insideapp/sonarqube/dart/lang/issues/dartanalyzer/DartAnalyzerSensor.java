@@ -41,7 +41,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DartAnalyzerSensor implements Sensor {
@@ -104,7 +106,7 @@ public class DartAnalyzerSensor implements Sensor {
 
 	private List<DartAnalyzerReportIssue> buildIssues(List<String> filesWithAbsolutePath)
 			throws IOException {
-		List<DartAnalyzerReportIssue> issues = new ArrayList<>();
+		Set<DartAnalyzerReportIssue> issues = new HashSet<>();
 
 		for (String paginatedFileBatch : getPaginatedFilesPaths(filesWithAbsolutePath)) {
 
@@ -127,7 +129,9 @@ public class DartAnalyzerSensor implements Sensor {
 
 		}
 		LOGGER.debug("Found issues: {}", issues.size());
-		return issues;
+		List<DartAnalyzerReportIssue> result = new ArrayList<>();
+		result.addAll(issues);
+		return result;
 	}
 
 	private List<String> getPaginatedFilesPaths(List<String> filesWithAbsolutePath) {

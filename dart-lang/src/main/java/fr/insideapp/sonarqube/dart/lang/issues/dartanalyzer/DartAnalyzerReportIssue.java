@@ -19,6 +19,8 @@
  */
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
+import java.util.Objects;
+
 public class DartAnalyzerReportIssue {
 
     private final String ruleId;
@@ -47,5 +49,21 @@ public class DartAnalyzerReportIssue {
 
     public int getLineNumber() {
         return lineNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DartAnalyzerReportIssue that = (DartAnalyzerReportIssue) o;
+        return lineNumber == that.lineNumber &&
+                Objects.equals(ruleId, that.ruleId) &&
+                Objects.equals(message, that.message) &&
+                Objects.equals(filePath, that.filePath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ruleId, message, filePath, lineNumber);
     }
 }
