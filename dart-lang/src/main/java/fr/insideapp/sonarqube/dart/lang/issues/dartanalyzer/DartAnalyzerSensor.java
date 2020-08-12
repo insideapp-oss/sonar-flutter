@@ -54,7 +54,7 @@ public class DartAnalyzerSensor implements Sensor {
 	private static final int ANALYZER_TIMEOUT = 10 * 60 * 1000;
 	private static final String ANALYSIS_OPTIONS_FILENAME = "analysis_options.yaml";
 	private static final String ANALYSIS_OPTIONS_FILE = "/fr/insideapp/sonarqube/dart/dartanalyzer/analysis_options.yaml";
-	private static final Integer PAGE_SIZE = 10;
+	private static final Integer PAGE_SIZE = 50;
 	private boolean useExistingAnalysisOptions;
 	
 	@Override
