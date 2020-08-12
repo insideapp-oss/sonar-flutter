@@ -40,8 +40,13 @@ public class FlutterTestReportParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(FlutterTestReportParser.class);
 
     List<FlutterUnitTestSuite> parse(File reportFile) throws IOException {
-        try (Scanner scanner = new Scanner(reportFile, StandardCharsets.UTF_8.name())) {
-            return parse(scanner);
+        if (reportFile.exists()) {
+            try (Scanner scanner = new Scanner(reportFile, StandardCharsets.UTF_8.name())) {
+                return parse(scanner);
+            }
+        } else {
+            LOGGER.warn("Test report file {} not found", reportFile.getAbsolutePath());
+            return new ArrayList<>();
         }
     }
 
