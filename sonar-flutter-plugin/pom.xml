@@ -4,7 +4,7 @@
     <parent>
         <artifactId>sonar-flutter</artifactId>
         <groupId>fr.insideapp.sonarqube</groupId>
-        <version>0.3-SNAPSHOT</version>
+        <version>0.3.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -17,7 +17,7 @@
         <dependency>
             <groupId>fr.insideapp.sonarqube</groupId>
             <artifactId>dart-lang</artifactId>
-            <version>0.3-SNAPSHOT</version>
+            <version>0.3.1</version>
         </dependency>
 
     </dependencies>

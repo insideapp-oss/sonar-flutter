@@ -1,6 +1,6 @@
 # SonarQube Plugin for Flutter / Dart
 
-## develop
+## 0.3.1
 
 #### Breaking
 
@@ -19,7 +19,7 @@
 - Test report parsing fix for Windows (thanks to [victorgilc](https://github.com/victorgilc)).
 - Removed duplicated issues on the same file.
 - Better handling of missing test report file.
-- Faster analysis on large projects (increased analyser page size to 50)
+- Faster analysis on large projects (increased analyser page size to 50).
 
 ## 0.3.0
 
