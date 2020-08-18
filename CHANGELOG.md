@@ -12,7 +12,7 @@
 
 #### Enhancements
 
-- None.
+- Allow re-using an existing dartanalyzer report with `sonar.dart.analysis.reportPath`
 
 #### Bug Fixes
 
