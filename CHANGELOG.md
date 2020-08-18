@@ -12,7 +12,7 @@
 
 #### Enhancements
 
-- None.
+- Add missing dart keywords `extension`, `on`, `mixin`
 
 #### Bug Fixes
 

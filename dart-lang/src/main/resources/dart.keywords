@@ -14,8 +14,9 @@ do$dynamic
 else
 enum
 export
-external
 extends
+extension
+external
 factory
 false
 final
@@ -28,8 +29,10 @@ import
 in
 is
 library
+mixin
 new
 null
+on
 operator
 part
 rethrow
@@ -48,4 +51,3 @@ void
 while
 with
 yield
-
