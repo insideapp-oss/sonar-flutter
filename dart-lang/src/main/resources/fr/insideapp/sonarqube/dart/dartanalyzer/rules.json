@@ -753,21 +753,21 @@
         "name": "Prefer final fields",
         "description": "Private field could be final.",
         "severity": "MINOR",
-        "type": "BUG"
+        "type": "CODE_SMELL"
     },
     {
         "key": "prefer_final_in_for_each",
         "name": "Prefer final in for each",
         "description": "Prefer final in for-each loop variable if reference is not reassigned.",
         "severity": "MINOR",
-        "type": "BUG"
+        "type": "CODE_SMELL"
     },
     {
         "key": "prefer_final_locals",
         "name": "Prefer final locals",
         "description": "Prefer final for variable declarations if they are not reassigned.",
         "severity": "MINOR",
-        "type": "BUG"
+        "type": "CODE_SMELL"
     },
     {
         "key": "prefer_for_elements_to_map_fromIterable",
