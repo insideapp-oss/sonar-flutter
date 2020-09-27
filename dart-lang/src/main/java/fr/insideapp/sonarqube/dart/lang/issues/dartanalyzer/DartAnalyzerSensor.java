@@ -113,13 +113,15 @@ public class DartAnalyzerSensor implements Sensor {
 			LOGGER.debug("Current file batch: {}", paginatedFileBatch);
 
 			try {
-				String output = new ProcBuilder(ANALYZER_COMMAND)
+				byte[] outputBytes = new ProcBuilder(ANALYZER_COMMAND)
 						.withArgs(paginatedFileBatch.split(" "))
 						.withTimeoutMillis(ANALYZER_TIMEOUT)
 						//.withExpectedExitStatuses(0, 1, 2, 3)
 						.ignoreExitStatus()
 						.run()
-						.getOutputString();
+						.getOutputBytes();
+
+				String output = new String(outputBytes, "UTF-8");
 
 				issues.addAll(new DartAnalyzerReportParser().parse(output));
 			} catch (Exception e) {
