@@ -84,10 +84,11 @@ Use the following commands from the root folder to start an analysis:
 ```console
 # Download dependencies 
 flutter pub get 
-# Run tests
-flutter test --machine > tests.output
-# Compute coverage (--machine and --coverage cannot be run at once...)
+# Run tests with Compute coverage (--machine and --coverage cannot be run at once...)
 flutter test --coverage
+# Run tests without User feedback
+flutter test --machine > tests.output
+
 # Run the analysis and publish to the SonarQube server
 sonar-scanner
 ```
