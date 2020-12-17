@@ -116,7 +116,7 @@ public class DartAnalyzerSensor implements Sensor {
 				String output = new ProcBuilder(ANALYZER_COMMAND)
 						.withArgs(paginatedFileBatch.split(" "))
 						.withTimeoutMillis(ANALYZER_TIMEOUT)
-						//.withExpectedExitStatuses(0, 1, 2, 3)
+						.withExpectedExitStatuses(0, 1, 2, 3)
 						.ignoreExitStatus()
 						.run()
 						.getOutputString();
