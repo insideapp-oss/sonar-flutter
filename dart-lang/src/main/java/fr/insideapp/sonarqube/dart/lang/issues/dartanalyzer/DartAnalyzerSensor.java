@@ -48,15 +48,18 @@ import java.util.stream.Collectors;
 
 public class DartAnalyzerSensor implements Sensor {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DartAnalyzerSensor.class);
-	private static final String ANALYZER_COMMAND = System.getProperty("os.name").toUpperCase().contains("WINDOWS")
+	private static final String ANALYZER_DART_COMMAND = System.getProperty("os.name").toUpperCase().contains("WINDOWS")
 			? "dartanalyzer.bat"
 			: "dartanalyzer";
+	private static final String ANALYZER_FLUTTER_COMMAND = System.getProperty("os.name").toUpperCase().contains("WINDOWS")
+			? "flutter.bat"
+			: "flutter";
 	private static final int ANALYZER_TIMEOUT = 10 * 60 * 1000;
 	private static final String ANALYSIS_OPTIONS_FILENAME = "analysis_options.yaml";
 	private static final String ANALYSIS_OPTIONS_FILE = "/fr/insideapp/sonarqube/dart/dartanalyzer/analysis_options.yaml";
 	private static final Integer PAGE_SIZE = 50;
 	private boolean useExistingAnalysisOptions;
-	
+
 	@Override
 	public void describe(SensorDescriptor sensorDescriptor) {
 		sensorDescriptor.onlyOnLanguage(Dart.KEY).name("dartanalyzer sensor").onlyOnFileType(Type.MAIN);
@@ -66,7 +69,7 @@ public class DartAnalyzerSensor implements Sensor {
 	public void execute(SensorContext sensorContext) {
 		try {
 			verifyIfDartAnalyzerExists();
-			
+
 			selectOptionFileToUse(sensorContext);
 
 			recordIssues(sensorContext, buildIssues(getFilesWithAbsolutePath(sensorContext)));
@@ -113,7 +116,7 @@ public class DartAnalyzerSensor implements Sensor {
 			LOGGER.debug("Current file batch: {}", paginatedFileBatch);
 
 			try {
-				String output = new ProcBuilder(ANALYZER_COMMAND)
+				String output = new ProcBuilder(ANALYZER_DART_COMMAND)
 						.withArgs(paginatedFileBatch.split(" "))
 						.withTimeoutMillis(ANALYZER_TIMEOUT)
 						//.withExpectedExitStatuses(0, 1, 2, 3)
@@ -251,7 +254,7 @@ public class DartAnalyzerSensor implements Sensor {
 
 	private void verifyIfDartAnalyzerExists() {
 		LOGGER.debug("Verify dart analyser...");
-		new ProcBuilder(ANALYZER_COMMAND).withArg("-h").run();
+		new ProcBuilder(ANALYZER_DART_COMMAND).withArg("-h").run();
 		LOGGER.debug("Verify dart analyser done");
 	}
 
