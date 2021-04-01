@@ -51,10 +51,10 @@ import static java.util.Arrays.asList;
 
 public class DartAnalyzerSensor implements Sensor {
     private static final Logger LOGGER = LoggerFactory.getLogger(DartAnalyzerSensor.class);
-    private static final String ANALYZER_DART_COMMAND = System.getProperty("os.name").toUpperCase().contains("WINDOWS")
+    private static final String LEGACY_COMMAND = System.getProperty("os.name").toUpperCase().contains("WINDOWS")
             ? "dartanalyzer.bat"
             : "dartanalyzer";
-    private static final String ANALYZER_FLUTTER_COMMAND = System.getProperty("os.name").toUpperCase().contains("WINDOWS")
+    private static final String FLUTTER_COMMAND = System.getProperty("os.name").toUpperCase().contains("WINDOWS")
             ? "flutter.bat"
             : "flutter";
     private static final int ANALYZER_TIMEOUT = 10 * 60 * 1000;
@@ -109,7 +109,7 @@ public class DartAnalyzerSensor implements Sensor {
     private List<DartAnalyzerReportIssue> getIssuesFromFlutterAnalyze() throws IOException {
         try {
             LOGGER.info("Running 'flutter analyze'...");
-            String output = new ProcBuilder(ANALYZER_FLUTTER_COMMAND, "analyze")
+            String output = new ProcBuilder(FLUTTER_COMMAND, "analyze")
                     .withTimeoutMillis(ANALYZER_TIMEOUT)
                     .ignoreExitStatus()
                     .run()
@@ -147,7 +147,7 @@ public class DartAnalyzerSensor implements Sensor {
         return sensorContext.config()
                 .get(FLUTTER_ANALYZER_MODE)
                 .map(AnalyzerMode::valueOf)
-                .orElse(AnalyzerMode.legacy);
+                .orElse(AnalyzerMode.flutter);
     }
 
     private Boolean getUseExistingAnalysisOptions(SensorContext sensorContext) {
@@ -163,7 +163,7 @@ public class DartAnalyzerSensor implements Sensor {
             LOGGER.debug("Current file batch: {}", paginatedFileBatch);
 
             try {
-                String output = new ProcBuilder(ANALYZER_DART_COMMAND)
+                String output = new ProcBuilder(LEGACY_COMMAND)
                         .withArgs(paginatedFileBatch.split(" "))
                         .withTimeoutMillis(ANALYZER_TIMEOUT)
                         //.withExpectedExitStatuses(0, 1, 2, 3)
@@ -301,7 +301,7 @@ public class DartAnalyzerSensor implements Sensor {
 
     private void verifyIfDartAnalyzerExists() {
         LOGGER.debug("Verify dart analyser...");
-        new ProcBuilder(ANALYZER_DART_COMMAND).withArg("-h").run();
+        new ProcBuilder(LEGACY_COMMAND).withArg("-h").run();
         LOGGER.debug("Verify dart analyser done");
     }
 
