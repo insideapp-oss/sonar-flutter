@@ -22,6 +22,7 @@ package fr.insideapp.sonarqube.flutter;
 import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.DartSensor;
 import fr.insideapp.sonarqube.dart.lang.issues.DartProfile;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerMode;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerSensor;
 import fr.insideapp.sonarqube.flutter.coverage.FlutterCoverageSensor;
@@ -87,7 +88,7 @@ public class FlutterPlugin implements Plugin {
                         .category(DART_CATEGORY)
                         .subCategory(ANALYSIS_SUBCATEGORY)
                         .options(DartAnalyzerSensor.FLUTTER_ANALYZER_MODE_OPTIONS.stream().map(Enum::name).collect(Collectors.toList()))
-                        .defaultValue(DartAnalyzerSensor.FLUTTER_ANALYZER_MODE_OPTIONS.get(0).name())
+                        .defaultValue(AnalyzerMode.defaultMode.name())
                         .type(PropertyType.SINGLE_SELECT_LIST)
                         .build());
 

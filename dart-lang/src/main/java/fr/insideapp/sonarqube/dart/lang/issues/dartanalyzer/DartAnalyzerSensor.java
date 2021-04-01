@@ -147,7 +147,7 @@ public class DartAnalyzerSensor implements Sensor {
         return sensorContext.config()
                 .get(FLUTTER_ANALYZER_MODE)
                 .map(AnalyzerMode::valueOf)
-                .orElse(AnalyzerMode.flutter);
+                .orElse(AnalyzerMode.defaultMode);
     }
 
     private Boolean getUseExistingAnalysisOptions(SensorContext sensorContext) {
