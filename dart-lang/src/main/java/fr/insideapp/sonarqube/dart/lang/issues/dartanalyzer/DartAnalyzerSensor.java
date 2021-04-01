@@ -23,6 +23,7 @@ import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.DartSensor;
+import org.apache.commons.lang.NotImplementedException;
 import org.buildobjects.process.ProcBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +58,9 @@ public class DartAnalyzerSensor implements Sensor {
     private static final String FLUTTER_COMMAND = System.getProperty("os.name").toUpperCase().contains("WINDOWS")
             ? "flutter.bat"
             : "flutter";
+    private static final String DART_COMMAND = System.getProperty("os.name").toUpperCase().contains("WINDOWS")
+            ? "dart.bat"
+            : "dart";
     private static final int ANALYZER_TIMEOUT = 10 * 60 * 1000;
     private static final String ANALYSIS_OPTIONS_FILENAME = "analysis_options.yaml";
     private static final String ANALYSIS_OPTIONS_FILE = "/fr/insideapp/sonarqube/dart/dartanalyzer/analysis_options.yaml";
@@ -96,20 +100,31 @@ public class DartAnalyzerSensor implements Sensor {
                 break;
 
             case flutter:
-                try {
-                    final List<DartAnalyzerReportIssue> issues = getIssuesFromFlutterAnalyze();
-                    recordIssues(sensorContext, issues);
-                } catch (Exception e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
+                recordIssuesFromAnalyzer(sensorContext, FLUTTER_COMMAND);
                 break;
+
+            case dart:
+                recordIssuesFromAnalyzer(sensorContext, DART_COMMAND);
+                break;
+
+            default:
+                throw new NotImplementedException();
         }
     }
 
-    private List<DartAnalyzerReportIssue> getIssuesFromFlutterAnalyze() throws IOException {
+    private void recordIssuesFromAnalyzer(SensorContext sensorContext, String analyzerCommand) {
         try {
-            LOGGER.info("Running 'flutter analyze'...");
-            String output = new ProcBuilder(FLUTTER_COMMAND, "analyze")
+            final List<DartAnalyzerReportIssue> issues = getIssuesFromAnalyzer(analyzerCommand);
+            recordIssues(sensorContext, issues);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+    }
+
+    private List<DartAnalyzerReportIssue> getIssuesFromAnalyzer(String analyzerCommand) throws IOException {
+        try {
+            LOGGER.info("Running '{} analyze'...", analyzerCommand);
+            String output = new ProcBuilder(analyzerCommand, "analyze")
                     .withTimeoutMillis(ANALYZER_TIMEOUT)
                     .ignoreExitStatus()
                     .run()

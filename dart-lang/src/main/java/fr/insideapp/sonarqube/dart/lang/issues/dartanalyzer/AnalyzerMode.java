@@ -22,6 +22,7 @@ package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
 public enum AnalyzerMode {
     flutter,
+    dart,
     legacy;
 
     public static final AnalyzerMode defaultMode = flutter;
