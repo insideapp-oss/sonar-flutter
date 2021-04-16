@@ -335,7 +335,7 @@ public class DartAnalyzerSensor implements Sensor {
 
     private void createAnalysisOptionsFile(SensorContext sensorContext) throws IOException {
         File analysisOptionsFile = new File(sensorContext.fileSystem().baseDir(), ANALYSIS_OPTIONS_FILENAME);
-        URL inputUrl = getClass().getResource(ANALYSIS_OPTIONS_FILE);
+        URL inputUrl = DartAnalyzerSensor.class.getResource(ANALYSIS_OPTIONS_FILE);
         Resources.asByteSource(inputUrl).copyTo(Files.asByteSink(analysisOptionsFile));
     }
 
