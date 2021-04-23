@@ -2,6 +2,7 @@ abstract
 as
 assert
 async
+async*
 await
 break
 case
@@ -35,6 +36,7 @@ null
 on
 operator
 part
+required
 rethrow
 return
 set
@@ -42,6 +44,7 @@ static
 super
 switch
 sync
+sync*
 this
 throw
 true
@@ -51,3 +54,4 @@ void
 while
 with
 yield
+yield*
