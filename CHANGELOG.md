@@ -17,7 +17,7 @@
 
 #### Bug Fixes
 
-- None.
+- Ensure analyzer encoding is UTF-8 (thanks to [Daniel Morawetz](https://github.com/dmorawetz))
 
 
 ## 0.3.1
