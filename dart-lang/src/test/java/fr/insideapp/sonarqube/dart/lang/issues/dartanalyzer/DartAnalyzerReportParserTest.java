@@ -19,11 +19,11 @@
  */
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
 
 import java.util.List;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DartAnalyzerReportParserTest {
 
@@ -89,7 +89,24 @@ public class DartAnalyzerReportParserTest {
     	assertRuleId(issues.get(10), RULE_ID_UNUSED_LOCAL_VARIABLE);
     	assertMessage(issues.get(10), "The value of the local variable 'j' isn't used.");
     }
-	
+
+	@Test
+	public void parseFlutterReport() {
+		String input = "   info • The value of the local variable 'chocolate' isn't used • lib/api/icecream/icecream_api.dart:110:29 • unused_local_variable\n" +
+				"   info • 'nothing' is deprecated and shouldn't be used. Do not use this anymore, please use [Nothing] instead. • lib/src/path/to/very_cool_widget.dart:32:59 • deprecated_member_use_from_same_package\n" +
+				"   info • The parameter 'foo' is required • lib/src/path/to/this_file.dart:9:5 • missing_required_param\n" +
+				"   info • Unnecessary await keyword in return • lib/path/to/other/file.dart:37:27 • unnecessary_await_in_return";
+
+		List<DartAnalyzerReportIssue> issues = parser.parse(input);
+		assertThat(issues).hasSize(4);
+		assertThat(issues.stream().map(DartAnalyzerReportIssue::getRuleId)).containsExactly(
+				"unused_local_variable",
+				"deprecated_member_use_from_same_package",
+				"missing_required_param",
+				"unnecessary_await_in_return"
+		);
+	}
+
 	private void assertFilePath(DartAnalyzerReportIssue issue, String expectedPath) {
 		assertThat(issue.getFilePath()).isEqualTo(expectedPath);
 	}

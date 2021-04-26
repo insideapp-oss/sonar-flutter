@@ -19,23 +19,27 @@
  */
 package fr.insideapp.sonarqube.flutter;
 
+import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.DartSensor;
 import fr.insideapp.sonarqube.dart.lang.issues.DartProfile;
+import fr.insideapp.sonarqube.dart.lang.issues.DartProfilePedantic190;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerMode;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerSensor;
 import fr.insideapp.sonarqube.flutter.coverage.FlutterCoverageSensor;
 import fr.insideapp.sonarqube.flutter.tests.FlutterTestSensor;
 import org.sonar.api.Plugin;
-import fr.insideapp.sonarqube.dart.lang.Dart;
+import org.sonar.api.PropertyType;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+
+import java.util.stream.Collectors;
 
 public class FlutterPlugin implements Plugin {
 
     public static final String DART_CATEGORY = "Dart";
     public static final String FLUTTER_CATEGORY = "Flutter";
     public static final String ANALYSIS_SUBCATEGORY = "Analysis";
-    public static final String GENERAL_SUBCATEGORY = "General";
     public static final String TESTS_SUBCATEGORY = "Tests";
 
     public static final String FLUTTER_TESTS_REPORT_PATH_KEY = "sonar.flutter.tests.reportPath";
@@ -44,7 +48,7 @@ public class FlutterPlugin implements Plugin {
     public void define(Context context) {
 
         // Language support
-        context.addExtensions(Dart.class, DartSensor.class, DartProfile.class);
+        context.addExtensions(Dart.class, DartSensor.class, DartProfile.class, DartProfilePedantic190.class);
 
         // dartanalyzer Sensor
         context.addExtensions(DartAnalyzerSensor.class, DartAnalyzerRulesDefinition.class);
@@ -75,6 +79,27 @@ public class FlutterPlugin implements Plugin {
                         .category(DART_CATEGORY)
                         .subCategory(ANALYSIS_SUBCATEGORY)
                         .defaultValue("false")
+                        .build());
+
+        context.addExtension(
+                PropertyDefinition.builder(DartAnalyzerSensor.FLUTTER_ANALYZER_MODE)
+                        .name("Analyzer")
+                        .description("Which analyzer to use")
+                        .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
+                        .category(DART_CATEGORY)
+                        .subCategory(ANALYSIS_SUBCATEGORY)
+                        .options(DartAnalyzerSensor.FLUTTER_ANALYZER_MODE_OPTIONS.stream().map(Enum::name).collect(Collectors.toList()))
+                        .defaultValue(AnalyzerMode.defaultMode.name())
+                        .type(PropertyType.SINGLE_SELECT_LIST)
+                        .build());
+
+        context.addExtension(
+                PropertyDefinition.builder(DartSensor.DART_ANALYSIS_USE_EXISTING_REPORT_PATH_KEY)
+                        .name("Use dartanalyzer report file for analysis")
+                        .description("Path to Dartanalyzer report file. If null, dartanalyzer will be executed. The path may be either absolute or relative to the project base directory. Run dartanalyzer with '--write PATH' to create the report.")
+                        .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
+                        .category(DART_CATEGORY)
+                        .subCategory(ANALYSIS_SUBCATEGORY)
                         .build());
 
         // Tests

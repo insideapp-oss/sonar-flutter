@@ -59,7 +59,7 @@ public class SourceLinesProvider {
             }
             sourceLines.add(new SourceLine(totalLines, count, global - count, global));
         } catch (final Throwable e) {
-            LOGGER.warn("Error occured reading file", e);
+            LOGGER.warn("Error occurred reading file", e);
         }
 
         return sourceLines.toArray(new SourceLine[0]);
