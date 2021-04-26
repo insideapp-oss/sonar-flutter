@@ -21,6 +21,7 @@ package fr.insideapp.sonarqube.flutter;
 
 import fr.insideapp.sonarqube.dart.lang.DartSensor;
 import fr.insideapp.sonarqube.dart.lang.issues.DartProfile;
+import fr.insideapp.sonarqube.dart.lang.issues.DartProfilePedantic190;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerSensor;
 import fr.insideapp.sonarqube.flutter.coverage.FlutterCoverageSensor;
@@ -44,7 +45,7 @@ public class FlutterPlugin implements Plugin {
     public void define(Context context) {
 
         // Language support
-        context.addExtensions(Dart.class, DartSensor.class, DartProfile.class);
+        context.addExtensions(Dart.class, DartSensor.class, DartProfile.class, DartProfilePedantic190.class);
 
         // dartanalyzer Sensor
         context.addExtensions(DartAnalyzerSensor.class, DartAnalyzerRulesDefinition.class);
