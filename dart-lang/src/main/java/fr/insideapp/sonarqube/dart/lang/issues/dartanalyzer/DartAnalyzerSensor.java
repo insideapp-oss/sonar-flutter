@@ -19,6 +19,7 @@
  */
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
+import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.DartSensor;
@@ -40,7 +41,6 @@ import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -131,14 +131,16 @@ public class DartAnalyzerSensor implements Sensor {
 
             LOGGER.debug("Current file batch: {}", paginatedFileBatch);
 
-            try {
-                String output = new ProcBuilder(ANALYZER_COMMAND)
-                        .withArgs(paginatedFileBatch.split(" "))
-                        .withTimeoutMillis(ANALYZER_TIMEOUT)
-                        //.withExpectedExitStatuses(0, 1, 2, 3)
-                        .ignoreExitStatus()
-                        .run()
-                        .getOutputString();
+			try {
+				byte[] outputBytes = new ProcBuilder(ANALYZER_COMMAND)
+						.withArgs(paginatedFileBatch.split(" "))
+						.withTimeoutMillis(ANALYZER_TIMEOUT)
+						//.withExpectedExitStatuses(0, 1, 2, 3)
+						.ignoreExitStatus()
+						.run()
+						.getOutputBytes();
+
+				String output = new String(outputBytes, "UTF-8");
 
                 return createIssuesFromOutput(output);
             } catch (Exception e) {
