@@ -13,6 +13,7 @@
 #### Enhancements
 
 - Allow re-using an existing dartanalyzer report with `sonar.dart.analysis.reportPath`
+- Add missing dart keywords `extension`, `on`, `mixin`
 
 #### Bug Fixes
 
