@@ -77,6 +77,15 @@ public class FlutterPlugin implements Plugin {
                         .defaultValue("false")
                         .build());
 
+        context.addExtension(
+                PropertyDefinition.builder(DartSensor.DART_ANALYSIS_USE_EXISTING_REPORT_PATH_KEY)
+                        .name("Use dartanalyzer report file for analysis")
+                        .description("Path to Dartanalyzer report file. If null, dartanalyzer will be executed. The path may be either absolute or relative to the project base directory. Run dartanalyzer with '--write PATH' to create the report.")
+                        .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
+                        .category(DART_CATEGORY)
+                        .subCategory(ANALYSIS_SUBCATEGORY)
+                        .build());
+
         // Tests
         context.addExtension(FlutterTestSensor.class);
 
