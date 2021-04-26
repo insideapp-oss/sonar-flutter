@@ -1,6 +1,6 @@
 # SonarQube Plugin for Flutter / Dart
 
-## develop
+## 0.3.2
 
 #### Breaking
 
