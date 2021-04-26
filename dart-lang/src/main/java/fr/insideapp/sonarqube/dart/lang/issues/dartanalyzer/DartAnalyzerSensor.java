@@ -141,12 +141,12 @@ public class DartAnalyzerSensor implements Sensor {
     private void selectOptionFileToUse(SensorContext sensorContext) throws IOException {
         useExistingAnalysisOptions = getUseExistingAnalysisOptions(sensorContext);
 
-        // Usage of existing option is required but file is missing
-        // Or usage of existing option is not required
-        if ((useExistingAnalysisOptions && !this.existsAnalysisOptionsFile(sensorContext)) || !useExistingAnalysisOptions) {
-            useDefaultAnalysisOptionsFile(sensorContext);
-        }
-    }
+		// Usage of existing option is required but file is missing
+		// Or usage of existing option is not required
+		if ((useExistingAnalysisOptions && !this.existsAnalysisOptionsFile(sensorContext)) || !useExistingAnalysisOptions) {
+			useDefaultAnalysisOptionsFile(sensorContext);
+		}
+	}
 
     private void useDefaultAnalysisOptionsFile(SensorContext sensorContext) throws IOException {
         LOGGER.debug("Either {} option is not set to true or {} file does not exists, use default analysis options instead",
@@ -178,14 +178,15 @@ public class DartAnalyzerSensor implements Sensor {
             LOGGER.debug("Current file batch: {}", paginatedFileBatch);
 
             try {
-                String output = new ProcBuilder(LEGACY_COMMAND)
+                byte[] outputBytes = new ProcBuilder(LEGACY_COMMAND)
                         .withArgs(paginatedFileBatch.split(" "))
                         .withTimeoutMillis(ANALYZER_TIMEOUT)
                         //.withExpectedExitStatuses(0, 1, 2, 3)
                         .ignoreExitStatus()
                         .run()
-                        .getOutputString();
+                        .getOutputBytes();
 
+                String output = new String(outputBytes, "UTF-8");
                 issues.addAll(new DartAnalyzerReportParser().parse(output));
             } catch (Exception e) {
                 throw new IOException(e);

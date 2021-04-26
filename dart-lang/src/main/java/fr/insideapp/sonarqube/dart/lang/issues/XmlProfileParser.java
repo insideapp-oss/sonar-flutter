@@ -48,18 +48,23 @@ public final class XmlProfileParser {
                 String repositoryKey = getChildContent(ruleElement, "repositoryKey");
                 String key = getChildContent(ruleElement, "key");
 
-                NewBuiltInActiveRule newActiveRule = profile.activateRule(repositoryKey, key);
+                try {
+                    NewBuiltInActiveRule newActiveRule = profile.activateRule(repositoryKey, key);
 
-                NodeList parameterNodeList = ruleElement.getElementsByTagName("parameter");
-                XmlFile.asList(parameterNodeList).forEach(parameter -> {
-                    Element parameterElement = (Element) parameter;
-                    String paramKey = getChildContent(parameterElement, "key");
-                    String paramValue = getChildContent(parameterElement, "value");
-                    newActiveRule.overrideParam(paramKey, paramValue);
-                });
+                    NodeList parameterNodeList = ruleElement.getElementsByTagName("parameter");
+                    XmlFile.asList(parameterNodeList).forEach(parameter -> {
+                        Element parameterElement = (Element) parameter;
+                        String paramKey = getChildContent(parameterElement, "key");
+                        String paramValue = getChildContent(parameterElement, "value");
+                        newActiveRule.overrideParam(paramKey, paramValue);
+                    });
 
-                Optional<String> priority = getOptionalChildContent(ruleElement, "priority");
-                priority.ifPresent(newActiveRule::overrideSeverity);
+                    Optional<String> priority = getOptionalChildContent(ruleElement, "priority");
+                    priority.ifPresent(newActiveRule::overrideSeverity);
+                } catch (IllegalArgumentException e) {
+                    // ignore, if rule was already registered in another profile
+                }
+                
             });
 
         } catch (IOException e) {

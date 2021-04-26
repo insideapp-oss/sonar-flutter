@@ -1,5 +1,26 @@
 # SonarQube Plugin for Flutter / Dart
 
+## develop
+
+#### Breaking
+
+- None.
+
+#### Experimental
+
+- None.
+
+#### Enhancements
+
+- Allow re-using an existing dartanalyzer report with `sonar.dart.analysis.reportPath` (thanks to [Peter Leibiger](https://github.com/kuhnroyal))
+- Add missing dart keywords `extension`, `on`, `mixin` (thanks to [Peter Leibiger](https://github.com/kuhnroyal))
+- Add pedantic 1.9.0 profile (thanks to [Daniel Morawetz](https://github.com/dmorawetz))
+
+#### Bug Fixes
+
+- Ensure analyzer encoding is UTF-8 (thanks to [Daniel Morawetz](https://github.com/dmorawetz))
+
+
 ## 0.3.1
 
 #### Breaking

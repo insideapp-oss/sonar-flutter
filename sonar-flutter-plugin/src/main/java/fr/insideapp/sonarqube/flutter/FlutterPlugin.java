@@ -22,7 +22,6 @@ package fr.insideapp.sonarqube.flutter;
 import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.DartSensor;
 import fr.insideapp.sonarqube.dart.lang.issues.DartProfile;
-import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerMode;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerSensor;
 import fr.insideapp.sonarqube.flutter.coverage.FlutterCoverageSensor;
@@ -47,7 +46,7 @@ public class FlutterPlugin implements Plugin {
     public void define(Context context) {
 
         // Language support
-        context.addExtensions(Dart.class, DartSensor.class, DartProfile.class);
+        context.addExtensions(Dart.class, DartSensor.class, DartProfile.class, DartProfilePedantic190.class);
 
         // dartanalyzer Sensor
         context.addExtensions(DartAnalyzerSensor.class, DartAnalyzerRulesDefinition.class);
@@ -90,6 +89,15 @@ public class FlutterPlugin implements Plugin {
                         .options(DartAnalyzerSensor.FLUTTER_ANALYZER_MODE_OPTIONS.stream().map(Enum::name).collect(Collectors.toList()))
                         .defaultValue(AnalyzerMode.defaultMode.name())
                         .type(PropertyType.SINGLE_SELECT_LIST)
+                        .build());
+
+        context.addExtension(
+                PropertyDefinition.builder(DartSensor.DART_ANALYSIS_USE_EXISTING_REPORT_PATH_KEY)
+                        .name("Use dartanalyzer report file for analysis")
+                        .description("Path to Dartanalyzer report file. If null, dartanalyzer will be executed. The path may be either absolute or relative to the project base directory. Run dartanalyzer with '--write PATH' to create the report.")
+                        .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
+                        .category(DART_CATEGORY)
+                        .subCategory(ANALYSIS_SUBCATEGORY)
                         .build());
 
         // Tests
