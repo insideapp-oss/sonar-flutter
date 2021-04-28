@@ -30,8 +30,6 @@ import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.batch.sensor.issue.NewIssueLocation;
-import org.sonar.api.batch.sensor.issue.internal.DefaultIssueLocation;
 import org.sonar.api.rule.RuleKey;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -78,7 +76,6 @@ public class DartAnalyzerSensor implements Sensor {
         recordIssues(sensorContext, issues);
     }
 
-
     private void recordIssues(SensorContext sensorContext, List<DartAnalyzerReportIssue> issues) {
         issues.forEach(issue -> {
             File file = sensorContext.fileSystem().resolvePath(issue.getFilePath());
@@ -89,26 +86,9 @@ public class DartAnalyzerSensor implements Sensor {
                 LOGGER.warn("File not included in SonarQube {}", file.getAbsoluteFile());
             } else {
                 final InputFile inputFile = Objects.requireNonNull(sensorContext.fileSystem().inputFile(fp));
-
-                final NewIssueLocation location;
-                if (issue.getColNumber() != null && issue.getLength() != null) {
-                    // This is a machine readable issue with column and length information
-                    int line = issue.getLineNumber();
-                    int start = issue.getColNumber();
-                    int end = start + issue.getLength() - 1;
-                    location = new DefaultIssueLocation().on(inputFile)
-                            .at(inputFile.newRange(line, start, line, end))
-                            .message(issue.getMessage());
-                } else {
-                    // This is a legacy issue without column/length information
-                    location = new DefaultIssueLocation().on(inputFile)
-                            .at(inputFile.selectLine(issue.getLineNumber()))
-                            .message(issue.getMessage());
-                }
-
                 sensorContext.newIssue()
                         .forRule(RuleKey.of(DartAnalyzerRulesDefinition.REPOSITORY_KEY, issue.getRuleId().toLowerCase(Locale.ROOT)))
-                        .at(location)
+                        .at(issue.toNewIssueLocationFor(inputFile))
                         .save();
             }
         });

@@ -19,6 +19,12 @@
  */
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.issue.NewIssueLocation;
+import org.sonar.api.batch.sensor.issue.internal.DefaultIssueLocation;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
 public class DartAnalyzerReportIssue {
@@ -40,7 +46,7 @@ public class DartAnalyzerReportIssue {
     }
 
     public DartAnalyzerReportIssue(String ruleId, String message, String filePath,
-                                   Integer lineNumber,Integer colNumber, Integer length) {
+                                   Integer lineNumber, Integer colNumber, Integer length) {
         this.ruleId = ruleId;
         this.message = message;
         this.filePath = filePath;
@@ -89,5 +95,26 @@ public class DartAnalyzerReportIssue {
     @Override
     public int hashCode() {
         return Objects.hash(ruleId, message, filePath, lineNumber, colNumber, length);
+    }
+
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    public NewIssueLocation toNewIssueLocationFor(final InputFile inputFile) {
+        final NewIssueLocation location = new DefaultIssueLocation().on(inputFile).message(message);
+        if (colNumber != null) {
+            // This is a machine readable issue with column and length information
+            // In Dart columns are 1-based but in Sonar they are 0-based, so need to subtract 1
+            int start = Math.max(0, colNumber - 1);
+
+            // Length is optional in the Dart language server, if it is not provided use max length
+            int maxLength = inputFile.selectLine(lineNumber).end().lineOffset();
+            int end = length == null ? maxLength : Math.min(maxLength, start + length);
+
+            location.at(inputFile.newRange(lineNumber, start, lineNumber, end));
+        } else {
+            // This is a legacy issue without column/length information
+            location.at(inputFile.selectLine(lineNumber));
+        }
+        return location;
     }
 }
