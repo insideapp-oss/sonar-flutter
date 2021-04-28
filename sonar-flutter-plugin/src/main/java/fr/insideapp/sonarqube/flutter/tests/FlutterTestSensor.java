@@ -28,6 +28,7 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.squidbridge.api.AnalysisException;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,19 +49,14 @@ public class FlutterTestSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-
-        String reportFileName = sensorContext.fileSystem().baseDir().getAbsolutePath() + File.separator + reportPath(sensorContext);
-        File reportFile = new File(reportFileName);
+        File reportFile = sensorContext.fileSystem().resolvePath(reportPath(sensorContext));
 
         FlutterTestReportParser parser = new FlutterTestReportParser();
         try {
             List<FlutterUnitTestSuite> suites = parser.parse(reportFile);
-            suites.forEach(s -> {
-                this.saveSuite(s, sensorContext);
-            });
-
+            suites.forEach(s -> saveSuite(s, sensorContext));
         } catch (IOException e) {
-            LOGGER.error("Failed to parse test report", e);
+            throw new AnalysisException("Failed to parse test report", e);
         }
     }
 

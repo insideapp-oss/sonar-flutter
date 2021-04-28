@@ -17,13 +17,32 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
-public enum AnalyzerMode {
-    flutter,
-    dart,
-    legacy;
+public class AnalyzerOutput {
 
-    public static final AnalyzerMode defaultMode = flutter;
+    public enum Mode {
+        DETECT,
+        MACHINE,
+        LEGACY;
+
+        public static final Mode defaultMode = DETECT;
+    }
+
+    private final Mode mode;
+
+    private final String content;
+
+    public AnalyzerOutput(Mode mode, String content) {
+        this.mode = mode;
+        this.content = content;
+    }
+
+    public Mode getMode() {
+        return mode;
+    }
+
+    public String getContent() {
+        return content;
+    }
 }

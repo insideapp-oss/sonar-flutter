@@ -26,13 +26,27 @@ public class DartAnalyzerReportIssue {
     private final String ruleId;
     private final String message;
     private final String filePath;
-    private final int lineNumber;
+    private final Integer lineNumber;
+    private final Integer colNumber;
+    private final Integer length;
 
-    public DartAnalyzerReportIssue(String ruleId, String message, String filePath, int lineNumber) {
+    public DartAnalyzerReportIssue(String ruleId, String message, String filePath, Integer lineNumber) {
         this.ruleId = ruleId;
         this.message = message;
         this.filePath = filePath;
         this.lineNumber = lineNumber;
+        this.colNumber = null;
+        this.length = null;
+    }
+
+    public DartAnalyzerReportIssue(String ruleId, String message, String filePath,
+                                   Integer lineNumber,Integer colNumber, Integer length) {
+        this.ruleId = ruleId;
+        this.message = message;
+        this.filePath = filePath;
+        this.lineNumber = lineNumber;
+        this.colNumber = colNumber;
+        this.length = length;
     }
 
     public String getRuleId() {
@@ -47,8 +61,16 @@ public class DartAnalyzerReportIssue {
         return filePath;
     }
 
-    public int getLineNumber() {
+    public Integer getLineNumber() {
         return lineNumber;
+    }
+
+    public Integer getColNumber() {
+        return colNumber;
+    }
+
+    public Integer getLength() {
+        return length;
     }
 
     @Override
@@ -56,7 +78,9 @@ public class DartAnalyzerReportIssue {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DartAnalyzerReportIssue that = (DartAnalyzerReportIssue) o;
-        return lineNumber == that.lineNumber &&
+        return Objects.equals(lineNumber, that.lineNumber) &&
+                Objects.equals(colNumber, that.colNumber) &&
+                Objects.equals(length, that.length) &&
                 Objects.equals(ruleId, that.ruleId) &&
                 Objects.equals(message, that.message) &&
                 Objects.equals(filePath, that.filePath);
@@ -64,6 +88,6 @@ public class DartAnalyzerReportIssue {
 
     @Override
     public int hashCode() {
-        return Objects.hash(ruleId, message, filePath, lineNumber);
+        return Objects.hash(ruleId, message, filePath, lineNumber, colNumber, length);
     }
 }

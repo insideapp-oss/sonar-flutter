@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.internal.DefaultInputModule;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
@@ -40,12 +41,12 @@ import fr.insideapp.sonarqube.dart.lang.antlr.HighlighterVisitor;
 import fr.insideapp.sonarqube.dart.lang.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.dart.lang.antlr.SourceLinesVisitor;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 public class DartSensor implements Sensor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DartSensor.class);
     private static final int EXECUTOR_TIMEOUT = 10000;
-	public static final String DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY = "sonar.dart.analysis.useExistingOptions";
-	public static final String DART_ANALYSIS_USE_EXISTING_REPORT_PATH_KEY = "sonar.dart.analysis.reportPath";
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
@@ -56,8 +57,8 @@ public class DartSensor implements Sensor {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void execute(SensorContext sensorContext) {
-
         FilePredicate hasDart = sensorContext.fileSystem().predicates().hasLanguage(Dart.KEY);
         FilePredicate isMain = sensorContext.fileSystem().predicates().hasType(InputFile.Type.MAIN);
         FilePredicate isTest = sensorContext.fileSystem().predicates().hasType(InputFile.Type.TEST);
@@ -104,7 +105,7 @@ public class DartSensor implements Sensor {
             executorService.shutdownNow();
         } catch (final InterruptedException e) {
             LOGGER.warn("Unexpected error while running waiting for executor service to finish", e);
+            Thread.currentThread().interrupt();
         }
-
     }
 }

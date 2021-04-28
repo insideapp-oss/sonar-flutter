@@ -21,9 +21,11 @@ package fr.insideapp.sonarqube.flutter;
 
 import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.DartSensor;
+import fr.insideapp.sonarqube.dart.lang.PubSpecSensor;
 import fr.insideapp.sonarqube.dart.lang.issues.DartProfile;
 import fr.insideapp.sonarqube.dart.lang.issues.DartProfilePedantic190;
-import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerMode;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerExecutable;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerOutput;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerSensor;
 import fr.insideapp.sonarqube.flutter.coverage.FlutterCoverageSensor;
@@ -50,6 +52,9 @@ public class FlutterPlugin implements Plugin {
         // Language support
         context.addExtensions(Dart.class, DartSensor.class, DartProfile.class, DartProfilePedantic190.class);
 
+        // Add pubspec support
+        context.addExtension(PubSpecSensor.class);
+
         // dartanalyzer Sensor
         context.addExtensions(DartAnalyzerSensor.class, DartAnalyzerRulesDefinition.class);
 
@@ -72,34 +77,47 @@ public class FlutterPlugin implements Plugin {
                         .build());
 
         context.addExtension(
-                PropertyDefinition.builder(DartSensor.DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY)
-                        .name("Use existing analysis_options file")
-                        .description("The SonarQube plugin for Flutter / Dart uses its own analysis_options file, even if it exists under the project root. If you want to use the existing analysis_options file instead, set the value to true.")
+                PropertyDefinition.builder(DartAnalyzerSensor.ANALYZER_OPTIONS_OVERRIDE)
+                        .name("Override existing analysis_options file")
+                        .description("The SonarQube plugin for Flutter/Dart uses its own analysis_options file, even if it exists under the project/module root. If you want to use the existing analysis_options file instead, set the value to false.")
                         .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
                         .category(DART_CATEGORY)
                         .subCategory(ANALYSIS_SUBCATEGORY)
-                        .defaultValue("false")
+                        .defaultValue(DartAnalyzerSensor.ANALYZER_OPTIONS_OVERRIDE_DEFAULT)
                         .build());
 
         context.addExtension(
-                PropertyDefinition.builder(DartAnalyzerSensor.FLUTTER_ANALYZER_MODE)
+                PropertyDefinition.builder(DartAnalyzerSensor.ANALYZER_MODE)
                         .name("Analyzer")
-                        .description("Which analyzer to use")
+                        .description("Which analyzer to use. If Dart 2.12+ is used, it is safe to leave on DETECT, otherwise manual configuration may be needed.")
                         .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
                         .category(DART_CATEGORY)
                         .subCategory(ANALYSIS_SUBCATEGORY)
-                        .options(DartAnalyzerSensor.FLUTTER_ANALYZER_MODE_OPTIONS.stream().map(Enum::name).collect(Collectors.toList()))
-                        .defaultValue(AnalyzerMode.defaultMode.name())
+                        .options(DartAnalyzerSensor.ANALYZER_MODE_OPTIONS.stream().map(Enum::name).collect(Collectors.toList()))
+                        .defaultValue(AnalyzerExecutable.Mode.defaultMode.name())
                         .type(PropertyType.SINGLE_SELECT_LIST)
                         .build());
 
         context.addExtension(
-                PropertyDefinition.builder(DartSensor.DART_ANALYSIS_USE_EXISTING_REPORT_PATH_KEY)
-                        .name("Use dartanalyzer report file for analysis")
-                        .description("Path to Dartanalyzer report file. If null, dartanalyzer will be executed. The path may be either absolute or relative to the project base directory. Run dartanalyzer with '--write PATH' to create the report.")
+                PropertyDefinition.builder(DartAnalyzerSensor.ANALYZER_REPORT_PATH)
+                        .name("Use existing report file for analysis")
+                        .description("Path to analysis report file. Only evaluated when the analyzer is set to MANUAL.")
                         .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
                         .category(DART_CATEGORY)
                         .subCategory(ANALYSIS_SUBCATEGORY)
+                        .build());
+
+
+        context.addExtension(
+                PropertyDefinition.builder(DartAnalyzerSensor.ANALYZER_OUTPUT_MODE)
+                        .name("Analyzer output format")
+                        .description("This needs to be configured if the analyzer is set to MANUAL. If Dart 2.12+ is used, it is safe to leave on DETECT, otherwise manual configuration may also be needed.")
+                        .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
+                        .category(DART_CATEGORY)
+                        .subCategory(ANALYSIS_SUBCATEGORY)
+                        .options(DartAnalyzerSensor.ANALYZER_OUTPUT_MODE_OPTIONS.stream().map(Enum::name).collect(Collectors.toList()))
+                        .defaultValue(AnalyzerOutput.Mode.defaultMode.name())
+                        .type(PropertyType.SINGLE_SELECT_LIST)
                         .build());
 
         // Tests
