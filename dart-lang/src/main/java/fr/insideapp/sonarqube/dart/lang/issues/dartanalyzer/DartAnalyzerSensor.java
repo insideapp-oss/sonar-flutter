@@ -22,6 +22,7 @@ package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.PubSpec;
 import fr.insideapp.sonarqube.dart.lang.PubSpecParser;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.executable.AnalyzerExecutable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FilePredicate;

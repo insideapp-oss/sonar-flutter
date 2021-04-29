@@ -17,18 +17,17 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
+package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.executable;
 
 import com.google.common.io.Resources;
 import com.vdurmont.semver4j.Semver;
 import fr.insideapp.sonarqube.dart.lang.PubSpec;
-import fr.insideapp.sonarqube.dart.lang.PubSpecParser;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerOutput;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerSensor;
 import org.buildobjects.process.ProcBuilder;
 import org.buildobjects.process.ProcResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.fs.FilePredicate;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.squidbridge.api.AnalysisException;
 
@@ -166,7 +165,7 @@ public abstract class AnalyzerExecutable {
 
     @Nonnull
     @ParametersAreNonnullByDefault
-    static AnalyzerExecutable create(SensorContext sensorContext, PubSpec pubSpec) {
+    public static AnalyzerExecutable create(SensorContext sensorContext, PubSpec pubSpec) {
         AnalyzerExecutable.Mode mode = getAnalyzerMode(sensorContext);
         LOGGER.debug("Analyzer configured for mode: {}", mode);
         if (mode.equals(AnalyzerExecutable.Mode.DETECT)) {
@@ -277,105 +276,5 @@ public abstract class AnalyzerExecutable {
                 .get(DartAnalyzerSensor.ANALYZER_OUTPUT_MODE)
                 .map(AnalyzerOutput.Mode::valueOf)
                 .orElse(AnalyzerOutput.Mode.defaultMode);
-    }
-}
-
-class DartanalyzerAnalyzerExecutable extends AnalyzerExecutable {
-
-    protected DartanalyzerAnalyzerExecutable(SensorContext sensorContext, AnalyzerOutput.Mode mode) {
-        super(sensorContext, mode);
-    }
-
-    @Override
-    public String getCommand() {
-        return System.getProperty("os.name").toUpperCase().contains("WINDOWS")
-                ? "dartanalyzer.bat"
-                : "dartanalyzer";
-    }
-
-    @Override
-    public String[] getArgs() {
-        if (mode.equals(AnalyzerOutput.Mode.MACHINE)) {
-            return new String[]{"--format=machine", "."};
-        }
-        return new String[]{"."};
-    }
-}
-
-class DartAnalyzerExecutable extends AnalyzerExecutable {
-
-    protected DartAnalyzerExecutable(SensorContext sensorContext, AnalyzerOutput.Mode mode) {
-        super(sensorContext, mode);
-    }
-
-    @Override
-    public String getCommand() {
-        return System.getProperty("os.name").toUpperCase().contains("WINDOWS")
-                ? "dart.bat"
-                : "dart";
-    }
-
-    @Override
-    public String[] getArgs() {
-        if (mode.equals(AnalyzerOutput.Mode.MACHINE)) {
-            return new String[]{"analyze", "--format=machine"};
-        }
-        return new String[]{"analyze"};
-    }
-}
-
-class FlutterAnalyzerExecutable extends AnalyzerExecutable {
-
-    protected FlutterAnalyzerExecutable(SensorContext sensorContext, AnalyzerOutput.Mode mode) {
-        super(sensorContext, mode);
-    }
-
-    @Override
-    public String getCommand() {
-        return System.getProperty("os.name").toUpperCase().contains("WINDOWS")
-                ? "flutter.bat"
-                : "flutter";
-    }
-
-    @Override
-    public String[] getArgs() {
-        return new String[]{"analyze"};
-    }
-}
-
-class ManualAnalyzerExecutable extends AnalyzerExecutable {
-
-    protected ManualAnalyzerExecutable(SensorContext sensorContext, AnalyzerOutput.Mode mode) {
-        super(sensorContext, mode);
-    }
-
-    @Override
-    public String getCommand() {
-        return "unused";
-    }
-
-    @Override
-    public String[] getArgs() {
-        return new String[]{};
-    }
-
-    @Override
-    public AnalyzerOutput analyze() {
-        final String path = sensorContext.config().get(DartAnalyzerSensor.ANALYZER_REPORT_PATH)
-                .orElseThrow(() -> new AnalysisException("MANUAL analyzer mode is configured but not report path is set!"));
-        LOGGER.info("Analysing report from {}", path);
-
-        final File report = sensorContext.fileSystem().resolvePath(path);
-        if (report != null && report.exists() && report.canRead()) {
-            final String output;
-            try {
-                output = new String(Files.readAllBytes(report.toPath()), StandardCharsets.UTF_8);
-            } catch (IOException e) {
-                throw new AnalysisException(e);
-            }
-            return new AnalyzerOutput(mode, output);
-        } else {
-            throw new AnalysisException(String.format("File '%s' does not exist or could not be read!", path));
-        }
     }
 }

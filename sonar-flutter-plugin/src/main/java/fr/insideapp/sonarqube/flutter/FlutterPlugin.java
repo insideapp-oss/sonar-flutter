@@ -24,7 +24,7 @@ import fr.insideapp.sonarqube.dart.lang.DartSensor;
 import fr.insideapp.sonarqube.dart.lang.PubSpecSensor;
 import fr.insideapp.sonarqube.dart.lang.issues.DartProfile;
 import fr.insideapp.sonarqube.dart.lang.issues.DartProfilePedantic190;
-import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerExecutable;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.executable.AnalyzerExecutable;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerOutput;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerSensor;
