@@ -25,6 +25,7 @@ import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.DartSensor;
 import org.apache.commons.lang.NotImplementedException;
 import org.buildobjects.process.ProcBuilder;
+import org.buildobjects.process.ProcResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FilePredicate;
@@ -38,13 +39,15 @@ import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.batch.sensor.issue.internal.DefaultIssueLocation;
 import org.sonar.api.rule.RuleKey;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
@@ -124,11 +127,14 @@ public class DartAnalyzerSensor implements Sensor {
     private List<DartAnalyzerReportIssue> getIssuesFromAnalyzer(String analyzerCommand) throws IOException {
         try {
             LOGGER.info("Running '{} analyze'...", analyzerCommand);
-            String output = new ProcBuilder(analyzerCommand, "analyze")
-                    .withTimeoutMillis(ANALYZER_TIMEOUT)
-                    .ignoreExitStatus()
-                    .run()
-                    .getOutputString();
+            String command = analyzerCommand + " analyze";
+            Process process = Runtime.getRuntime().exec(command);
+
+            String output = "";
+            try (BufferedReader stdInput = new BufferedReader(new
+                    InputStreamReader(process.getInputStream()))) {
+                output = stdInput.lines().collect(Collectors.joining("\n"));
+            }
 
             List<DartAnalyzerReportIssue> issues = new DartAnalyzerReportParser().parse(output);
             LOGGER.info("Found issues: {}", issues.size());
