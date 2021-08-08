@@ -82,7 +82,12 @@ def assignType(key) {
         }
 
         if (grandParentNode.name.text() == 'Reliability') {
-            return "BUG"
+
+            // See https://github.com/insideapp-oss/sonar-flutter/pull/32
+            if (!ruleNode.name.text().startsWith('prefer_final')) {
+                return "BUG"
+            }
+
         }
     }
 
