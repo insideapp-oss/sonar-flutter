@@ -32,7 +32,7 @@ Changelog is available [here](https://github.com/insideapp-oss/sonar-flutter/blo
 
 ### Flutter SDK
 
-Install Flutter as explained on the official documentaiton page.
+Install Flutter as explained on the official documentation page.
 
 [Installation instructions](https://flutter.dev/docs/get-started/install)
 
@@ -40,7 +40,7 @@ Install Flutter as explained on the official documentaiton page.
 
 Dart is downloaded by the Flutter SDK in **$FLUTTER_HOME/bin/cache/dart-sdk**, however command lines are not on the path by default (dartanalyzer must be on the path).
 
-It is recommanded to install Dart SDK separately as explained here : [Install the Dart SDK](https://dart.dev/get-dart) for more reliability in a CI/CD environement.
+It is recommended to install Dart SDK separately as explained here : [Install the Dart SDK](https://dart.dev/get-dart) for more reliability in a CI/CD environment.
 
 ### sonar-scanner (requires Java)
 
