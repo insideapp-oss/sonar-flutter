@@ -75,7 +75,7 @@
         <analyzer-commons.version>1.10.2.456</analyzer-commons.version>
         <assertj.version>3.5.2</assertj.version>
         <jproc.version>2.2.3</jproc.version>
-        <apache-commons.version>2.6</apache-commons.version>
+        <apache-commons.version>2.7</apache-commons.version>
 
     </properties>
 
