@@ -26,6 +26,7 @@ import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.SonarRuntime;
+import org.sonar.api.rule.RuleStatus;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.squidbridge.rules.SqaleXmlLoader;
@@ -60,6 +61,7 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
                             .setName((String) slRule.get("name"))
                             .setSeverity((String) slRule.get("severity"))
                             .setType(RuleType.valueOf((String) slRule.get("type")))
+                            .setStatus(RuleStatus.valueOf((String) slRule.get("status")))
                             .setHtmlDescription((String) slRule.get("description"));
                 }
             }

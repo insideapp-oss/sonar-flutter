@@ -5,123 +5,11 @@
   <rules>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>avoid_empty_else</key>
+      <key>abstract_field_initializer</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>avoid_print</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>avoid_relative_lib_imports</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>avoid_returning_null_for_future</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>avoid_slow_async_io</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>avoid_types_as_parameter_names</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>avoid_web_libraries_in_flutter (experimental)</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>cancel_subscriptions</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>close_sinks</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>comment_references</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>control_flow_in_finally</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>diagnostic_describe_all_properties</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>empty_statements</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>hash_and_equals</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invariant_booleans (experimental)</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>iterable_contains_unrelated_type</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>list_remove_unrelated_type</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>literal_only_boolean_expressions</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>no_adjacent_strings_in_list</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>no_duplicate_case_values</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>no_logic_in_create_state</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>prefer_relative_imports</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>prefer_void_to_null</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>test_types_in_equals</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>throw_in_finally</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_statements</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unrelated_type_equality_checks</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unsafe_html</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>use_key_in_widget_constructors</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>valid_regexps</key>
+      <key>abstract_super_member_reference</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -145,7 +33,79 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>always_use_package_imports</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>ambiguous_export</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>ambiguous_extension_member_access</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>ambiguous_import</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>ambiguous_set_or_map_literal_both</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>ambiguous_set_or_map_literal_either</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>annotate_overrides</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>argument_type_not_assignable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>argument_type_not_assignable_to_error_handler</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>assert_in_redirecting_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>assignment_of_do_not_store</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>assignment_to_const</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>assignment_to_final</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>assignment_to_final_local</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>assignment_to_final_no_setter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>assignment_to_function</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>assignment_to_method</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>assignment_to_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>async_for_in_wrong_context</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -177,7 +137,19 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>avoid_dynamic_calls</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>avoid_empty_else</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>avoid_equals_and_hash_code_on_mutable_classes</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>avoid_escaping_inner_quotes</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -201,6 +173,10 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>avoid_multiple_declarations_per_line</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>avoid_null_checks_in_equality_operators</key>
     </rule>
     <rule>
@@ -209,11 +185,19 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>avoid_print</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>avoid_private_typedef_functions</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
       <key>avoid_redundant_argument_values</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>avoid_relative_lib_imports</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -226,6 +210,10 @@
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
       <key>avoid_returning_null</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>avoid_returning_null_for_future</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -249,6 +237,18 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>avoid_slow_async_io</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>avoid_type_to_string</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>avoid_types_as_parameter_names</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>avoid_types_on_closure_parameters</key>
     </rule>
     <rule>
@@ -265,7 +265,51 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>avoid_web_libraries_in_flutter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>await_in_late_local_variable_initializer</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>await_in_wrong_context</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>await_only_futures</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>body_might_complete_normally</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>break_label_on_switch_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>built_in_identifier_as_extension_name</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>built_in_identifier_as_prefix_name</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>built_in_identifier_as_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>built_in_identifier_as_type_name</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>built_in_identifier_as_type_parameter_name</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>built_in_identifier_as_typedef_name</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -277,7 +321,199 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>can_be_null_after_null_aware</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>cancel_subscriptions</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>cascade_invocations</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>case_block_not_terminated</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>case_expression_type_implements_equals</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>case_expression_type_is_not_switch_expression_subtype</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>cast_nullable_to_non_nullable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>cast_to_non_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>close_sinks</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>collection_element_from_deferred_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>comment_references</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>concrete_class_with_abstract_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>conflicting_constructor_and_static_field</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>conflicting_constructor_and_static_method</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>conflicting_field_and_method</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>conflicting_generic_interfaces</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>conflicting_method_and_field</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>conflicting_static_and_instance</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>conflicting_type_variable_and_container</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>conflicting_type_variable_and_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_constructor_field_type_mismatch</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_constructor_param_type_mismatch</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_constructor_throws_exception</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_constructor_with_field_initialized_by_non_const</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_constructor_with_mixin_with_field</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_constructor_with_non_const_super</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_constructor_with_non_final_field</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_deferred_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_eval_throws_exception</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_eval_throws_idbze</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_eval_type_bool</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_eval_type_bool_int</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_eval_type_bool_num_string</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_eval_type_int</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_eval_type_num</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_eval_type_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_initialized_with_non_constant_value</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_initialized_with_non_constant_value_from_deferred_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_instance_field</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_map_key_expression_type_implements_equals</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_not_initialized</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_set_element_type_implements_equals</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_spread_expected_list_or_set</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_spread_expected_map</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_with_non_const</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_with_non_constant_argument</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_with_type_parameters</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_with_undefined_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>const_with_undefined_constructor_default</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -285,11 +521,135 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>continue_label_on_switch</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>control_flow_in_finally</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>could_not_infer</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>creation_with_non_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>curly_braces_in_flow_control_structures</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>dead_code</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>dead_code_catch_following_catch</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>dead_code_on_catch_subtype</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>dead_null_aware_expression</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>default_list_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>default_value_in_redirecting_factory_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>default_value_on_required_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>deferred_import_of_extension</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>definitely_unassigned_late_local_variable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>deprecated_consistency</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>deprecated_extends_function</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>deprecated_function_class_declaration</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>deprecated_member_use</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>deprecated_member_use_from_same_package</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>deprecated_mixin_function</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>diagnostic_describe_all_properties</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>directives_ordering</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>division_optimization</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>do_not_use_environment</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>duplicate_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>duplicate_definition</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>duplicate_field_formal_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>duplicate_hidden_name</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>duplicate_ignore</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>duplicate_import</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>duplicate_named_argument</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>duplicate_part</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>duplicate_shown_name</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -301,7 +661,175 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>empty_statements</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>enum_constant_same_name_as_enclosing</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>equal_elements_in_const_set</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>equal_elements_in_set</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>equal_keys_in_const_map</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>equal_keys_in_map</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>exhaustive_cases</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>expected_one_list_type_arguments</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>expected_one_set_type_arguments</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>expected_two_map_type_arguments</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>export_internal_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>export_legacy_symbol</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>export_of_non_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>expression_in_map</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>extends_non_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>extends_type_alias_expands_to_type_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>extension_as_expression</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>extension_conflicting_static_and_instance</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>extension_declares_member_of_object</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>extension_override_access_to_static_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>extension_override_argument_not_assignable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>extension_override_with_cascade</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>extension_override_without_access</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>external_field_constructor_initializer</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>external_field_initializer</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>external_variable_initializer</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>extra_positional_arguments</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>extra_positional_arguments_could_be_named</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>field_initialized_by_multiple_initializers</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>field_initialized_in_initializer_and_declaration</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>field_initialized_in_parameter_and_initializer</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>field_initializer_factory_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>field_initializer_not_assignable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>field_initializer_outside_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>field_initializer_redirecting_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>field_initializing_formal_not_assignable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>file_import_inside_lib_references_file_outside</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>file_import_outside_lib_references_file_inside</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>file_names</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>final_initialized_in_declaration_and_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>final_initialized_multiple_times</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>final_not_initialized</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>final_not_initialized_constructor</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -309,11 +837,427 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>for_in_of_invalid_element_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>for_in_of_invalid_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>for_in_with_const_variable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>generic_function_type_cannot_be_bound</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>generic_function_type_cannot_be_type_argument</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>getter_not_assignable_setter_types</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>getter_not_subtype_setter_types</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>hash_and_equals</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>if_element_condition_from_deferred_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>illegal_async_generator_return_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>illegal_async_return_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>illegal_sync_generator_return_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>implementation_imports</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>implements_non_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>implements_repeated</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>implements_super_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>implements_type_alias_expands_to_type_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>implicit_this_reference_in_initializer</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>import_deferred_library_with_load_function</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>import_internal_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>import_of_legacy_library_into_null_safe</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>import_of_non_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>inconsistent_case_expression_types</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>inconsistent_inheritance</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>inconsistent_inheritance_getter_and_method</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>inconsistent_language_version_override</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>inference_failure_on_collection_literal</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>inference_failure_on_function_return_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>inference_failure_on_instance_creation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>inference_failure_on_uninitialized_variable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>inference_failure_on_untyped_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>initializer_for_non_existent_field</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>initializer_for_static_field</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>initializing_formal_for_non_existent_field</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>initializing_formal_for_static_field</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>instance_access_to_static_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>instance_member_access_from_factory</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>instance_member_access_from_static</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>instantiate_abstract_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>instantiate_enum</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>instantiate_type_alias_expands_to_type_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>integer_literal_imprecise_as_double</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>integer_literal_out_of_range</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_annotation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_annotation_from_deferred_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_annotation_target</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_assignment</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_cast_function</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_cast_function_expr</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_cast_literal</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_cast_literal_list</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_cast_literal_map</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_cast_literal_set</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_cast_method</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_cast_new_expr</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_constant</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_constructor_name</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_dependency</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_export_of_internal_element</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_export_of_internal_element_indirectly</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_extension_argument_count</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_factory_annotation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_factory_method_decl</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_factory_method_impl</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_factory_name_not_a_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_immutable_annotation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_implementation_override</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_inline_function_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_internal_annotation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_language_version_override</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_literal_annotation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_modifier_on_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_modifier_on_setter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_non_virtual_annotation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_null_aware_operator</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_override</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_override_different_default_values_named</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_override_different_default_values_positional</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_override_of_non_virtual_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_reference_to_this</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_required_named_param</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_required_optional_positional_param</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_required_positional_param</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_return_type_for_catch_error</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_sealed_annotation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_super_invocation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_type_argument_in_const_literal</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_uri</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_use_of_covariant</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_use_of_internal_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_use_of_null_value</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_use_of_protected_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_use_of_visible_for_template_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_use_of_visible_for_testing_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invalid_visibility_annotation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invariant_booleans</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invocation_of_extension_without_call</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invocation_of_non_function</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>invocation_of_non_function_expression</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>iterable_contains_unrelated_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>join_return_with_assignment</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>label_in_outer_scope</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>label_undefined</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>late_final_field_with_const_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>late_final_local_already_assigned</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>leading_newlines_in_multiline_strings</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -325,7 +1269,91 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>library_private_types_in_public_api</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>lines_longer_than_80_chars</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>list_element_type_not_assignable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>list_remove_unrelated_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>literal_only_boolean_expressions</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>main_first_positional_parameter_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>main_has_required_named_parameters</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>main_has_too_many_required_positional_parameters</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>main_is_not_function</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>map_entry_not_in_map</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>map_key_type_not_assignable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>map_value_type_not_assignable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>missing_const_in_list_literal</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>missing_const_in_map_literal</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>missing_const_in_set_literal</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>missing_dart_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>missing_default_value_for_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>missing_enum_constant_in_switch</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>missing_js_lib_annotation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>missing_required_argument</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>missing_required_param</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>missing_return</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -333,7 +1361,183 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_application_concrete_super_invoked_member_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_application_no_concrete_super_invoked_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_application_not_implemented_interface</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_class_declares_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_declares_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_inference_inconsistent_matching_classes</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_inference_no_matching_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_inference_no_possible_substitution</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_inherits_from_not_object</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_instantiate</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_of_non_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_of_type_alias_expands_to_type_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_on_sealed_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_on_type_alias_expands_to_type_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_super_class_constraint_deferred_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_super_class_constraint_non_interface</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixin_with_non_class_superclass</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>mixins_super_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>multiple_redirecting_constructor_invocations</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>multiple_super_initializers</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>must_be_immutable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>must_call_super</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>new_with_undefined_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>new_with_undefined_constructor_default</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>no_adjacent_strings_in_list</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>no_annotation_constructor_arguments</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>no_combined_super_signature</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>no_default_cases</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>no_default_super_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>no_duplicate_case_values</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>no_generative_constructor_in_superclass</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>no_logic_in_create_state</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>no_runtimeType_toString</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_abstract_class_inherits_abstract_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_bool_condition</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_bool_expression</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_bool_negation_expression</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_bool_operand</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_const_call_to_literal_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_const_map_as_expression_statement</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_constant_annotation_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_constant_case_expression</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_constant_case_expression_from_deferred_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_constant_default_value</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_constant_default_value_from_deferred_library</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -341,11 +1545,143 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_constant_list_element</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_constant_map_element</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_constant_map_key</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_constant_map_value</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_constant_set_element</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_generative_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_generative_implicit_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_sync_factory</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_type_as_type_argument</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_type_in_catch_clause</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_void_return_for_operator</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>non_void_return_for_setter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>not_a_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>not_assigned_potentially_non_nullable_local_variable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>not_enough_positional_arguments</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>not_initialized_non_nullable_instance_field</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>not_initialized_non_nullable_variable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>not_instantiated_bound</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>not_iterable_spread</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>not_map_spread</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>not_null_aware_null_spread</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>null_aware_before_operator</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>null_aware_in_condition</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>null_aware_in_logical_operator</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>null_check_always_fails</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>null_check_on_nullable_type_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>null_closures</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>nullable_type_in_catch_clause</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>nullable_type_in_extends_clause</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>nullable_type_in_implements_clause</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>nullable_type_in_on_clause</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>nullable_type_in_with_clause</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>object_cannot_extend_another_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>omit_local_variable_types</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>on_repeated</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -357,11 +1693,27 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>optional_parameter_in_operator</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>overridden_fields</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>override_on_non_overriding_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>package_api_docs</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>package_import_contains_dot_dot</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>package_names</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -370,6 +1722,26 @@
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
       <key>parameter_assignments</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>part_of_different_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>part_of_non_part</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>part_of_unnamed_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>path_does_not_exist</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>path_pubspec_does_not_exist</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -385,7 +1757,7 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>prefer_bool_in_asserts (deprecated)</key>
+      <key>prefer_bool_in_asserts</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -505,7 +1877,15 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>prefer_null_aware_method_calls</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>prefer_null_aware_operators</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>prefer_relative_imports</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -521,6 +1901,34 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>prefer_void_to_null</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>prefix_collides_with_top_level_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>prefix_identifier_not_followed_by_dot</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>prefix_shadowed_by_local_declaration</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>private_collision_in_mixin_application</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>private_optional_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>private_setter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>provide_deprecation_message</key>
     </rule>
     <rule>
@@ -529,551 +1937,55 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>read_potentially_unassigned_final</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>receiver_of_type_never</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>recursive_compile_time_constant</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>recursive_constructor_redirect</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>recursive_getters</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>slash_for_doc_comments</key>
+      <key>recursive_interface_inheritance</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>sort_child_properties_last</key>
+      <key>recursive_interface_inheritance_extends</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>sort_constructors_first</key>
+      <key>recursive_interface_inheritance_implements</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>sort_unnamed_constructors_first</key>
+      <key>recursive_interface_inheritance_on</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>super_goes_last (deprecated)</key>
+      <key>recursive_interface_inheritance_with</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>type_annotate_public_apis</key>
+      <key>redirect_generative_to_missing_constructor</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>type_init_formals</key>
+      <key>redirect_generative_to_non_generative_constructor</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unawaited_futures</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_await_in_return</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_brace_in_string_interps</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_const</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_final</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_getters_setters</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_lambdas</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_new</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_null_aware_assignments</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_null_in_if_null_operators</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_overrides</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_parenthesis</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_string_interpolations</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>unnecessary_this</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>use_full_hex_values_for_flutter_colors</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>use_function_type_syntax_for_parameters</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>use_rethrow_when_possible</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>use_setters_to_change_properties</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>use_string_buffers</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>use_to_and_as_if_applicable</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>void_checks</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>package_names</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>abstract_super_member_reference</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>ambiguous_extension_member_access</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>ambiguous_import</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>ambiguous_set_or_map_literal_both</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>ambiguous_set_or_map_literal_either</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>argument_type_not_assignable</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>assignment_to_final</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>assignment_to_final_local</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>assignment_to_final_no_setter</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>assignment_to_method</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>built_in_identifier_as_extension_name</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>built_in_identifier_as_type</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>case_block_not_terminated</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>cast_to_non_type</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>concrete_class_with_abstract_member</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>const_constructor_with_non_final_field</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>const_initialized_with_non_constant_value</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>const_instance_field</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>const_not_initialized</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>const_spread_expected_list_or_set</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>const_spread_expected_map</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>const_with_non_const</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>const_with_non_constant_argument</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>dead_code</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>dead_code_catch_following_catch</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>dead_code_on_catch_subtype</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>deprecated_member_use</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>deprecated_member_use_from_same_package</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>duplicate_constructor</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>duplicate_definition</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>duplicate_import</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>duplicate_named_argument</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>equal_elements_in_const_set</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>equal_keys_in_const_map</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>expression_in_map</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extends_non_class</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extension_as_expression</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extension_conflicting_static_and_instance</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extension_declares_abstract_member</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extension_declares_constructor</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extension_declares_instance_field</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extension_declares_member_of_object</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extension_override_access_to_static_member</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extension_override_argument_not_assignable</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extension_override_without_access</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extension_override_with_cascade</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extra_positional_arguments</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>extra_positional_arguments_could_be_named</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>final_not_initialized</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>final_not_initialized_constructor</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>for_in_of_invalid_type</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>implements_non_class</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>implements_repeated</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>implicit_this_reference_in_initializer</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>initializer_for_non_existent_field</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>initializing_formal_for_non_existent_field</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>instance_access_to_static_member</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>instance_member_access_from_factory</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>instance_member_access_from_static</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>instantiate_abstract_class</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invalid_assignment</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invalid_extension_argument_count</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invalid_factory_name_not_a_class</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invalid_literal_annotation</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invalid_override</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invalid_reference_to_this</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invalid_uri</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invalid_use_of_covariant_in_extension</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invalid_visibility_annotation</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invocation_of_extension_without_call</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invocation_of_non_function</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>invocation_of_non_function_expression</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>list_element_type_not_assignable</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>map_entry_not_in_map</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>map_key_type_not_assignable</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>map_value_type_not_assignable</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>missing_enum_constant_in_switch</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>missing_required_param</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>missing_return</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>mixin_of_non_class</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>mixin_on_sealed_class</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>mixin_super_class_constraint_non_interface</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>must_be_immutable</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>must_call_super</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>new_with_undefined_constructor_default</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_abstract_class_inherits_abstract_member</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_bool_condition</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_bool_expression</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_bool_negation_expression</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_bool_operand</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_constant_case_expression</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_constant_default_value</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_constant_list_element</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_constant_map_element</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_constant_map_key</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_constant_map_value</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_constant_set_element</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_const_call_to_literal_constructor</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_type_as_type_argument</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>non_type_in_catch_clause</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>not_a_type</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>not_enough_positional_arguments</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>not_iterable_spread</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>not_map_spread</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>no_annotation_constructor_arguments</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>override_on_non_overriding_member</key>
-    </rule>
-    <rule>
-      <repositoryKey>dartanalyzer</repositoryKey>
-      <key>part_of_non_part</key>
+      <key>redirect_to_abstract_class_constructor</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -1085,11 +1997,43 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>redirect_to_missing_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>redirect_to_non_class</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>redirect_to_non_const_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>redirect_to_type_alias_expands_to_type_parameter</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>referenced_before_declaration</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>require_trailing_commas</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>rethrow_outside_catch</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>return_in_generative_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>return_in_generator</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>return_of_do_not_store</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -1105,11 +2049,11 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>sdk_version_async_exported_from_core</key>
+      <key>sdk_version_as_expression_in_const_context</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>sdk_version_as_expression_in_const_context</key>
+      <key>sdk_version_async_exported_from_core</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -1125,7 +2069,15 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>sdk_version_gt_gt_gt_operator</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>sdk_version_is_expression_in_const_context</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>sdk_version_never</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -1141,7 +2093,63 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>set_element_type_not_assignable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>shared_deferred_prefix</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>sized_box_for_whitespace</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>slash_for_doc_comments</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>sort_child_properties_last</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>sort_constructors_first</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>sort_pub_dependencies</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>sort_unnamed_constructors_first</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>spread_expression_from_deferred_library</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>static_access_to_instance_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>strict_raw_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>subtype_of_deferred_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>subtype_of_disallowed_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>subtype_of_sealed_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>super_goes_last</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -1153,11 +2161,95 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>super_in_redirecting_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>super_initializer_in_object</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>switch_case_completes_normally</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>switch_expression_not_assignable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>test_types_in_equals</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>throw_in_finally</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>throw_of_invalid_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>tighten_type_of_initializing_formals</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>todo</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>top_level_cycle</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>type_alias_cannot_reference_itself</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>type_annotate_public_apis</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>type_annotation_deferred_class</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>type_argument_not_matching_bounds</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>type_check_is_not_null</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>type_check_is_null</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>type_init_formals</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>type_parameter_referenced_by_static</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>type_parameter_supertype_of_its_bound</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>type_test_with_non_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>type_test_with_undefined_name</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unawaited_futures</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unchecked_use_of_nullable_value</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -1173,11 +2265,19 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>undefined_enum_constant</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>undefined_extension_getter</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
       <key>undefined_extension_method</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>undefined_extension_operator</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -1198,6 +2298,10 @@
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
       <key>undefined_identifier</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>undefined_identifier_await</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -1225,7 +2329,19 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
-      <key>undefined_super_method</key>
+      <key>undefined_super_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unignorable_ignore</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_await_in_return</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_brace_in_string_interps</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -1233,7 +2349,107 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_const</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_final</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_getters_setters</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_ignore</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_lambdas</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_new</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_no_such_method</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_non_null_assertion</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_null_aware_assignments</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_null_checks</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_null_comparison</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_null_in_if_null_operators</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_nullable_for_final_variable_declarations</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_overrides</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_parenthesis</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_question_mark</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_raw_strings</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_statements</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_string_escapes</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_string_interpolations</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_this</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unnecessary_type_check</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unqualified_reference_to_non_local_static_member</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>unqualified_reference_to_static_member_of_extended_type</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unrelated_type_equality_checks</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>unsafe_html</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -1277,11 +2493,79 @@
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>uri_with_interpolation</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_build_context_synchronously</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_full_hex_values_for_flutter_colors</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_function_type_syntax_for_parameters</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_if_null_to_convert_nulls_to_bools</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_is_even_rather_than_modulo</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_key_in_widget_constructors</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_late_for_private_fields_and_variables</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_named_constants</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>use_of_void_result</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_raw_strings</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_rethrow_when_possible</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_setters_to_change_properties</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_string_buffers</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>use_to_and_as_if_applicable</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>valid_regexps</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
       <key>variable_type_mismatch</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>void_checks</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>wrong_explicit_type_parameter_variance_in_superinterface</key>
     </rule>
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
@@ -1294,6 +2578,38 @@
     <rule>
       <repositoryKey>dartanalyzer</repositoryKey>
       <key>wrong_number_of_type_arguments</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>wrong_number_of_type_arguments_constructor</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>wrong_number_of_type_arguments_extension</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>wrong_number_of_type_arguments_method</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>wrong_type_parameter_variance_in_superinterface</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>wrong_type_parameter_variance_position</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>yield_each_in_non_generator</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>yield_in_non_generator</key>
+    </rule>
+    <rule>
+      <repositoryKey>dartanalyzer</repositoryKey>
+      <key>yield_of_invalid_type</key>
     </rule>
   </rules>
 </profile>

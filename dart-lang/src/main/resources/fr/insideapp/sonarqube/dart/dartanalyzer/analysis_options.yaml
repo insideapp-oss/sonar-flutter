@@ -1,41 +1,31 @@
 linter:
   rules:
-    - avoid_empty_else
-    - avoid_print
-    - avoid_relative_lib_imports
-    - avoid_returning_null_for_future
-    - avoid_slow_async_io
-    - avoid_types_as_parameter_names
-    - avoid_web_libraries_in_flutter (experimental)
-    - cancel_subscriptions
-    - close_sinks
-    - comment_references
-    - control_flow_in_finally
-    - diagnostic_describe_all_properties
-    - empty_statements
-    - hash_and_equals
-    - invariant_booleans (experimental)
-    - iterable_contains_unrelated_type
-    - list_remove_unrelated_type
-    - literal_only_boolean_expressions
-    - no_adjacent_strings_in_list
-    - no_duplicate_case_values
-    - no_logic_in_create_state
-    - prefer_relative_imports
-    - prefer_void_to_null
-    - test_types_in_equals
-    - throw_in_finally
-    - unnecessary_statements
-    - unrelated_type_equality_checks
-    - unsafe_html
-    - use_key_in_widget_constructors
-    - valid_regexps
+    - abstract_field_initializer
+    - abstract_super_member_reference
     - always_declare_return_types
     - always_put_control_body_on_new_line
     - always_put_required_named_parameters_first
     - always_require_non_null_named_parameters
     - always_specify_types
+    - always_use_package_imports
+    - ambiguous_export
+    - ambiguous_extension_member_access
+    - ambiguous_import
+    - ambiguous_set_or_map_literal_both
+    - ambiguous_set_or_map_literal_either
     - annotate_overrides
+    - argument_type_not_assignable
+    - argument_type_not_assignable_to_error_handler
+    - assert_in_redirecting_constructor
+    - assignment_of_do_not_store
+    - assignment_to_const
+    - assignment_to_final
+    - assignment_to_final_local
+    - assignment_to_final_no_setter
+    - assignment_to_function
+    - assignment_to_method
+    - assignment_to_type
+    - async_for_in_wrong_context
     - avoid_annotating_with_dynamic
     - avoid_as
     - avoid_bool_literals_in_conditional_expressions
@@ -43,59 +33,412 @@ linter:
     - avoid_catching_errors
     - avoid_classes_with_only_static_members
     - avoid_double_and_int_checks
+    - avoid_dynamic_calls
+    - avoid_empty_else
     - avoid_equals_and_hash_code_on_mutable_classes
+    - avoid_escaping_inner_quotes
     - avoid_field_initializers_in_const_classes
     - avoid_function_literals_in_foreach_calls
     - avoid_implementing_value_types
     - avoid_init_to_null
     - avoid_js_rounded_ints
+    - avoid_multiple_declarations_per_line
     - avoid_null_checks_in_equality_operators
     - avoid_positional_boolean_parameters
+    - avoid_print
     - avoid_private_typedef_functions
     - avoid_redundant_argument_values
+    - avoid_relative_lib_imports
     - avoid_renaming_method_parameters
     - avoid_return_types_on_setters
     - avoid_returning_null
+    - avoid_returning_null_for_future
     - avoid_returning_null_for_void
     - avoid_returning_this
     - avoid_setters_without_getters
     - avoid_shadowing_type_parameters
     - avoid_single_cascade_in_expression_statements
+    - avoid_slow_async_io
+    - avoid_type_to_string
+    - avoid_types_as_parameter_names
     - avoid_types_on_closure_parameters
     - avoid_unnecessary_containers
     - avoid_unused_constructor_parameters
     - avoid_void_async
+    - avoid_web_libraries_in_flutter
+    - await_in_late_local_variable_initializer
+    - await_in_wrong_context
     - await_only_futures
+    - body_might_complete_normally
+    - break_label_on_switch_member
+    - built_in_identifier_as_extension_name
+    - built_in_identifier_as_prefix_name
+    - built_in_identifier_as_type
+    - built_in_identifier_as_type_name
+    - built_in_identifier_as_type_parameter_name
+    - built_in_identifier_as_typedef_name
     - camel_case_extensions
     - camel_case_types
+    - can_be_null_after_null_aware
+    - cancel_subscriptions
     - cascade_invocations
+    - case_block_not_terminated
+    - case_expression_type_implements_equals
+    - case_expression_type_is_not_switch_expression_subtype
+    - cast_nullable_to_non_nullable
+    - cast_to_non_type
+    - close_sinks
+    - collection_element_from_deferred_library
+    - comment_references
+    - concrete_class_with_abstract_member
+    - conflicting_constructor_and_static_field
+    - conflicting_constructor_and_static_method
+    - conflicting_field_and_method
+    - conflicting_generic_interfaces
+    - conflicting_method_and_field
+    - conflicting_static_and_instance
+    - conflicting_type_variable_and_container
+    - conflicting_type_variable_and_member
+    - const_constructor_field_type_mismatch
+    - const_constructor_param_type_mismatch
+    - const_constructor_throws_exception
+    - const_constructor_with_field_initialized_by_non_const
+    - const_constructor_with_mixin_with_field
+    - const_constructor_with_non_const_super
+    - const_constructor_with_non_final_field
+    - const_deferred_class
+    - const_eval_throws_exception
+    - const_eval_throws_idbze
+    - const_eval_type_bool
+    - const_eval_type_bool_int
+    - const_eval_type_bool_num_string
+    - const_eval_type_int
+    - const_eval_type_num
+    - const_eval_type_type
+    - const_initialized_with_non_constant_value
+    - const_initialized_with_non_constant_value_from_deferred_library
+    - const_instance_field
+    - const_map_key_expression_type_implements_equals
+    - const_not_initialized
+    - const_set_element_type_implements_equals
+    - const_spread_expected_list_or_set
+    - const_spread_expected_map
+    - const_with_non_const
+    - const_with_non_constant_argument
+    - const_with_type_parameters
+    - const_with_undefined_constructor
+    - const_with_undefined_constructor_default
     - constant_identifier_names
+    - continue_label_on_switch
+    - control_flow_in_finally
+    - could_not_infer
+    - creation_with_non_type
     - curly_braces_in_flow_control_structures
+    - dead_code
+    - dead_code_catch_following_catch
+    - dead_code_on_catch_subtype
+    - dead_null_aware_expression
+    - default_list_constructor
+    - default_value_in_redirecting_factory_constructor
+    - default_value_on_required_parameter
+    - deferred_import_of_extension
+    - definitely_unassigned_late_local_variable
+    - deprecated_consistency
+    - deprecated_extends_function
+    - deprecated_function_class_declaration
+    - deprecated_member_use
+    - deprecated_member_use_from_same_package
+    - deprecated_mixin_function
+    - diagnostic_describe_all_properties
     - directives_ordering
+    - division_optimization
+    - do_not_use_environment
+    - duplicate_constructor
+    - duplicate_definition
+    - duplicate_field_formal_parameter
+    - duplicate_hidden_name
+    - duplicate_ignore
+    - duplicate_import
+    - duplicate_named_argument
+    - duplicate_part
+    - duplicate_shown_name
     - empty_catches
     - empty_constructor_bodies
+    - empty_statements
+    - enum_constant_same_name_as_enclosing
+    - equal_elements_in_const_set
+    - equal_elements_in_set
+    - equal_keys_in_const_map
+    - equal_keys_in_map
+    - exhaustive_cases
+    - expected_one_list_type_arguments
+    - expected_one_set_type_arguments
+    - expected_two_map_type_arguments
+    - export_internal_library
+    - export_legacy_symbol
+    - export_of_non_library
+    - expression_in_map
+    - extends_non_class
+    - extends_type_alias_expands_to_type_parameter
+    - extension_as_expression
+    - extension_conflicting_static_and_instance
+    - extension_declares_member_of_object
+    - extension_override_access_to_static_member
+    - extension_override_argument_not_assignable
+    - extension_override_with_cascade
+    - extension_override_without_access
+    - external_field_constructor_initializer
+    - external_field_initializer
+    - external_variable_initializer
+    - extra_positional_arguments
+    - extra_positional_arguments_could_be_named
+    - field_initialized_by_multiple_initializers
+    - field_initialized_in_initializer_and_declaration
+    - field_initialized_in_parameter_and_initializer
+    - field_initializer_factory_constructor
+    - field_initializer_not_assignable
+    - field_initializer_outside_constructor
+    - field_initializer_redirecting_constructor
+    - field_initializing_formal_not_assignable
+    - file_import_inside_lib_references_file_outside
+    - file_import_outside_lib_references_file_inside
     - file_names
+    - final_initialized_in_declaration_and_constructor
+    - final_initialized_multiple_times
+    - final_not_initialized
+    - final_not_initialized_constructor
     - flutter_style_todos
+    - for_in_of_invalid_element_type
+    - for_in_of_invalid_type
+    - for_in_with_const_variable
+    - generic_function_type_cannot_be_bound
+    - generic_function_type_cannot_be_type_argument
+    - getter_not_assignable_setter_types
+    - getter_not_subtype_setter_types
+    - hash_and_equals
+    - if_element_condition_from_deferred_library
+    - illegal_async_generator_return_type
+    - illegal_async_return_type
+    - illegal_sync_generator_return_type
     - implementation_imports
+    - implements_non_class
+    - implements_repeated
+    - implements_super_class
+    - implements_type_alias_expands_to_type_parameter
+    - implicit_this_reference_in_initializer
+    - import_deferred_library_with_load_function
+    - import_internal_library
+    - import_of_legacy_library_into_null_safe
+    - import_of_non_library
+    - inconsistent_case_expression_types
+    - inconsistent_inheritance
+    - inconsistent_inheritance_getter_and_method
+    - inconsistent_language_version_override
+    - inference_failure_on_collection_literal
+    - inference_failure_on_function_return_type
+    - inference_failure_on_instance_creation
+    - inference_failure_on_uninitialized_variable
+    - inference_failure_on_untyped_parameter
+    - initializer_for_non_existent_field
+    - initializer_for_static_field
+    - initializing_formal_for_non_existent_field
+    - initializing_formal_for_static_field
+    - instance_access_to_static_member
+    - instance_member_access_from_factory
+    - instance_member_access_from_static
+    - instantiate_abstract_class
+    - instantiate_enum
+    - instantiate_type_alias_expands_to_type_parameter
+    - integer_literal_imprecise_as_double
+    - integer_literal_out_of_range
+    - invalid_annotation
+    - invalid_annotation_from_deferred_library
+    - invalid_annotation_target
+    - invalid_assignment
+    - invalid_cast_function
+    - invalid_cast_function_expr
+    - invalid_cast_literal
+    - invalid_cast_literal_list
+    - invalid_cast_literal_map
+    - invalid_cast_literal_set
+    - invalid_cast_method
+    - invalid_cast_new_expr
+    - invalid_constant
+    - invalid_constructor_name
+    - invalid_dependency
+    - invalid_export_of_internal_element
+    - invalid_export_of_internal_element_indirectly
+    - invalid_extension_argument_count
+    - invalid_factory_annotation
+    - invalid_factory_method_decl
+    - invalid_factory_method_impl
+    - invalid_factory_name_not_a_class
+    - invalid_immutable_annotation
+    - invalid_implementation_override
+    - invalid_inline_function_type
+    - invalid_internal_annotation
+    - invalid_language_version_override
+    - invalid_literal_annotation
+    - invalid_modifier_on_constructor
+    - invalid_modifier_on_setter
+    - invalid_non_virtual_annotation
+    - invalid_null_aware_operator
+    - invalid_override
+    - invalid_override_different_default_values_named
+    - invalid_override_different_default_values_positional
+    - invalid_override_of_non_virtual_member
+    - invalid_reference_to_this
+    - invalid_required_named_param
+    - invalid_required_optional_positional_param
+    - invalid_required_positional_param
+    - invalid_return_type_for_catch_error
+    - invalid_sealed_annotation
+    - invalid_super_invocation
+    - invalid_type_argument_in_const_literal
+    - invalid_uri
+    - invalid_use_of_covariant
+    - invalid_use_of_internal_member
+    - invalid_use_of_null_value
+    - invalid_use_of_protected_member
+    - invalid_use_of_visible_for_template_member
+    - invalid_use_of_visible_for_testing_member
+    - invalid_visibility_annotation
+    - invariant_booleans
+    - invocation_of_extension_without_call
+    - invocation_of_non_function
+    - invocation_of_non_function_expression
+    - iterable_contains_unrelated_type
     - join_return_with_assignment
+    - label_in_outer_scope
+    - label_undefined
+    - late_final_field_with_const_constructor
+    - late_final_local_already_assigned
+    - leading_newlines_in_multiline_strings
     - library_names
     - library_prefixes
+    - library_private_types_in_public_api
     - lines_longer_than_80_chars
+    - list_element_type_not_assignable
+    - list_remove_unrelated_type
+    - literal_only_boolean_expressions
+    - main_first_positional_parameter_type
+    - main_has_required_named_parameters
+    - main_has_too_many_required_positional_parameters
+    - main_is_not_function
+    - map_entry_not_in_map
+    - map_key_type_not_assignable
+    - map_value_type_not_assignable
+    - missing_const_in_list_literal
+    - missing_const_in_map_literal
+    - missing_const_in_set_literal
+    - missing_dart_library
+    - missing_default_value_for_parameter
+    - missing_enum_constant_in_switch
+    - missing_js_lib_annotation
+    - missing_required_argument
+    - missing_required_param
+    - missing_return
     - missing_whitespace_between_adjacent_strings
+    - mixin_application_concrete_super_invoked_member_type
+    - mixin_application_no_concrete_super_invoked_member
+    - mixin_application_not_implemented_interface
+    - mixin_class_declares_constructor
+    - mixin_declares_constructor
+    - mixin_inference_inconsistent_matching_classes
+    - mixin_inference_no_matching_class
+    - mixin_inference_no_possible_substitution
+    - mixin_inherits_from_not_object
+    - mixin_instantiate
+    - mixin_of_non_class
+    - mixin_of_type_alias_expands_to_type_parameter
+    - mixin_on_sealed_class
+    - mixin_on_type_alias_expands_to_type_parameter
+    - mixin_super_class_constraint_deferred_class
+    - mixin_super_class_constraint_non_interface
+    - mixin_with_non_class_superclass
+    - mixins_super_class
+    - multiple_redirecting_constructor_invocations
+    - multiple_super_initializers
+    - must_be_immutable
+    - must_call_super
+    - new_with_undefined_constructor
+    - new_with_undefined_constructor_default
+    - no_adjacent_strings_in_list
+    - no_annotation_constructor_arguments
+    - no_combined_super_signature
+    - no_default_cases
+    - no_default_super_constructor
+    - no_duplicate_case_values
+    - no_generative_constructor_in_superclass
+    - no_logic_in_create_state
     - no_runtimeType_toString
+    - non_abstract_class_inherits_abstract_member
+    - non_bool_condition
+    - non_bool_expression
+    - non_bool_negation_expression
+    - non_bool_operand
+    - non_const_call_to_literal_constructor
+    - non_const_map_as_expression_statement
+    - non_constant_annotation_constructor
+    - non_constant_case_expression
+    - non_constant_case_expression_from_deferred_library
+    - non_constant_default_value
+    - non_constant_default_value_from_deferred_library
     - non_constant_identifier_names
+    - non_constant_list_element
+    - non_constant_map_element
+    - non_constant_map_key
+    - non_constant_map_value
+    - non_constant_set_element
+    - non_generative_constructor
+    - non_generative_implicit_constructor
+    - non_sync_factory
+    - non_type_as_type_argument
+    - non_type_in_catch_clause
+    - non_void_return_for_operator
+    - non_void_return_for_setter
+    - not_a_type
+    - not_assigned_potentially_non_nullable_local_variable
+    - not_enough_positional_arguments
+    - not_initialized_non_nullable_instance_field
+    - not_initialized_non_nullable_variable
+    - not_instantiated_bound
+    - not_iterable_spread
+    - not_map_spread
+    - not_null_aware_null_spread
+    - null_aware_before_operator
+    - null_aware_in_condition
+    - null_aware_in_logical_operator
+    - null_check_always_fails
+    - null_check_on_nullable_type_parameter
     - null_closures
+    - nullable_type_in_catch_clause
+    - nullable_type_in_extends_clause
+    - nullable_type_in_implements_clause
+    - nullable_type_in_on_clause
+    - nullable_type_in_with_clause
+    - object_cannot_extend_another_class
     - omit_local_variable_types
+    - on_repeated
     - one_member_abstracts
     - only_throw_errors
+    - optional_parameter_in_operator
     - overridden_fields
+    - override_on_non_overriding_member
     - package_api_docs
+    - package_import_contains_dot_dot
+    - package_names
     - package_prefixed_library_names
     - parameter_assignments
+    - part_of_different_library
+    - part_of_non_part
+    - part_of_unnamed_library
+    - path_does_not_exist
+    - path_pubspec_does_not_exist
     - prefer_adjacent_string_concatenation
     - prefer_asserts_in_initializer_lists
     - prefer_asserts_with_message
-    - prefer_bool_in_asserts (deprecated)
+    - prefer_bool_in_asserts
     - prefer_collection_literals
     - prefer_conditional_assignment
     - prefer_const_constructors
@@ -125,189 +468,150 @@ linter:
     - prefer_is_not_operator
     - prefer_iterable_whereType
     - prefer_mixin
+    - prefer_null_aware_method_calls
     - prefer_null_aware_operators
+    - prefer_relative_imports
     - prefer_single_quotes
     - prefer_spread_collections
     - prefer_typing_uninitialized_variables
+    - prefer_void_to_null
+    - prefix_collides_with_top_level_member
+    - prefix_identifier_not_followed_by_dot
+    - prefix_shadowed_by_local_declaration
+    - private_collision_in_mixin_application
+    - private_optional_parameter
+    - private_setter
     - provide_deprecation_message
     - public_member_api_docs
+    - read_potentially_unassigned_final
+    - receiver_of_type_never
+    - recursive_compile_time_constant
+    - recursive_constructor_redirect
     - recursive_getters
-    - slash_for_doc_comments
-    - sort_child_properties_last
-    - sort_constructors_first
-    - sort_unnamed_constructors_first
-    - super_goes_last (deprecated)
-    - type_annotate_public_apis
-    - type_init_formals
-    - unawaited_futures
-    - unnecessary_await_in_return
-    - unnecessary_brace_in_string_interps
-    - unnecessary_const
-    - unnecessary_final
-    - unnecessary_getters_setters
-    - unnecessary_lambdas
-    - unnecessary_new
-    - unnecessary_null_aware_assignments
-    - unnecessary_null_in_if_null_operators
-    - unnecessary_overrides
-    - unnecessary_parenthesis
-    - unnecessary_string_interpolations
-    - unnecessary_this
-    - use_full_hex_values_for_flutter_colors
-    - use_function_type_syntax_for_parameters
-    - use_rethrow_when_possible
-    - use_setters_to_change_properties
-    - use_string_buffers
-    - use_to_and_as_if_applicable
-    - void_checks
-    - package_names
-    - abstract_super_member_reference
-    - ambiguous_extension_member_access
-    - ambiguous_import
-    - ambiguous_set_or_map_literal_both
-    - ambiguous_set_or_map_literal_either
-    - argument_type_not_assignable
-    - assignment_to_final
-    - assignment_to_final_local
-    - assignment_to_final_no_setter
-    - assignment_to_method
-    - built_in_identifier_as_extension_name
-    - built_in_identifier_as_type
-    - case_block_not_terminated
-    - cast_to_non_type
-    - concrete_class_with_abstract_member
-    - const_constructor_with_non_final_field
-    - const_initialized_with_non_constant_value
-    - const_instance_field
-    - const_not_initialized
-    - const_spread_expected_list_or_set
-    - const_spread_expected_map
-    - const_with_non_const
-    - const_with_non_constant_argument
-    - dead_code
-    - dead_code_catch_following_catch
-    - dead_code_on_catch_subtype
-    - deprecated_member_use
-    - deprecated_member_use_from_same_package
-    - duplicate_constructor
-    - duplicate_definition
-    - duplicate_import
-    - duplicate_named_argument
-    - equal_elements_in_const_set
-    - equal_keys_in_const_map
-    - expression_in_map
-    - extends_non_class
-    - extension_as_expression
-    - extension_conflicting_static_and_instance
-    - extension_declares_abstract_member
-    - extension_declares_constructor
-    - extension_declares_instance_field
-    - extension_declares_member_of_object
-    - extension_override_access_to_static_member
-    - extension_override_argument_not_assignable
-    - extension_override_without_access
-    - extension_override_with_cascade
-    - extra_positional_arguments
-    - extra_positional_arguments_could_be_named
-    - final_not_initialized
-    - final_not_initialized_constructor
-    - for_in_of_invalid_type
-    - implements_non_class
-    - implements_repeated
-    - implicit_this_reference_in_initializer
-    - initializer_for_non_existent_field
-    - initializing_formal_for_non_existent_field
-    - instance_access_to_static_member
-    - instance_member_access_from_factory
-    - instance_member_access_from_static
-    - instantiate_abstract_class
-    - invalid_assignment
-    - invalid_extension_argument_count
-    - invalid_factory_name_not_a_class
-    - invalid_literal_annotation
-    - invalid_override
-    - invalid_reference_to_this
-    - invalid_uri
-    - invalid_use_of_covariant_in_extension
-    - invalid_visibility_annotation
-    - invocation_of_extension_without_call
-    - invocation_of_non_function
-    - invocation_of_non_function_expression
-    - list_element_type_not_assignable
-    - map_entry_not_in_map
-    - map_key_type_not_assignable
-    - map_value_type_not_assignable
-    - missing_enum_constant_in_switch
-    - missing_required_param
-    - missing_return
-    - mixin_of_non_class
-    - mixin_on_sealed_class
-    - mixin_super_class_constraint_non_interface
-    - must_be_immutable
-    - must_call_super
-    - new_with_undefined_constructor_default
-    - non_abstract_class_inherits_abstract_member
-    - non_bool_condition
-    - non_bool_expression
-    - non_bool_negation_expression
-    - non_bool_operand
-    - non_constant_case_expression
-    - non_constant_default_value
-    - non_constant_list_element
-    - non_constant_map_element
-    - non_constant_map_key
-    - non_constant_map_value
-    - non_constant_set_element
-    - non_const_call_to_literal_constructor
-    - non_type_as_type_argument
-    - non_type_in_catch_clause
-    - not_a_type
-    - not_enough_positional_arguments
-    - not_iterable_spread
-    - not_map_spread
-    - no_annotation_constructor_arguments
-    - override_on_non_overriding_member
-    - part_of_non_part
+    - recursive_interface_inheritance
+    - recursive_interface_inheritance_extends
+    - recursive_interface_inheritance_implements
+    - recursive_interface_inheritance_on
+    - recursive_interface_inheritance_with
+    - redirect_generative_to_missing_constructor
+    - redirect_generative_to_non_generative_constructor
+    - redirect_to_abstract_class_constructor
     - redirect_to_invalid_function_type
     - redirect_to_invalid_return_type
+    - redirect_to_missing_constructor
     - redirect_to_non_class
+    - redirect_to_non_const_constructor
+    - redirect_to_type_alias_expands_to_type_parameter
     - referenced_before_declaration
+    - require_trailing_commas
+    - rethrow_outside_catch
+    - return_in_generative_constructor
+    - return_in_generator
+    - return_of_do_not_store
     - return_of_invalid_type
     - return_of_invalid_type_from_closure
     - return_without_value
-    - sdk_version_async_exported_from_core
     - sdk_version_as_expression_in_const_context
+    - sdk_version_async_exported_from_core
     - sdk_version_bool_operator_in_const_context
     - sdk_version_eq_eq_operator_in_const_context
     - sdk_version_extension_methods
+    - sdk_version_gt_gt_gt_operator
     - sdk_version_is_expression_in_const_context
+    - sdk_version_never
     - sdk_version_set_literal
     - sdk_version_ui_as_code
     - sdk_version_ui_as_code_in_const_context
+    - set_element_type_not_assignable
+    - shared_deferred_prefix
+    - sized_box_for_whitespace
+    - slash_for_doc_comments
+    - sort_child_properties_last
+    - sort_constructors_first
+    - sort_pub_dependencies
+    - sort_unnamed_constructors_first
+    - spread_expression_from_deferred_library
     - static_access_to_instance_member
+    - strict_raw_type
+    - subtype_of_deferred_class
+    - subtype_of_disallowed_type
+    - subtype_of_sealed_class
+    - super_goes_last
     - super_in_extension
     - super_in_invalid_context
+    - super_in_redirecting_constructor
+    - super_initializer_in_object
+    - switch_case_completes_normally
+    - switch_expression_not_assignable
+    - test_types_in_equals
+    - throw_in_finally
+    - throw_of_invalid_type
+    - tighten_type_of_initializing_formals
+    - todo
+    - top_level_cycle
+    - type_alias_cannot_reference_itself
+    - type_annotate_public_apis
+    - type_annotation_deferred_class
     - type_argument_not_matching_bounds
+    - type_check_is_not_null
+    - type_check_is_null
+    - type_init_formals
+    - type_parameter_referenced_by_static
+    - type_parameter_supertype_of_its_bound
+    - type_test_with_non_type
     - type_test_with_undefined_name
+    - unawaited_futures
+    - unchecked_use_of_nullable_value
     - undefined_annotation
     - undefined_class
     - undefined_constructor_in_initializer
+    - undefined_enum_constant
     - undefined_extension_getter
     - undefined_extension_method
+    - undefined_extension_operator
     - undefined_extension_setter
     - undefined_function
     - undefined_getter
     - undefined_hidden_name
     - undefined_identifier
+    - undefined_identifier_await
     - undefined_method
     - undefined_named_parameter
     - undefined_operator
     - undefined_prefixed_name
     - undefined_setter
     - undefined_shown_name
-    - undefined_super_method
+    - undefined_super_member
+    - unignorable_ignore
+    - unnecessary_await_in_return
+    - unnecessary_brace_in_string_interps
     - unnecessary_cast
+    - unnecessary_const
+    - unnecessary_final
+    - unnecessary_getters_setters
+    - unnecessary_ignore
+    - unnecessary_lambdas
+    - unnecessary_new
+    - unnecessary_no_such_method
+    - unnecessary_non_null_assertion
+    - unnecessary_null_aware_assignments
+    - unnecessary_null_checks
+    - unnecessary_null_comparison
+    - unnecessary_null_in_if_null_operators
+    - unnecessary_nullable_for_final_variable_declarations
+    - unnecessary_overrides
+    - unnecessary_parenthesis
+    - unnecessary_question_mark
+    - unnecessary_raw_strings
+    - unnecessary_statements
+    - unnecessary_string_escapes
+    - unnecessary_string_interpolations
+    - unnecessary_this
+    - unnecessary_type_check
+    - unqualified_reference_to_non_local_static_member
     - unqualified_reference_to_static_member_of_extended_type
+    - unrelated_type_equality_checks
+    - unsafe_html
     - unused_catch_clause
     - unused_catch_stack
     - unused_element
@@ -318,8 +622,33 @@ linter:
     - unused_shown_name
     - uri_does_not_exist
     - uri_has_not_been_generated
+    - uri_with_interpolation
+    - use_build_context_synchronously
+    - use_full_hex_values_for_flutter_colors
+    - use_function_type_syntax_for_parameters
+    - use_if_null_to_convert_nulls_to_bools
+    - use_is_even_rather_than_modulo
+    - use_key_in_widget_constructors
+    - use_late_for_private_fields_and_variables
+    - use_named_constants
     - use_of_void_result
+    - use_raw_strings
+    - use_rethrow_when_possible
+    - use_setters_to_change_properties
+    - use_string_buffers
+    - use_to_and_as_if_applicable
+    - valid_regexps
     - variable_type_mismatch
+    - void_checks
+    - wrong_explicit_type_parameter_variance_in_superinterface
     - wrong_number_of_parameters_for_operator
     - wrong_number_of_parameters_for_setter
     - wrong_number_of_type_arguments
+    - wrong_number_of_type_arguments_constructor
+    - wrong_number_of_type_arguments_extension
+    - wrong_number_of_type_arguments_method
+    - wrong_type_parameter_variance_in_superinterface
+    - wrong_type_parameter_variance_position
+    - yield_each_in_non_generator
+    - yield_in_non_generator
+    - yield_of_invalid_type
