@@ -12,7 +12,7 @@
 
 #### Enhancements
 
-- None.
+- Support SonarQube 9
 
 #### Bug Fixes
 
