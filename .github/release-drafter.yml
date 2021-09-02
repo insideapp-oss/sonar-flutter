@@ -15,6 +15,7 @@ categories:
       - 'bug'
   - title: '🧰 Maintenance'
     labels:
+      - 'documentation'
       - 'chore'
       - 'infra'
   - title: '🧪 Experimental'
