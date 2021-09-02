@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.sonarsource.parent</groupId>
         <artifactId>parent</artifactId>
-        <version>52</version>
+        <version>59.0.29</version>
     </parent>
     
     <groupId>fr.insideapp.sonarqube</groupId>
     <artifactId>sonar-flutter</artifactId>
-    <version>0.3.2</version>
+    <version>0.4.0</version>
 
     <packaging>pom</packaging>
 
@@ -31,7 +31,7 @@
     <licenses>
         <license>
             <name>GNU LGPL 3</name>
-            <url>http://www.gnu.org/licenses/lgpl.txt</url>
+            <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -58,8 +58,6 @@
 
         <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
 
-        <sonarQubeMinVersion>6.7</sonarQubeMinVersion>
-
         <assertj.version>3.5.2</assertj.version>
         <guava.version>17.0</guava.version>
         <junit.version>4.10</junit.version>
@@ -70,7 +68,7 @@
         <sonar-orchestrator.version>3.22.0.1791</sonar-orchestrator.version>
         <sonarlint.version>4.0.0.2052</sonarlint.version>
         <sslr.version>1.23</sslr.version>
-        <sslr-squid-bridge.version>2.6.1</sslr-squid-bridge.version>
+        <sslr-squid-bridge.version>2.7.1.392</sslr-squid-bridge.version>
         <ant.version>1.6</ant.version>
         <analyzer-commons.version>1.10.2.456</analyzer-commons.version>
         <assertj.version>3.5.2</assertj.version>
