@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    default_labels:
+      - "dependencies"
+      - "skip-changelog"
+    schedule:
+      interval: "daily"
