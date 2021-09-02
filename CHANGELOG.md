@@ -1,3 +1,7 @@
+## Please check the Github releases for newer changelogs!
+
+---
+
 ## 0.3.2
 
 #### Breaking
