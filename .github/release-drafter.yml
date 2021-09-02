@@ -22,24 +22,6 @@ categories:
       - 'experimental'
 exclude-labels:
   - 'skip-changelog'
-autolabeler:
-  - label: 'chore'
-    files:
-      - '*.md'
-    branch:
-      - '/docs{0,1}\/.+/'
-      - '/infra\/.+/'
-  - label: 'bug'
-    branch:
-      - '/fix\/.+/'
-      - '/bugfix\/.+/'
-      - '/hotfix\/.+/'
-    title:
-      - '/fix/i'
-      - '/bug/i'
-  - label: 'enhancement'
-    branch:
-      - '/feature\/.+/'
 change-template: '- (#$NUMBER) $TITLE - (thanks to @$AUTHOR)'
 change-title-escapes: '\<*_&#@'
 version-resolver:

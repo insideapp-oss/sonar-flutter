@@ -3,19 +3,14 @@
 name: Release Drafter
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - develop
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
     branches:
       - develop
 
 jobs:
   update_release_draft:
+    if: github.repository_owner == 'insideapp-oss'
     runs-on: ubuntu-latest
     steps:
       - uses: release-drafter/release-drafter@v5.15.0
