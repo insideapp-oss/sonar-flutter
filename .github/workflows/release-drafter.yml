@@ -1,0 +1,23 @@
+# Automates creation of Release Drafts using Release Drafter
+# More Info: https://github.com/jenkinsci/.github/blob/master/.github/release-drafter.adoc
+name: Release Drafter
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    branches:
+      - develop
+
+jobs:
+  update_release_draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter@v5.15.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
