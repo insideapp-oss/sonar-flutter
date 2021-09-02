@@ -2,9 +2,9 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
-    default_labels:
+    labels:
       - "dependencies"
       - "skip-changelog"
-    target_branch: "develop"
+    target-branch: "develop"
     schedule:
       interval: "daily"
