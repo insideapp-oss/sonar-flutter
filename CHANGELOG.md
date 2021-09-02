@@ -1,23 +1,3 @@
-# SonarQube Plugin for Flutter / Dart
-
-## develop
-
-#### Breaking
-
-- None.
-
-#### Experimental
-
-- None.
-
-#### Enhancements
-
-- Support SonarQube 9
-
-#### Bug Fixes
-
-- None.
-
 ## 0.3.2
 
 #### Breaking

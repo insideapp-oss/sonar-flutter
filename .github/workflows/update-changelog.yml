@@ -1,0 +1,23 @@
+name: Update CHANGELOG.md
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: Update changelog
+        run: |
+          npm install github-release-notes
+          export GREN_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          npm run overrideChangelog
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3.10.1
+        with:
+          commit-message: Update changelog
+          title: Update Changelog
+          body: Update changelog to reflect release changes
+          branch: update-changelog
+          base: master
