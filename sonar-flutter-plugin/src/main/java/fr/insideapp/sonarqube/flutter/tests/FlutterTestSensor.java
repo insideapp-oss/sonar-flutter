@@ -28,7 +28,6 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.squidbridge.api.AnalysisException;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,7 +55,7 @@ public class FlutterTestSensor implements Sensor {
             List<FlutterUnitTestSuite> suites = parser.parse(reportFile);
             suites.forEach(s -> saveSuite(s, sensorContext));
         } catch (IOException e) {
-            throw new AnalysisException("Failed to parse test report", e);
+            throw new IllegalStateException("Failed to parse test report", e);
         }
     }
 

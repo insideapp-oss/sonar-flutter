@@ -29,7 +29,6 @@ import org.buildobjects.process.ProcResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.squidbridge.api.AnalysisException;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -76,7 +75,7 @@ public abstract class AnalyzerExecutable {
      * Run the analyzer executable, using the existing
      * analysis_options.yaml unless the override is configured.
      */
-    public AnalyzerOutput analyze() {
+    public AnalyzerOutput analyze() throws IOException {
         final boolean optionsCreated = configureAnalysisOptionsFile(sensorContext);
         final String command = getCommand();
         final String[] args = getArgs();
@@ -89,11 +88,9 @@ public abstract class AnalyzerExecutable {
                     .run();
 
             LOGGER.info("Command '{}' finished (exit {})", result.getProcString(), result.getExitValue());
-            maybeThrowAnalysisException(result);
+            maybeThrowException(result);
 
             return new AnalyzerOutput(mode, result.getOutputString());
-        } catch (Exception e) {
-            throw new AnalysisException(e);
         } finally {
             if (optionsCreated) {
                 restoreAnalysisOptionsFile(sensorContext);
@@ -101,14 +98,14 @@ public abstract class AnalyzerExecutable {
         }
     }
 
-    private void maybeThrowAnalysisException(ProcResult result) {
+    private void maybeThrowException(ProcResult result) {
         final String errorString = result.getErrorString();
         if (errorString != null && !errorString.isEmpty()) {
-            throw new AnalysisException(String.format("Error while running '%s' (exit %s): %s", result.getProcString(), result.getExitValue(), errorString));
+            throw new IllegalStateException(String.format("Error while running '%s' (exit %s): %s", result.getProcString(), result.getExitValue(), errorString));
         }
     }
 
-    private boolean configureAnalysisOptionsFile(SensorContext sensorContext) {
+    private boolean configureAnalysisOptionsFile(SensorContext sensorContext) throws IOException {
         final boolean exists = existsAnalysisOptionsFile(sensorContext);
         if (exists && !shouldOverrideAnalysisOptionsFile(sensorContext)) {
             LOGGER.info("Using existing {} since override is disabled", ANALYSIS_OPTIONS_FILENAME);
@@ -138,28 +135,20 @@ public abstract class AnalyzerExecutable {
         }
     }
 
-    private void createAnalysisOptionsFile(SensorContext sensorContext) {
+    private void createAnalysisOptionsFile(SensorContext sensorContext) throws IOException {
         File analysisOptionsFile = sensorContext.fileSystem().resolvePath(ANALYSIS_OPTIONS_FILENAME);
         URL inputUrl = DartAnalyzerSensor.class.getResource(ANALYSIS_OPTIONS_FILE);
-        try {
-            Resources.asByteSource(inputUrl).copyTo(com.google.common.io.Files.asByteSink(analysisOptionsFile));
-        } catch (IOException e) {
-            throw new AnalysisException(e);
-        }
+        Resources.asByteSource(inputUrl).copyTo(com.google.common.io.Files.asByteSink(analysisOptionsFile));
     }
 
-    private void restoreAnalysisOptionsFile(SensorContext sensorContext) {
+    private void restoreAnalysisOptionsFile(SensorContext sensorContext) throws IOException {
         File analysisOptionsFile = sensorContext.fileSystem().resolvePath(ANALYSIS_OPTIONS_FILENAME);
         File backupAnalysisOptionsFile = sensorContext.fileSystem().resolvePath(ANALYSIS_OPTIONS_FILENAME + ".sonar");
         if (backupAnalysisOptionsFile.exists() && backupAnalysisOptionsFile.renameTo(analysisOptionsFile)) {
             LOGGER.info("Restored original {} file", ANALYSIS_OPTIONS_FILENAME);
         } else {
-            try {
-                Files.delete(analysisOptionsFile.toPath());
-                LOGGER.debug("Cleaned up temporary {} file", ANALYSIS_OPTIONS_FILENAME);
-            } catch (IOException e) {
-                throw new AnalysisException(e);
-            }
+            Files.delete(analysisOptionsFile.toPath());
+            LOGGER.debug("Cleaned up temporary {} file", ANALYSIS_OPTIONS_FILENAME);
         }
     }
 
@@ -192,7 +181,7 @@ public abstract class AnalyzerExecutable {
             case FLUTTER:
                 return new FlutterAnalyzerExecutable(sensorContext, outputMode);
             default:
-                throw new AnalysisException("Could not determine a valid analyzer executable");
+                throw new IllegalArgumentException("Could not determine a valid analyzer executable");
         }
     }
 

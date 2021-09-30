@@ -22,7 +22,6 @@ package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.executable;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerOutput;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerSensor;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.squidbridge.api.AnalysisException;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,22 +45,17 @@ class ManualAnalyzerExecutable extends AnalyzerExecutable {
     }
 
     @Override
-    public AnalyzerOutput analyze() {
+    public AnalyzerOutput analyze() throws IOException {
         final String path = sensorContext.config().get(DartAnalyzerSensor.ANALYZER_REPORT_PATH)
-                .orElseThrow(() -> new AnalysisException("MANUAL analyzer mode is configured but not report path is set!"));
+                .orElseThrow(() -> new IllegalStateException("MANUAL analyzer mode is configured but not report path is set!"));
         LOGGER.info("Analysing report from {}", path);
 
         final File report = sensorContext.fileSystem().resolvePath(path);
         if (report != null && report.exists() && report.canRead()) {
-            final String output;
-            try {
-                output = new String(Files.readAllBytes(report.toPath()), StandardCharsets.UTF_8);
-            } catch (IOException e) {
-                throw new AnalysisException(e);
-            }
+            final String output = new String(Files.readAllBytes(report.toPath()), StandardCharsets.UTF_8);
             return new AnalyzerOutput(mode, output);
         } else {
-            throw new AnalysisException(String.format("File '%s' does not exist or could not be read!", path));
+            throw new IllegalStateException(String.format("File '%s' does not exist or could not be read!", path));
         }
     }
 }

@@ -22,7 +22,6 @@ package fr.insideapp.sonarqube.dart.lang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.squidbridge.api.AnalysisException;
 import org.yaml.snakeyaml.Yaml;
 
 import javax.annotation.Nonnull;
@@ -42,24 +41,19 @@ public class PubSpecParser {
 
     @Nonnull
     @ParametersAreNonnullByDefault
-    public static PubSpec parse(SensorContext sensorContext) {
+    public static PubSpec parse(SensorContext sensorContext) throws IOException {
         final File pubSpec = sensorContext.fileSystem().resolvePath(PubSpec.NAME);
         final Path pubSpecPath = pubSpec.toPath();
 
         LOGGER.debug("Attempting to parse {}", pubSpecPath);
 
         if (!Files.exists(pubSpecPath)) {
-            throw new AnalysisException(pubSpecPath + " does not exist");
+            throw new IllegalArgumentException(pubSpecPath + " does not exist");
         }
         if (!Files.isReadable(pubSpecPath)) {
-            throw new AnalysisException(pubSpecPath + " can not be read");
+            throw new IllegalArgumentException(pubSpecPath + " can not be read");
         }
-        final String pubSpecContent;
-        try {
-            pubSpecContent = new String(Files.readAllBytes(pubSpecPath), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new AnalysisException(pubSpecPath + " can not be read", e);
-        }
+        final String pubSpecContent = new String(Files.readAllBytes(pubSpecPath), StandardCharsets.UTF_8);
 
         Yaml yaml = new Yaml();
         Map<String, Object> data = yaml.load(pubSpecContent);
