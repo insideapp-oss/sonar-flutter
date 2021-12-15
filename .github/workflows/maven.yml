@@ -32,7 +32,7 @@ jobs:
         name: Get maven project version
         uses: jactions/maven-version@v1.0.0
       - name: Upload plugin artifact
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v2.3.1
         with:
           name: plugin
           path: sonar-flutter-plugin/target/sonar-flutter-plugin-${{ steps.get-version.outputs.version }}.jar
