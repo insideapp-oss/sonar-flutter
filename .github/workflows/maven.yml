@@ -30,7 +30,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }} #required
       - id: get-version
         name: Get maven project version
-        uses: jactions/maven-version@v1.0.0
+        uses: jactions/maven-version@v1.2.0
       - name: Upload plugin artifact
         uses: actions/upload-artifact@v3.1.0
         with:
