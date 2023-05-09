@@ -23,7 +23,6 @@ import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.DartSensor;
 import fr.insideapp.sonarqube.dart.lang.PubSpecSensor;
 import fr.insideapp.sonarqube.dart.lang.issues.DartProfile;
-import fr.insideapp.sonarqube.dart.lang.issues.DartProfilePedantic190;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.executable.AnalyzerExecutable;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerOutput;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
@@ -50,7 +49,7 @@ public class FlutterPlugin implements Plugin {
     public void define(Context context) {
 
         // Language support
-        context.addExtensions(Dart.class, DartSensor.class, DartProfile.class, DartProfilePedantic190.class);
+        context.addExtensions(Dart.class, DartSensor.class, DartProfile.class);
 
         // Add pubspec support
         context.addExtension(PubSpecSensor.class);

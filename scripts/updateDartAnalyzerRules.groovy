@@ -243,9 +243,9 @@ def writeAnalysisOptions(rls, file) {
 
 def rulesUrl = "https://dart-lang.github.io/linter/lints/"
 def diagnosticRulesUrl = "https://dart.dev/tools/diagnostic-messages"
-File rulesJson = new File('../dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/rules.json')
-File profileXml = new File('../dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/profile-dartanalyzer.xml')
-File analysisOptionsYaml = new File('../dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/analysis_options.yaml')
+File rulesJson = new File('dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/rules.json')
+File profileXml = new File('dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/profile-dartanalyzer.xml')
+File analysisOptionsYaml = new File('dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/analysis_options.yaml')
 def rules = parseRules(rulesUrl)
 rules.addAll(parseRulesFromDiagnostic(diagnosticRulesUrl))
 writeRules(rules, rulesJson)

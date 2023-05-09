@@ -32,13 +32,14 @@ public class DartAnalyzerLegacyReportParser implements DartAnalyzerReportParser 
         List<DartAnalyzerReportIssue> issues = new ArrayList<>();
 
         String[] lines = input.split(System.getProperty("line.separator"));
-        Pattern pattern = Pattern.compile("(hint|lint|info|warning|error)(.*)([-•])(.*)([-•])(.*):(.*):(.*)([-•])(.*)");
+        //Pattern pattern = Pattern.compile("(hint|lint|info|warning|error)(.*)([-•])(.*)([-•])(.*):(.*):(.*)([-•])(.*)");
+        Pattern pattern = Pattern.compile("(hint|lint|info|warning|error)(.*)([-•])(.*):(.*):(.*)([-•])(.*)([-•])(.*)");
         for (String line : lines) {
             Matcher matcher = pattern.matcher(line);
             while (matcher.find()) {
-                String filePath = matcher.group(6).trim();
-                int lineNum = Integer.parseInt(matcher.group(7).trim());
-                String message = matcher.group(4).trim();
+                String filePath = matcher.group(4).trim();
+                int lineNum = Integer.parseInt(matcher.group(5).trim());
+                String message = matcher.group(8).trim();
                 String ruleId = matcher.group(10).trim();
 
                 issues.add(new DartAnalyzerReportIssue(ruleId, message, filePath, lineNum));

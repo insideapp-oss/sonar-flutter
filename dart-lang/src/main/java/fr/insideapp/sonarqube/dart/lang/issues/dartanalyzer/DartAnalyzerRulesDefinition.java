@@ -57,11 +57,11 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
             if(slRules != null){
                 for (Object obj : slRules) {
                     JSONObject slRule = (JSONObject) obj;
+                    System.out.println(slRule.toJSONString());
                     repository.createRule((String) slRule.get("key"))
                             .setName((String) slRule.get("name"))
                             .setSeverity((String) slRule.get("severity"))
                             .setType(RuleType.valueOf((String) slRule.get("type")))
-                            .setStatus(RuleStatus.valueOf((String) slRule.get("status")))
                             .setHtmlDescription((String) slRule.get("description"));
                 }
             }

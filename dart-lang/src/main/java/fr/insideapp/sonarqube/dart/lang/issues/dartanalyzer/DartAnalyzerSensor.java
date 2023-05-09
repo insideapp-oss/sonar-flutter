@@ -35,6 +35,7 @@ import org.sonar.api.rule.RuleKey;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -63,18 +64,23 @@ public class DartAnalyzerSensor implements Sensor {
     @Override
     @ParametersAreNonnullByDefault
     public void execute(SensorContext sensorContext) {
-        final PubSpec pubSpec = PubSpecParser.parse(sensorContext);
+        try {
+            final PubSpec pubSpec = PubSpecParser.parse(sensorContext);
+            final AnalyzerOutput output = AnalyzerExecutable.create(sensorContext, pubSpec).analyze();
 
-        final AnalyzerOutput output = AnalyzerExecutable.create(sensorContext, pubSpec).analyze();
+            final DartAnalyzerReportParser parser = output.getMode().equals(AnalyzerOutput.Mode.MACHINE)
+                    ? new DartAnalyzerMachineReportParser() : new DartAnalyzerLegacyReportParser();
 
-        final DartAnalyzerReportParser parser = output.getMode().equals(AnalyzerOutput.Mode.MACHINE)
-                ? new DartAnalyzerMachineReportParser() : new DartAnalyzerLegacyReportParser();
+            final List<DartAnalyzerReportIssue> issues = parser.parse(output.getContent());
 
-        final List<DartAnalyzerReportIssue> issues = parser.parse(output.getContent());
+            LOGGER.info("Recording {} issues", issues.size());
 
-        LOGGER.info("Recording {} issues", issues.size());
+            recordIssues(sensorContext, issues);
+        } catch (IOException e) {
+            LOGGER.error("Analysis failed", e);
+        }
 
-        recordIssues(sensorContext, issues);
+
     }
 
     private void recordIssues(SensorContext sensorContext, List<DartAnalyzerReportIssue> issues) {

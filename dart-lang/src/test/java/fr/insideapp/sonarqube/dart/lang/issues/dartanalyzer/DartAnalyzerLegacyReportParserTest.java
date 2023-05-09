@@ -39,8 +39,8 @@ public class DartAnalyzerLegacyReportParserTest {
 	@Test
 	public void parseWithCircles() {
 
-		String input = "  lint • Close instances of `dart.core.Sink`. • lib/main.dart:63:9 • close_sinks\n"
-				+ "  hint • The value of the local variable '_controller' isn't used. • lib/main.dart:63:9 • unused_local_variable";
+		String input = "  lint • lib/main.dart:63:9 • Close instances of `dart.core.Sink`. • close_sinks\n"
+				+ "  hint • lib/main.dart:63:9 • The value of the local variable '_controller' isn't used. • unused_local_variable\n";
 
 		List<DartAnalyzerReportIssue> issues = parser.parse(input);
 		assertThat(issues.size()).isEqualTo(2);
@@ -60,18 +60,18 @@ public class DartAnalyzerLegacyReportParserTest {
 	@Test
     public void parseWithTraces() {
     	String input = "Analyzing D:\\workspace\\samples-master\\platform_design\\lib\\main.dart, D:\\workspace\\samples-master\\platform_design\\lib\\utils.dart, D:\\workspace\\samples-master\\platform_design\\lib\\songs_tab.dart, D:\\workspace\\samples-master\\platform_design\\lib\\news_tab.dart, D:\\workspace\\samples-master\\platform_design\\lib\\song_detail_tab.dart...\r\n" +
-    			"  error - Target of URI doesn't exist: 'package:flutter/material.dart'. - lib/main.dart:1:8 - uri_does_not_exist\r\n" +
-    			"  hint - The value of the local variable 'a' isn't used. - lib/main.dart:7:7 - unused_local_variable\r\n" +
-    			"  hint - The value of the local variable 'b' isn't used. - lib/main.dart:8:7 - unused_local_variable\r\n" +
-    			"  hint - The value of the local variable 'c' isn't used. - lib/main.dart:9:7 - unused_local_variable\r\n" +
-    			"  hint - The value of the local variable 'd' isn't used. - lib/main.dart:10:7 - unused_local_variable\r\n" +
-    			"  hint - The value of the local variable 'e' isn't used. - lib/main.dart:11:7 - unused_local_variable\r\n" +
-    			"  hint - The value of the local variable 'f' isn't used. - lib/main.dart:12:7 - unused_local_variable\r\n" +
-    			"  hint - The value of the local variable 'g' isn't used. - lib/main.dart:13:7 - unused_local_variable\r\n" +
-    			"  hint - The value of the local variable 'h' isn't used. - lib/main.dart:14:7 - unused_local_variable\r\n" +
-    			"  hint - The value of the local variable 'i' isn't used. - lib/main.dart:15:7 - unused_local_variable\r\n" +
-    			"  hint - The value of the local variable 'j' isn't used. - lib/main.dart:16:7 - unused_local_variable\r\n" +
-    			"  hint - The value of the local variable 'k' isn't used. - lib/main.dart:17:7 - unused_local_variable\r\n" +
+    			"  error - lib/main.dart:1:8 - Target of URI doesn't exist: 'package:flutter/material.dart'. - uri_does_not_exist\r\n" +
+    			"  hint - lib/main.dart:7:7 - The value of the local variable 'a' isn't used. - unused_local_variable\r\n" +
+    			"  hint - lib/main.dart:8:7 - The value of the local variable 'b' isn't used. - unused_local_variable\r\n" +
+    			"  hint - lib/main.dart:9:7 - The value of the local variable 'c' isn't used. - unused_local_variable\r\n" +
+				"  hint - lib/main.dart:10:7 - The value of the local variable 'd' isn't used. - unused_local_variable\r\n" +
+				"  hint - lib/main.dart:11:7 - The value of the local variable 'e' isn't used. - unused_local_variable\r\n" +
+				"  hint - lib/main.dart:12:7 - The value of the local variable 'f' isn't used. - unused_local_variable\r\n" +
+				"  hint - lib/main.dart:13:7 - The value of the local variable 'g' isn't used. - unused_local_variable\r\n" +
+				"  hint - lib/main.dart:14:7 - The value of the local variable 'h' isn't used. - unused_local_variable\r\n" +
+				"  hint - lib/main.dart:15:7 - The value of the local variable 'i' isn't used. - unused_local_variable\r\n" +
+				"  hint - lib/main.dart:16:7 - The value of the local variable 'j' isn't used. - unused_local_variable\r\n" +
+				"  hint - lib/main.dart:17:7 - The value of the local variable 'k' isn't used. - unused_local_variable\r\n" +
     			"1 errors and 11 hints found.";
 
     	List<DartAnalyzerReportIssue> issues = parser.parse(input);
@@ -92,10 +92,10 @@ public class DartAnalyzerLegacyReportParserTest {
 
 	@Test
 	public void parseFlutterReport() {
-		String input = "   info • The value of the local variable 'chocolate' isn't used • lib/api/icecream/icecream_api.dart:110:29 • unused_local_variable\n" +
-				"   info • 'nothing' is deprecated and shouldn't be used. Do not use this anymore, please use [Nothing] instead. • lib/src/path/to/very_cool_widget.dart:32:59 • deprecated_member_use_from_same_package\n" +
-				"   info • The parameter 'foo' is required • lib/src/path/to/this_file.dart:9:5 • missing_required_param\n" +
-				"   info • Unnecessary await keyword in return • lib/path/to/other/file.dart:37:27 • unnecessary_await_in_return";
+		String input = "   info • lib/api/icecream/icecream_api.dart:110:29 • The value of the local variable 'chocolate' isn't used • unused_local_variable\n" +
+				"   info • lib/src/path/to/very_cool_widget.dart:32:59 • 'nothing' is deprecated and shouldn't be used. Do not use this anymore, please use [Nothing] instead. • deprecated_member_use_from_same_package\n" +
+				"   info • lib/src/path/to/this_file.dart:9:5 • The parameter 'foo' is required • missing_required_param\n" +
+				"   info • lib/path/to/other/file.dart:37:27 • Unnecessary await keyword in return • unnecessary_await_in_return";
 
 		List<DartAnalyzerReportIssue> issues = parser.parse(input);
 		assertThat(issues).hasSize(4);
