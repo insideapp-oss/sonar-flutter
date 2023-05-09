@@ -19,8 +19,30 @@
  */
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
-import java.util.List;
+public class AnalyzerOutput {
 
-public interface DartAnalyzerReportParser {
-    List<DartAnalyzerReportIssue> parse(String input);
+    public enum Mode {
+        DETECT,
+        MACHINE,
+        LEGACY;
+
+        public static final Mode defaultMode = DETECT;
+    }
+
+    private final Mode mode;
+
+    private final String content;
+
+    public AnalyzerOutput(Mode mode, String content) {
+        this.mode = mode;
+        this.content = content;
+    }
+
+    public Mode getMode() {
+        return mode;
+    }
+
+    public String getContent() {
+        return content;
+    }
 }

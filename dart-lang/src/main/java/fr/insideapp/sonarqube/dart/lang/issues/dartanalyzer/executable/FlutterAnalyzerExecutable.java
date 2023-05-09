@@ -17,10 +17,26 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
+package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.executable;
 
-import java.util.List;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerOutput;
+import org.sonar.api.batch.sensor.SensorContext;
 
-public interface DartAnalyzerReportParser {
-    List<DartAnalyzerReportIssue> parse(String input);
+class FlutterAnalyzerExecutable extends AnalyzerExecutable {
+
+    protected FlutterAnalyzerExecutable(SensorContext sensorContext, AnalyzerOutput.Mode mode) {
+        super(sensorContext, mode);
+    }
+
+    @Override
+    public String getCommand() {
+        return System.getProperty("os.name").toUpperCase().contains("WINDOWS")
+                ? "flutter.bat"
+                : "flutter";
+    }
+
+    @Override
+    public String[] getArgs() {
+        return new String[]{"analyze"};
+    }
 }

@@ -26,6 +26,7 @@ import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.SonarRuntime;
+import org.sonar.api.rule.RuleStatus;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.squidbridge.rules.SqaleXmlLoader;
@@ -33,8 +34,7 @@ import org.sonar.squidbridge.rules.SqaleXmlLoader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.charset.Charset;
-
+import java.nio.charset.StandardCharsets;
 
 public class DartAnalyzerRulesDefinition implements RulesDefinition {
     private static final Logger LOGGER = LoggerFactory.getLogger(DartAnalyzerRulesDefinition.class);
@@ -52,7 +52,7 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
     public void define(Context context) {
         NewRepository repository = context.createRepository(REPOSITORY_KEY, Dart.KEY).setName(REPOSITORY_NAME);
 
-        try(Reader reader = new InputStreamReader(getClass().getResourceAsStream(RULES_FILE), Charset.forName("UTF-8"))){
+        try(Reader reader = new InputStreamReader(getClass().getResourceAsStream(RULES_FILE), StandardCharsets.UTF_8)) {
             JSONArray slRules = (JSONArray) JSONValue.parse(reader);
             if(slRules != null){
                 for (Object obj : slRules) {
@@ -61,6 +61,7 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
                             .setName((String) slRule.get("name"))
                             .setSeverity((String) slRule.get("severity"))
                             .setType(RuleType.valueOf((String) slRule.get("type")))
+                            .setStatus(RuleStatus.valueOf((String) slRule.get("status")))
                             .setHtmlDescription((String) slRule.get("description"));
                 }
             }

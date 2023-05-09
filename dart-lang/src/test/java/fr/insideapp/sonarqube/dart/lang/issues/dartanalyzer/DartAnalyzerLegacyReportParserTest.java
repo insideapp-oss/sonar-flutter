@@ -25,15 +25,15 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DartAnalyzerReportParserTest {
+public class DartAnalyzerLegacyReportParserTest {
 
 	private static final String FILE_PATH = "lib/main.dart";
 	private static final String RULE_ID_UNUSED_LOCAL_VARIABLE = "unused_local_variable";
-	
-	private DartAnalyzerReportParser parser;
 
-	public DartAnalyzerReportParserTest() {
-		parser = new DartAnalyzerReportParser();
+	private final DartAnalyzerReportParser parser;
+
+	public DartAnalyzerLegacyReportParserTest() {
+		parser = new DartAnalyzerLegacyReportParser();
 	}
 
 	@Test
@@ -44,12 +44,12 @@ public class DartAnalyzerReportParserTest {
 
 		List<DartAnalyzerReportIssue> issues = parser.parse(input);
 		assertThat(issues.size()).isEqualTo(2);
-		
+
 		assertFilePath(issues.get(0), FILE_PATH);
 		assertLineNumber(issues.get(0), 63);
 		assertRuleId(issues.get(0), "close_sinks");
 		assertMessage(issues.get(0), "Close instances of `dart.core.Sink`.");
-	
+
 		assertFilePath(issues.get(1), FILE_PATH);
 		assertLineNumber(issues.get(1), 63);
 		assertRuleId(issues.get(1), RULE_ID_UNUSED_LOCAL_VARIABLE);
@@ -59,8 +59,8 @@ public class DartAnalyzerReportParserTest {
 
 	@Test
     public void parseWithTraces() {
-    	String input = "Analyzing D:\\workspace\\samples-master\\platform_design\\lib\\main.dart, D:\\workspace\\samples-master\\platform_design\\lib\\utils.dart, D:\\workspace\\samples-master\\platform_design\\lib\\songs_tab.dart, D:\\workspace\\samples-master\\platform_design\\lib\\news_tab.dart, D:\\workspace\\samples-master\\platform_design\\lib\\song_detail_tab.dart...\r\n" + 
-    			"  error - Target of URI doesn't exist: 'package:flutter/material.dart'. - lib/main.dart:1:8 - uri_does_not_exist\r\n" + 
+    	String input = "Analyzing D:\\workspace\\samples-master\\platform_design\\lib\\main.dart, D:\\workspace\\samples-master\\platform_design\\lib\\utils.dart, D:\\workspace\\samples-master\\platform_design\\lib\\songs_tab.dart, D:\\workspace\\samples-master\\platform_design\\lib\\news_tab.dart, D:\\workspace\\samples-master\\platform_design\\lib\\song_detail_tab.dart...\r\n" +
+    			"  error - Target of URI doesn't exist: 'package:flutter/material.dart'. - lib/main.dart:1:8 - uri_does_not_exist\r\n" +
     			"  hint - The value of the local variable 'a' isn't used. - lib/main.dart:7:7 - unused_local_variable\r\n" +
     			"  hint - The value of the local variable 'b' isn't used. - lib/main.dart:8:7 - unused_local_variable\r\n" +
     			"  hint - The value of the local variable 'c' isn't used. - lib/main.dart:9:7 - unused_local_variable\r\n" +
@@ -73,18 +73,18 @@ public class DartAnalyzerReportParserTest {
     			"  hint - The value of the local variable 'j' isn't used. - lib/main.dart:16:7 - unused_local_variable\r\n" +
     			"  hint - The value of the local variable 'k' isn't used. - lib/main.dart:17:7 - unused_local_variable\r\n" +
     			"1 errors and 11 hints found.";
-    	
+
     	List<DartAnalyzerReportIssue> issues = parser.parse(input);
 
-    	assertThat(issues.size()).isEqualTo(12);   
-    	
-    	assertFilePath(issues.get(0), FILE_PATH); 
+    	assertThat(issues.size()).isEqualTo(12);
+
+    	assertFilePath(issues.get(0), FILE_PATH);
     	assertLineNumber(issues.get(0), 1);
     	assertRuleId(issues.get(0), "uri_does_not_exist");
     	assertMessage(issues.get(0), "Target of URI doesn't exist: 'package:flutter/material.dart'.");
-    	
-    	
-    	assertFilePath(issues.get(10), FILE_PATH); 
+
+
+    	assertFilePath(issues.get(10), FILE_PATH);
     	assertLineNumber(issues.get(10), 16);
     	assertRuleId(issues.get(10), RULE_ID_UNUSED_LOCAL_VARIABLE);
     	assertMessage(issues.get(10), "The value of the local variable 'j' isn't used.");
@@ -110,15 +110,15 @@ public class DartAnalyzerReportParserTest {
 	private void assertFilePath(DartAnalyzerReportIssue issue, String expectedPath) {
 		assertThat(issue.getFilePath()).isEqualTo(expectedPath);
 	}
-	
+
 	private void assertLineNumber(DartAnalyzerReportIssue issue, Integer expectedLine) {
 		assertThat(issue.getLineNumber()).isEqualTo(expectedLine);
 	}
-	
+
 	private void assertRuleId(DartAnalyzerReportIssue issue, String expectedRuleId) {
 		assertThat(issue.getRuleId()).isEqualTo(expectedRuleId);
 	}
-	
+
 	private void assertMessage(DartAnalyzerReportIssue issue, String expectedMessage) {
 		assertThat(issue.getMessage()).isEqualTo(expectedMessage);
 	}

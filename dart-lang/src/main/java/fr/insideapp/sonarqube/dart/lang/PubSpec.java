@@ -17,10 +17,26 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
+package fr.insideapp.sonarqube.dart.lang;
 
-import java.util.List;
+public class PubSpec {
 
-public interface DartAnalyzerReportParser {
-    List<DartAnalyzerReportIssue> parse(String input);
+    public static final String NAME = "pubspec.yaml";
+
+    private final boolean flutter;
+
+    private final String version;
+
+    PubSpec(boolean flutter, String version) {
+        this.flutter = flutter;
+        this.version = version;
+    }
+
+    public boolean isFlutter() {
+        return flutter;
+    }
+
+    public String getProjectVersion() {
+        return version;
+    }
 }

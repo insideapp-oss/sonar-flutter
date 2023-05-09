@@ -17,13 +17,29 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.executable;
 
-package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerOutput;
+import org.sonar.api.batch.sensor.SensorContext;
 
-public enum AnalyzerMode {
-    flutter,
-    dart,
-    legacy;
+class DartAnalyzerExecutable extends AnalyzerExecutable {
 
-    public static final AnalyzerMode defaultMode = flutter;
+    protected DartAnalyzerExecutable(SensorContext sensorContext, AnalyzerOutput.Mode mode) {
+        super(sensorContext, mode);
+    }
+
+    @Override
+    public String getCommand() {
+        return System.getProperty("os.name").toUpperCase().contains("WINDOWS")
+                ? "dart.bat"
+                : "dart";
+    }
+
+    @Override
+    public String[] getArgs() {
+        if (mode.equals(AnalyzerOutput.Mode.MACHINE)) {
+            return new String[]{"analyze", "--format=machine"};
+        }
+        return new String[]{"analyze"};
+    }
 }

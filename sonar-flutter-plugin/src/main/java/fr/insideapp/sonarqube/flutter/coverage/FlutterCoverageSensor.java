@@ -53,7 +53,7 @@ public class FlutterCoverageSensor implements Sensor {
     public void execute(SensorContext context) {
 
         List<File> lcovFiles = new ArrayList<>();
-        lcovFiles.add(getIOFile(context.fileSystem().baseDir(), reportPath(context)));
+        lcovFiles.add(getIOFile(context, reportPath(context)));
         saveCoverageFromLcovFiles(context, lcovFiles);
     }
 
@@ -108,13 +108,10 @@ public class FlutterCoverageSensor implements Sensor {
      * If path is not absolute, returns a File with module base directory as parent path.
      */
     @CheckForNull
-    private static File getIOFile(File baseDir, String path) {
-        File file = new File(path);
-        if (!file.isAbsolute()) {
-            file = new File(baseDir, path);
-        }
-        if (!file.isFile()) {
-            LOGGER.warn("No coverage information will be saved because LCOV file cannot be found.");
+    private static File getIOFile(SensorContext context, String path) {
+        File file = context.fileSystem().resolvePath(path);
+        if (!file.isFile() || !file.exists() || !file.canRead()) {
+            LOGGER.warn("No coverage information will be saved because LCOV file cannot be found or read.");
             LOGGER.warn("Provided LCOV file path: {}. Seek file with path: {}", path, file.getAbsolutePath());
             return null;
         }

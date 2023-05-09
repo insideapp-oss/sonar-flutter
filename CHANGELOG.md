@@ -2,6 +2,59 @@
 
 ---
 
+#### Breaking
+
+- Removed the following rules. If you use any of these rules in custom quality profiles, please remove them from the profile before the update!
+  - `super_goes_last (deprecated)` -> replaced by `super_goes_last`
+  - `invalid_use_of_covariant_in_extension` -> replaced by `invalid_use_of_covariant`
+  - `extension_declares_abstract_member`
+  - `extension_declares_constructor`
+  - `extension_declares_instance_field`
+  - `undefined_super_method` -> replaced by `undefined_super_member`
+  - `avoid_web_libraries_in_flutter (experimental)` -> replaced by `avoid_web_libraries_in_flutter`
+  - `prefer_bool_in_asserts (deprecated)` -> replaced by `prefer_bool_in_asserts`
+  - `invariant_booleans (experimental)` -> replaced by `invariant_booleans`
+- Removed `dartanalyzer` implementation that scans each file individual, this may affect projects running on a (pretty) old Dart SDK.
+  The replacement runs legacy `dartanalyzer .` instead which is much faster.
+- Renamed `sonar.flutter.analyzer.mode` to `sonar.dart.analyzer.mode` and reworked implementation.
+  - Available options `DETECT|DART|FLUTTER|MANUAL|DARTANALYZER`
+  - Defaults to automatic detection by parsing the `pubspec.yaml`.
+  - Uses `flutter analyze` when `environment.flutter` is configured in `pubspec.yaml`.
+  - Uses `dart analyze` when `environment.flutter` is NOT configured in `pubspec.yaml`.
+  - Allows to be configured for legacy `dartanalyzer` if required (`DARTANALYZER`)
+  - Allows to be configured for pre-existing analysis reports (`MANUAL`)
+- Renamed `sonar.dart.analysis.useExistingOptions` to `sonar.dart.analyzer.options.override`, now defaults to `true`
+- Renamed `sonar.dart.analysis.reportPath` to `sonar.dart.analyzer.report.path` - this is only evaluated when `sonar.dart.analyzer.mode`is set to `MANUAL`
+- Added `sonar.dart.analyzer.report.mode` option
+  - Available options `DETECT|MACHINE|LEGACY`
+  - Defaults to automatic detection by parsing the Dart SDK version and defaults to `--format=machine` for Dart when SDK >= 2.12
+  - Can be set to legacy mode when using pre-existing analysis report or an older Dart SDK
+
+#### Experimental
+
+- None.
+
+#### Enhancements
+
+- Add a `pubspec.yaml` sensor which adds the file to SonarQube and allow showing lints for this file
+- Add support for multi-module projects (`sonar.modules=mylib,mylib_generator,example`)
+- Added missing dart keywords and corrected some
+  - `try`
+  - `hide`
+  - `show`
+  - `late`
+  - `of`
+  - `continue`
+  - `covariant`
+  - `out`
+  - `do`
+  - `dynamic`
+  - `native`
+
+#### Bug Fixes
+
+- None.
+
 ## 0.3.2
 
 #### Breaking
