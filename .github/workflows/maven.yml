@@ -30,15 +30,15 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Analyze
-          env:
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: |
-            mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-            -Dsonar.login=$SONAR_TOKEN \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.organization=insideapp-oss \
-            -Dsonar.projectKey=insideapp-oss_sonar-flutter
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.login=$SONAR_TOKEN \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.organization=insideapp-oss \
+          -Dsonar.projectKey=insideapp-oss_sonar-flutter
 
       - id: get-version
         name: Get maven project version
