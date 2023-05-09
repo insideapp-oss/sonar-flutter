@@ -42,10 +42,6 @@ def parseRules(url) {
 
         switch (tag.name()) {
             case 'STRONG':
-                if (currentKey == 'Flutter') {
-                    currentKey = ''
-                    started = true
-                }
                 if (currentKey != '' && started) {
                     def rule = new Rule(
                             currentKey,
@@ -61,6 +57,8 @@ def parseRules(url) {
                 break
             case 'H2':
                 currentCategory = tag.text()
+                currentKey = ''
+                started = true
                 break
             case 'P':
                 currentDescription = tag.text()
@@ -146,7 +144,7 @@ def updater = new RuleUpdater('dart-lang/src/main/resources/dartanalyzer/rules.j
     def rules = parseRules('https://dart-lang.github.io/linter/lints/')
     rules.addAll(parseRulesFromDiagnostic('https://dart.dev/tools/diagnostic-messages'))
 
-    writeAnalysisOptions(rules, new File('dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/analysis_options.yaml'))
+    writeAnalysisOptions(rules, new File('dart-lang/src/main/resources/dartanalyzer/analysis_options.yaml'))
 
     return rules
 })

@@ -69,7 +69,7 @@
         "severity": "MINOR",
         "description": "The analyzer produces this diagnostic when a class declares more than one\nunnamed constructor or when it declares more than one constructor with the\nsame name.\n @see https://dart.dev/tools/diagnostic-messages#duplicate_constructor",
         "type": "BUG",
-        "debt":  "5min"
+        "debt": "5min"
     },
     {
         "key": "duplicate_field_name",
