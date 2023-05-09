@@ -1,5 +1,11 @@
 ![CI](https://github.com/insideapp-oss/sonar-flutter/workflows/CI/badge.svg)
-![Coverage](https://codecov.io/gh/insideapp-oss/sonar-flutter/branch/master/graph/badge.svg)
+
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=insideapp-oss_sonar-flutter&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=insideapp-oss_sonar-flutter)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=insideapp-oss_sonar-flutter&metric=coverage)](https://sonarcloud.io/summary/new_code?id=insideapp-oss_sonar-flutter)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=insideapp-oss_sonar-flutter&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=insideapp-oss_sonar-flutter)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=insideapp-oss_sonar-flutter&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=insideapp-oss_sonar-flutter)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=insideapp-oss_sonar-flutter&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=insideapp-oss_sonar-flutter)
+
 
 # SonarQube plugin for Flutter / Dart
 
@@ -11,14 +17,14 @@ A plugin to enable analysis of Dart and Flutter projects into SonarQube.
 
 ## Features
 
-| Feature    | Supported              |
-|------------|------------------------|
-| Size       | YES                    |
-| Issues     | YES ([dartanalyzer](https://dart.dev/tools/dartanalyzer) rules)|
-| Tests      | YES                    |
-| Coverage   | YES                    |
-| Complexity | YES                    |
-| Syntax     | YES                    |
+| Feature    | Supported                                                       |
+|------------|-----------------------------------------------------------------|
+| Size       | YES                                                             |
+| Issues     | YES ([dartanalyzer](https://dart.dev/tools/dartanalyzer) rules) |
+| Tests      | YES                                                             |
+| Coverage   | YES                                                             |
+| Complexity | YES                                                             |
+| Syntax     | YES                                                             |
 
 The plugin is compatible with sonarQube 6.7+.
 
