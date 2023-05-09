@@ -1,0 +1,418 @@
+[
+    {
+        "key": "abi_specific_integer_invalid",
+        "name": "Abi specific integer invalid",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a class that extends\nAbiSpecificInteger doesn\u2019t meet all of the following requirements:\n @see https://dart.dev/tools/diagnostic-messages#abi_specific_integer_invalid",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "abstract_field_initializer",
+        "name": "Abstract field initializer",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a field that has the abstract\nmodifier also has an initializer.\n @see https://dart.dev/tools/diagnostic-messages#abstract_field_initializer",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "argument_type_not_assignable_to_error_handler",
+        "name": "Argument type not assignable to error handler",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when an invocation of\nFuture.catchError has an argument that is a function whose parameters\naren\u2019t compatible with the arguments that will be passed to the function\nwhen it\u2019s invoked. The static type of the first argument to catchError\nis just Function, even though the function that is passed in is expected\nto have either a single parameter of type Object or two parameters of\ntype Object and StackTrace.\n @see https://dart.dev/tools/diagnostic-messages#argument_type_not_assignable_to_error_handler",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "body_might_complete_normally",
+        "name": "Body might complete normally",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a method or function has a\nreturn type that\u2019s potentially non-nullable but would implicitly return\nnull if control reached the end of the function.\n @see https://dart.dev/tools/diagnostic-messages#body_might_complete_normally",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "conflicting_constructor_and_static_member",
+        "name": "Conflicting constructor and static member",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a named constructor and either a\nstatic method or static field have the same name. Both are accessed using\nthe name of the class, so having the same name makes the reference\nambiguous.\n @see https://dart.dev/tools/diagnostic-messages#conflicting_constructor_and_static_member",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "const_map_key_not_primitive_equality",
+        "name": "Const map key not primitive equality",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when the class of object used as a\nkey in a constant map literal implements either the == operator, the\ngetter hashCode, or both. The implementation of constant maps uses both\nthe == operator and the hashCode getter, so any implementation other\nthan the ones inherited from Object requires executing arbitrary code at\ncompile time, which isn\u2019t supported.\n @see https://dart.dev/tools/diagnostic-messages#const_map_key_not_primitive_equality",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "dead_null_aware_expression",
+        "name": "Dead null aware expression",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic in two cases.The first is when the left operand of an ?? operator can\u2019t be null.\nThe right operand is only evaluated if the left operand has the value\nnull, and because the left operand can\u2019t be null, the right operand is\nnever evaluated.The second is when the left-hand side of an assignment using the ??=\noperator can\u2019t be null. The right-hand side is only evaluated if the\nleft-hand side has the value null, and because the left-hand side can\u2019t\nbe null, the right-hand side is never evaluated.\n @see https://dart.dev/tools/diagnostic-messages#dead_null_aware_expression",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "deprecated_new_in_comment_reference",
+        "name": "Deprecated new in comment reference",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a comment reference (the name\nof a declaration enclosed in square brackets in a documentation comment)\nuses the keyword new to refer to a constructor. This form is deprecated.\n @see https://dart.dev/tools/diagnostic-messages#deprecated_new_in_comment_reference",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "duplicate_constructor",
+        "name": "Duplicate constructor",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a class declares more than one\nunnamed constructor or when it declares more than one constructor with the\nsame name.\n @see https://dart.dev/tools/diagnostic-messages#duplicate_constructor",
+        "type": "BUG",
+        "debt":  "5min"
+    },
+    {
+        "key": "duplicate_field_name",
+        "name": "Duplicate field name",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when either a record literal or a\nrecord type annotation contains a field whose name is the same as a\npreviously declared field in the same literal or type.\n @see https://dart.dev/tools/diagnostic-messages#duplicate_field_name",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "duplicate_ignore",
+        "name": "Duplicate ignore",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a diagnostic name appears in an\nignore comment, but the diagnostic is already being ignored, either\nbecause it\u2019s already included in the same ignore comment or because it\nappears in an ignore-in-file comment.\n @see https://dart.dev/tools/diagnostic-messages#duplicate_ignore",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "duplicate_pattern_field",
+        "name": "Duplicate pattern field",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a record pattern matches the\nsame field more than once, or when an object pattern matches the same\ngetter more than once.\n @see https://dart.dev/tools/diagnostic-messages#duplicate_pattern_field",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "external_with_initializer",
+        "name": "External with initializer",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a field or variable marked with\nthe keyword external has an initializer, or when an external field is\ninitialized in a constructor.\n @see https://dart.dev/tools/diagnostic-messages#external_with_initializer",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "field_initializer_redirecting_constructor",
+        "name": "Field initializer redirecting constructor",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a redirecting constructor\ninitializes a field in the object. This isn\u2019t allowed because the instance\nthat has the field hasn\u2019t been created at the point at which it should be\ninitialized.\n @see https://dart.dev/tools/diagnostic-messages#field_initializer_redirecting_constructor",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "illegal_concrete_enum_member",
+        "name": "Illegal concrete enum member",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when either an enum declaration, a\nclass that implements Enum, or a mixin with a superclass constraint of\nEnum, declares or inherits a concrete instance member named either\nindex, hashCode, or ==.\n @see https://dart.dev/tools/diagnostic-messages#illegal_concrete_enum_member",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "illegal_enum_values",
+        "name": "Illegal enum values",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when either a class that implements\nEnum or a mixin with a superclass constraint of Enum has an instance\nmember named values.\n @see https://dart.dev/tools/diagnostic-messages#illegal_enum_values",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "implicit_super_initializer_missing_arguments",
+        "name": "Implicit super initializer missing arguments",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a constructor implicitly\ninvokes the unnamed constructor from the superclass, the unnamed\nconstructor of the superclass has a required parameter, and there\u2019s no\nsuper parameter corresponding to the required parameter.\n @see https://dart.dev/tools/diagnostic-messages#implicit_super_initializer_missing_arguments",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "inconsistent_pattern_variable_logical_or",
+        "name": "Inconsistent pattern variable logical or",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a pattern variable that is\ndeclared on all branches of a logical-or pattern doesn\u2019t have the same\ntype on every branch. It is also produced when the variable has a\ndifferent finality on different branches. A pattern variable declared on\nmultiple branches of a logical-or pattern is required to have the same\ntype and finality in each branch, so that the type and finality of the\nvariable can be known in code that\u2019s guarded by the logical-or pattern.\n @see https://dart.dev/tools/diagnostic-messages#inconsistent_pattern_variable_logical_or",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invalid_annotation",
+        "name": "Invalid annotation",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when an annotation is found that is\nusing something that is neither a variable marked as const or the\ninvocation of a const constructor.Getters can\u2019t be used as annotations.\n @see https://dart.dev/tools/diagnostic-messages#invalid_annotation",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invalid_extension_argument_count",
+        "name": "Invalid extension argument count",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when an extension override doesn\u2019t\nhave exactly one argument. The argument is the expression used to compute\nthe value of this within the extension method, so there must be one\nargument.\n @see https://dart.dev/tools/diagnostic-messages#invalid_extension_argument_count",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invalid_field_name",
+        "name": "Invalid field name",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when either a record literal or a\nrecord type annotation has a field whose name is invalid. The name is\ninvalid if it is:\n @see https://dart.dev/tools/diagnostic-messages#invalid_field_name",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invalid_literal_annotation",
+        "name": "Invalid literal annotation",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when the [literal][[meta-literal]]\nannotation is applied to anything other than a const constructor.\n @see https://dart.dev/tools/diagnostic-messages#invalid_literal_annotation",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invalid_non_virtual_annotation",
+        "name": "Invalid non virtual annotation",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when the nonVirtual annotation is\nfound on a declaration other than a member of a class, mixin, or enum, or\nif the member isn\u2019t a concrete instance member.\n @see https://dart.dev/tools/diagnostic-messages#invalid_non_virtual_annotation",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invalid_null_aware_operator",
+        "name": "Invalid null aware operator",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a null-aware operator (?.,\n?.., ?[, ?..[, or ...?) is used on a receiver that\u2019s known to be\nnon-nullable.\n @see https://dart.dev/tools/diagnostic-messages#invalid_null_aware_operator",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invalid_pattern_variable_in_shared_case_scope",
+        "name": "Invalid pattern variable in shared case scope",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when multiple case clauses in a\nswitch statement share a body, and at least one of them declares a\nvariable that is referenced in the shared statements, but the variable is\neither not declared in all of the case clauses or it is declared in\ninconsistent ways.If the variable isn\u2019t declared in all of the case clauses, then it won\u2019t\nhave a value if one of the clauses that doesn\u2019t declare the variable is\nthe one that matches and executes the body. This includes the situation\nwhere one of the case clauses is the default clause.If the variable is declared in inconsistent ways, either being final in\nsome cases and not final in others or having a different type in\ndifferent cases, then the semantics of what the type or finality of the\nvariable should be are not defined.\n @see https://dart.dev/tools/diagnostic-messages#invalid_pattern_variable_in_shared_case_scope",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invalid_return_type_for_catch_error",
+        "name": "Invalid return type for catch error",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when an invocation of\nFuture.catchError has an argument whose return type isn\u2019t compatible with\nthe type returned by the instance of Future. At runtime, the method\ncatchError attempts to return the value from the callback as the result\nof the future, which results in another exception being thrown.\n @see https://dart.dev/tools/diagnostic-messages#invalid_return_type_for_catch_error",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invalid_super_formal_parameter_location",
+        "name": "Invalid super formal parameter location",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a super parameter is used\nanywhere other than a non-redirecting generative constructor.\n @see https://dart.dev/tools/diagnostic-messages#invalid_super_formal_parameter_location",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invalid_type_argument_in_const_literal",
+        "name": "Invalid type argument in const literal",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a type parameter is used as a\ntype argument in a list, map, or set literal that is prefixed by const.\nThis isn\u2019t allowed because the value of the type parameter (the actual type\nthat will be used at runtime) can\u2019t be known at compile time.\n @see https://dart.dev/tools/diagnostic-messages#invalid_type_argument_in_const_literal",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invocation_of_non_function_expression",
+        "name": "Invocation of non function expression",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a function invocation is found,\nbut the name being referenced isn\u2019t the name of a function, or when the\nexpression computing the function doesn\u2019t compute a function.\n @see https://dart.dev/tools/diagnostic-messages#invocation_of_non_function_expression",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "missing_default_value_for_parameter",
+        "name": "Missing default value for parameter",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when an optional parameter, whether\npositional or named, has a potentially non-nullable type and doesn\u2019t\nspecify a default value. Optional parameters that have no explicit default\nvalue have an implicit default value of null. If the type of the\nparameter doesn\u2019t allow the parameter to have a value of null, then the\nimplicit default value isn\u2019t valid.\n @see https://dart.dev/tools/diagnostic-messages#missing_default_value_for_parameter",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "non_constant_map_element",
+        "name": "Non constant map element",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when an if element or a spread\nelement in a constant map isn\u2019t a constant element.\n @see https://dart.dev/tools/diagnostic-messages#non_constant_map_element",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "not_assigned_potentially_non_nullable_local_variable",
+        "name": "Not assigned potentially non nullable local variable",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a local variable is referenced\nand has all these characteristics:\n @see https://dart.dev/tools/diagnostic-messages#not_assigned_potentially_non_nullable_local_variable",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "not_initialized_non_nullable_instance_field",
+        "name": "Not initialized non nullable instance field",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a field is declared and has all\nthese characteristics:\n @see https://dart.dev/tools/diagnostic-messages#not_initialized_non_nullable_instance_field",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "not_initialized_non_nullable_variable",
+        "name": "Not initialized non nullable variable",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a static field or top-level\nvariable has a type that\u2019s non-nullable and doesn\u2019t have an initializer.\nFields and variables that don\u2019t have an initializer are normally\ninitialized to null, but the type of the field or variable doesn\u2019t allow\nit to be set to null, so an explicit initializer must be provided.\n @see https://dart.dev/tools/diagnostic-messages#not_initialized_non_nullable_variable",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "recursive_constructor_redirect",
+        "name": "Recursive constructor redirect",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a constructor redirects to\nitself, either directly or indirectly, creating an infinite loop.\n @see https://dart.dev/tools/diagnostic-messages#recursive_constructor_redirect",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "redirect_to_invalid_function_type",
+        "name": "Redirect to invalid function type",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a factory constructor attempts\nto redirect to another constructor, but the two have incompatible\nparameters. The parameters are compatible if all of the parameters of the\nredirecting constructor can be passed to the other constructor and if the\nother constructor doesn\u2019t require any parameters that aren\u2019t declared by\nthe redirecting constructor.\n @see https://dart.dev/tools/diagnostic-messages#redirect_to_invalid_function_type",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "return_in_generator",
+        "name": "Return in generator",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a generator function (one whose\nbody is marked with either async* or sync*) uses either a return\nstatement to return a value or implicitly returns a value because of using\n=>. In any of these cases, they should use yield instead of return.\n @see https://dart.dev/tools/diagnostic-messages#return_in_generator",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "subtype_of_disallowed_type",
+        "name": "Subtype of disallowed type",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when one of the restricted classes is\nused in either an extends, implements, with, or on clause. The\nclasses bool, double, FutureOr, int, Null, num, and String\nare all restricted in this way, to allow for more efficient\nimplementations.\n @see https://dart.dev/tools/diagnostic-messages#subtype_of_disallowed_type",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "super_formal_parameter_without_associated_positional",
+        "name": "Super formal parameter without associated positional",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when there\u2019s a positional super\nparameter in a constructor and the implicitly or explicitly invoked super\nconstructor doesn\u2019t have a positional parameter at the corresponding\nindex.Positional super parameters are associated with positional parameters in\nthe super constructor by their index. That is, the first super parameter\nis associated with the first positional parameter in the super\nconstructor, the second with the second, and so on.\n @see https://dart.dev/tools/diagnostic-messages#super_formal_parameter_without_associated_positional",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "type_check_with_null",
+        "name": "Type check with null",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when there\u2019s a type check (using the\nas operator) where the type is Null. There\u2019s only one value whose type\nis Null, so the code is both more readable and more performant when it\ntests for null explicitly.\n @see https://dart.dev/tools/diagnostic-messages#type_check_with_null",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "type_parameter_supertype_of_its_bound",
+        "name": "Type parameter supertype of its bound",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when the bound of a type parameter\n(the type following the extends keyword) is either directly or indirectly\nthe type parameter itself. Stating that the type parameter must be the same\nas itself or a subtype of itself or a subtype of itself isn\u2019t helpful\nbecause it will always be the same as itself.\n @see https://dart.dev/tools/diagnostic-messages#type_parameter_supertype_of_its_bound",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "undefined_constructor_in_initializer",
+        "name": "Undefined constructor in initializer",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a superclass constructor is\ninvoked in the initializer list of a constructor, but the superclass\ndoesn\u2019t define the constructor being invoked.\n @see https://dart.dev/tools/diagnostic-messages#undefined_constructor_in_initializer",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "undefined_enum_constructor",
+        "name": "Undefined enum constructor",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when the constructor invoked to\ninitialize an enum constant doesn\u2019t exist.\n @see https://dart.dev/tools/diagnostic-messages#undefined_enum_constructor",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "undefined_extension_getter",
+        "name": "Undefined extension getter",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when an extension override is used to\ninvoke a getter, but the getter isn\u2019t defined by the specified extension.\nThe analyzer also produces this diagnostic when a static getter is\nreferenced but isn\u2019t defined by the specified extension.\n @see https://dart.dev/tools/diagnostic-messages#undefined_extension_getter",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "undefined_extension_method",
+        "name": "Undefined extension method",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when an extension override is used to\ninvoke a method, but the method isn\u2019t defined by the specified extension.\nThe analyzer also produces this diagnostic when a static method is\nreferenced but isn\u2019t defined by the specified extension.\n @see https://dart.dev/tools/diagnostic-messages#undefined_extension_method",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "undefined_extension_setter",
+        "name": "Undefined extension setter",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when an extension override is used to\ninvoke a setter, but the setter isn\u2019t defined by the specified extension.\nThe analyzer also produces this diagnostic when a static setter is\nreferenced but isn\u2019t defined by the specified extension.\n @see https://dart.dev/tools/diagnostic-messages#undefined_extension_setter",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "undefined_super_member",
+        "name": "Undefined super member",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when an inherited member (method,\ngetter, setter, or operator) is referenced using super, but there\u2019s no\nmember with that name in the superclass chain.\n @see https://dart.dev/tools/diagnostic-messages#undefined_super_member",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "unnecessary_final",
+        "name": "Unnecessary final",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when either a field initializing\nparameter or a super parameter in a constructor has the keyword final.\nIn both cases the keyword is unnecessary because the parameter is\nimplicitly final.\n @see https://dart.dev/tools/diagnostic-messages#unnecessary_final",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "unnecessary_null_comparison",
+        "name": "Unnecessary null comparison",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when it finds an equality comparison\n(either == or !=) with one operand of null and the other operand\ncan\u2019t be null. Such comparisons are always either true or false, so\nthey serve no purpose.\n @see https://dart.dev/tools/diagnostic-messages#unnecessary_null_comparison",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "wrong_number_of_parameters_for_setter",
+        "name": "Wrong number of parameters for setter",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a setter is found that doesn\u2019t\ndeclare exactly one required positional parameter.\n @see https://dart.dev/tools/diagnostic-messages#wrong_number_of_parameters_for_setter",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "wrong_number_of_type_arguments",
+        "name": "Wrong number of type arguments",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a type that has type parameters\nis used and type arguments are provided, but the number of type arguments\nisn\u2019t the same as the number of type parameters.The analyzer also produces this diagnostic when a constructor is invoked\nand the number of type arguments doesn\u2019t match the number of type\nparameters declared for the class.\n @see https://dart.dev/tools/diagnostic-messages#wrong_number_of_type_arguments",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "yield_in_non_generator",
+        "name": "Yield in non generator",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a yield or yield* statement\nappears in a function whose body isn\u2019t marked with one of the async* or\nsync* modifiers.\n @see https://dart.dev/tools/diagnostic-messages#yield_in_non_generator",
+        "type": "BUG",
+        "debt": "5min"
+    }
+]

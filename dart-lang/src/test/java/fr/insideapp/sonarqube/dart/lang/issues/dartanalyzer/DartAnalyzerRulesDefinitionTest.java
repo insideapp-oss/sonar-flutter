@@ -19,13 +19,8 @@
  */
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
-import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
 import org.junit.Test;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,8 +29,7 @@ public class DartAnalyzerRulesDefinitionTest {
     @Test
     public void define() {
 
-        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 3), SonarQubeSide.SERVER);
-        DartAnalyzerRulesDefinition rulesDefinition = new DartAnalyzerRulesDefinition(sonarRuntime);
+        DartAnalyzerRulesDefinition rulesDefinition = new DartAnalyzerRulesDefinition();
         RulesDefinition.Context context = new RulesDefinition.Context();
         rulesDefinition.define(context);
 

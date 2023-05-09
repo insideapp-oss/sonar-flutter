@@ -54,15 +54,15 @@
         <jdk.min.version>1.9</jdk.min.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <sonar.version>6.7</sonar.version>
-        <sonar-orchestrator.version>3.22.0.1791</sonar-orchestrator.version>
-        <sonarlint.version>4.0.0.2052</sonarlint.version>
+        <sonar.version>7.9</sonar.version>
+
+
 
         <assertj.version>3.5.2</assertj.version>
         <guava.version>17.0</guava.version>
-        <junit.version>4.10</junit.version>
+        <junit.version>4.11</junit.version>
         <logback.version>1.0.13</logback.version>
-        <mockito.version>1.9.0</mockito.version>
+        <mockito.version>4.4.0</mockito.version>
         <slf4j.version>1.7.21</slf4j.version>
         <sslr.version>1.23</sslr.version>
         <sslr-squid-bridge.version>2.7.1.392</sslr-squid-bridge.version>

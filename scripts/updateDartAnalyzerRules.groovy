@@ -2,6 +2,7 @@
  Update rules.json and profile-dartanalyzer.xml from Dart Linter rules website.
  Severity is assigned based on category and rule naming
  */
+
 import groovy.xml.MarkupBuilder
 @Grab(group = 'org.codehaus.groovy.modules.http-builder',
         module = 'http-builder', version = '0.7')
@@ -11,89 +12,13 @@ import groovyx.net.http.*
         module = 'http-builder', version = '0.7')
 
 import groovyx.net.http.*
-import groovy.json.JsonBuilder
 
-/**
- * Assign severity to a rule based on its properties
- * @param category
- * @param key
- * @param description
- * @return
- */
-def assignSeverity(category, key, description) {
 
-    // Error category
-    if (category.contains('Error')) {
-        if (!key.contains('avoid') && !key.contains('comment') && !key.contains('empty')) {
-            return "CRITICAL"
-        } else {
-            return "MAJOR"
-        }
+import commons.RuleUpdater
+import commons.ConsoleString
+import commons.Rule
 
-        // Style category
-    } else if (category.contains('Style')) {
-        if (key.contains('camel_case')) {
-            return "MAJOR"
-        } else {
-            return "MINOR"
-        }
-    }
-
-    // Specific
-    if (key == 'avoid_print' || key == 'null_closures') {
-        return "CRITICAL"
-    }
-    if (key == 'library_prefixes' || key == 'library_names' ||
-            key == 'file_names' || key == 'empty_catches' || key == 'constant_identifier_names') {
-        return "MAJOR"
-    }
-
-    // Default
-    return "MINOR"
-}
-
-/**
- * Assign type (BUG, CODE_SMELL, VULNERABILITY) to a rule based on SQALE file
- * @param key
- * @return
- */
-def assignType(key) {
-
-    File sqaleXml = new File('../dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/sqale-model.xml')
-
-    /*
-    Code Smell (Maintainability domain)
-    Bug (Reliability domain)
-    Vulnerability (Security domain)
-    Security Hotspot (Security domain)
-     */
-
-    def sqale = new XmlSlurper().parseText(sqaleXml.text)
-    def ruleNode = sqale.'**'.find { chc ->
-        chc.'rule-key' == key
-    }
-    if (ruleNode) {
-
-        parentNode = ruleNode.parent()
-        grandParentNode = parentNode.parent()
-
-        if (parentNode.name.text() == 'Security features') {
-            return "VULNERABILITY"
-        }
-
-        if (grandParentNode.name.text() == 'Reliability') {
-
-            // See https://github.com/insideapp-oss/sonar-flutter/pull/32
-            if (!ruleNode.name.text().startsWith('prefer_final')) {
-                return "BUG"
-            }
-
-        }
-    }
-
-    // Default type
-    return "CODE_SMELL"
-}
+String.mixin(ConsoleString)
 
 /**
  * Parse rules from the lint website
@@ -122,13 +47,15 @@ def parseRules(url) {
                     started = true
                 }
                 if (currentKey != '' && started) {
-                    def entry = [:]
-                    entry.key = currentKey
-                    entry.name = currentKey.replace("_", " ").capitalize()
-                    entry.description = currentDescription
-                    entry.severity = assignSeverity(currentCategory, currentKey, currentDescription)
-                    entry.type = assignType(currentKey)
-                    result.add(entry)
+                    def rule = new Rule(
+                            currentKey,
+                            currentDescription,
+                            null, // no severity
+                            null, // no type
+                            currentKey.replace("_", " ").capitalize(),
+                            null // no debt
+                    )
+                    result.add(rule)
                 }
                 currentKey = tag.text()
                 break
@@ -177,13 +104,15 @@ def parseRulesFromDiagnostic(url) {
                     descriptionOver = true
                     //When reaching examples, we consider the description over
                     //todo but we might want to provider nicer description with examples later !
-                    def entry = [:]
-                    entry.key = currentKey
-                    entry.name = currentKey.replace("_", " ").capitalize()
-                    entry.description = currentDescription += "\n @see https://dart.dev/tools/diagnostic-messages#$currentKey"
-                    entry.severity = "MINOR"
-                    entry.type = "CODE_SMELL"
-                    result.add(entry)
+                    def rule = new Rule(
+                            currentKey,
+                            currentDescription += "\n @see https://dart.dev/tools/diagnostic-messages#$currentKey",
+                            null, // no severity
+                            null, // no type
+                            currentKey.replace("_", " ").capitalize(),
+                            null // no debt
+                    )
+                    result.add(rule)
                 }
                 break
             case 'P':
@@ -196,42 +125,12 @@ def parseRulesFromDiagnostic(url) {
     result
 }
 
-
 /**
- * Write rules to a JSON file
- * @param rules
+ * Write default analysis_options.yaml
+ * @param rls
  * @param file
  * @return
  */
-def writeRules(rules, file) {
-
-    def builder = new JsonBuilder()
-    builder(rules)
-
-    file.text = builder.toPrettyString()
-
-}
-
-def writeProfileDartAnalyzer(rls, file) {
-    def writer = new StringWriter()
-    def xml = new MarkupBuilder(writer)
-    xml.profile() {
-        name "dartanalyzer"
-        language "dart"
-        rules {
-            rls.each { r ->
-                rule {
-                    repositoryKey "dartanalyzer"
-                    key r.key
-                }
-            }
-        }
-    }
-
-    file.text = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" + writer.toString()
-
-}
-
 def writeAnalysisOptions(rls, file) {
     text = "linter:\n"
     text += "  rules:\n"
@@ -241,13 +140,15 @@ def writeAnalysisOptions(rls, file) {
     file.text = text
 }
 
-def rulesUrl = "https://dart-lang.github.io/linter/lints/"
-def diagnosticRulesUrl = "https://dart.dev/tools/diagnostic-messages"
-File rulesJson = new File('dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/rules.json')
-File profileXml = new File('dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/profile-dartanalyzer.xml')
-File analysisOptionsYaml = new File('dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/analysis_options.yaml')
-def rules = parseRules(rulesUrl)
-rules.addAll(parseRulesFromDiagnostic(diagnosticRulesUrl))
-writeRules(rules, rulesJson)
-writeProfileDartAnalyzer(rules, profileXml)
-writeAnalysisOptions(rules, analysisOptionsYaml)
+
+def updater = new RuleUpdater('dart-lang/src/main/resources/dartanalyzer/rules.json', {
+
+    def rules = parseRules('https://dart-lang.github.io/linter/lints/')
+    rules.addAll(parseRulesFromDiagnostic('https://dart.dev/tools/diagnostic-messages'))
+
+    writeAnalysisOptions(rules, new File('dart-lang/src/main/resources/fr/insideapp/sonarqube/dart/dartanalyzer/analysis_options.yaml'))
+
+    return rules
+})
+
+updater.update()

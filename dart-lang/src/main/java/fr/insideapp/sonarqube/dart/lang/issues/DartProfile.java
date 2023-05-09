@@ -25,18 +25,41 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 
+import java.io.IOException;
+import java.util.List;
+
 public class DartProfile implements BuiltInQualityProfilesDefinition {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DartProfile.class);
-    public static final String DARTANALYZER_PROFILE_PATH = "fr/insideapp/sonarqube/dart/dartanalyzer/profile-dartanalyzer.xml";
+
+    private final Dart dart;
+
+    private final DartAnalyzerRulesDefinition dartAnalyzerRulesDefinition;
+
+
+    public DartProfile(final Dart dart, final DartAnalyzerRulesDefinition dartAnalyzerRulesDefinition) {
+        this.dart = dart;
+        this.dartAnalyzerRulesDefinition = dartAnalyzerRulesDefinition;
+    }
 
     @Override
     public void define(BuiltInQualityProfilesDefinition.Context context) {
 
-        // dartanalyzer profile
-        LOGGER.info("Creating dartanalyzer Profile");
-        NewBuiltInQualityProfile nbiqp = context.createBuiltInQualityProfile(DartAnalyzerRulesDefinition.REPOSITORY_KEY, Dart.KEY);
-        XmlProfileParser.parse(DARTANALYZER_PROFILE_PATH, nbiqp);
-        nbiqp.done();
+        NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(DartAnalyzerRulesDefinition.REPOSITORY_KEY, Dart.KEY);
+        RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
+
+        // dartanalyzer rules
+        try {
+            List<RepositoryRule> rules = repositoryRuleParser.parse(DartAnalyzerRulesDefinition.RULES_FILE);
+            for (RepositoryRule r: rules) {
+                NewBuiltInActiveRule rule1 = profile.activateRule("dartanalyzer", r.key);
+                rule1.overrideSeverity(r.severity.name());
+            }
+        } catch (IOException e) {
+            LOGGER.error("Failed to load dartanalyzer rules", e);
+        }
+
+        profile.setDefault(true);
+        profile.done();
     }
 }
