@@ -75,6 +75,9 @@
         <jproc.version>2.2.3</jproc.version>
         <apache-commons.version>2.6</apache-commons.version>
 
+        <sonar.sources>src/main/java,src/main/js</sonar.sources>
+        <sonar.exclusions>file:**/src/main/java/**/generated/**/*.java</sonar.exclusions>
+
     </properties>
 
     <dependencies>

@@ -14,7 +14,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.0.2
+
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+        
       - name: Set up JDK 1.11
         uses: actions/setup-java@v3.10.0
         with:
@@ -22,15 +25,25 @@ jobs:
           java-version: '11'
           check-latest: true
           cache: 'maven'
+
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3.1.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} #required
+
+      - name: Analyze
+          env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.login=$SONAR_TOKEN \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.organization=insideapp-oss \
+            -Dsonar.projectKey=insideapp-oss_sonar-flutter
+
       - id: get-version
         name: Get maven project version
         uses: jactions/maven-version@v1.2.0
+
       - name: Upload plugin artifact
         uses: actions/upload-artifact@v3.1.0
         with:
