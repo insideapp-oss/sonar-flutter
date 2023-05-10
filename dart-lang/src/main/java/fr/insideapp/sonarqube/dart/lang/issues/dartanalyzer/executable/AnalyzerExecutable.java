@@ -217,10 +217,11 @@ public abstract class AnalyzerExecutable {
 
         final int exitCode = result.getExitValue();
 
+        String logMessage = String.format("Command '%s' finished (exit %d)", result.getProcString(), exitCode);
         if (exitCode != 0) {
-            LOGGER.warn("Command '{}' finished (exit {})", result.getProcString(), exitCode);
+            LOGGER.warn(logMessage);
         } else {
-            LOGGER.debug("Command '{}' finished (exit {})", result.getProcString(), exitCode);
+            LOGGER.debug(logMessage);
         }
 
         final String output = new String(result.getErrorBytes(), StandardCharsets.UTF_8).split("\\R", 2)[0];

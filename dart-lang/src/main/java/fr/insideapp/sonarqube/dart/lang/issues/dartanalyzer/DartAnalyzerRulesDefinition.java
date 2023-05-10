@@ -46,7 +46,7 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
             for (RepositoryRule rule : rules) {
 
                 if ( rule.name == null || rule.severity == null || rule.type == null || rule.description == null) {
-                    LOGGER.warn(String.format("Cannot load %s rule from dartanalyzer, rule data is not missing in rules.json", rule.key));
+                    LOGGER.warn(String.format("Cannot load %s rule from dartanalyzer, rule data is missing in rules.json", rule.key));
                 } else {
                     RulesDefinition.NewRule newRule = repository.createRule(rule.key)
                             .setName(rule.name)
@@ -58,7 +58,7 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
 
             }
         } catch (IOException e) {
-            LOGGER.error(String.format("Failed to load dartanalyzer rules"), e);
+            LOGGER.error("Failed to load dartanalyzer rules", e);
         }
 
         repository.done();

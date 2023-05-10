@@ -32,10 +32,6 @@ public class DartProfile implements BuiltInQualityProfilesDefinition {
 
     private static final Logger LOGGER = Loggers.get(DartProfile.class);
 
-    public DartProfile() {
-
-    }
-
     @Override
     public void define(BuiltInQualityProfilesDefinition.Context context) {
 
@@ -46,8 +42,13 @@ public class DartProfile implements BuiltInQualityProfilesDefinition {
         try {
             List<RepositoryRule> rules = repositoryRuleParser.parse(DartAnalyzerRulesDefinition.RULES_FILE);
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule1 = profile.activateRule("dartanalyzer", r.key);
-                rule1.overrideSeverity(r.severity.name());
+
+                if ( r.name == null || r.severity == null || r.type == null || r.description == null) {
+                    LOGGER.warn(String.format("Cannot add %s rule to dartanalyzer profile, rule data is missing in rules.json", r.key));
+                } else {
+                    NewBuiltInActiveRule rule = profile.activateRule("dartanalyzer", r.key);
+                    rule.overrideSeverity(r.severity.name());
+                }
             }
         } catch (IOException e) {
             LOGGER.error("Failed to load dartanalyzer rules", e);

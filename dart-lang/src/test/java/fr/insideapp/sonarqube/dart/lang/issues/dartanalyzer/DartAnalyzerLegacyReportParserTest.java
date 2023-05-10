@@ -40,10 +40,11 @@ public class DartAnalyzerLegacyReportParserTest {
 	public void parseWithCircles() {
 
 		String input = "  lint • lib/main.dart:63:9 • Close instances of `dart.core.Sink`. • close_sinks\n"
-				+ "  hint • lib/main.dart:63:9 • The value of the local variable '_controller' isn't used. • unused_local_variable\n";
+				+ "  hint • lib/main.dart:63:9 • The value of the local variable '_controller' isn't used. • unused_local_variable\n"
+				+ "  info • lib/main.dart:61:5 • Use Flutter TODO format: // TODO(username): message, https://URL-to-issue. • flutter_style_todos";
 
 		List<DartAnalyzerReportIssue> issues = parser.parse(input);
-		assertThat(issues.size()).isEqualTo(2);
+		assertThat(issues.size()).isEqualTo(3);
 
 		assertFilePath(issues.get(0), FILE_PATH);
 		assertLineNumber(issues.get(0), 63);
@@ -54,6 +55,11 @@ public class DartAnalyzerLegacyReportParserTest {
 		assertLineNumber(issues.get(1), 63);
 		assertRuleId(issues.get(1), RULE_ID_UNUSED_LOCAL_VARIABLE);
 		assertMessage(issues.get(1), "The value of the local variable '_controller' isn't used.");
+
+		assertFilePath(issues.get(2), FILE_PATH);
+		assertLineNumber(issues.get(2), 61);
+		assertRuleId(issues.get(2), "flutter_style_todos");
+		assertMessage(issues.get(2), "Use Flutter TODO format: // TODO(username): message, https://URL-to-issue.");
 
 	}
 

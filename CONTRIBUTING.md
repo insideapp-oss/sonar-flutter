@@ -4,7 +4,7 @@ This documentation is a guide for plugin developers / contributors.
 
 ## Requirements
 
-- Java JDK 13+
+- Java JDK 11+
 - Maven 3.8 or later
 - A local SonarQube instance for local testing
 
