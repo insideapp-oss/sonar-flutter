@@ -24,17 +24,17 @@ import fr.insideapp.sonarqube.dart.lang.SourceLinesProvider;
 import fr.insideapp.sonarqube.dart.lang.antlr.generated.Dart2Parser;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import java.io.InputStream;
 
 public class SourceLinesVisitor implements ParseTreeItemVisitor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SourceLinesVisitor.class);
+    private static final Logger LOGGER = Loggers.get(SourceLinesVisitor.class);
     private final SourceLinesProvider linesProvider = new SourceLinesProvider();
 
     private static int[] getLineAndColumn(final SourceLine[] lines, final int global) {

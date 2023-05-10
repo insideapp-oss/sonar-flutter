@@ -22,20 +22,20 @@ package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.issues.RepositoryRule;
 import fr.insideapp.sonarqube.dart.lang.issues.RepositoryRuleParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import java.io.IOException;
 import java.util.List;
 
 public class DartAnalyzerRulesDefinition implements RulesDefinition {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DartAnalyzerRulesDefinition.class);
+    private static final Logger LOGGER = Loggers.get(DartAnalyzerRulesDefinition.class);
     public static final String REPOSITORY_KEY = "dartanalyzer";
     public static final String REPOSITORY_NAME = REPOSITORY_KEY;
     public static final String RULES_FILE = "/dartanalyzer/rules.json";
-    
+
     @Override
     public void define(Context context) {
         NewRepository repository = context.createRepository(REPOSITORY_KEY, Dart.KEY).setName(REPOSITORY_NAME);
@@ -45,12 +45,17 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
             List<RepositoryRule> rules = repositoryRuleParser.parse(RULES_FILE);
             for (RepositoryRule rule : rules) {
 
-                RulesDefinition.NewRule newRule = repository.createRule(rule.key)
-                        .setName(rule.name)
-                        .setSeverity(rule.severity.name())
-                        .setType(RuleType.valueOf(rule.type.name()))
-                        .setHtmlDescription(rule.description);
-                newRule.setDebtRemediationFunction(newRule.debtRemediationFunctions().constantPerIssue(rule.debt));
+                if ( rule.name == null || rule.severity == null || rule.type == null || rule.description == null) {
+                    LOGGER.warn(String.format("Cannot load %s rule from dartanalyzer, rule data is not missing in rules.json", rule.key));
+                } else {
+                    RulesDefinition.NewRule newRule = repository.createRule(rule.key)
+                            .setName(rule.name)
+                            .setSeverity(rule.severity.name())
+                            .setType(RuleType.valueOf(rule.type.name()))
+                            .setHtmlDescription(rule.description);
+                    newRule.setDebtRemediationFunction(newRule.debtRemediationFunctions().constantPerIssue(rule.debt));
+                }
+
             }
         } catch (IOException e) {
             LOGGER.error(String.format("Failed to load dartanalyzer rules"), e);

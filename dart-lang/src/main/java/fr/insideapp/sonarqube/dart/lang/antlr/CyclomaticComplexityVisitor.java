@@ -23,15 +23,15 @@ import static java.lang.String.format;
 
 import fr.insideapp.sonarqube.dart.lang.antlr.generated.Dart2Parser;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class CyclomaticComplexityVisitor implements ParseTreeItemVisitor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CyclomaticComplexityVisitor.class);
+    private static final Logger LOGGER = Loggers.get(CyclomaticComplexityVisitor.class);
 
     private int complexity = 0;
 

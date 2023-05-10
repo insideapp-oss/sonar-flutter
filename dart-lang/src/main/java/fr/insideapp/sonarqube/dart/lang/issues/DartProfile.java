@@ -21,16 +21,16 @@ package fr.insideapp.sonarqube.dart.lang.issues;
 
 import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import java.io.IOException;
 import java.util.List;
 
 public class DartProfile implements BuiltInQualityProfilesDefinition {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DartProfile.class);
+    private static final Logger LOGGER = Loggers.get(DartProfile.class);
 
     public DartProfile() {
 

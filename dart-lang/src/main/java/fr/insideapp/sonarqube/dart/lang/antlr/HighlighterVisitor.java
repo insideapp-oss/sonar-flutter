@@ -23,20 +23,20 @@ import fr.insideapp.sonarqube.dart.lang.KeywordsProvider;
 import fr.insideapp.sonarqube.dart.lang.antlr.generated.Dart2Parser;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import static java.lang.String.format;
 
 public class HighlighterVisitor implements ParseTreeItemVisitor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HighlighterVisitor.class);
+    private static final Logger LOGGER = Loggers.get(HighlighterVisitor.class);
     private final KeywordsProvider keywordsProvider = new KeywordsProvider();
 
     @Override

@@ -20,8 +20,8 @@
 package fr.insideapp.sonarqube.dart.lang;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KeywordsProvider {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KeywordsProvider.class);
+    private static final Logger LOGGER = Loggers.get(KeywordsProvider.class);
     private final List<String> keywords = new ArrayList<String>();
 
     public KeywordsProvider() {

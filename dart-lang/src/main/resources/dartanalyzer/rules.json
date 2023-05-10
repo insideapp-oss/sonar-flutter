@@ -426,102 +426,162 @@
     {
         "key": "avoid_dynamic_calls",
         "name": "Avoid dynamic calls",
-        "description": "Avoid method calls or property accesses on a \"dynamic\" target."
+        "severity": "MAJOR",
+        "description": "Avoid method calls or property accesses on a \"dynamic\" target.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "avoid_empty_else",
         "name": "Avoid empty else",
-        "description": "Avoid empty else statements."
+        "severity": "MAJOR",
+        "description": "Avoid empty else statements.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_print",
         "name": "Avoid print",
-        "description": "Avoid print calls in production code."
+        "severity": "MAJOR",
+        "description": "Avoid print calls in production code.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_relative_lib_imports",
         "name": "Avoid relative lib imports",
-        "description": "Avoid relative imports for files in lib/."
+        "severity": "MAJOR",
+        "description": "Avoid relative imports for files in lib/.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "avoid_returning_null_for_future (deprecated)",
         "name": "Avoid returning null for future (deprecated)",
-        "description": "Avoid returning null for Future."
+        "severity": "MAJOR",
+        "description": "Avoid returning null for Future.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_slow_async_io",
         "name": "Avoid slow async io",
-        "description": "Avoid slow async dart:io methods."
+        "severity": "MAJOR",
+        "description": "Avoid slow async dart:io methods.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "avoid_type_to_string",
         "name": "Avoid type to string",
-        "description": "Avoid .toString() in production code since results may be minified."
+        "severity": "MAJOR",
+        "description": "Avoid .toString() in production code since results may be minified.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_types_as_parameter_names",
         "name": "Avoid types as parameter names",
-        "description": "Avoid types as parameter names."
+        "severity": "MAJOR",
+        "description": "Avoid types as parameter names.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_web_libraries_in_flutter",
         "name": "Avoid web libraries in flutter",
-        "description": "Avoid using web-only libraries outside Flutter web plugin packages."
+        "severity": "CRITICAL",
+        "description": "Avoid using web-only libraries outside Flutter web plugin packages.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "cancel_subscriptions",
         "name": "Cancel subscriptions",
-        "description": "Cancel instances of dart.async.StreamSubscription."
+        "severity": "CRITICAL",
+        "description": "Cancel instances of dart.async.StreamSubscription.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "close_sinks",
         "name": "Close sinks",
-        "description": "Close instances of dart.core.Sink."
+        "severity": "CRITICAL",
+        "description": "Close instances of dart.core.Sink.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "collection_methods_unrelated_type",
         "name": "Collection methods unrelated type",
-        "description": "Invocation of various collection methods with arguments of unrelated types."
+        "severity": "CRITICAL",
+        "description": "Invocation of various collection methods with arguments of unrelated types.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "comment_references",
         "name": "Comment references",
-        "description": "Only reference in scope identifiers in doc comments."
+        "severity": "MINOR",
+        "description": "Only reference in scope identifiers in doc comments.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "control_flow_in_finally",
         "name": "Control flow in finally",
-        "description": "Avoid control flow in finally blocks."
+        "severity": "MAJOR",
+        "description": "Avoid control flow in finally blocks.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "deprecated_member_use_from_same_package",
         "name": "Deprecated member use from same package",
-        "description": "Avoid using deprecated elements from within the package in which they are declared."
+        "severity": "MINOR",
+        "description": "Avoid using deprecated elements from within the package in which they are declared.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "diagnostic_describe_all_properties",
         "name": "Diagnostic describe all properties",
-        "description": "DO reference all public properties in debug methods."
+        "severity": "MAJOR",
+        "description": "DO reference all public properties in debug methods.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "discarded_futures",
         "name": "Discarded futures",
-        "description": "Don't invoke asynchronous functions in non-async blocks."
+        "severity": "MAJOR",
+        "description": "Don't invoke asynchronous functions in non-async blocks.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "empty_statements",
         "name": "Empty statements",
-        "description": "Avoid empty statements."
+        "severity": "CRITICAL",
+        "description": "Avoid empty statements.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "hash_and_equals",
         "name": "Hash and equals",
-        "description": "Always override hashCode if overriding ==."
+        "severity": "CRITICAL",
+        "description": "Always override hashCode if overriding ==.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "implicit_reopen (experimental)",
         "name": "Implicit reopen (experimental)",
-        "description": "Don't implicitly reopen classes."
+        "severity": "MAJOR",
+        "description": "Don't implicitly reopen classes.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "invalid_case_patterns (experimental)",

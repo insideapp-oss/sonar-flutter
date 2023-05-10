@@ -25,8 +25,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
@@ -39,12 +37,14 @@ import fr.insideapp.sonarqube.dart.lang.antlr.CyclomaticComplexityVisitor;
 import fr.insideapp.sonarqube.dart.lang.antlr.HighlighterVisitor;
 import fr.insideapp.sonarqube.dart.lang.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.dart.lang.antlr.SourceLinesVisitor;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 public class DartSensor implements Sensor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DartSensor.class);
+    private static final Logger LOGGER = Loggers.get(DartSensor.class);
     private static final int EXECUTOR_TIMEOUT = 10000;
 
     @Override
