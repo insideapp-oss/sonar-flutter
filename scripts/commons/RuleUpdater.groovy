@@ -75,45 +75,52 @@ class RuleUpdater {
     /**
      * Scan rules for missing manual info an prompt when missing
      * @param rules List of rules to check
+     * @param max Max number of rules to manually process. No limit if set to 0.
      * @return List of rules (with all data completed)
      */
-    def private requestManualInfo(ArrayList<Rule> rules) {
+    def private requestManualInfo(ArrayList<Rule> rules, int max = 0) {
 
         def rulesCompleted = [] as ArrayList<Rule>
+        def manuallyProcessedCount = 0;
 
         use(ConsoleString) {
             rules.each { r ->
 
                 if (r.severity == null || r.debt == null || r.type == null) {
-                    println ""
-                    println "Missing information on rule ${r.key}".style(ConsoleString.Color.YELLOW)
-                    println "${r.description}".style(ConsoleString.Color.DEFAULT)
-                    println ""
-                    if (r.name == null) {
-                        r.name = new Prompt("Name?", null).promptText()
-                        println r.name.style(ConsoleString.Color.DEFAULT_BOLD)
-                    }
-                    if (r.severity == null) {
-                        List<String> severities = Arrays.asList(Rule.Severity.values().each{ s -> s.name() });
-                        def choice = new Prompt("Severity?", severities).promptChoice() as String
-                        r.severity = Enum.valueOf(Rule.Severity.class, choice);
-                        println r.severity.name().style(ConsoleString.Color.DEFAULT_BOLD)
-                    }
-                    if (r.type == null) {
-                        List<String> types = Arrays.asList(Rule.Type.values().each{ s -> s.name() });
-                        def choice = new Prompt("Type?", types).promptChoice() as String
-                        r.type = Enum.valueOf(Rule.Type.class, choice);
-                        println r.type.name().style(ConsoleString.Color.DEFAULT_BOLD)
-                    }
-                    if (r.debt == null) {
-                        def offset = new Prompt("Remediation time?", null).promptDuration()
-                        println offset.style(ConsoleString.Color.DEFAULT_BOLD)
-                        r.debt = offset
+                    if (max == 0 || manuallyProcessedCount < max) {
+                        println ""
+                        println "Missing information on rule ${r.key}".style(ConsoleString.Color.YELLOW)
+                        println "${r.description}".style(ConsoleString.Color.DEFAULT)
+                        println ""
+                        if (r.name == null) {
+                            r.name = new Prompt("Name?", null).promptText()
+                            println r.name.style(ConsoleString.Color.DEFAULT_BOLD)
+                        }
+                        if (r.severity == null) {
+                            List<String> severities = Arrays.asList(Rule.Severity.values().each { s -> s.name() });
+                            def choice = new Prompt("Severity?", severities).promptChoice() as String
+                            r.severity = Enum.valueOf(Rule.Severity.class, choice);
+                            println r.severity.name().style(ConsoleString.Color.DEFAULT_BOLD)
+                        }
+                        if (r.type == null) {
+                            List<String> types = Arrays.asList(Rule.Type.values().each { s -> s.name() });
+                            def choice = new Prompt("Type?", types).promptChoice() as String
+                            r.type = Enum.valueOf(Rule.Type.class, choice);
+                            println r.type.name().style(ConsoleString.Color.DEFAULT_BOLD)
+                        }
+                        if (r.debt == null) {
+                            def offset = new Prompt("Remediation time?", null).promptDuration()
+                            println offset.style(ConsoleString.Color.DEFAULT_BOLD)
+                            r.debt = offset
+                        }
+
+                        manuallyProcessedCount++
                     }
 
                 }
 
                 rulesCompleted.add(r)
+
             }
         }
 
@@ -122,8 +129,9 @@ class RuleUpdater {
 
     /**
      * Performs rule update.
+     * @param max Max number of rules to manually process. No limit if set to 0.
      */
-    def update() {
+    def update(int max = 0) {
 
         def existingRules = readRules() as ArrayList<Rule>
         println "Read ${existingRules.size()} existing rule(s) from file"
@@ -136,7 +144,7 @@ class RuleUpdater {
         println "${allRules.size()} rule(s) merged"
 
         // Fill missing info
-        def completedRules = requestManualInfo(allRules) as ArrayList<Rule>
+        def completedRules = requestManualInfo(allRules, max) as ArrayList<Rule>
         println "${completedRules.size()} rule(s) about to be saved"
 
         writeRules(completedRules)

@@ -75,6 +75,9 @@
         <sonar.sources>src/main/java,src/main/js</sonar.sources>
         <sonar.exclusions>file:**/src/main/java/**/generated/**/*.java</sonar.exclusions>
 
+        <!-- Max number of rules to process manually when running rule update scripts -->
+        <scripts.max-manual>20</scripts.max-manual>
+
     </properties>
 
     <dependencies>

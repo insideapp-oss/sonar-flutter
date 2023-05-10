@@ -35,12 +35,7 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
     public static final String REPOSITORY_KEY = "dartanalyzer";
     public static final String REPOSITORY_NAME = REPOSITORY_KEY;
     public static final String RULES_FILE = "/dartanalyzer/rules.json";
-
-
-    public DartAnalyzerRulesDefinition() {
-
-    }
-
+    
     @Override
     public void define(Context context) {
         NewRepository repository = context.createRepository(REPOSITORY_KEY, Dart.KEY).setName(REPOSITORY_NAME);

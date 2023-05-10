@@ -32,14 +32,8 @@ public class DartProfile implements BuiltInQualityProfilesDefinition {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DartProfile.class);
 
-    private final Dart dart;
+    public DartProfile() {
 
-    private final DartAnalyzerRulesDefinition dartAnalyzerRulesDefinition;
-
-
-    public DartProfile(final Dart dart, final DartAnalyzerRulesDefinition dartAnalyzerRulesDefinition) {
-        this.dart = dart;
-        this.dartAnalyzerRulesDefinition = dartAnalyzerRulesDefinition;
     }
 
     @Override

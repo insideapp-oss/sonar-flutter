@@ -12,7 +12,8 @@ import groovyx.net.http.*
         module = 'http-builder', version = '0.7')
 
 import groovyx.net.http.*
-
+@Grab(group = 'org.codehaus.groovy.modules.http-builder',
+        module = 'http-builder', version = '0.7')
 
 import commons.RuleUpdater
 import commons.ConsoleString
@@ -149,4 +150,4 @@ def updater = new RuleUpdater('dart-lang/src/main/resources/dartanalyzer/rules.j
     return rules
 })
 
-updater.update()
+updater.update(Integer.parseInt(project.properties['scripts.max-manual']))
