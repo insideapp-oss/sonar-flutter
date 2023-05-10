@@ -243,9 +243,21 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
+                <version>4.1</version>
                 <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>com/mycila/maven/plugin/license/templates/LGPL-3.txt</header>
+                            <includes>
+                                <include>**/*.java</include>
+                                <include>**/*.groovy</include>
+                            </includes>
+                        </licenseSet>
+                    </licenseSets>
                     <properties>
-                        <license.years>${project.inceptionYear}</license.years>
+                        <owner>${license.owner}</owner>
+                        <email>${license.mailto}</email>
+                        <project.name>SonarQube Flutter Plugin</project.name>
                     </properties>
                 </configuration>
             </plugin>
