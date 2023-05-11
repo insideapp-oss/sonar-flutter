@@ -21,7 +21,7 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.sonar.api.batch.sensor.SensorContext;
 
-public class CustomTreeVisitor extends AbstractParseTreeVisitor implements ParseTreeItemVisitor {
+public class CustomTreeVisitor extends AbstractParseTreeVisitor<Object> implements ParseTreeItemVisitor {
 
     private final ParseTreeItemVisitor[] visitors;
 

@@ -27,7 +27,7 @@ class FileLocator {
 
     FileLocator(Iterable<InputFile> inputFiles) {
         inputFiles.forEach(inputFile -> {
-            String[] path = inputFile.relativePath().split("/");
+            String[] path = inputFile.key().split("/");
             tree.index(inputFile, path);
         });
     }

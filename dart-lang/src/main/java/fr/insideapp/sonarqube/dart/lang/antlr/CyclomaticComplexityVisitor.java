@@ -68,7 +68,7 @@ public class CyclomaticComplexityVisitor implements ParseTreeItemVisitor {
                 context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.COMPLEXITY).withValue(complexity)
                         .save();
             } catch (final Throwable e) {
-                LOGGER.warn(format("Unexpected adding complexity measures on file %s", file.absolutePath()), e);
+                LOGGER.warn(format("Unexpected adding complexity measures on file %s", file.key()), e);
             }
         }
     }

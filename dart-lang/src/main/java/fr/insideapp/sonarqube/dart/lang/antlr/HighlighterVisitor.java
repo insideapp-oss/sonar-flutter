@@ -72,7 +72,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug(format(
                             "Unexpected error creating text range on file %s for token %s on (%s, %s) -  (%s, %s)",
-                            file.absolutePath(), token.getText(), startLine, startLineOffset, endLine, endLineOffset),
+                            file.key(), token.getText(), startLine, startLineOffset, endLine, endLineOffset),
                             e);
                 }
 
@@ -83,12 +83,12 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
             try {
                 newHighlightning.save();
             } catch (final Throwable e) {
-                LOGGER.warn(format("Unexpected error saving highlightings on file %s", file.absolutePath()), e);
+                LOGGER.warn(format("Unexpected error saving highlightings on file %s", file.key()), e);
             }
             try {
                 cpdTokens.save();
             } catch (final Throwable e) {
-                LOGGER.warn(format("Unexpected error saving cpd tokens on file %s", file.absolutePath()), e);
+                LOGGER.warn(format("Unexpected error saving cpd tokens on file %s", file.key()), e);
             }
         }
     }
@@ -99,7 +99,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
             cpdTokens.addToken(range, token.getText());
         } catch (Throwable e) {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(format("Unexpected error adding cpd tokens on file %s", file.absolutePath()), e);
+                LOGGER.debug(format("Unexpected error adding cpd tokens on file %s", file.key()), e);
             }
 
         }
@@ -136,7 +136,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
 
         } catch (final Throwable e) {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(format("Unexpected error adding highlighting on file %s", file.absolutePath()), e);
+                LOGGER.debug(format("Unexpected error adding highlighting on file %s", file.key()), e);
             }
         }
     }

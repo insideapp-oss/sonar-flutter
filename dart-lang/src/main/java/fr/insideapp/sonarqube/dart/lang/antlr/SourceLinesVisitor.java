@@ -33,7 +33,6 @@ import java.io.InputStream;
 public class SourceLinesVisitor implements ParseTreeItemVisitor {
 
     private static final Logger LOGGER = Loggers.get(SourceLinesVisitor.class);
-    private final SourceLinesProvider linesProvider = new SourceLinesProvider();
 
     private static int[] getLineAndColumn(final SourceLine[] lines, final int global) {
 
@@ -47,21 +46,21 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
 
     @Override
     public void apply(ParseTree tree) {
-
+        // No implementation needed
     }
 
     @Override
     public void fillContext(SensorContext context, AntlrContext antlrContext) {
-        try (InputStream stream = antlrContext.getFile().inputStream()) {
+        try  {
             final SourceLine[] lines = antlrContext.getLines();
-            final Token[] alltokens = antlrContext.getTokens();
+            final Token[] allTokens = antlrContext.getTokens();
             final int[] total = new int[lines.length];
             final InputFile file = antlrContext.getFile();
 
-            for (final Token token : alltokens) {
+            for (final Token token : allTokens) {
                 int startLine = token.getLine();
                 int[] endLines = getLineAndColumn(lines, token.getStopIndex());
-                if (endLines == null || endLines.length == 0 || token.getStartIndex() >= token.getStopIndex()) {
+                if (endLines.length == 0 || token.getStartIndex() >= token.getStopIndex()) {
                     continue;
                 }
                 if (token.getType() == Dart2Parser.EOF || token.getType() == Dart2Parser.SINGLE_LINE_COMMENT
@@ -74,10 +73,10 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
 
             }
 
-            for (final Token token : alltokens) {
+            for (final Token token : allTokens) {
                 int startLine = token.getLine();
                 int[] endLines = getLineAndColumn(lines, token.getStopIndex());
-                if (token.getType() == Dart2Parser.EOF || endLines == null || endLines.length == 0
+                if (token.getType() == Dart2Parser.EOF || endLines.length == 0
                         || token.getStartIndex() >= token.getStopIndex()) {
                     continue;
                 }
@@ -108,7 +107,7 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
                 try {
                     context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.NCLOC).withValue(locs).save();
                 } catch (final Throwable e) {
-                    LOGGER.warn(String.format("Unexpected adding nloc measures on file %s", file.absolutePath()), e);
+                    LOGGER.warn(String.format("Unexpected adding nloc measures on file %s", file.key()), e);
                 }
 
                 try {
@@ -116,7 +115,7 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
                             .withValue(comments).save();
                 } catch (final Throwable e) {
                     LOGGER.warn(String.format("Unexpected error while adding comment_lines measures on file %s",
-                            file.absolutePath()), e);
+                            file.key()), e);
                 }
             }
 
