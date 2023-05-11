@@ -40,6 +40,7 @@ class Rule {
     public Type type;
     public String name;
     public String debt;
+    public boolean active;
 
     Rule(
             String key,
@@ -47,7 +48,8 @@ class Rule {
             Severity severity,
             Type type,
             String name,
-            String debt
+            String debt,
+            boolean active
     ) {
         this.key = key
         this.description = description
@@ -55,6 +57,7 @@ class Rule {
         this.type = type
         this.name = name
         this.debt = debt
+        this.active = active
     }
 
 }

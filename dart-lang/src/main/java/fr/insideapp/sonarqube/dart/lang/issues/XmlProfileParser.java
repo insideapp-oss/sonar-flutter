@@ -32,9 +32,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public final class XmlProfileParser {
 
-    public XmlProfileParser() {
-    }
-
     public static void parse(String path, NewBuiltInQualityProfile profile) {
         try {
             String content = toString(path);

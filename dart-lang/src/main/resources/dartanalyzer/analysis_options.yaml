@@ -19,8 +19,8 @@ linter:
     - discarded_futures
     - empty_statements
     - hash_and_equals
-    - implicit_reopen (experimental)
-    - invalid_case_patterns (experimental)
+    - implicit_reopen
+    - invalid_case_patterns
     - invariant_booleans
     - iterable_contains_unrelated_type
     - list_remove_unrelated_type
@@ -35,7 +35,7 @@ linter:
     - unnecessary_statements
     - unrelated_type_equality_checks
     - unsafe_html
-    - use_build_context_synchronously (experimental)
+    - use_build_context_synchronously
     - use_key_in_widget_constructors
     - always_declare_return_types
     - always_put_control_body_on_new_line
@@ -104,7 +104,7 @@ linter:
     - lines_longer_than_80_chars
     - matching_super_parameters
     - missing_whitespace_between_adjacent_strings
-    - no_default_cases (experimental)
+    - no_default_cases
     - no_leading_underscores_for_library_prefixes
     - no_leading_underscores_for_local_identifiers
     - no_literal_bool_comparisons
@@ -188,7 +188,7 @@ linter:
     - unnecessary_new
     - unnecessary_null_aware_assignments
     - unnecessary_null_aware_operator_on_extension_on_nullable
-    - unnecessary_null_checks (experimental)
+    - unnecessary_null_checks
     - unnecessary_null_in_if_null_operators
     - unnecessary_nullable_for_final_variable_declarations
     - unnecessary_overrides
@@ -198,7 +198,7 @@ linter:
     - unnecessary_string_interpolations
     - unnecessary_this
     - unnecessary_to_list_in_spreads
-    - unreachable_from_main (experimental)
+    - unreachable_from_main
     - use_colored_box
     - use_decorated_box
     - use_enums
@@ -206,14 +206,14 @@ linter:
     - use_function_type_syntax_for_parameters
     - use_if_null_to_convert_nulls_to_bools
     - use_is_even_rather_than_modulo
-    - use_late_for_private_fields_and_variables (experimental)
+    - use_late_for_private_fields_and_variables
     - use_named_constants
     - use_raw_strings
     - use_rethrow_when_possible
     - use_setters_to_change_properties
     - use_string_buffers
     - use_string_in_part_of_directives
-    - use_super_parameters (experimental)
+    - use_super_parameters
     - use_test_throws_matchers
     - use_to_and_as_if_applicable
     - depend_on_referenced_packages

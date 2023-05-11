@@ -32,11 +32,30 @@ import groovyx.net.http.*
 @Grab(group = 'org.codehaus.groovy.modules.http-builder',
         module = 'http-builder', version = '0.7')
 
+import groovy.xml.*
+
 import commons.RuleUpdater
 import commons.ConsoleString
 import commons.Rule
 
 String.mixin(ConsoleString)
+
+/** Parse rule HTML description
+ * @param ruleKey Rule key
+ * @return HTML content as String
+ */
+def parseRuleDescription(String ruleKey) {
+
+    def http = new HTTPBuilder('https://dart-lang.github.io/linter/lints/' + ruleKey + '.html')
+    def html = http.get([:])
+
+    def root = html."**".find { it.name() == "SECTION" }
+
+    String formatted = XmlUtil.serialize( new StreamingMarkupBuilder().bind { mkp.yield root } )
+    // Remove XML header and layout spaces
+    formatted.replace('<?xml version="1.0" encoding="UTF-8"?>', '').replace('<PRE>\n    ', '<PRE>\n')
+
+}
 
 /**
  * Parse rules from the lint website
@@ -55,21 +74,26 @@ def parseRules(url) {
     def currentCategory = ''
     def currentKey = ''
     def currentDescription = ''
+    def currentActive = false
     def started = false
-    root."**".findAll { it.name() == "STRONG" || it.name() == "H2" || it.name() == "P" }.each { tag ->
+    root."**".findAll { it.name() == "STRONG" || it.name() == "H2" || it.name() == "P" || it.name() == "IMG" }.each { tag ->
 
         switch (tag.name()) {
             case 'STRONG':
-                if (currentKey != '' && !currentKey.contains('(deprecated)') && started) {
+                def deprecated = currentKey.contains('(deprecated)')
+                currentKey = currentKey.split(' ')[0]
+                if (currentKey != '' && !deprecated && started) {
                     def rule = new Rule(
                             currentKey,
-                            currentDescription,
+                            parseRuleDescription(currentKey),
                             null, // no severity
                             null, // no type
                             currentKey.replace("_", " ").capitalize(),
-                            null // no debt
+                            null, // no debt
+                            currentActive
                     )
                     result.add(rule)
+                    currentActive = false
                 }
                 currentKey = tag.text()
                 break
@@ -80,6 +104,11 @@ def parseRules(url) {
                 break
             case 'P':
                 currentDescription = tag.text()
+                break
+            case 'IMG':
+                if (!currentActive) {
+                    currentActive = (tag.@alt == 'recommended')
+                }
                 break
         }
 
@@ -126,7 +155,8 @@ def parseRulesFromDiagnostic(url) {
                             null, // no severity
                             null, // no type
                             currentKey.replace("_", " ").capitalize(),
-                            null // no debt
+                            null, // no debt
+                            true // active
                     )
                     result.add(rule)
                 }

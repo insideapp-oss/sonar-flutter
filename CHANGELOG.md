@@ -1,19 +1,10 @@
 ## Please check the Github releases for newer changelogs!
 
----
+## Current
 
 #### Breaking
 
-- Removed the following rules. If you use any of these rules in custom quality profiles, please remove them from the profile before the update!
-  - `super_goes_last (deprecated)` -> replaced by `super_goes_last`
-  - `invalid_use_of_covariant_in_extension` -> replaced by `invalid_use_of_covariant`
-  - `extension_declares_abstract_member`
-  - `extension_declares_constructor`
-  - `extension_declares_instance_field`
-  - `undefined_super_method` -> replaced by `undefined_super_member`
-  - `avoid_web_libraries_in_flutter (experimental)` -> replaced by `avoid_web_libraries_in_flutter`
-  - `prefer_bool_in_asserts (deprecated)` -> replaced by `prefer_bool_in_asserts`
-  - `invariant_booleans (experimental)` -> replaced by `invariant_booleans`
+- SonarQube API update to 7.9 for latest LTS support (9.9)
 - Removed `dartanalyzer` implementation that scans each file individual, this may affect projects running on a (pretty) old Dart SDK.
   The replacement runs legacy `dartanalyzer .` instead which is much faster.
 - Renamed `sonar.flutter.analyzer.mode` to `sonar.dart.analyzer.mode` and reworked implementation.
@@ -50,6 +41,8 @@
   - `do`
   - `dynamic`
   - `native`
+- Rules update
+- Better rules description
 
 #### Bug Fixes
 

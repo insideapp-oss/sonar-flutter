@@ -58,6 +58,7 @@ class RuleUpdater {
             description rule.description
             type rule.type
             debt rule.debt
+            active rule.active
         }
         file.text = groovy.json.JsonOutput.prettyPrint(json.toString())
     }
@@ -72,16 +73,26 @@ class RuleUpdater {
 
         def allRules = [] as ArrayList<Rule>
 
-        // Add existing rules
-        allRules.addAll(existingRules)
-
-        // Add new rules, if they don't exist yet
         use(ConsoleString) {
             newRules.each { r ->
-                def exists = existingRules.find { er -> er.key == r.key }
-                if (!exists) {
-                    println "Adding new rule ${r.key.style(ConsoleString.Color.DEFAULT_BOLD)}"
-                    allRules.add(r)
+                def alreadyProcessed = allRules.find { er -> er.key == r.key }
+                if (alreadyProcessed) {
+                    println "Warning: rule already processed, skipping ${alreadyProcessed.key.style(ConsoleString.Color.DEFAULT_BOLD)}"
+                } else {
+                    def exists = existingRules.find { er -> er.key == r.key }
+                    // Add new rules, if they don't exist yet
+                    if (!exists) {
+                        println "Adding new rule ${r.key.style(ConsoleString.Color.DEFAULT_BOLD)}"
+                        allRules.add(r)
+                        // Update if they already exist
+                    } else {
+                        println "Updating existing rule ${exists.key.style(ConsoleString.Color.DEFAULT_BOLD)}"
+                        // Description
+                        exists.description = r.description
+                        // Active
+                        exists.active = r.active
+                        allRules.add(exists)
+                    }
                 }
             }
         }
@@ -153,9 +164,9 @@ class RuleUpdater {
         def existingRules = readRules() as ArrayList<Rule>
         println "Read ${existingRules.size()} existing rule(s) from file"
 
-        println "Processing rules from tool"
+        println "Processing rules from website"
         def rules = fetchClosure.call() as ArrayList<Rule>
-        println "Read ${rules.size()} rule(s) from tool"
+        println "Read ${rules.size()} rule(s) from website"
 
         def allRules = mergeRules(existingRules, rules) as ArrayList<Rule>
         println "${allRules.size()} rule(s) merged"

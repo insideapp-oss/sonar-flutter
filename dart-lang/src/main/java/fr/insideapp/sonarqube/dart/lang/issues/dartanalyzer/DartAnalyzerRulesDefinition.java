@@ -50,6 +50,7 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
                             .setName(rule.name)
                             .setSeverity(rule.severity.name())
                             .setType(RuleType.valueOf(rule.type.name()))
+                            .setActivatedByDefault(rule.active)
                             .setHtmlDescription(rule.description);
                     newRule.setDebtRemediationFunction(newRule.debtRemediationFunctions().constantPerIssue(rule.debt));
                 }

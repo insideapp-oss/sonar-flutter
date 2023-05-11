@@ -53,4 +53,7 @@ public class RepositoryRule {
 
     @JsonProperty("debt")
     public String debt;
+
+    @JsonProperty("active")
+    public boolean active;
 }
