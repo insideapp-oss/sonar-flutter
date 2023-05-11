@@ -18,7 +18,6 @@
 package fr.insideapp.sonarqube.dart.lang.antlr;
 
 import fr.insideapp.sonarqube.dart.lang.SourceLine;
-import fr.insideapp.sonarqube.dart.lang.SourceLinesProvider;
 import fr.insideapp.sonarqube.dart.lang.antlr.generated.Dart2Parser;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -27,8 +26,6 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-
-import java.io.InputStream;
 
 public class SourceLinesVisitor implements ParseTreeItemVisitor {
 
