@@ -5,7 +5,6 @@ linter:
     - avoid_empty_else
     - avoid_print
     - avoid_relative_lib_imports
-    - avoid_returning_null_for_future (deprecated)
     - avoid_slow_async_io
     - avoid_type_to_string
     - avoid_types_as_parameter_names
@@ -41,7 +40,6 @@ linter:
     - always_declare_return_types
     - always_put_control_body_on_new_line
     - always_put_required_named_parameters_first
-    - always_require_non_null_named_parameters (deprecated)
     - always_specify_types
     - annotate_overrides
     - avoid_annotating_with_dynamic
@@ -66,7 +64,6 @@ linter:
     - avoid_redundant_argument_values
     - avoid_renaming_method_parameters
     - avoid_return_types_on_setters
-    - avoid_returning_null (deprecated)
     - avoid_returning_null_for_void
     - avoid_returning_this
     - avoid_setters_without_getters

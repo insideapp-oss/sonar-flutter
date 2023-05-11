@@ -418,7 +418,7 @@
     {
         "key": "always_use_package_imports",
         "name": "Always use package imports",
-        "severity": "MAJOR",
+        "severity": "MINOR",
         "description": "Avoid relative imports for files in lib/.",
         "type": "CODE_SMELL",
         "debt": "5min"
@@ -450,7 +450,7 @@
     {
         "key": "avoid_relative_lib_imports",
         "name": "Avoid relative lib imports",
-        "severity": "MAJOR",
+        "severity": "MINOR",
         "description": "Avoid relative imports for files in lib/.",
         "type": "CODE_SMELL",
         "debt": "5min"
@@ -650,7 +650,7 @@
     {
         "key": "prefer_relative_imports",
         "name": "Prefer relative imports",
-        "severity": "MAJOR",
+        "severity": "MINOR",
         "description": "Prefer relative imports for files in lib/.",
         "type": "CODE_SMELL",
         "debt": "1min"
@@ -744,109 +744,164 @@
         "debt": "1min"
     },
     {
-        "key": "always_require_non_null_named_parameters (deprecated)",
-        "name": "Always require non null named parameters (deprecated)",
-        "description": "Specify @required on named parameters without defaults."
-    },
-    {
         "key": "always_specify_types",
         "name": "Always specify types",
-        "description": "Specify type annotations."
+        "severity": "MAJOR",
+        "description": "Specify type annotations.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "annotate_overrides",
         "name": "Annotate overrides",
-        "description": "Annotate overridden members."
+        "severity": "MAJOR",
+        "description": "Annotate overridden members.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_annotating_with_dynamic",
         "name": "Avoid annotating with dynamic",
-        "description": "Avoid annotating with dynamic when not required."
+        "severity": "MINOR",
+        "description": "Avoid annotating with dynamic when not required.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_as",
         "name": "Avoid as",
-        "description": "Avoid using as."
+        "severity": "MINOR",
+        "description": "Avoid using as.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_bool_literals_in_conditional_expressions",
         "name": "Avoid bool literals in conditional expressions",
-        "description": "Avoid bool literals in conditional expressions."
+        "severity": "MINOR",
+        "description": "Avoid bool literals in conditional expressions.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_catches_without_on_clauses",
         "name": "Avoid catches without on clauses",
-        "description": "Avoid catches without on clauses."
+        "severity": "MAJOR",
+        "description": "Avoid catches without on clauses.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_catching_errors",
         "name": "Avoid catching errors",
-        "description": "Don't explicitly catch Error or types that implement it."
+        "severity": "MAJOR",
+        "description": "Don't explicitly catch Error or types that implement it.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_classes_with_only_static_members",
         "name": "Avoid classes with only static members",
-        "description": "Avoid defining a class that contains only static members."
+        "severity": "MINOR",
+        "description": "Avoid defining a class that contains only static members.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "avoid_double_and_int_checks",
         "name": "Avoid double and int checks",
-        "description": "Avoid double and int checks."
+        "severity": "MAJOR",
+        "description": "Avoid double and int checks.",
+        "type": "BUG",
+        "debt": "1min"
     },
     {
         "key": "avoid_equals_and_hash_code_on_mutable_classes",
         "name": "Avoid equals and hash code on mutable classes",
-        "description": "Avoid overloading operator == and hashCode on classes not marked @immutable."
+        "severity": "MAJOR",
+        "description": "Avoid overloading operator == and hashCode on classes not marked @immutable.",
+        "type": "BUG",
+        "debt": "5min"
     },
     {
         "key": "avoid_escaping_inner_quotes",
         "name": "Avoid escaping inner quotes",
-        "description": "Avoid escaping inner quotes by converting surrounding quotes."
+        "severity": "MINOR",
+        "description": "Avoid escaping inner quotes by converting surrounding quotes.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_field_initializers_in_const_classes",
         "name": "Avoid field initializers in const classes",
-        "description": "Avoid field initializers in const classes."
+        "severity": "MINOR",
+        "description": "Avoid field initializers in const classes.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_final_parameters",
         "name": "Avoid final parameters",
-        "description": "Avoid final for parameter declarations."
+        "severity": "MINOR",
+        "description": "Avoid final for parameter declarations.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_function_literals_in_foreach_calls",
         "name": "Avoid function literals in foreach calls",
-        "description": "Avoid using forEach with a function literal."
+        "severity": "MINOR",
+        "description": "Avoid using forEach with a function literal.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_implementing_value_types",
         "name": "Avoid implementing value types",
-        "description": "Don't implement classes that override ==."
+        "severity": "MAJOR",
+        "description": "Don't implement classes that override ==.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "avoid_init_to_null",
         "name": "Avoid init to null",
-        "description": "Don't explicitly initialize variables to null."
+        "severity": "MINOR",
+        "description": "Don't explicitly initialize variables to null.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_js_rounded_ints",
         "name": "Avoid js rounded ints",
-        "description": "Avoid JavaScript rounded ints."
+        "severity": "MAJOR",
+        "description": "Avoid JavaScript rounded ints.",
+        "type": "BUG",
+        "debt": "5min"
     },
     {
         "key": "avoid_multiple_declarations_per_line",
         "name": "Avoid multiple declarations per line",
-        "description": "Don't declare multiple variables on a single line."
+        "severity": "MINOR",
+        "description": "Don't declare multiple variables on a single line.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_null_checks_in_equality_operators",
         "name": "Avoid null checks in equality operators",
-        "description": "Don't check for null in custom == operators."
+        "severity": "MINOR",
+        "description": "Don't check for null in custom == operators.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "avoid_positional_boolean_parameters",
         "name": "Avoid positional boolean parameters",
-        "description": "Avoid positional boolean parameters."
+        "severity": "MINOR",
+        "description": "Avoid positional boolean parameters.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "avoid_private_typedef_functions",

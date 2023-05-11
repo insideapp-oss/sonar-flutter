@@ -60,7 +60,7 @@ def parseRules(url) {
 
         switch (tag.name()) {
             case 'STRONG':
-                if (currentKey != '' && started) {
+                if (currentKey != '' && !currentKey.contains('(deprecated)') && started) {
                     def rule = new Rule(
                             currentKey,
                             currentDescription,
