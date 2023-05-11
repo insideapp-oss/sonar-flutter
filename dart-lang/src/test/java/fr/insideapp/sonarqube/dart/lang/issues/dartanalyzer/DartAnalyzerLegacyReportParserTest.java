@@ -42,7 +42,7 @@ public class DartAnalyzerLegacyReportParserTest {
 				+ "  info • lib/main.dart:61:5 • Use Flutter TODO format: // TODO(username): message, https://URL-to-issue. • flutter_style_todos";
 
 		List<DartAnalyzerReportIssue> issues = parser.parse(input);
-		assertThat(issues.size()).isEqualTo(3);
+		assertThat(issues).hasSize(3);
 
 		assertFilePath(issues.get(0), FILE_PATH);
 		assertLineNumber(issues.get(0), 63);
@@ -80,7 +80,7 @@ public class DartAnalyzerLegacyReportParserTest {
 
     	List<DartAnalyzerReportIssue> issues = parser.parse(input);
 
-    	assertThat(issues.size()).isEqualTo(12);
+    	assertThat(issues).hasSize(12);
 
     	assertFilePath(issues.get(0), FILE_PATH);
     	assertLineNumber(issues.get(0), 1);

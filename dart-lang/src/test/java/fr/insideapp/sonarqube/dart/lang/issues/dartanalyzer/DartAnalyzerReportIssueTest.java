@@ -91,7 +91,7 @@ public class DartAnalyzerReportIssueTest {
         DartAnalyzerReportIssue issue = new DartAnalyzerReportIssue("1", "msg", "/test/path", 1, 1, 19);
         DefaultIssueLocation location = (DefaultIssueLocation) issue.toNewIssueLocationFor(testFile());
 
-        assertThat(location.textRange().start().lineOffset()).isEqualTo(0);
+        assertThat(location.textRange().start().lineOffset()).isZero();
         assertThat(location.textRange().end().lineOffset()).isEqualTo(19);
     }
 

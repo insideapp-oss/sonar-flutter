@@ -30,7 +30,7 @@ public class DartAnalyzerLegacyReportParser implements DartAnalyzerReportParser 
         List<DartAnalyzerReportIssue> issues = new ArrayList<>();
 
         String[] lines = input.split(System.getProperty("line.separator"));
-        Pattern pattern = Pattern.compile("(hint|lint|info|warning|error)( [-•] )(.*):([0-9]+):([0-9]+)( [-•] )(.*)( [-•] )(.*)");
+        Pattern pattern = Pattern.compile("(hint|lint|info|warning|error)( [-•] )(.*):(\\d+):(\\d+)( [-•] )(.*)( [-•] )(.*)");
         for (String line : lines) {
             Matcher matcher = pattern.matcher(line);
             while (matcher.find()) {

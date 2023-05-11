@@ -43,7 +43,7 @@ public class DartAnalyzerMachineReportParserTest {
                 + "INFO|HINT|DUMMY_RULE|/some/path/with/pipe/_\\\\|_/lib/main.dart|2|3|4|Some message with pipe _\\\\|_.";
 
         List<DartAnalyzerReportIssue> issues = parser.parse(input);
-        assertThat(issues.size()).isEqualTo(5);
+        assertThat(issues).hasSize(5);
 
         assertFilePath(issues.get(0), FILE_PATH);
         assertLineNumber(issues.get(0), 63);
