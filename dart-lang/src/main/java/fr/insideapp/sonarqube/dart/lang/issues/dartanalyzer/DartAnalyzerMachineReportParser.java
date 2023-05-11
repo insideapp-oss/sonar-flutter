@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  */
 public class DartAnalyzerMachineReportParser implements DartAnalyzerReportParser {
 
-    private static final Pattern PATTERN = Pattern.compile("^([A-Z]*)\\|([A-Z_]*)\\|([A-Z_]*)\\|(.*)\\|(\\d*)\\|([0-9]*)\\|(\\d*)\\|(.*)$");
+    private static final Pattern PATTERN = Pattern.compile("^([A-Z]*)\\|([A-Z_]*)\\|([A-Z_]*)\\|(.*)\\|(\\d*)\\|(\\d*)\\|(\\d*)\\|(.*)$");
 
     @Override
     public List<DartAnalyzerReportIssue> parse(String input) {

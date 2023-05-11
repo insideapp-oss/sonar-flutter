@@ -586,102 +586,162 @@
     {
         "key": "invalid_case_patterns (experimental)",
         "name": "Invalid case patterns (experimental)",
-        "description": "Use case expressions that are valid in Dart 3.0."
+        "severity": "CRITICAL",
+        "description": "Use case expressions that are valid in Dart 3.0.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "invariant_booleans",
         "name": "Invariant booleans",
-        "description": "Conditions should not unconditionally evaluate to true or to false."
+        "severity": "MAJOR",
+        "description": "Conditions should not unconditionally evaluate to true or to false.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "iterable_contains_unrelated_type",
         "name": "Iterable contains unrelated type",
-        "description": "Invocation of Iterable.contains with references of unrelated types."
+        "severity": "MAJOR",
+        "description": "Invocation of Iterable.contains with references of unrelated types.",
+        "type": "BUG",
+        "debt": "1min"
     },
     {
         "key": "list_remove_unrelated_type",
         "name": "List remove unrelated type",
-        "description": "Invocation of remove with references of unrelated types."
+        "severity": "MAJOR",
+        "description": "Invocation of remove with references of unrelated types.",
+        "type": "BUG",
+        "debt": "1min"
     },
     {
         "key": "literal_only_boolean_expressions",
         "name": "Literal only boolean expressions",
-        "description": "Boolean expression composed only with literals."
+        "severity": "MAJOR",
+        "description": "Boolean expression composed only with literals.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "no_adjacent_strings_in_list",
         "name": "No adjacent strings in list",
-        "description": "Don't use adjacent strings in list."
+        "severity": "MAJOR",
+        "description": "Don't use adjacent strings in list.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "no_duplicate_case_values",
         "name": "No duplicate case values",
-        "description": "Don't use more than one case with same value."
+        "severity": "CRITICAL",
+        "description": "Don't use more than one case with same value.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "no_logic_in_create_state",
         "name": "No logic in create state",
-        "description": "Don't put any logic in createState."
+        "severity": "MAJOR",
+        "description": "Don't put any logic in createState.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "prefer_relative_imports",
         "name": "Prefer relative imports",
-        "description": "Prefer relative imports for files in lib/."
+        "severity": "MAJOR",
+        "description": "Prefer relative imports for files in lib/.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "prefer_void_to_null",
         "name": "Prefer void to null",
-        "description": "Don't use the Null type, unless you are positive that you don't want void."
+        "severity": "MAJOR",
+        "description": "Don't use the Null type, unless you are positive that you don't want void.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "test_types_in_equals",
         "name": "Test types in equals",
-        "description": "Test type arguments in operator ==(Object other)."
+        "severity": "CRITICAL",
+        "description": "Test type arguments in operator ==(Object other).",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "throw_in_finally",
         "name": "Throw in finally",
-        "description": "Avoid throw in finally block."
+        "severity": "MAJOR",
+        "description": "Avoid throw in finally block.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "unnecessary_statements",
         "name": "Unnecessary statements",
-        "description": "Avoid using unnecessary statements."
+        "severity": "MINOR",
+        "description": "Avoid using unnecessary statements.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "unrelated_type_equality_checks",
         "name": "Unrelated type equality checks",
-        "description": "Equality operator == invocation with references of unrelated types."
+        "severity": "CRITICAL",
+        "description": "Equality operator == invocation with references of unrelated types.",
+        "type": "BUG",
+        "debt": "1min"
     },
     {
         "key": "unsafe_html",
         "name": "Unsafe html",
-        "description": "Avoid unsafe HTML APIs."
+        "severity": "CRITICAL",
+        "description": "Avoid unsafe HTML APIs.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     },
     {
         "key": "use_build_context_synchronously (experimental)",
         "name": "Use build context synchronously (experimental)",
-        "description": "Do not use BuildContexts across async gaps."
+        "severity": "CRITICAL",
+        "description": "Do not use BuildContexts across async gaps.",
+        "type": "BUG",
+        "debt": "5min"
     },
     {
         "key": "use_key_in_widget_constructors",
         "name": "Use key in widget constructors",
-        "description": "Use key in widget constructors."
+        "severity": "MAJOR",
+        "description": "Use key in widget constructors.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "always_declare_return_types",
         "name": "Always declare return types",
-        "description": "Declare method return types."
+        "severity": "MAJOR",
+        "description": "Declare method return types.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "always_put_control_body_on_new_line",
         "name": "Always put control body on new line",
-        "description": "Separate the control structure expression from its statement."
+        "severity": "MINOR",
+        "description": "Separate the control structure expression from its statement.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "always_put_required_named_parameters_first",
         "name": "Always put required named parameters first",
-        "description": "Put required named parameters first."
+        "severity": "MINOR",
+        "description": "Put required named parameters first.",
+        "type": "CODE_SMELL",
+        "debt": "1min"
     },
     {
         "key": "always_require_non_null_named_parameters (deprecated)",
