@@ -76,6 +76,10 @@ public class DartAnalyzerSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
+        if (sensorContext.config().hasKey(DartSensor.DART_ANALYSIS_USE_EXISTING_REPORT_PATH_KEY)) {
+            executeWithExistingReport(sensorContext);
+            return;
+        }
 
         AnalyzerMode analyzerMode = getAnalyzerMode(sensorContext);
         LOGGER.info("Chosen analyzer mode: {}", analyzerMode);
@@ -111,6 +115,37 @@ public class DartAnalyzerSensor implements Sensor {
                 throw new NotImplementedException();
         }
     }
+
+    private void executeWithExistingReport(SensorContext sensorContext) {
+        final String path = sensorContext.config().get(DartSensor.DART_ANALYSIS_USE_EXISTING_REPORT_PATH_KEY)
+                .orElseThrow(() -> new IllegalArgumentException(DartSensor.DART_ANALYSIS_USE_EXISTING_REPORT_PATH_KEY + " is miss-configured!"));
+        final File report = sensorContext.fileSystem().resolvePath(path);
+        LOGGER.info("Analysing report from " + report.getPath());
+        try {
+            List<DartAnalyzerReportIssue> issues = buildIssuesFromFile(report);
+            recordIssues(sensorContext, issues);
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+    }
+
+    private List<DartAnalyzerReportIssue> buildIssuesFromFile(File report)
+            throws IOException {
+        if (report != null && report.exists() && report.canRead()) {
+            final String output = new String(java.nio.file.Files.readAllBytes(report.toPath()));
+            return createIssuesFromOutput(output);
+        } else {
+            throw new IllegalArgumentException("File does not exist or could not be read!");
+        }
+    }
+
+    private List<DartAnalyzerReportIssue> createIssuesFromOutput(String output) {
+        Set<DartAnalyzerReportIssue> issues = new HashSet<>(new DartAnalyzerReportParser().parse(output));
+        LOGGER.info("Found issues: {}", issues.size());
+        return new ArrayList<>(issues);
+    }
+
+
 
     private void recordIssuesFromAnalyzer(SensorContext sensorContext, String analyzerCommand) {
         try {
