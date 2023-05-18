@@ -57,7 +57,7 @@ public class PubSpecParser {
         Map<String, Object> data = yaml.load(pubSpecContent);
 
         final String projectVersion = ((String) data.get("version"));
-        final boolean flutter = ((Map<String, Object>) data.get("environment")).containsKey("flutter");
+        final boolean flutter = ((Map<String, Object>) data.get("dependencies")).containsKey("flutter");
         LOGGER.info("Detected {} project with version {}", flutter ? "Flutter" : "Dart", projectVersion);
 
         return new PubSpec(flutter, projectVersion);
