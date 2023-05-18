@@ -29,7 +29,7 @@ public class FlutterAnalyzerReportParser implements DartAnalyzerReportParser {
         List<DartAnalyzerReportIssue> issues = new ArrayList<>();
 
         String[] lines = input.split(System.getProperty("line.separator"));
-        Pattern pattern = Pattern.compile("(hint|lint|info|warning|error)(.*)(-|•)(.*)(-|•)(.*):(.*):(.*)(-|•)(.*)");
+        Pattern pattern = Pattern.compile("(hint|lint|info|warning|error)(.*)([-•])(.*)([-•])(.*):(.*):(.*)([-•])(.*)");
         for (int i = 0; i < lines.length; i++) {
             Matcher matcher = pattern.matcher(lines[i]);
             while (matcher.find()) {

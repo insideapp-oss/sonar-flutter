@@ -99,10 +99,6 @@ public abstract class AnalyzerExecutable {
     }
 
     private void maybeThrowException(ProcResult result) {
-        /*final String errorString = result.getErrorString();
-        if (errorString != null && !errorString.isEmpty()) {
-            throw new IllegalStateException(String.format("Error while running '%s' (exit %s): %s", result.getProcString(), result.getExitValue(), errorString));
-        }*/
         if (result.getExitValue() != 0) {
             throw new IllegalStateException(String.format("Error while running '%s' (exit %s): %s", result.getProcString(), result.getExitValue(), result.getErrorString()));
         }
