@@ -992,121 +992,181 @@
     {
         "key": "noop_primitive_operations",
         "name": "Noop primitive operations",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>Some operations on primitive types are idempotent and can be removed.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">doubleValue.toDouble();\n\nintValue.toInt();\nintValue.round();\nintValue.ceil();\nintValue.floor();\nintValue.truncate();\n\nstring.toString();\nstring = 'hello\\n'\n    'world\\n'\n    ''; // useless empty string\n\n'string with ${x.toString()}';\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "null_check_on_nullable_type_parameter",
         "name": "Null check on nullable type parameter",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     use null check on a potentially nullable type parameter.\n  </P>\n  <P>\n    Given a generic type parameter \n    <CODE>T</CODE>\n     which has a nullable bound (e.g. the default\nbound of \n    <CODE>Object?</CODE>\n    ), it is very easy to introduce erroneous null checks when\nworking with a variable of type \n    <CODE>T?</CODE>\n    . Specifically, it is not uncommon to have\n\n    <CODE>T? x;</CODE>\n     and want to assert that \n    <CODE>x</CODE>\n     has been set to a valid value of type \n    <CODE>T</CODE>\n    .\nA common mistake is to do so using \n    <CODE>x!</CODE>\n    . This is almost always incorrect, since\nif \n    <CODE>T</CODE>\n     is a nullable type, \n    <CODE>x</CODE>\n     may validly hold \n    <CODE>null</CODE>\n     as a value of type \n    <CODE>T</CODE>\n    .\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">T run&lt;T&gt;(T callback()) {\n  T? result;\n   (() { result = callback(); })();\n  return result!;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">T run&lt;T&gt;(T callback()) {\n  T? result;\n   (() { result = callback(); })();\n  return result as T;\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "null_closures",
         "name": "Null closures",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     pass \n    <CODE>null</CODE>\n     as an argument where a closure is expected.\n  </P>\n  <P>\n    Often a closure that is passed to a method will only be called conditionally,\nso that tests and \"happy path\" production calls do not reveal that \n    <CODE>null</CODE>\n     will\nresult in an exception being thrown.\n  </P>\n  <P>This rule only catches null literals being passed where closures are expected\nin the following locations:</P>\n  <H4>Constructors</H4>\n  <UL>\n    <LI>\n      From \n      <CODE>dart:async</CODE>\n      <UL>\n        <LI>\n          <CODE>Future</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Future.microtask</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Future.sync</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Timer</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Timer.periodic</CODE>\n           at the 1st positional parameter\n        </LI>\n      </UL>\n    </LI>\n    <LI>\n      From \n      <CODE>dart:core</CODE>\n      <UL>\n        <LI>\n          <CODE>List.generate</CODE>\n           at the 1st positional parameter\n        </LI>\n      </UL>\n    </LI>\n  </UL>\n  <H4>Static functions</H4>\n  <UL>\n    <LI>\n      From \n      <CODE>dart:async</CODE>\n      <UL>\n        <LI>\n          <CODE>scheduleMicrotask</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Future.doWhile</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Future.forEach</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Future.wait</CODE>\n           at the named parameter \n          <CODE>cleanup</CODE>\n        </LI>\n        <LI>\n          <CODE>Timer.run</CODE>\n           at the 0th positional parameter\n        </LI>\n      </UL>\n    </LI>\n  </UL>\n  <H4>Instance methods</H4>\n  <UL>\n    <LI>\n      From \n      <CODE>dart:async</CODE>\n      <UL>\n        <LI>\n          <CODE>Future.then</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Future.complete</CODE>\n           at the 0th positional parameter\n        </LI>\n      </UL>\n    </LI>\n    <LI>\n      From \n      <CODE>dart:collection</CODE>\n      <UL>\n        <LI>\n          <CODE>Queue.removeWhere</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>`Queue.retain</LI>\n        <LI>\n          <CODE>Iterable.firstWhere</CODE>\n           at the 0th positional parameter, and the named\nparameter \n          <CODE>orElse</CODE>\n        </LI>\n        <LI>\n          <CODE>Iterable.forEach</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Iterable.fold</CODE>\n           at the 1st positional parameter\n        </LI>\n        <LI>\n          <CODE>Iterable.lastWhere</CODE>\n           at the 0th positional parameter, and the named\nparameter \n          <CODE>orElse</CODE>\n        </LI>\n        <LI>\n          <CODE>Iterable.map</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Iterable.reduce</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Iterable.singleWhere</CODE>\n           at the 0th positional parameter, and the named\nparameter \n          <CODE>orElse</CODE>\n        </LI>\n        <LI>\n          <CODE>Iterable.skipWhile</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Iterable.takeWhile</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>Iterable.where</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>List.removeWhere</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>List.retainWhere</CODE>\n           at the 0th positional parameter\n        </LI>\n        <LI>\n          <CODE>String.replaceAllMapped</CODE>\n           at the 1st positional parameter\n        </LI>\n        <LI>\n          <CODE>String.replaceFirstMapped</CODE>\n           at the 1st positional parameter\n        </LI>\n        <LI>\n          <CODE>String.splitMapJoin</CODE>\n           at the named parameters \n          <CODE>onMatch</CODE>\n           and \n          <CODE>onNonMatch</CODE>\n        </LI>\n      </UL>\n    </LI>\n  </UL>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">[1, 3, 5].firstWhere((e) =&gt; e.isOdd, orElse: null);\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">[1, 3, 5].firstWhere((e) =&gt; e.isOdd, orElse: () =&gt; null);\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": true
     },
     {
         "key": "omit_local_variable_types",
         "name": "Omit local variable types",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     redundantly type annotate initialized local variables.\n  </P>\n  <P>\n    Local variables, especially in modern code where functions tend to be small,\nhave very little scope. Omitting the type focuses the reader's attention on the\nmore important \n    <EM>name</EM>\n     of the variable and its initialized value.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">List&lt;List&lt;Ingredient&gt;&gt; possibleDesserts(Set&lt;Ingredient&gt; pantry) {\n  List&lt;List&lt;Ingredient&gt;&gt; desserts = &lt;List&lt;Ingredient&gt;&gt;[];\n  for (final List&lt;Ingredient&gt; recipe in cookbook) {\n    if (pantry.containsAll(recipe)) {\n      desserts.add(recipe);\n    }\n  }\n\n  return desserts;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">List&lt;List&lt;Ingredient&gt;&gt; possibleDesserts(Set&lt;Ingredient&gt; pantry) {\n  var desserts = &lt;List&lt;Ingredient&gt;&gt;[];\n  for (final recipe in cookbook) {\n    if (pantry.containsAll(recipe)) {\n      desserts.add(recipe);\n    }\n  }\n\n  return desserts;\n}\n</CODE>\n  </PRE>\n  <P>Sometimes the inferred type is not the type you want the variable to have. For\nexample, you may intend to assign values of other types later. In that case,\nannotate the variable with the type you want.</P>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Widget build(BuildContext context) {\n  Widget result = Text('You won!');\n  if (applyPadding) {\n    result = Padding(padding: EdgeInsets.all(8.0), child: result);\n  }\n  return result;\n}\n</CODE>\n  </PRE>\n  <P>\n    Incompatible with: \n    <A href=\"always_specify_types.html\">always_specify_types</A>\n    .\n\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "one_member_abstracts",
         "name": "One member abstracts",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    From the \n    <A href=\"https://dart.dev/guides/language/effective-dart/style/\">style guide</A>\n    :\n  </P>\n  <P>\n    <STRONG>AVOID</STRONG>\n     defining a one-member abstract class when a simple function will do.\n  </P>\n  <P>\n    Unlike Java, Dart has first-class functions, closures, and a nice light syntax\nfor using them.  If all you need is something like a callback, just use a\nfunction.  If you're defining a class and it only has a single abstract member\nwith a meaningless name like \n    <CODE>call</CODE>\n     or \n    <CODE>invoke</CODE>\n    , there is a good chance\nyou just want a function.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">abstract class Predicate {\n  bool test(item);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">typedef Predicate = bool Function(item);\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "only_throw_errors",
         "name": "Only throw errors",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     throw only instances of classes that extend \n    <CODE>dart.core.Error</CODE>\n     or\n\n    <CODE>dart.core.Exception</CODE>\n    .\n  </P>\n  <P>\n    Throwing instances that do not extend \n    <CODE>Error</CODE>\n     or \n    <CODE>Exception</CODE>\n     is a bad practice;\ndoing this is usually a hack for something that should be implemented more\nthoroughly.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void throwString() {\n  throw 'hello world!'; // LINT\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void throwArgumentError() {\n  Error error = ArgumentError('oh!');\n  throw error; // OK\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "overridden_fields",
         "name": "Overridden fields",
+        "severity": "CRITICAL",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     override fields.\n  </P>\n  <P>Overriding fields is almost always done unintentionally.  Regardless, it is a\nbad practice to do so.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Base {\n  Object field = 'lorem';\n\n  Object something = 'change';\n}\n\nclass Bad1 extends Base {\n  @override\n  final field = 'ipsum'; // LINT\n}\n\nclass Bad2 extends Base {\n  @override\n  Object something = 'done'; // LINT\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Base {\n  Object field = 'lorem';\n\n  Object something = 'change';\n}\n\nclass Ok extends Base {\n  Object newField; // OK\n\n  final Object newFinal = 'ignore'; // OK\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">abstract class BaseLoggingHandler {\n  Base transformer;\n}\n\nclass LogPrintHandler implements BaseLoggingHandler {\n  @override\n  Derived transformer; // OK\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "package_api_docs",
         "name": "Package api docs",
+        "severity": "INFO",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     provide doc comments for all public APIs.\n  </P>\n  <P>\n    As described in the \n    <A href=\"https://dart.dev/tools/pub/package-layout#implementation-files\">pub package layout doc</A>\n    ,\npublic APIs consist in everything in your package's \n    <CODE>lib</CODE>\n     folder, minus\nimplementation files in \n    <CODE>lib/src</CODE>\n    , adding elements explicitly exported with an\n\n    <CODE>export</CODE>\n     directive.\n  </P>\n  <P>\n    For example, given \n    <CODE>lib/foo.dart</CODE>\n    :\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">export 'src/bar.dart' show Bar;\nexport 'src/baz.dart';\n\nclass Foo { }\n\nclass _Foo { }\n</CODE>\n  </PRE>\n  <P>its API includes:</P>\n  <UL>\n    <LI>\n      <CODE>Foo</CODE>\n       (but not \n      <CODE>_Foo</CODE>\n      )\n    </LI>\n    <LI>\n      <CODE>Bar</CODE>\n       (exported) and\n    </LI>\n    <LI>\n      all \n      <EM>public</EM>\n       elements in \n      <CODE>src/baz.dart</CODE>\n    </LI>\n  </UL>\n  <P>\n    All public API members should be documented with \n    <CODE>///</CODE>\n     doc-style comments.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Bar {\n  void bar();\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">/// A Foo.\nabstract class Foo {\n  /// Start foo-ing.\n  void start() =&gt; _start();\n\n  _start();\n}\n</CODE>\n  </PRE>\n  <P>\n    Advice for writing good doc comments can be found in the\n\n    <A href=\"https://dart.dev/guides/language/effective-dart/documentation\">Doc Writing Guidelines</A>\n    .\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "10min",
         "active": false
     },
     {
         "key": "package_prefixed_library_names",
         "name": "Package prefixed library names",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     prefix library names with the package name and a dot-separated path.\n  </P>\n  <P>This guideline helps avoid the warnings you get when two libraries have the same\nname.  Here are the rules we recommend:</P>\n  <UL>\n    <LI>Prefix all library names with the package name.</LI>\n    <LI>Make the entry library have the same name as the package.</LI>\n    <LI>For all other libraries in a package, after the package name add the\ndot-separated path to the library's Dart file.</LI>\n    <LI>\n      For libraries under \n      <CODE>lib</CODE>\n      , omit the top directory name.\n    </LI>\n  </UL>\n  <P>\n    For example, say the package name is \n    <CODE>my_package</CODE>\n    .  Here are the library names\nfor various files in the package:\n  </P>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">// In lib/my_package.dart\nlibrary my_package;\n\n// In lib/other.dart\nlibrary my_package.other;\n\n// In lib/foo/bar.dart\nlibrary my_package.foo.bar;\n\n// In example/foo/bar.dart\nlibrary my_package.example.foo.bar;\n\n// In lib/src/private.dart\nlibrary my_package.src.private;\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": true
     },
     {
         "key": "parameter_assignments",
         "name": "Parameter assignments",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     assign new values to parameters of methods or functions.\n  </P>\n  <P>\n    Assigning new values to parameters is generally a bad practice unless an\noperator such as \n    <CODE>??=</CODE>\n     is used.  Otherwise, arbitrarily reassigning parameters\nis usually a mistake.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void badFunction(int parameter) { // LINT\n  parameter = 4;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void badFunction(int required, {int optional: 42}) { // LINT\n  optional ??= 8;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void badFunctionPositional(int required, [int optional = 42]) { // LINT\n  optional ??= 8;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  void badMethod(int parameter) { // LINT\n    parameter = 4;\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void ok(String parameter) {\n  print(parameter);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void actuallyGood(int required, {int optional}) { // OK\n  optional ??= ...;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void actuallyGoodPositional(int required, [int optional]) { // OK\n  optional ??= ...;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  void ok(String parameter) {\n    print(parameter);\n  }\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_adjacent_string_concatenation",
         "name": "Prefer adjacent string concatenation",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use adjacent strings to concatenate string literals.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">raiseAlarm(\n    'ERROR: Parts of the spaceship are on fire. Other ' +\n    'parts are overrun by martians. Unclear which are which.');\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">raiseAlarm(\n    'ERROR: Parts of the spaceship are on fire. Other '\n    'parts are overrun by martians. Unclear which are which.');\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_asserts_in_initializer_lists",
         "name": "Prefer asserts in initializer lists",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     put asserts in initializer lists.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  A(int a) {\n    assert(a != 0);\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  A(int a) : assert(a != 0);\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_asserts_with_message",
         "name": "Prefer asserts with message",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    When assertions fail it's not always simple to understand why. Adding a message\nto the \n    <CODE>assert</CODE>\n     helps the developer to understand why the AssertionError occurs.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">f(a) {\n  assert(a != null);\n}\n\nclass A {\n  A(a) : assert(a != null);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">f(a) {\n  assert(a != null, 'a must not be null');\n}\n\nclass A {\n  A(a) : assert(a != null, 'a must not be null');\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_bool_in_asserts",
         "name": "Prefer bool in asserts",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P style=\"font-size:30px\">\n    <STRONG>Unsupported since Dart language version 3.0.0.</STRONG>\n  </P>\n  <P>\n    <STRONG>DO</STRONG>\n     use a boolean for assert conditions.\n  </P>\n  <P>Not using booleans in assert conditions can lead to code where it isn't clear\nwhat the intention of the assert statement is.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">assert(() {\n  f();\n  return true;\n});\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">assert(() {\n  f();\n  return true;\n}());\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_collection_literals",
         "name": "Prefer collection literals",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use collection literals when possible.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var addresses = Map&lt;String, String&gt;();\nvar uniqueNames = Set&lt;String&gt;();\nvar ids = LinkedHashSet&lt;int&gt;();\nvar coordinates = LinkedHashMap&lt;int, int&gt;();\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var addresses = &lt;String, String&gt;{};\nvar uniqueNames = &lt;String&gt;{};\nvar ids = &lt;int&gt;{};\nvar coordinates = &lt;int, int&gt;{};\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>EXCEPTIONS:</STRONG>\n  </P>\n  <P>\n    There are cases with \n    <CODE>LinkedHashSet</CODE>\n     or \n    <CODE>LinkedHashMap</CODE>\n     where a literal constructor\nwill trigger a type error so those will be excluded from the lint.\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void main() {\n  LinkedHashSet&lt;int&gt; linkedHashSet =  LinkedHashSet.from([1, 2, 3]); // OK\n  LinkedHashMap linkedHashMap = LinkedHashMap(); // OK\n  \n  printSet(LinkedHashSet&lt;int&gt;()); // LINT\n  printHashSet(LinkedHashSet&lt;int&gt;()); // OK\n\n  printMap(LinkedHashMap&lt;int, int&gt;()); // LINT\n  printHashMap(LinkedHashMap&lt;int, int&gt;()); // OK\n}\n\nvoid printSet(Set&lt;int&gt; ids) =&gt; print('$ids!');\nvoid printHashSet(LinkedHashSet&lt;int&gt; ids) =&gt; printSet(ids);\nvoid printMap(Map map) =&gt; print('$map!');\nvoid printHashMap(LinkedHashMap map) =&gt; printMap(map);\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_conditional_assignment",
         "name": "Prefer conditional assignment",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     using \n    <CODE>??=</CODE>\n     over testing for null.\n  </P>\n  <P>\n    As Dart has the \n    <CODE>??=</CODE>\n     operator, it is advisable to use it where applicable to\nimprove the brevity of your code.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">String get fullName {\n  if (_fullName == null) {\n    _fullName = getFullUserName(this);\n  }\n  return _fullName;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">String get fullName {\n  return _fullName ??= getFullUserName(this);\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_const_constructors",
         "name": "Prefer const constructors",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     using \n    <CODE>const</CODE>\n     for instantiating constant constructors.\n  </P>\n  <P>If a constructor can be invoked as const to produce a canonicalized instance,\nit's preferable to do so.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  const A();\n}\n\nvoid accessA() {\n  A a = new A();\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  const A();\n}\n\nvoid accessA() {\n  A a = const A();\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  final int x;\n\n  const A(this.x);\n}\n\nA foo(int x) =&gt; new A(x);\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_const_constructors_in_immutables",
         "name": "Prefer const constructors in immutables",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     declaring const constructors on \n    <CODE>@immutable</CODE>\n     classes.\n  </P>\n  <P>If a class is immutable, it is usually a good idea to make its constructor a\nconst constructor.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">@immutable\nclass A {\n  final a;\n  A(this.a);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">@immutable\nclass A {\n  final a;\n  const A(this.a);\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_const_declarations",
         "name": "Prefer const declarations",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     using \n    <CODE>const</CODE>\n     for const declarations.\n  </P>\n  <P>Const declarations are more hot-reload friendly and allow to use const\nconstructors if an instantiation references this declaration.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">final o = const &lt;int&gt;[];\n\nclass A {\n  static final o = const &lt;int&gt;[];\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">const o = &lt;int&gt;[];\n\nclass A {\n  static const o = &lt;int&gt;[];\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_const_literals_to_create_immutables",
         "name": "Prefer const literals to create immutables",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     using \n    <CODE>const</CODE>\n     for instantiating list, map and set literals used as\nparameters in immutable class instantiations.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">@immutable\nclass A {\n  A(this.v);\n  final v;\n}\n\nA a1 = new A([1]);\nA a2 = new A({});\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">A a1 = new A(const [1]);\nA a2 = new A(const {});\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {

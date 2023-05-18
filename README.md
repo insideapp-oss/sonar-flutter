@@ -26,7 +26,7 @@ A plugin to enable analysis of Dart and Flutter projects into SonarQube.
 | Complexity | YES                                                             |
 | Syntax     | YES                                                             |
 
-The plugin is compatible with sonarQube 6.7+.
+The plugin is compatible with sonarQube 7.9+.
 
 ## Download
 
