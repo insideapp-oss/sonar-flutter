@@ -1352,121 +1352,181 @@
     {
         "key": "prefer_is_not_empty",
         "name": "Prefer is not empty",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n    <CODE>x.isNotEmpty</CODE>\n     to \n    <CODE>!x.isEmpty</CODE>\n     for \n    <CODE>Iterable</CODE>\n     and \n    <CODE>Map</CODE>\n     instances.\n  </P>\n  <P>\n    When testing whether an iterable or map is empty, prefer \n    <CODE>isNotEmpty</CODE>\n     over\n\n    <CODE>!isEmpty</CODE>\n     to improve code readability.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">if (!sources.isEmpty) {\n  process(sources);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">if (todo.isNotEmpty) {\n  sendResults(request, todo.isEmpty);\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_is_not_operator",
         "name": "Prefer is not operator",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>When checking if an object is not of a specified type, it is preferable to use the 'is!' operator.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">if (!(foo is Foo)) {\n  ...\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">if (foo is! Foo) {\n  ...\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_iterable_whereType",
         "name": "Prefer iterable whereType",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n    <CODE>iterable.whereType&lt;T&gt;()</CODE>\n     over \n    <CODE>iterable.where((e) =&gt; e is T)</CODE>\n    .\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">iterable.where((e) =&gt; e is MyClass);\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">iterable.whereType&lt;MyClass&gt;();\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_mixin",
         "name": "Prefer mixin",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    Dart 2.1 introduced a new syntax for mixins that provides a safe way for a mixin\nto invoke inherited members using \n    <CODE>super</CODE>\n    . The new style of mixins should always\nbe used for types that are to be mixed in. As a result, this lint will flag any\nuses of a class in a \n    <CODE>with</CODE>\n     clause.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {}\nclass B extends Object with A {}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>OK:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">mixin M {}\nclass C with M {}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "prefer_null_aware_method_calls",
         "name": "Prefer null aware method calls",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    Instead of checking nullability of a function/method \n    <CODE>f</CODE>\n     before calling it you\ncan use \n    <CODE>f?.call()</CODE>\n    .\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">if (f != null) f!();\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">f?.call();\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_null_aware_operators",
         "name": "Prefer null aware operators",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     using null aware operators instead of null checks in conditional\nexpressions.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">v = a == null ? null : a.b;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">v = a?.b;\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_single_quotes",
         "name": "Prefer single quotes",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use single quotes where they wouldn't require additional escapes.\n  </P>\n  <P>That means strings with an apostrophe may use double quotes so that the\napostrophe isn't escaped (note: we don't lint the other way around, ie, a single\nquoted string with an escaped apostrophe is not flagged).</P>\n  <P>It's also rare, but possible, to have strings within string interpolations.  In\nthis case, its much more readable to use a double quote somewhere.  So double\nquotes are allowed either within, or containing, an interpolated string literal.\nArguably strings within string interpolations should be its own type of lint.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">useStrings(\n    \"should be single quote\",\n    r\"should be single quote\",\n    r\"\"\"should be single quotes\"\"\")\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">useStrings(\n    'should be single quote',\n    r'should be single quote',\n    r'''should be single quotes''',\n    \"here's ok\",\n    \"nested ${a ? 'strings' : 'can'} be wrapped by a double quote\",\n    'and nested ${a ? \"strings\" : \"can be double quoted themselves\"}');\n</CODE>\n  </PRE>\n  <P>\n    Incompatible with: \n    <A href=\"prefer_double_quotes.html\">prefer_double_quotes</A>\n    .\n\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_spread_collections",
         "name": "Prefer spread collections",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>Use spread collections when possible.</P>\n  <P>Collection literals are excellent when you want to create a new collection out\nof individual items. But, when existing items are already stored in another\ncollection, spread collection syntax leads to simpler code.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Widget build(BuildContext context) {\n  return CupertinoPageScaffold(\n    child: ListView(\n      children: [\n        Tab2Header(),\n      ]..addAll(buildTab2Conversation()),\n    ),\n  );\n}\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-dart\">var ints = [1, 2, 3];\nprint(['a']..addAll(ints.map((i) =&gt; i.toString()))..addAll(['c']));\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-dart\">var things;\nvar l = ['a']..addAll(things ?? const []);\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Widget build(BuildContext context) {\n  return CupertinoPageScaffold(\n    child: ListView(\n      children: [\n        Tab2Header(),\n        ...buildTab2Conversation(),\n      ],\n    ),\n  );\n}\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-dart\">var ints = [1, 2, 3];\nprint(['a', ...ints.map((i) =&gt; i.toString()), 'c');\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-dart\">var things;\nvar l = ['a', ...?things];\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_typing_uninitialized_variables",
         "name": "Prefer typing uninitialized variables",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     specifying a type annotation for uninitialized variables and fields.\n  </P>\n  <P>Forgoing type annotations for uninitialized variables is a bad practice because\nyou may accidentally assign them to a type that you didn't originally intend to.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class BadClass {\n  static var bar; // LINT\n  var foo; // LINT\n\n  void method() {\n    var bar; // LINT\n    bar = 5;\n    print(bar);\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void aFunction() {\n  var bar; // LINT\n  bar = 5;\n  ...\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class GoodClass {\n  static var bar = 7;\n  var foo = 42;\n  int baz; // OK\n\n  void method() {\n    int baz;\n    var bar = 5;\n    ...\n  }\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "provide_deprecation_message",
         "name": "Provide deprecation message",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     specify a deprecation message (with migration instructions and/or a\nremoval schedule) in the Deprecation constructor.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">@deprecated\nvoid oldFunction(arg1, arg2) {}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">@Deprecated(\"\"\"\n[oldFunction] is being deprecated in favor of [newFunction] (with slightly\ndifferent parameters; see [newFunction] for more information). [oldFunction]\nwill be removed on or after the 4.0.0 release.\n\"\"\")\nvoid oldFunction(arg1, arg2) {}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": true
     },
     {
         "key": "public_member_api_docs",
         "name": "Public member api docs",
+        "severity": "INFO",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     document all public members.\n  </P>\n  <P>\n    All non-overriding public members should be documented with \n    <CODE>///</CODE>\n     doc-style\ncomments.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Bad {\n  void meh() { }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">/// A good thing.\nabstract class Good {\n  /// Start doing your thing.\n  void start() =&gt; _start();\n\n  _start();\n}\n</CODE>\n  </PRE>\n  <P>\n    In case a public member overrides a member it is up to the declaring member\nto provide documentation.  For example, in the following, \n    <CODE>Sub</CODE>\n     needn't\ndocument \n    <CODE>init</CODE>\n     (though it certainly may, if there's need).\n  </P>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">/// Base of all things.\nabstract class Base {\n  /// Initialize the base.\n  void init();\n}\n\n/// A sub base.\nclass Sub extends Base {\n  @override\n  void init() { ... }\n}\n</CODE>\n  </PRE>\n  <P>\n    Note that consistent with \n    <CODE>dart doc</CODE>\n    , an exception to the rule is made when\ndocumented getters have corresponding undocumented setters.  In this case the\nsetters inherit the docs from the getters.\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "10min",
         "active": false
     },
     {
         "key": "recursive_getters",
         "name": "Recursive getters",
+        "severity": "CRITICAL",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     create recursive getters.\n  </P>\n  <P>Recursive getters are getters which return themselves as a value.  This is\nusually a typo.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">int get field =&gt; field; // LINT\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">int get otherField {\n  return otherField; // LINT\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">int get field =&gt; _field;\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "BUG",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "require_trailing_commas",
         "name": "Require trailing commas",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use trailing commas for all function calls and declarations unless the\nfunction call or definition, from the start of the function name up to the\nclosing parenthesis, fits in a single line.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void run() {\n  method('does not fit on one line',\n      'test test test test test test test test test test test');\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void run() {\n  method(\n    'does not fit on one line',\n    'test test test test test test test test test test test',\n  );\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>EXCEPTION:</STRONG>\n     If the final parameter/argument is positional (vs named) and is\neither a function literal implemented using curly braces, a literal map, a\nliteral set or a literal array. This exception only applies if the final\nparameter does not fit entirely on one line.\n  </P>\n  <P>\n    <STRONG>NOTE:</STRONG>\n     This lint rule assumes \n    <CODE>dart format</CODE>\n     has been run over the code and\nmay produce false positives until that has happened.\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "sized_box_for_whitespace",
         "name": "Sized box for whitespace",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>Use SizedBox to add whitespace to a layout.</P>\n  <P>\n    A \n    <CODE>Container</CODE>\n     is a heavier Widget than a \n    <CODE>SizedBox</CODE>\n    , and as bonus, \n    <CODE>SizedBox</CODE>\n    has a \n    <CODE>const</CODE>\n     constructor.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Widget buildRow() {\n  return Row(\n    children: &lt;Widget&gt;[\n      const MyLogo(),\n      Container(width: 4),\n      const Expanded(\n        child: Text('...'),\n      ),\n    ],\n  );\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Widget buildRow() {\n  return Row(\n    children: const &lt;Widget&gt;[\n      MyLogo(),\n      SizedBox(width: 4),\n      Expanded(\n        child: Text('...'),\n      ),\n    ],\n  );\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "sized_box_shrink_expand",
         "name": "Sized box shrink expand",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    Use \n    <CODE>SizedBox.shrink(...)</CODE>\n     and \n    <CODE>SizedBox.expand(...)</CODE>\n     constructors appropriately.\n  </P>\n  <P>\n    The \n    <CODE>SizedBox.shrink(...)</CODE>\n     and \n    <CODE>SizedBox.expand(...)</CODE>\n     constructors should be used\ninstead of the more general \n    <CODE>SizedBox(...)</CODE>\n     constructor when the named constructors\ncapture the intent of the code more succinctly.\n  </P>\n  <P>\n    <STRONG>Examples</STRONG>\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Widget buildLogo() {\n  return SizedBox(\n    height: 0,\n    width: 0,\n    child: const MyLogo(),\n  );\n}\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-dart\">Widget buildLogo() {\n  return SizedBox(\n    height: double.infinity,\n    width: double.infinity,\n    child: const MyLogo(),\n  );\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Widget buildLogo() {\n  return SizedBox.shrink(\n    child: const MyLogo(),\n  );\n}\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-dart\">Widget buildLogo() {\n  return SizedBox.expand(\n    child: const MyLogo(),\n  );\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "slash_for_doc_comments",
         "name": "Slash for doc comments",
+        "severity": "INFO",
         "description": "<SECTION>\n  <P>\n    From the \n    <A href=\"https://dart.dev/guides/language/effective-dart/style\">style guide</A>\n    :\n  </P>\n  <P>\n    <STRONG>PREFER</STRONG>\n     using \n    <CODE>///</CODE>\n     for doc comments.\n  </P>\n  <P>\n    Although Dart supports two syntaxes of doc comments (\n    <CODE>///</CODE>\n     and \n    <CODE>/**</CODE>\n    ), we\nprefer using \n    <CODE>///</CODE>\n     for doc comments.\n  </P>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">/// Parses a set of option strings. For each option:\n///\n/// * If it is `null`, then it is ignored.\n/// * If it is a string, then [validate] is called on it.\n/// * If it is any other type, it is *not* validated.\nvoid parse(List options) {\n  // ...\n}\n</CODE>\n  </PRE>\n  <P>Within a doc comment, you can use markdown for formatting.</P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "sort_child_properties_last",
         "name": "Sort child properties last",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>Sort child properties last in widget instance creations.  This improves\nreadability and plays nicest with UI as Code visualization in IDEs with UI as\nCode Guides in editors (such as IntelliJ) where Properties in the correct order\nappear clearly associated with the constructor call and separated from the\nchildren.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">return Scaffold(\n  appBar: AppBar(\n    title: Text(widget.title),\n  ),\n  body: Center(\n    child: Column(\n      children: &lt;Widget&gt;[\n        Text(\n          'You have pushed the button this many times:',\n         ),\n        Text(\n          '$_counter',\n          style: Theme.of(context).textTheme.display1,\n         ),\n      ],\n      mainAxisAlignment: MainAxisAlignment.center,\n    ),\n    widthFactor: 0.5,\n  ),\n  floatingActionButton: FloatingActionButton(\n    child: Icon(Icons.add),\n    onPressed: _incrementCounter,\n    tooltip: 'Increment',\n  ),\n);\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">return Scaffold(\n  appBar: AppBar(\n    title: Text(widget.title),\n  ),\n  body: Center(\n    widthFactor: 0.5,\n    child: Column(\n      mainAxisAlignment: MainAxisAlignment.center,\n      children: &lt;Widget&gt;[\n        Text(\n          'You have pushed the button this many times:',\n         ),\n        Text(\n          '$_counter',\n          style: Theme.of(context).textTheme.display1,\n         ),\n      ],\n    ),\n  ),\n  floatingActionButton: FloatingActionButton(\n    onPressed: _incrementCounter,\n    tooltip: 'Increment',\n    child: Icon(Icons.add),\n  ),\n);\n</CODE>\n  </PRE>\n  <P>\n    Exception: It's allowed to have parameter with a function expression after the\n\n    <CODE>child</CODE>\n     property.\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "sort_constructors_first",
         "name": "Sort constructors first",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     sort constructor declarations before other members.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">abstract class Visitor {\n  double value;\n  visitSomething(Something s);\n  Visitor();\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">abstract class Animation&lt;T&gt; {\n  const Animation(this.value);\n  double value;\n  void addListener(VoidCallback listener);\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "sort_unnamed_constructors_first",
         "name": "Sort unnamed constructors first",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     sort unnamed constructor declarations first, before named ones.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class _PriorityItem {\n  factory _PriorityItem.forName(bool isStatic, String name, _MemberKind kind) =&gt; ...\n  _PriorityItem(this.isStatic, this.kind, this.isPrivate);\n  ...\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">abstract class CancelableFuture&lt;T&gt; implements Future&lt;T&gt;  {\n  factory CancelableFuture(computation()) =&gt; ...\n  factory CancelableFuture.delayed(Duration duration, [computation()]) =&gt; ...\n  ...\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "super_goes_last",
         "name": "Super goes last",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P style=\"font-size:30px\">\n    <STRONG>Unsupported since Dart language version 3.0.0.</STRONG>\n  </P>\n  <P>\n    From the \n    <A href=\"https://dart.dev/guides/language/effective-dart/style/\">style guide</A>\n    :\n  </P>\n  <P>\n    <STRONG>DO</STRONG>\n     place the \n    <CODE>super</CODE>\n     call last in a constructor initialization list.\n  </P>\n  <P>\n    Field initializers are evaluated in the order that they appear in the\nconstructor initialization list.  If you place a \n    <CODE>super()</CODE>\n     call in the middle of\nan initializer list, the superclass's initializers will be evaluated right then\nbefore evaluating the rest of the subclass's initializers.\n  </P>\n  <P>\n    What it doesn't mean is that the superclass's constructor body will be executed\nthen.  That always happens after all initializers are run regardless of where\n\n    <CODE>super</CODE>\n     appears.  It's vanishingly rare that the order of initializers matters,\nso the placement of \n    <CODE>super</CODE>\n     in the list almost never matters either.\n  </P>\n  <P>Getting in the habit of placing it last improves consistency, visually\nreinforces when the superclass's constructor body is run, and may help\nperformance.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">View(Style style, List children)\n    : super(style),\n      _children = children {\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">View(Style style, List children)\n    : _children = children,\n      super(style) {\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
