@@ -1532,61 +1532,91 @@
     {
         "key": "tighten_type_of_initializing_formals",
         "name": "Tighten type of initializing formals",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>Tighten the type of an initializing formal if a non-null assert exists. This\nallows the type system to catch problems rather than have them only be caught at\nrun-time.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  A.c1(this.p) : assert(p != null);\n  A.c2(this.p);\n  final String? p;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  A.c1(String this.p);\n  A.c2(this.p);\n  final String? p;\n}\n\nclass B {\n  String? b;\n  B(this.b);\n}\n\nclass C extends B {\n  B(String super.b);\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "type_annotate_public_apis",
         "name": "Type annotate public apis",
+        "severity": "INFO",
         "description": "<SECTION>\n  <P>\n    From \n    <A href=\"https://dart.dev/guides/language/effective-dart/design#do-type-annotate-fields-and-top-level-variables-if-the-type-isnt-obvious\">Effective Dart</A>\n    :\n  </P>\n  <P>\n    <STRONG>PREFER</STRONG>\n     type annotating public APIs.\n  </P>\n  <P>Type annotations are important documentation for how a library should be used.\nAnnotating the parameter and return types of public methods and functions helps\nusers understand what the API expects and what it provides.</P>\n  <P>\n    Note that if a public API accepts a range of values that Dart's type system\ncannot express, then it is acceptable to leave that untyped.  In that case, the\nimplicit \n    <CODE>dynamic</CODE>\n     is the correct type for the API.\n  </P>\n  <P>\n    For code internal to a library (either private, or things like nested functions)\nannotate where you feel it helps, but don't feel that you \n    <EM>must</EM>\n     provide them.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">install(id, destination) {\n  // ...\n}\n</CODE>\n  </PRE>\n  <P>\n    Here, it's unclear what \n    <CODE>id</CODE>\n     is.  A string? And what is \n    <CODE>destination</CODE>\n    ? A string\nor a \n    <CODE>File</CODE>\n     object? Is this method synchronous or asynchronous?\n  </P>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Future&lt;bool&gt; install(PackageId id, String destination) {\n  // ...\n}\n</CODE>\n  </PRE>\n  <P>With types, all of this is clarified.</P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "type_init_formals",
         "name": "Type init formals",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    From the \n    <A href=\"https://dart.dev/guides/language/effective-dart/style/\">style guide</A>\n    :\n  </P>\n  <P>\n    <STRONG>DON'T</STRONG>\n     type annotate initializing formals.\n  </P>\n  <P>\n    If a constructor parameter is using \n    <CODE>this.x</CODE>\n     to initialize a field, then the\ntype of the parameter is understood to be the same type as the field. If a\na constructor parameter is using \n    <CODE>super.x</CODE>\n     to forward to a super constructor,\nthen the type of the parameter is understood to be the same as the super\nconstructor parameter.\n  </P>\n  <P>Type annotating an initializing formal with a different type than that of the\nfield is OK.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Point {\n  int x, y;\n  Point(int this.x, int this.y);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Point {\n  int x, y;\n  Point(this.x, this.y);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  int a;\n  A(this.a);\n}\n\nclass B extends A {\n  B(int super.a);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  int a;\n  A(this.a);\n}\n\nclass B extends A {\n  B(super.a);\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "type_literal_in_constant_pattern",
         "name": "Type literal in constant pattern",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    If you meant to test if the object has type \n    <CODE>Foo</CODE>\n    , instead write \n    <CODE>Foo _</CODE>\n    .\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void f(Object? x) {\n  if (x case num) {\n    print('int or double');\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void f(Object? x) {\n  if (x case num _) {\n    print('int or double');\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    If you do mean to test that the matched value (which you expect to have the\ntype \n    <CODE>Type</CODE>\n    ) is equal to the type literal \n    <CODE>Foo</CODE>\n    , then this lint can be\nsilenced using \n    <CODE>const (Foo)</CODE>\n    .\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void f(Object? x) {\n  if (x case int) {\n    print('int');\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void f(Object? x) {\n  if (x case const (int)) {\n    print('int');\n  }\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "unawaited_futures",
         "name": "Unawaited futures",
+        "severity": "CRITICAL",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     await functions that return a \n    <CODE>Future</CODE>\n     inside of an async function body.\n  </P>\n  <P>\n    It's easy to forget await in async methods as naming conventions usually don't\ntell us if a method is sync or async (except for some in \n    <CODE>dart:io</CODE>\n    ).\n  </P>\n  <P>\n    When you really \n    <EM>do</EM>\n     want to start a fire-and-forget \n    <CODE>Future</CODE>\n    , the recommended\nway is to use \n    <CODE>unawaited</CODE>\n     from \n    <CODE>dart:async</CODE>\n    . The \n    <CODE>// ignore</CODE>\n     and\n\n    <CODE>// ignore_for_file</CODE>\n     comments also work.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void main() async {\n  doSomething(); // Likely a bug.\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Future doSomething() =&gt; ...;\n\nvoid main() async {\n  await doSomething();\n\n  unawaited(doSomething()); // Explicitly-ignored fire-and-forget.\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "BUG",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "unnecessary_await_in_return",
         "name": "Unnecessary await in return",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>Avoid returning an awaited expression when the expression type is assignable to\nthe function's return type.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Future&lt;int&gt; future;\nFuture&lt;int&gt; f1() async =&gt; await future;\nFuture&lt;int&gt; f2() async {\n  return await future;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Future&lt;int&gt; future;\nFuture&lt;int&gt; f1() =&gt; future;\nFuture&lt;int&gt; f2() {\n  return future;\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "unnecessary_brace_in_string_interps",
         "name": "Unnecessary brace in string interps",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>AVOID</STRONG>\n     using braces in interpolation when not needed.\n  </P>\n  <P>\n    If you're just interpolating a simple identifier, and it's not immediately\nfollowed by more alphanumeric text, the \n    <CODE>{}</CODE>\n     can and should be omitted.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">print(\"Hi, ${name}!\");\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">print(\"Hi, $name!\");\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "unnecessary_breaks",
         "name": "Unnecessary breaks",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    Only use a \n    <CODE>break</CODE>\n     in a non-empty switch case statement if you need to break\nbefore the end of the case body.  Dart does not support fallthrough execution\nfor non-empty cases, so \n    <CODE>break</CODE>\n    s at the end of non-empty switch case statements\nare unnecessary.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">switch (1) {\n  case 1:\n    print(\"one\");\n    break;\n  case 2:\n    print(\"two\");\n    break;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">switch (1) {\n  case 1:\n    print(\"one\");\n  case 2:\n    print(\"two\");\n}\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-dart\">switch (1) {\n  case 1:\n  case 2:\n    print(\"one or two\");\n}\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-dart\">switch (1) {\n  case 1:\n    break;\n  case 2:\n    print(\"just two\");\n}\n</CODE>\n  </PRE>\n  <P>\n    NOTE: This lint only reports unnecessary breaks in libraries with a\n\n    <A href=\"https://dart.dev/guides/language/evolution#language-versioning\">language version</A>\n    of 3.0 or greater. Explicit breaks are still required in Dart 2.19 and below.\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "unnecessary_const",
         "name": "Unnecessary const",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>AVOID</STRONG>\n     repeating const keyword in a const context.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A { const A(); }\nm(){\n  const a = const A();\n  final b = const [const A()];\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A { const A(); }\nm(){\n  const a = A();\n  final b = const [A()];\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "unnecessary_constructor_name",
         "name": "Unnecessary constructor name",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     using the default unnamed Constructor over \n    <CODE>.new</CODE>\n    .\n  </P>\n  <P>\n    Given a class \n    <CODE>C</CODE>\n    , the named unnamed constructor \n    <CODE>C.new</CODE>\n     refers to the same\nconstructor as the unnamed \n    <CODE>C</CODE>\n    . As such it adds nothing but visual noise to\ninvocations and should be avoided (unless being used to identify a constructor\ntear-off).\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  A.new(); // LINT\n}\n\nvar a = A.new(); // LINT\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  A.ok();\n}\n\nvar a = A();\nvar aa = A.ok();\nvar makeA = A.new;\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
@@ -1601,61 +1631,91 @@
     {
         "key": "unnecessary_getters_setters",
         "name": "Unnecessary getters setters",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    From the \n    <A href=\"https://dart.dev/guides/language/effective-dart/style/\">style guide</A>\n    :\n  </P>\n  <P>\n    <STRONG>AVOID</STRONG>\n     wrapping fields in getters and setters just to be \"safe\".\n  </P>\n  <P>In Java and C#, it's common to hide all fields behind getters and setters (or\nproperties in C#), even if the implementation just forwards to the field.  That\nway, if you ever need to do more work in those members, you can do it without needing\nto touch the callsites.  This is because calling a getter method is different\nthan accessing a field in Java, and accessing a property isn't binary-compatible\nwith accessing a raw field in C#.</P>\n  <P>Dart doesn't have this limitation.  Fields and getters/setters are completely\nindistinguishable.  You can expose a field in a class and later wrap it in a\ngetter and setter without having to touch any code that uses that field.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Box {\n  var _contents;\n  get contents =&gt; _contents;\n  set contents(value) {\n    _contents = value;\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Box {\n  var contents;\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "unnecessary_lambdas",
         "name": "Unnecessary lambdas",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     create a lambda when a tear-off will do.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">names.forEach((name) {\n  print(name);\n});\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">names.forEach(print);\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "unnecessary_late",
         "name": "Unnecessary late",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     not specify the \n    <CODE>late</CODE>\n     modifier for top-level and static variables\nwhen the declaration contains an initializer.\n  </P>\n  <P>\n    Top-level and static variables with initializers are already evaluated lazily\nas if they are marked \n    <CODE>late</CODE>\n    .\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">late String badTopLevel = '';\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">String goodTopLevel = '';\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class BadExample {\n  static late String badStatic = '';\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class GoodExample {\n  late String goodStatic;\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "unnecessary_library_directive",
         "name": "Unnecessary library directive",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use library directives if you want to document a library and/or annotate\na library.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">library;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">/// This library does important things\nlibrary;\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-dart\">@TestOn('js')\nlibrary;\n</CODE>\n  </PRE>\n  <P>NOTE: Due to limitations with this lint, libraries with parts will not be\nflagged for unnecessary library directives.</P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "unnecessary_new",
         "name": "Unnecessary new",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>AVOID</STRONG>\n     new keyword to create instances.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A { A(); }\nm(){\n  final a = new A();\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A { A(); }\nm(){\n  final a = A();\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "unnecessary_null_aware_assignments",
         "name": "Unnecessary null aware assignments",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>AVOID</STRONG>\n    <CODE>null</CODE>\n     in null-aware assignment.\n  </P>\n  <P>\n    Using \n    <CODE>null</CODE>\n     on the right-hand side of a null-aware assignment effectively makes\nthe assignment redundant.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var x;\nx ??= null;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var x;\nx ??= 1;\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "unnecessary_null_aware_operator_on_extension_on_nullable",
         "name": "Unnecessary null aware operator on extension on nullable",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>Avoid null aware operators for members defined in an extension on a nullable type.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">extension E on int? {\n  int m() =&gt; 1;\n}\nf(int? i) =&gt; i?.m();\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">extension E on int? {\n  int m() =&gt; 1;\n}\nf(int? i) =&gt; i.m();\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "unnecessary_null_checks",
         "name": "Unnecessary null checks",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     apply a null check when a nullable value is accepted.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">f(int? i) {}\nm() {\n  int? j;\n  f(j!);\n}\n\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">f(int? i) {}\nm() {\n  int? j;\n  f(j);\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "unnecessary_null_in_if_null_operators",
         "name": "Unnecessary null in if null operators",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>AVOID</STRONG>\n     using \n    <CODE>null</CODE>\n     as an operand in \n    <CODE>if null</CODE>\n     operators.\n  </P>\n  <P>\n    Using \n    <CODE>null</CODE>\n     in an \n    <CODE>if null</CODE>\n     operator is redundant, regardless of which side\n\n    <CODE>null</CODE>\n     is used on.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var x = a ?? null;\nvar y = null ?? 1;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var x = a ?? 1;\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "unnecessary_nullable_for_final_variable_declarations",
         "name": "Unnecessary nullable for final variable declarations",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>Use a non-nullable type for a final variable initialized with a non-nullable\nvalue.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">final int? i = 1;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">final int i = 1;\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
