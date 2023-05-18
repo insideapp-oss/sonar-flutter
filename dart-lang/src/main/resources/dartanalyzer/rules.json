@@ -1901,49 +1901,73 @@
     {
         "key": "use_string_buffers",
         "name": "Use string buffers",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use string buffers to compose strings.\n  </P>\n  <P>In most cases, using a string buffer is preferred for composing strings due to\nits improved performance.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">String foo() {\n  final buffer = '';\n  for (int i = 0; i &lt; 10; i++) {\n    buffer += 'a'; // LINT\n  }\n  return buffer;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">String foo() {\n  final buffer = StringBuffer();\n  for (int i = 0; i &lt; 10; i++) {\n    buffer.write('a');\n  }\n  return buffer.toString();\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "use_string_in_part_of_directives",
         "name": "Use string in part of directives",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    From \n    <A href=\"https://dart.dev/guides/language/effective-dart/usage#do-use-strings-in-part-of-directives\">Effective Dart</A>\n    :\n  </P>\n  <P>\n    <STRONG>DO</STRONG>\n     use strings in \n    <CODE>part of</CODE>\n     directives.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">part of my_library;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">part of '../../my_library.dart';\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "use_super_parameters",
         "name": "Use super parameters",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\"Forwarding constructor\"s, that do nothing except forward parameters to their\nsuperclass constructors should take advantage of super-initializer parameters\nrather than repeating the names of parameters when passing them to the\nsuperclass constructors.  This makes the code more concise and easier to read\nand maintain.</P>\n  <P>\n    <STRONG>DO</STRONG>\n     use super-initializer parameters where possible.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  A({int? x, int? y});\n}\nclass B extends A {\n  B({int? x, int? y}) : super(x: x, y: y);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  A({int? x, int? y});\n}\nclass B extends A {\n  B({super.x, super.y});\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "use_test_throws_matchers",
         "name": "Use test throws matchers",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    Use the \n    <CODE>throwsA</CODE>\n     matcher instead of try-catch with \n    <CODE>fail()</CODE>\n    .\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">// sync code\ntry {\n  someSyncFunctionThatThrows();\n  fail('expected Error');\n} on Error catch (error) {\n  expect(error.message, contains('some message'));\n}\n\n// async code\ntry {\n  await someAsyncFunctionThatThrows();\n  fail('expected Error');\n} on Error catch (error) {\n  expect(error.message, contains('some message'));\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">// sync code\nexpect(\n  () =&gt; someSyncFunctionThatThrows(),\n  throwsA(isA&lt;Error&gt;().having((Error error) =&gt; error.message, 'message', contains('some message'))),\n);\n\n// async code\nawait expectLater(\n  () =&gt; someAsyncFunctionThatThrows(),\n  throwsA(isA&lt;Error&gt;().having((Error error) =&gt; error.message, 'message', contains('some message'))),\n);\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "use_to_and_as_if_applicable",
         "name": "Use to and as if applicable",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    From the \n    <A href=\"https://dart.dev/guides/language/effective-dart/design\">Effective Dart</A>\n    :\n  </P>\n  <P>\n    <STRONG>PREFER</STRONG>\n     naming a method \n    <CODE>to___()</CODE>\n     if it copies the object's state to a new\nobject.\n  </P>\n  <P>\n    <STRONG>PREFER</STRONG>\n     naming a method \n    <CODE>as___()</CODE>\n     if it returns a different representation\nbacked by the original object.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Bar {\n  Foo myMethod() {\n    return Foo.from(this);\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Bar {\n  Foo toFoo() {\n    return Foo.from(this);\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Bar {\n  Foo asFoo() {\n    return Foo.from(this);\n  }\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "depend_on_referenced_packages",
         "name": "Depend on referenced packages",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     depend on referenced packages.\n  </P>\n  <P>When importing a package, add a dependency on it to your pubspec.</P>\n  <P>Depending explicitly on packages that you reference ensures they will always\nexist and allows you to put a dependency constraint on them to guard you\nagainst breaking changes.</P>\n  <P>\n    Whether this should be a regular dependency or dev_dependency depends on if it\nis referenced from a public file (one under either \n    <CODE>lib</CODE>\n     or \n    <CODE>bin</CODE>\n    ), or some\nother private file.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">import 'package:a/a.dart';\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-yaml\">dependencies:\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">import 'package:a/a.dart';\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-yaml\">dependencies:\n  a: ^1.0.0\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "package_names",
         "name": "Package names",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    From the \n    <A href=\"https://dart.dev/tools/pub/pubspec\">Pubspec format description</A>\n    :\n  </P>\n  <P>\n    <STRONG>DO</STRONG>\n     use \n    <CODE>lowercase_with_underscores</CODE>\n     for package names.\n  </P>\n  <P>\n    Package names should be all lowercase, with underscores to separate words,\n\n    <CODE>just_like_this</CODE>\n    .  Use only basic Latin letters and Arabic digits: [a-z0-9_].\nAlso, make sure the name is a valid Dart identifier -- that it doesn't start\nwith digits and isn't a reserved word.\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "secure_pubspec_urls",
         "name": "Secure pubspec urls",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     Use secure urls in \n    <CODE>pubspec.yaml</CODE>\n    .\n  </P>\n  <P>\n    Use \n    <CODE>https</CODE>\n     instead of \n    <CODE>http</CODE>\n     or \n    <CODE>git:</CODE>\n    .\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-yaml\">repository: http://github.com/dart-lang/example\n</CODE>\n  </PRE>\n  <PRE>\n<CODE class=\"language-yaml\">git:\n  url: git://github.com/dart-lang/example/example.git\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-yaml\">repository: https://github.com/dart-lang/example\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
