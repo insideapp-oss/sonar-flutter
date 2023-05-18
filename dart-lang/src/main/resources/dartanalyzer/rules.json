@@ -1172,121 +1172,181 @@
     {
         "key": "prefer_constructors_over_static_methods",
         "name": "Prefer constructors over static methods",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     defining constructors instead of static methods to create instances.\n  </P>\n  <P>In most cases, it makes more sense to use a named constructor rather than a\nstatic method because it makes instantiation clearer.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Point {\n  num x, y;\n  Point(this.x, this.y);\n  static Point polar(num theta, num radius) {\n    return Point(radius * math.cos(theta),\n        radius * math.sin(theta));\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Point {\n  num x, y;\n  Point(this.x, this.y);\n  Point.polar(num theta, num radius)\n      : x = radius * math.cos(theta),\n        y = radius * math.sin(theta);\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "prefer_contains",
         "name": "Prefer contains",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     use \n    <CODE>indexOf</CODE>\n     to see if a collection contains an element.\n  </P>\n  <P>\n    Calling \n    <CODE>indexOf</CODE>\n     to see if a collection contains something is difficult to read\nand may have poor performance.\n  </P>\n  <P>\n    Instead, prefer \n    <CODE>contains</CODE>\n    .\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">if (lunchBox.indexOf('sandwich') == -1) return 'so hungry...';\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">if (!lunchBox.contains('sandwich')) return 'so hungry...';\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_double_quotes",
         "name": "Prefer double quotes",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use double quotes where they wouldn't require additional escapes.\n  </P>\n  <P>That means strings with a double quote may use apostrophes so that the double\nquote isn't escaped (note: we don't lint the other way around, ie, a double\nquoted string with an escaped double quote is not flagged).</P>\n  <P>It's also rare, but possible, to have strings within string interpolations.  In\nthis case, its much more readable to use a single quote somewhere.  So single\nquotes are allowed either within, or containing, an interpolated string literal.\nArguably strings within string interpolations should be its own type of lint.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">useStrings(\n    'should be double quote',\n    r'should be double quote',\n    r'''should be double quotes''')\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">useStrings(\n    \"should be double quote\",\n    r\"should be double quote\",\n    r\"\"\"should be double quotes\"\"\",\n    'ok with \" inside',\n    'nested ${a ? \"strings\" : \"can\"} be wrapped by a double quote',\n    \"and nested ${a ? 'strings' : 'can be double quoted themselves'}\");\n</CODE>\n  </PRE>\n  <P>\n    Incompatible with: \n    <A href=\"prefer_single_quotes.html\">prefer_single_quotes</A>\n    .\n\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_equal_for_default_values",
         "name": "Prefer equal for default values",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P style=\"font-size:30px\">\n    <STRONG>Unsupported since Dart language version 3.0.0.</STRONG>\n  </P>\n  <P>\n    From the \n    <A href=\"https://dart.dev/guides/language/effective-dart/usage\">style guide</A>\n    :\n  </P>\n  <P>\n    <STRONG>DO</STRONG>\n     use \n    <CODE>=</CODE>\n     to separate a named parameter from its default value.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">m({a: 1})\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">m({a = 1})\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_expression_function_bodies",
         "name": "Prefer expression function bodies",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>CONSIDER</STRONG>\n     using =&gt; for short members whose body is a single return statement.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">get width {\n  return right - left;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">bool ready(num time) {\n  return minTime == null || minTime &lt;= time;\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">containsValue(String value) {\n  return getValues().contains(value);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">get width =&gt; right - left;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">bool ready(num time) =&gt; minTime == null || minTime &lt;= time;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">containsValue(String value) =&gt; getValues().contains(value);\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_final_fields",
         "name": "Prefer final fields",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     prefer declaring private fields as final if they are not reassigned later\nin the library.\n  </P>\n  <P>Declaring fields as final when possible is a good practice because it helps\navoid accidental reassignments and allows the compiler to do optimizations.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class BadImmutable {\n  var _label = 'hola mundo! BadImmutable'; // LINT\n  var label = 'hola mundo! BadImmutable'; // OK\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class MultipleMutable {\n  var _label = 'hola mundo! GoodMutable', _offender = 'mumble mumble!'; // LINT\n  var _someOther; // LINT\n\n  MultipleMutable() : _someOther = 5;\n\n  MultipleMutable(this._someOther);\n\n  void changeLabel() {\n    _label= 'hello world! GoodMutable';\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class GoodImmutable {\n  final label = 'hola mundo! BadImmutable', bla = 5; // OK\n  final _label = 'hola mundo! BadImmutable', _bla = 5; // OK\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class GoodMutable {\n  var _label = 'hola mundo! GoodMutable';\n\n  void changeLabel() {\n    _label = 'hello world! GoodMutable';\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class AssignedInAllConstructors {\n  var _label; // LINT\n  AssignedInAllConstructors(this._label);\n  AssignedInAllConstructors.withDefault() : _label = 'Hello';\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class NotAssignedInAllConstructors {\n  var _label; // OK\n  NotAssignedInAllConstructors();\n  NotAssignedInAllConstructors.withDefault() : _label = 'Hello';\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_final_in_for_each",
         "name": "Prefer final in for each",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     prefer declaring for-each loop variables as final if they are not\nreassigned later in the code.\n  </P>\n  <P>Declaring for-each loop variables as final when possible is a good practice\nbecause it helps avoid accidental reassignments and allows the compiler to do\noptimizations.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">for (var element in elements) { // LINT\n  print('Element: $element');\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">for (final element in elements) {\n  print('Element: $element');\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">for (var element in elements) {\n  element = element + element;\n  print('Element: $element');\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_final_locals",
         "name": "Prefer final locals",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     prefer declaring variables as final if they are not reassigned later in\nthe code.\n  </P>\n  <P>Declaring variables as final when possible is a good practice because it helps\navoid accidental reassignments and allows the compiler to do optimizations.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void badMethod() {\n  var label = 'hola mundo! badMethod'; // LINT\n  print(label);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void goodMethod() {\n  final label = 'hola mundo! goodMethod';\n  print(label);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void mutableCase() {\n  var label = 'hola mundo! mutableCase';\n  print(label);\n  label = 'hello world';\n  print(label);\n}\n</CODE>\n  </PRE>\n  <P>\n    Incompatible with: \n    <A href=\"unnecessary_final.html\">unnecessary_final</A>\n    .\n\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_final_parameters",
         "name": "Prefer final parameters",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     prefer declaring parameters as final if they are not reassigned in\nthe function body.\n  </P>\n  <P>Declaring parameters as final when possible is a good practice because it helps\navoid accidental reassignments.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void badParameter(String label) { // LINT\n  print(label);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void goodParameter(final String label) { // OK\n  print(label);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void badExpression(int value) =&gt; print(value); // LINT\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void goodExpression(final int value) =&gt; print(value); // OK\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">[1, 4, 6, 8].forEach((value) =&gt; print(value + 2)); // LINT\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">[1, 4, 6, 8].forEach((final value) =&gt; print(value + 2)); // OK\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void mutableParameter(String label) { // OK\n  print(label);\n  label = 'Hello Linter!';\n  print(label);\n}\n</CODE>\n  </PRE>\n  <P>\n    Incompatible with: \n    <A href=\"unnecessary_final.html\">unnecessary_final</A>\n    , \n    <A href=\"avoid_final_parameters.html\">avoid_final_parameters</A>\n    .\n\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_for_elements_to_map_fromIterable",
         "name": "Prefer for elements to map fromIterable",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>When building maps from iterables, it is preferable to use 'for' elements.</P>\n  <P>Using 'for' elements brings several benefits including:</P>\n  <UL>\n    <LI>Performance</LI>\n    <LI>Flexibility</LI>\n    <LI>Readability</LI>\n    <LI>Improved type inference</LI>\n    <LI>Improved interaction with null safety</LI>\n  </UL>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">Map&lt;String, WidgetBuilder&gt;.fromIterable(\n  kAllGalleryDemos,\n  key: (demo) =&gt; '${demo.routeName}',\n  value: (demo) =&gt; demo.buildRoute,\n);\n\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">return {\n  for (var demo in kAllGalleryDemos)\n    '${demo.routeName}': demo.buildRoute,\n};\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">// Map&lt;int, Student&gt; is not required, type is inferred automatically.\nfinal pizzaRecipients = {\n  ...studentLeaders,\n  for (var student in classG)\n    if (student.isPassing) student.id: student,\n};\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": true
     },
     {
         "key": "prefer_foreach",
         "name": "Prefer foreach",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use \n    <CODE>forEach</CODE>\n     if you are only going to apply a function or a method\nto all the elements of an iterable.\n  </P>\n  <P>\n    Using \n    <CODE>forEach</CODE>\n     when you are only going to apply a function or method to all\nelements of an iterable is a good practice because it makes your code more\nterse.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">for (final key in map.keys.toList()) {\n  map.remove(key);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">map.keys.toList().forEach(map.remove);\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>NOTE:</STRONG>\n     Replacing a for each statement with a forEach call may change the\nbehavior in the case where there are side-effects on the iterable itself.\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">for (final v in myList) {\n  foo().f(v); // This code invokes foo() many times.\n}\n\nmyList.forEach(foo().f); // But this one invokes foo() just once.\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_function_declarations_over_variables",
         "name": "Prefer function declarations over variables",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use a function declaration to bind a function to a name.\n  </P>\n  <P>As Dart allows local function declarations, it is a good practice to use them in\nthe place of function literals.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void main() {\n  var localFunction = () {\n    ...\n  };\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void main() {\n  localFunction() {\n    ...\n  }\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_generic_function_type_aliases",
         "name": "Prefer generic function type aliases",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     generic function type aliases.\n  </P>\n  <P>\n    With the introduction of generic functions, function type aliases\n(\n    <CODE>typedef void F()</CODE>\n    ) couldn't express all of the possible kinds of\nparameterization that users might want to express. Generic function type aliases\n(\n    <CODE>typedef F = void Function()</CODE>\n    ) fixed that issue.\n  </P>\n  <P>For consistency and readability reasons, it's better to only use one syntax and\nthus prefer generic function type aliases.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">typedef void F();\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">typedef F = void Function();\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": true
     },
     {
         "key": "prefer_if_elements_to_conditional_expressions",
         "name": "Prefer if elements to conditional expressions",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    When building collections, it is preferable to use \n    <CODE>if</CODE>\n     elements rather than\nconditionals.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var list = ['a', 'b', condition ? 'c' : null].where((e) =&gt; e != null).toList();\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var list = ['a', 'b', if (condition) 'c'];\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_if_null_operators",
         "name": "Prefer if null operators",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     using if null operators instead of null checks in conditional\nexpressions.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">v = a == null ? b : a;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">v = a ?? b;\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_initializing_formals",
         "name": "Prefer initializing formals",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use initializing formals when possible.\n  </P>\n  <P>Using initializing formals when possible makes your code more terse.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Point {\n  num x, y;\n  Point(num x, num y) {\n    this.x = x;\n    this.y = y;\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Point {\n  num x, y;\n  Point(this.x, this.y);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Point {\n  num x, y;\n  Point({num x, num y}) {\n    this.x = x;\n    this.y = y;\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Point {\n  num x, y;\n  Point({this.x, this.y});\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>NOTE:</STRONG>\n    This rule will not generate a lint for named parameters unless the parameter\nname and the field name are the same. The reason for this is that resolving\nsuch a lint would require either renaming the field or renaming the parameter,\nand both of those actions would potentially be a breaking change. For example,\nthe following will not generate a lint:\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Point {\n  bool isEnabled;\n  Point({bool enabled}) {\n    this.isEnabled = enabled; // OK\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>NOTE:</STRONG>\n    Also note that it is possible to enforce a type that is stricter than the\ninitialized field with an initializing formal parameter.  In the following\nexample the unnamed \n    <CODE>Bid</CODE>\n     constructor requires a non-null \n    <CODE>int</CODE>\n     despite\n\n    <CODE>amount</CODE>\n     being declared nullable (\n    <CODE>int?</CODE>\n    ).\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Bid {\n final int? amount;\n Bid(int this.amount);\n Bid.pass() : amount = null;\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_inlined_adds",
         "name": "Prefer inlined adds",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    Declare elements in list literals inline, rather than using \n    <CODE>add</CODE>\n     and\n\n    <CODE>addAll</CODE>\n     methods where possible.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var l = ['a']..add('b')..add('c');\nvar l2 = ['a']..addAll(['b', 'c']);\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var l = ['a', 'b', 'c'];\nvar l2 = ['a', 'b', 'c'];\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_int_literals",
         "name": "Prefer int literals",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use int literals rather than the corresponding double literal.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">const double myDouble = 8.0;\nfinal anotherDouble = myDouble + 7.0e2;\nmain() {\n  someMethod(6.0);\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">const double myDouble = 8;\nfinal anotherDouble = myDouble + 700;\nmain() {\n  someMethod(6);\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "prefer_interpolation_to_compose_strings",
         "name": "Prefer interpolation to compose strings",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>PREFER</STRONG>\n     using interpolation to compose strings and values.\n  </P>\n  <P>Using interpolation when composing strings and values is usually easier to write\nand read than concatenation.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">'Hello, ' + person.name + ' from ' + person.city + '.';\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">'Hello, ${person.name} from ${person.city}.'\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "prefer_is_empty",
         "name": "Prefer is empty",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     use \n    <CODE>length</CODE>\n     to see if a collection is empty.\n  </P>\n  <P>\n    The \n    <CODE>Iterable</CODE>\n     contract does not require that a collection know its length or be\nable to provide it in constant time.  Calling \n    <CODE>length</CODE>\n     just to see if the\ncollection contains anything can be painfully slow.\n  </P>\n  <P>\n    Instead, there are faster and more readable getters: \n    <CODE>isEmpty</CODE>\n     and\n\n    <CODE>isNotEmpty</CODE>\n    .  Use the one that doesn't require you to negate the result.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">if (lunchBox.length == 0) return 'so hungry...';\nif (words.length != 0) return words.join(' ');\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">if (lunchBox.isEmpty) return 'so hungry...';\nif (words.isNotEmpty) return words.join(' ');\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
