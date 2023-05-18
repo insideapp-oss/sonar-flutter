@@ -1,0 +1,26 @@
+<!--
+This is a set of ant helper command.
+-->
+<project name="sonar-flutter" default="deploy" basedir="..">
+    <target name="deploy">
+        <property environment="env"/>
+        <fail unless="env.SONARQUBE_HOME" message="SONARQUBE_HOME not set."/>
+        <delete file="${env.SONARQUBE_HOME}/extensions/plugins/sonar-flutter"/>
+        <copy todir="${env.SONARQUBE_HOME}/extensions/plugins">
+            <fileset dir="target">
+                <include name="sonar-flutter-plugin-*.jar"/>
+            </fileset>
+        </copy>
+        <delete>
+            <fileset dir="${env.SONARQUBE_HOME}/extensions/plugins/">
+                <include name="*sources.jar"/>
+            </fileset>
+        </delete>
+        <exec executable="${env.SONARQUBE_HOME}/bin/macosx-universal-64/sonar.sh">
+            <arg value="stop"/>
+        </exec>
+        <exec executable="${env.SONARQUBE_HOME}/bin/macosx-universal-64/sonar.sh">
+            <arg value="start"/>
+        </exec>
+    </target>
+</project>

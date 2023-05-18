@@ -1,6 +1,52 @@
 ## Please check the Github releases for newer changelogs!
 
----
+## develop
+
+#### Breaking
+
+- SonarQube API update to 7.9 for latest LTS support (9.9)
+- Removed `dartanalyzer` implementation that scans each file individual, this may affect projects running on a (pretty) old Dart SDK.
+  The replacement runs legacy `dartanalyzer .` instead which is much faster.
+- Renamed `sonar.flutter.analyzer.mode` to `sonar.dart.analyzer.mode` and reworked implementation.
+  - Available options `DETECT|DART|FLUTTER|MANUAL|DARTANALYZER`
+  - Defaults to automatic detection by parsing the `pubspec.yaml`.
+  - Uses `flutter analyze` when `environment.flutter` is configured in `pubspec.yaml`.
+  - Uses `dart analyze` when `environment.flutter` is NOT configured in `pubspec.yaml`.
+  - Allows to be configured for legacy `dartanalyzer` if required (`DARTANALYZER`)
+  - Allows to be configured for pre-existing analysis reports (`MANUAL`)
+- Renamed `sonar.dart.analysis.useExistingOptions` to `sonar.dart.analyzer.options.override`, now defaults to `true`
+- Renamed `sonar.dart.analysis.reportPath` to `sonar.dart.analyzer.report.path` - this is only evaluated when `sonar.dart.analyzer.mode`is set to `MANUAL`
+- Added `sonar.dart.analyzer.report.mode` option
+  - Available options `DETECT|MACHINE|LEGACY`
+  - Defaults to automatic detection by parsing the Dart SDK version and defaults to `--format=machine` for Dart when SDK >= 2.12
+  - Can be set to legacy mode when using pre-existing analysis report or an older Dart SDK
+
+#### Experimental
+
+- None.
+
+#### Enhancements
+
+- Add a `pubspec.yaml` sensor which adds the file to SonarQube and allow showing lints for this file
+- Add support for multi-module projects (`sonar.modules=mylib,mylib_generator,example`)
+- Added missing dart keywords and corrected some
+  - `try`
+  - `hide`
+  - `show`
+  - `late`
+  - `of`
+  - `continue`
+  - `covariant`
+  - `out`
+  - `do`
+  - `dynamic`
+  - `native`
+- Rules update
+- Better rules description
+
+#### Bug Fixes
+
+- None.
 
 ## 0.3.2
 
