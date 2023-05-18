@@ -34,6 +34,7 @@ public class DartProfile implements BuiltInQualityProfilesDefinition {
     public void define(BuiltInQualityProfilesDefinition.Context context) {
 
         NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(DartAnalyzerRulesDefinition.REPOSITORY_KEY, Dart.KEY);
+        profile.setDefault(true);
         RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
 
         // dartanalyzer rules
@@ -44,15 +45,16 @@ public class DartProfile implements BuiltInQualityProfilesDefinition {
                 if ( r.name == null || r.severity == null || r.type == null || r.description == null) {
                     LOGGER.warn(String.format("Cannot add %s rule to dartanalyzer profile, rule data is missing in rules.json", r.key));
                 } else {
-                    NewBuiltInActiveRule rule = profile.activateRule("dartanalyzer", r.key);
-                    rule.overrideSeverity(r.severity.name());
+                    if (r.active) {
+                        NewBuiltInActiveRule rule = profile.activateRule("dartanalyzer", r.key);
+                        rule.overrideSeverity(r.severity.name());
+                    }
                 }
             }
         } catch (IOException e) {
             LOGGER.error("Failed to load dartanalyzer rules", e);
         }
 
-        profile.setDefault(true);
         profile.done();
     }
 }
