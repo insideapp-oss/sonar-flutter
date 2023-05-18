@@ -85,5 +85,29 @@ Remediation time? (in minutes)
 
 ## Releasing
 
-TODO
+### Snapshots
+
+Every push to `develop` branch updates the matching snapshot release.
+
+For example: if project version is set to `0.1-SNAPSHOT` on`develop`. A `0.1-SNAPSHOT` will be released (or release will be updated if it already exists) as soon as the `maven.yml` GitHub actions workflow finishes.
+
+### Stable
+
+A new stable release is pushed on GitHub, on every new tag creation (performed by the `release.yml` GitHub Actions workflow).
+
+The steps to issue a new stable release are:
+1. Merge `develop` branch to `main`branch (do not squash in order to keep commit history).
+2. Create a new tag from `main` branch with a naming matching the release number. Example:
+```bash
+$ git tag -a 0.1.0
+```
+3. Push the new tag with:
+```bash
+$ git push --tags
+```
+
+Once released, remember to update the project version on the `develop`branch to a new snapshot number:
+```bash
+$ mvn versions:set -DnewVersion=0.2-SNAPSHOT
+``` 
 
