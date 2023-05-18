@@ -1,29 +1,28 @@
 /*
- * SonarQube Flutter Plugin
- * Copyright (C) 2020 inside|app
- * contact@insideapp.fr
+ * SonarQube Flutter Plugin - Enables analysis of Dart and Flutter projects into SonarQube.
+ * Copyright © 2020 inside|app (contact@insideapp.fr)
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package fr.insideapp.sonarqube.flutter;
 
 import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.DartSensor;
+import fr.insideapp.sonarqube.dart.lang.PubSpecSensor;
 import fr.insideapp.sonarqube.dart.lang.issues.DartProfile;
-import fr.insideapp.sonarqube.dart.lang.issues.DartProfilePedantic190;
-import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerMode;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.executable.AnalyzerExecutable;
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.AnalyzerOutput;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerSensor;
 import fr.insideapp.sonarqube.flutter.coverage.FlutterCoverageSensor;
@@ -48,7 +47,10 @@ public class FlutterPlugin implements Plugin {
     public void define(Context context) {
 
         // Language support
-        context.addExtensions(Dart.class, DartSensor.class, DartProfile.class, DartProfilePedantic190.class);
+        context.addExtensions(Dart.class, DartSensor.class, DartProfile.class);
+
+        // Add pubspec support
+        context.addExtension(PubSpecSensor.class);
 
         // dartanalyzer Sensor
         context.addExtensions(DartAnalyzerSensor.class, DartAnalyzerRulesDefinition.class);
@@ -57,7 +59,7 @@ public class FlutterPlugin implements Plugin {
                 PropertyDefinition.builder(FLUTTER_TESTS_REPORT_PATH_KEY)
                         .name("Unit Test Report")
                         .description("Path to Flutter unit test execution report file. The path may be either absolute or relative to the project base directory.")
-                        .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
+                        .onQualifiers(Qualifiers.PROJECT)
                         .category(FLUTTER_CATEGORY)
                         .subCategory(TESTS_SUBCATEGORY)
                         .build());
@@ -66,40 +68,53 @@ public class FlutterPlugin implements Plugin {
                 PropertyDefinition.builder(FLUTTER_LCOV_REPORT_PATH_KEY)
                         .name("Coverage Report")
                         .description("Path to Flutter coverage report file. The path may be either absolute or relative to the project base directory.")
-                        .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
+                        .onQualifiers(Qualifiers.PROJECT)
                         .category(FLUTTER_CATEGORY)
                         .subCategory(TESTS_SUBCATEGORY)
                         .build());
 
         context.addExtension(
-                PropertyDefinition.builder(DartSensor.DART_ANALYSIS_USE_EXISTING_OPTIONS_KEY)
-                        .name("Use existing analysis_options file")
-                        .description("The SonarQube plugin for Flutter / Dart uses its own analysis_options file, even if it exists under the project root. If you want to use the existing analysis_options file instead, set the value to true.")
-                        .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
+                PropertyDefinition.builder(DartAnalyzerSensor.ANALYZER_OPTIONS_OVERRIDE)
+                        .name("Override existing analysis_options file")
+                        .description("The SonarQube plugin for Flutter/Dart uses its own analysis_options file, even if it exists under the project/module root. If you want to use the existing analysis_options file instead, set the value to false.")
+                        .onQualifiers(Qualifiers.PROJECT)
                         .category(DART_CATEGORY)
                         .subCategory(ANALYSIS_SUBCATEGORY)
-                        .defaultValue("false")
+                        .defaultValue(DartAnalyzerSensor.ANALYZER_OPTIONS_OVERRIDE_DEFAULT)
                         .build());
 
         context.addExtension(
-                PropertyDefinition.builder(DartAnalyzerSensor.FLUTTER_ANALYZER_MODE)
+                PropertyDefinition.builder(DartAnalyzerSensor.ANALYZER_MODE)
                         .name("Analyzer")
-                        .description("Which analyzer to use")
-                        .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
+                        .description("Which analyzer to use. If Dart 2.12+ is used, it is safe to leave on DETECT, otherwise manual configuration may be needed.")
+                        .onQualifiers(Qualifiers.PROJECT)
                         .category(DART_CATEGORY)
                         .subCategory(ANALYSIS_SUBCATEGORY)
-                        .options(DartAnalyzerSensor.FLUTTER_ANALYZER_MODE_OPTIONS.stream().map(Enum::name).collect(Collectors.toList()))
-                        .defaultValue(AnalyzerMode.defaultMode.name())
+                        .options(DartAnalyzerSensor.ANALYZER_MODE_OPTIONS.stream().map(Enum::name).collect(Collectors.toList()))
+                        .defaultValue(AnalyzerExecutable.Mode.defaultMode.name())
                         .type(PropertyType.SINGLE_SELECT_LIST)
                         .build());
 
         context.addExtension(
-                PropertyDefinition.builder(DartSensor.DART_ANALYSIS_USE_EXISTING_REPORT_PATH_KEY)
-                        .name("Use dartanalyzer report file for analysis")
-                        .description("Path to Dartanalyzer report file. If null, dartanalyzer will be executed. The path may be either absolute or relative to the project base directory. Run dartanalyzer with '--write PATH' to create the report.")
-                        .onQualifiers(Qualifiers.MODULE, Qualifiers.PROJECT)
+                PropertyDefinition.builder(DartAnalyzerSensor.ANALYZER_REPORT_PATH)
+                        .name("Use existing report file for analysis")
+                        .description("Path to analysis report file. Only evaluated when the analyzer is set to MANUAL.")
+                        .onQualifiers(Qualifiers.PROJECT)
                         .category(DART_CATEGORY)
                         .subCategory(ANALYSIS_SUBCATEGORY)
+                        .build());
+
+
+        context.addExtension(
+                PropertyDefinition.builder(DartAnalyzerSensor.ANALYZER_OUTPUT_MODE)
+                        .name("Analyzer output format")
+                        .description("This needs to be configured if the analyzer is set to MANUAL. If Dart 2.12+ is used, it is safe to leave on DETECT, otherwise manual configuration may also be needed.")
+                        .onQualifiers(Qualifiers.PROJECT)
+                        .category(DART_CATEGORY)
+                        .subCategory(ANALYSIS_SUBCATEGORY)
+                        .options(DartAnalyzerSensor.ANALYZER_OUTPUT_MODE_OPTIONS.stream().map(Enum::name).collect(Collectors.toList()))
+                        .defaultValue(AnalyzerOutput.Mode.defaultMode.name())
+                        .type(PropertyType.SINGLE_SELECT_LIST)
                         .build());
 
         // Tests

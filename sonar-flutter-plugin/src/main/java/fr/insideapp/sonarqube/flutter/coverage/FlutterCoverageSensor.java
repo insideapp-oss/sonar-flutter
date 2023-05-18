@@ -1,27 +1,23 @@
 /*
- * SonarQube Flutter Plugin
- * Copyright (C) 2020 inside|app
- * contact@insideapp.fr
+ * SonarQube Flutter Plugin - Enables analysis of Dart and Flutter projects into SonarQube.
+ * Copyright © 2020 inside|app (contact@insideapp.fr)
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package fr.insideapp.sonarqube.flutter.coverage;
 
 import fr.insideapp.sonarqube.dart.lang.Dart;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -29,6 +25,8 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import javax.annotation.CheckForNull;
 import java.io.File;
@@ -37,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FlutterCoverageSensor implements Sensor {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FlutterCoverageSensor.class);
+    private static final Logger LOGGER = Loggers.get(FlutterCoverageSensor.class);
     public static final String REPORT_PATH_KEY = "sonar.flutter.coverage.reportPath";
     public static final String DEFAULT_REPORT_PATH = "coverage/lcov.info";
 
@@ -53,7 +51,7 @@ public class FlutterCoverageSensor implements Sensor {
     public void execute(SensorContext context) {
 
         List<File> lcovFiles = new ArrayList<>();
-        lcovFiles.add(getIOFile(context.fileSystem().baseDir(), reportPath(context)));
+        lcovFiles.add(getIOFile(context, reportPath(context)));
         saveCoverageFromLcovFiles(context, lcovFiles);
     }
 
@@ -108,13 +106,10 @@ public class FlutterCoverageSensor implements Sensor {
      * If path is not absolute, returns a File with module base directory as parent path.
      */
     @CheckForNull
-    private static File getIOFile(File baseDir, String path) {
-        File file = new File(path);
-        if (!file.isAbsolute()) {
-            file = new File(baseDir, path);
-        }
-        if (!file.isFile()) {
-            LOGGER.warn("No coverage information will be saved because LCOV file cannot be found.");
+    private static File getIOFile(SensorContext context, String path) {
+        File file = context.fileSystem().resolvePath(path);
+        if (!file.isFile() || !file.exists() || !file.canRead()) {
+            LOGGER.warn("No coverage information will be saved because LCOV file cannot be found or read.");
             LOGGER.warn("Provided LCOV file path: {}. Seek file with path: {}", path, file.getAbsolutePath());
             return null;
         }
