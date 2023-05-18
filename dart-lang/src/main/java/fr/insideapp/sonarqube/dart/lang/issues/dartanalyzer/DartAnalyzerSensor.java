@@ -66,7 +66,8 @@ public class DartAnalyzerSensor implements Sensor {
             final PubSpec pubSpec = PubSpecParser.parse(sensorContext);
             final AnalyzerOutput output = AnalyzerExecutable.create(sensorContext, pubSpec).analyze();
 
-            final DartAnalyzerReportParser parser = output.getMode().equals(AnalyzerOutput.Mode.MACHINE)
+            final DartAnalyzerReportParser parser = output.getAnalyzerMode().equals(AnalyzerExecutable.Mode.FLUTTER) ?
+                    new FlutterAnalyzerReportParser() : output.getMode().equals(AnalyzerOutput.Mode.MACHINE)
                     ? new DartAnalyzerMachineReportParser() : new DartAnalyzerLegacyReportParser();
 
             final List<DartAnalyzerReportIssue> issues = parser.parse(output.getContent());

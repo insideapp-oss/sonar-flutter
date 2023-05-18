@@ -51,9 +51,14 @@ class ManualAnalyzerExecutable extends AnalyzerExecutable {
         final File report = sensorContext.fileSystem().resolvePath(path);
         if (report != null && report.exists() && report.canRead()) {
             final String output = new String(Files.readAllBytes(report.toPath()), StandardCharsets.UTF_8);
-            return new AnalyzerOutput(mode, output);
+            return new AnalyzerOutput(outputMode, getMode(), output);
         } else {
             throw new IllegalStateException(String.format("File '%s' does not exist or could not be read!", path));
         }
+    }
+
+    @Override
+    protected Mode getMode() {
+        return Mode.MANUAL;
     }
 }

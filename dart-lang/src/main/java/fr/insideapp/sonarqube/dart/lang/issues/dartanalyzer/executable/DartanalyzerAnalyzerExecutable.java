@@ -35,9 +35,14 @@ class DartanalyzerAnalyzerExecutable extends AnalyzerExecutable {
 
     @Override
     public String[] getArgs() {
-        if (mode.equals(AnalyzerOutput.Mode.MACHINE)) {
+        if (outputMode.equals(AnalyzerOutput.Mode.MACHINE)) {
             return new String[]{"--format=machine", "."};
         }
         return new String[]{"."};
+    }
+
+    @Override
+    protected Mode getMode() {
+        return Mode.DARTANALYZER;
     }
 }

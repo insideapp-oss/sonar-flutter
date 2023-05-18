@@ -17,6 +17,8 @@
  */
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
+import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.executable.AnalyzerExecutable;
+
 public class AnalyzerOutput {
 
     public enum Mode {
@@ -29,15 +31,22 @@ public class AnalyzerOutput {
 
     private final Mode mode;
 
+    private final AnalyzerExecutable.Mode analyzerMode;
+
     private final String content;
 
-    public AnalyzerOutput(Mode mode, String content) {
+    public AnalyzerOutput(Mode mode, AnalyzerExecutable.Mode analyzerMode, String content) {
         this.mode = mode;
+        this.analyzerMode = analyzerMode;
         this.content = content;
     }
 
     public Mode getMode() {
         return mode;
+    }
+
+    public AnalyzerExecutable.Mode getAnalyzerMode() {
+        return this.analyzerMode;
     }
 
     public String getContent() {

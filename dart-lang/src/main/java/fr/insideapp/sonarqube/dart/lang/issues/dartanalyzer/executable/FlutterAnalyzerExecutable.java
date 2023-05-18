@@ -35,6 +35,11 @@ class FlutterAnalyzerExecutable extends AnalyzerExecutable {
 
     @Override
     public String[] getArgs() {
-        return new String[]{"analyze"};
+        return new String[]{"analyze", "--no-fatal-warnings", "--no-fatal-infos"};
+    }
+
+    @Override
+    protected Mode getMode() {
+        return Mode.FLUTTER;
     }
 }

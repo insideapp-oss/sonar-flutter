@@ -58,16 +58,18 @@ public abstract class AnalyzerExecutable {
 
     protected final SensorContext sensorContext;
 
-    protected final AnalyzerOutput.Mode mode;
+    protected final AnalyzerOutput.Mode outputMode;
 
-    protected AnalyzerExecutable(SensorContext sensorContext, AnalyzerOutput.Mode mode) {
+    protected AnalyzerExecutable(SensorContext sensorContext, AnalyzerOutput.Mode outputMode) {
         this.sensorContext = sensorContext;
-        this.mode = mode;
+        this.outputMode = outputMode;
     }
 
     protected abstract String getCommand();
 
     protected abstract String[] getArgs();
+
+    protected abstract Mode getMode();
 
     /**
      * Run the analyzer executable, using the existing
@@ -88,7 +90,7 @@ public abstract class AnalyzerExecutable {
             LOGGER.info("Command '{}' finished (exit {})", result.getProcString(), result.getExitValue());
             maybeThrowException(result);
 
-            return new AnalyzerOutput(mode, result.getOutputString());
+            return new AnalyzerOutput(outputMode, getMode(), result.getOutputString());
         } finally {
             if (optionsCreated) {
                 restoreAnalysisOptionsFile(sensorContext);
@@ -97,9 +99,12 @@ public abstract class AnalyzerExecutable {
     }
 
     private void maybeThrowException(ProcResult result) {
-        final String errorString = result.getErrorString();
+        /*final String errorString = result.getErrorString();
         if (errorString != null && !errorString.isEmpty()) {
             throw new IllegalStateException(String.format("Error while running '%s' (exit %s): %s", result.getProcString(), result.getExitValue(), errorString));
+        }*/
+        if (result.getExitValue() != 0) {
+            throw new IllegalStateException(String.format("Error while running '%s' (exit %s): %s", result.getProcString(), result.getExitValue(), result.getErrorString()));
         }
     }
 

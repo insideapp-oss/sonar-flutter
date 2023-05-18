@@ -94,23 +94,6 @@ public class DartAnalyzerLegacyReportParserTest {
     	assertMessage(issues.get(10), "The value of the local variable 'j' isn't used.");
     }
 
-	@Test
-	public void parseFlutterReport() {
-		String input = "   info • lib/api/icecream/icecream_api.dart:110:29 • The value of the local variable 'chocolate' isn't used • unused_local_variable\n" +
-				"   info • lib/src/path/to/very_cool_widget.dart:32:59 • 'nothing' is deprecated and shouldn't be used. Do not use this anymore, please use [Nothing] instead. • deprecated_member_use_from_same_package\n" +
-				"   info • lib/src/path/to/this_file.dart:9:5 • The parameter 'foo' is required • missing_required_param\n" +
-				"   info • lib/path/to/other/file.dart:37:27 • Unnecessary await keyword in return • unnecessary_await_in_return";
-
-		List<DartAnalyzerReportIssue> issues = parser.parse(input);
-		assertThat(issues).hasSize(4);
-		assertThat(issues.stream().map(DartAnalyzerReportIssue::getRuleId)).containsExactly(
-				"unused_local_variable",
-				"deprecated_member_use_from_same_package",
-				"missing_required_param",
-				"unnecessary_await_in_return"
-		);
-	}
-
 	private void assertFilePath(DartAnalyzerReportIssue issue, String expectedPath) {
 		assertThat(issue.getFilePath()).isEqualTo(expectedPath);
 	}

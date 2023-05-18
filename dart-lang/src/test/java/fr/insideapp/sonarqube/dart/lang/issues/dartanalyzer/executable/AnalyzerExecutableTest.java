@@ -48,6 +48,11 @@ public class AnalyzerExecutableTest {
         protected String[] getArgs() {
             return new String[]{"hello"};
         }
+
+        @Override
+        protected Mode getMode() {
+            return Mode.MANUAL;
+        }
     }
 
     @Test
