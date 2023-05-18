@@ -4,7 +4,7 @@
     
     <groupId>fr.insideapp.sonarqube</groupId>
     <artifactId>sonar-flutter</artifactId>
-    <version>0.4.1-SNAPSHOT</version>
+    <version>0.5.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -54,16 +54,15 @@
         <jdk.min.version>1.9</jdk.min.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <sonar.version>6.7</sonar.version>
-        <sonar-orchestrator.version>3.22.0.1791</sonar-orchestrator.version>
-        <sonarlint.version>4.0.0.2052</sonarlint.version>
+        <sonar.version>7.9</sonar.version>
+
+
 
         <assertj.version>3.5.2</assertj.version>
         <guava.version>17.0</guava.version>
-        <junit.version>4.10</junit.version>
+        <junit.version>4.11</junit.version>
         <logback.version>1.0.13</logback.version>
-        <mockito.version>1.9.0</mockito.version>
-        <slf4j.version>1.7.21</slf4j.version>
+        <mockito.version>4.4.0</mockito.version>
         <sslr.version>1.23</sslr.version>
         <sslr-squid-bridge.version>2.7.1.392</sslr-squid-bridge.version>
         <ant.version>1.6</ant.version>
@@ -75,6 +74,9 @@
         <sonar.sources>src/main/java,src/main/js</sonar.sources>
         <sonar.exclusions>file:**/src/main/java/**/generated/**/*.java</sonar.exclusions>
 
+        <!-- Max number of rules to process manually when running rule update scripts -->
+        <scripts.max-manual>20</scripts.max-manual>
+
     </properties>
 
     <dependencies>
@@ -82,12 +84,6 @@
             <groupId>org.sonarsource.sonarqube</groupId>
             <artifactId>sonar-plugin-api</artifactId>
             <version>${sonar.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -176,6 +172,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.sonarsource.sslr</groupId>
             <artifactId>sslr-testing-harness</artifactId>
             <version>${sslr.version}</version>
@@ -185,6 +187,12 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -235,19 +243,49 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
+                <version>4.1</version>
                 <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>com/mycila/maven/plugin/license/templates/LGPL-3.txt</header>
+                            <includes>
+                                <include>**/*.java</include>
+                                <include>**/*.groovy</include>
+                            </includes>
+                        </licenseSet>
+                    </licenseSets>
                     <properties>
-                        <license.years>${project.inceptionYear}</license.years>
+                        <owner>${license.owner}</owner>
+                        <email>${license.mailto}</email>
+                        <project.name>SonarQube Flutter Plugin</project.name>
                     </properties>
                 </configuration>
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <forkCount>0</forkCount>
-                </configuration>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
+                <version>2.1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <version>3.0.10</version>
+                        <type>pom</type>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.ivy</groupId>
+                        <artifactId>ivy</artifactId>
+                        <version>2.5.0</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
         </plugins>
