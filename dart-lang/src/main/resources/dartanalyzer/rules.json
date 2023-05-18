@@ -812,121 +812,181 @@
     {
         "key": "exhaustive_cases",
         "name": "Exhaustive cases",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>Switching on instances of enum-like classes should be exhaustive.</P>\n  <P>Enum-like classes are defined as concrete (non-abstract) classes that have:</P>\n  <UL>\n    <LI>only private non-factory constructors</LI>\n    <LI>two or more static const fields whose type is the enclosing class and</LI>\n    <LI>no subclasses of the class in the defining library</LI>\n  </UL>\n  <P>\n    <STRONG>DO</STRONG>\n     define case clauses for all constants in enum-like classes.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class EnumLike {\n  final int i;\n  const EnumLike._(this.i);\n\n  static const e = EnumLike._(1);\n  static const f = EnumLike._(2);\n  static const g = EnumLike._(3);\n}\n\nvoid bad(EnumLike e) {\n  // Missing case.\n  switch(e) { // LINT\n    case EnumLike.e :\n      print('e');\n      break;\n    case EnumLike.f :\n      print('f');\n      break;\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class EnumLike {\n  final int i;\n  const EnumLike._(this.i);\n\n  static const e = EnumLike._(1);\n  static const f = EnumLike._(2);\n  static const g = EnumLike._(3);\n}\n\nvoid ok(EnumLike e) {\n  // All cases covered.\n  switch(e) { // OK\n    case EnumLike.e :\n      print('e');\n      break;\n    case EnumLike.f :\n      print('f');\n      break;\n    case EnumLike.g :\n      print('g');\n      break;\n  }\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": true
     },
     {
         "key": "file_names",
         "name": "File names",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     name source files using \n    <CODE>lowercase_with_underscores</CODE>\n    .\n  </P>\n  <P>Some file systems are not case-sensitive, so many projects require filenames to\nbe all lowercase. Using a separating character allows names to still be readable\nin that form. Using underscores as the separator ensures that the name is still\na valid Dart identifier, which may be helpful if the language later supports\nsymbolic imports.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <UL>\n    <LI>\n      <CODE>SliderMenu.dart</CODE>\n    </LI>\n    <LI>\n      <CODE>filesystem.dart</CODE>\n    </LI>\n    <LI>\n      <CODE>file-system.dart</CODE>\n    </LI>\n  </UL>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <UL>\n    <LI>\n      <CODE>slider_menu.dart</CODE>\n    </LI>\n    <LI>\n      <CODE>file_system.dart</CODE>\n    </LI>\n  </UL>\n  <P>\n    Files without a strict \n    <CODE>.dart</CODE>\n     extension are ignored.  For example:\n  </P>\n  <P>\n    <STRONG>OK:</STRONG>\n  </P>\n  <UL>\n    <LI>\n      <CODE>file-system.g.dart</CODE>\n    </LI>\n    <LI>\n      <CODE>SliderMenu.css.dart</CODE>\n    </LI>\n  </UL>\n  <P>\n    The lint \n    <CODE>library_names</CODE>\n     can be used to enforce the same kind of naming on the\nlibrary.\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "flutter_style_todos",
         "name": "Flutter style todos",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use Flutter TODO format.\n  </P>\n  <P>\n    From the \n    <A href=\"https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#comments\">Flutter docs</A>\n    :\n  </P>\n  <BLOCKQUOTE>\n    <P>TODOs should include the string TODO in all caps, followed by the GitHub username of the person with the best context about the problem referenced by the TODO in parenthesis. A TODO is not a commitment that the person referenced will fix the problem, it is intended to be the person with enough context to explain the problem. Thus, when you create a TODO, it is almost always your username that is given.</P>\n  </BLOCKQUOTE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">// TODO(username): message.\n// TODO(username): message, https://URL-to-issue.\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "implementation_imports",
         "name": "Implementation imports",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    From the the \n    <A href=\"https://dart.dev/tools/pub/package-layout#implementation-files\">pub package layout doc</A>\n    :\n  </P>\n  <P>\n    <STRONG>DON'T</STRONG>\n     import implementation files from another package.\n  </P>\n  <P>\n    The libraries inside \n    <CODE>lib</CODE>\n     are publicly visible: other packages are free to\nimport them.  But much of a package's code is internal implementation libraries\nthat should only be imported and used by the package itself.  Those go inside a\nsubdirectory of \n    <CODE>lib</CODE>\n     called \n    <CODE>src</CODE>\n    .  You can create subdirectories in there if\nit helps you organize things.\n  </P>\n  <P>\n    You are free to import libraries that live in \n    <CODE>lib/src</CODE>\n     from within other Dart\ncode in the same package (like other libraries in \n    <CODE>lib</CODE>\n    , scripts in \n    <CODE>bin</CODE>\n    ,\nand tests) but you should never import from another package's \n    <CODE>lib/src</CODE>\n    directory.  Those files are not part of the package's public API, and they\nmight change in ways that could break your code.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">// In 'road_runner'\nimport 'package:acme/src/internals.dart';\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": true
     },
     {
         "key": "implicit_call_tearoffs",
         "name": "Implicit call tearoffs",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n    Explicitly tear off \n    <CODE>.call</CODE>\n     methods from objects when assigning to a Function\ntype. There is less magic with an explicit tear off. Future language versions\nmay remove the implicit call tear off.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Callable {\n  void call() {}\n}\nvoid callIt(void Function() f) {\n  f();\n}\n\ncallIt(Callable());\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Callable {\n  void call() {}\n}\nvoid callIt(void Function() f) {\n  f();\n}\n\ncallIt(Callable().call);\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "join_return_with_assignment",
         "name": "Join return with assignment",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     join return statement with assignment when possible.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  B _lazyInstance;\n  static B get instance {\n    _lazyInstance ??= B(); // LINT\n    return _lazyInstance;\n  }\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  B _lazyInstance;\n  static B get instance =&gt; _lazyInstance ??= B();\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "leading_newlines_in_multiline_strings",
         "name": "Leading newlines in multiline strings",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>Multiline strings are easier to read when they start with a newline (a newline\nstarting a multiline string is ignored).</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var s1 = '''{\n  \"a\": 1,\n  \"b\": 2\n}''';\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var s1 = '''\n{\n  \"a\": 1,\n  \"b\": 2\n}''';\n\nvar s2 = '''This one-liner multiline string is ok. It usually allows to escape both ' and \" in the string.''';\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "library_annotations",
         "name": "Library annotations",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>Attach library annotations to library directives, rather than\nsome other library-level element.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">@TestOn('browser')\n\nimport 'package:test/test.dart';\n\nvoid main() {}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">@TestOn('browser')\nlibrary;\n\nimport 'package:test/test.dart';\n\nvoid main() {}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>NOTE:</STRONG>\n     An unnamed library, like \n    <CODE>library;</CODE>\n     above, is only supported in Dart\n2.19 and later. Code which might run in earlier versions of Dart will need to\nprovide a name in the \n    <CODE>library</CODE>\n     directive.\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "library_names",
         "name": "Library names",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     name libraries using \n    <CODE>lowercase_with_underscores</CODE>\n    .\n  </P>\n  <P>Some file systems are not case-sensitive, so many projects require filenames to\nbe all lowercase. Using a separating character allows names to still be readable\nin that form. Using underscores as the separator ensures that the name is still\na valid Dart identifier, which may be helpful if the language later supports\nsymbolic imports.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">library peg-parser;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">library peg_parser;\n</CODE>\n  </PRE>\n  <P>\n    The lint \n    <CODE>file_names</CODE>\n     can be used to enforce the same kind of naming on the\nfile.\n  </P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "library_prefixes",
         "name": "Library prefixes",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use \n    <CODE>lowercase_with_underscores</CODE>\n     when specifying a library prefix.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">import 'dart:math' as Math;\nimport 'dart:json' as JSON;\nimport 'package:js/js.dart' as JS;\nimport 'package:javascript_utils/javascript_utils.dart' as jsUtils;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">import 'dart:math' as math;\nimport 'dart:json' as json;\nimport 'package:js/js.dart' as js;\nimport 'package:javascript_utils/javascript_utils.dart' as js_utils;\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "library_private_types_in_public_api",
         "name": "Library private types in public api",
+        "severity": "CRITICAL",
         "description": "<SECTION>\n  <P>\n    <STRONG>AVOID</STRONG>\n     using library private types in public APIs.\n  </P>\n  <P>For the purposes of this lint, a public API is considered to be any top-level or\nmember declaration unless the declaration is library private or contained in a\ndeclaration that's library private. The following uses of types are checked:</P>\n  <UL>\n    <LI>the return type of a function or method,</LI>\n    <LI>the type of any parameter of a function or method,</LI>\n    <LI>the bound of a type parameter to any function, method, class, mixin,\nextension's extended type, or type alias,</LI>\n    <LI>the type of any top level variable or field,</LI>\n    <LI>\n      any type used in the declaration of a type alias (for example\n\n      <CODE>typedef F = _Private Function();</CODE>\n      ), or\n    </LI>\n    <LI>\n      any type used in the \n      <CODE>on</CODE>\n       clause of an extension or a mixin\n    </LI>\n  </UL>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">f(_Private p) { ... }\nclass _Private {}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">f(String s) { ... }\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "15min",
         "active": true
     },
     {
         "key": "lines_longer_than_80_chars",
         "name": "Lines longer than 80 chars",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>AVOID</STRONG>\n     lines longer than 80 characters\n  </P>\n  <P>Readability studies show that long lines of text are harder to read because your\neye has to travel farther when moving to the beginning of the next line. This is\nwhy newspapers and magazines use multiple columns of text.</P>\n  <P>\n    If you really find yourself wanting lines longer than 80 characters, our\nexperience is that your code is likely too verbose and could be a little more\ncompact. The main offender is usually \n    <CODE>VeryLongCamelCaseClassNames</CODE>\n    . Ask\nyourself, \u201cDoes each word in that type name tell me something critical or\nprevent a name collision?\u201d If not, consider omitting it.\n  </P>\n  <P>\n    Note that \n    <CODE>dart format</CODE>\n     does 99% of this for you, but the last 1% is you. It\ndoes not split long string literals to fit in 80 columns, so you have to do\nthat manually.\n  </P>\n  <P>We make an exception for URIs and file paths. When those occur in comments or\nstrings (usually in imports and exports), they may remain on a single line even\nif they go over the line limit. This makes it easier to search source files for\na given path.</P>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "matching_super_parameters",
         "name": "Matching super parameters",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     use super parameter names that match their corresponding super\nconstructor's parameter names.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Rectangle {\n  final int width;\n  final int height;\n  \n  Rectangle(this.width, this.height);\n}\n\nclass ColoredRectangle extends Rectangle {\n  final Color color;\n  \n  ColoredRectangle(\n    this.color,\n    super.height, // Bad, actually corresponds to the `width` parameter.\n    super.width, // Bad, actually corresponds to the `height` parameter.\n  ); \n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class Rectangle {\n  final int width;\n  final int height;\n  \n  Rectangle(this.width, this.height);\n}\n\nclass ColoredRectangle extends Rectangle {\n  final Color color;\n  \n  ColoredRectangle(\n    this.color,\n    super.width,\n    super.height, \n  ); \n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "missing_whitespace_between_adjacent_strings",
         "name": "Missing whitespace between adjacent strings",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>Add a trailing whitespace to prevent missing whitespace between adjacent\nstrings.</P>\n  <P>With long text split across adjacent strings it's easy to forget a whitespace\nbetween strings.</P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var s =\n  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed'\n  'do eiusmod tempor incididunt ut labore et dolore magna';\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var s =\n  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed '\n  'do eiusmod tempor incididunt ut labore et dolore magna';\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "no_default_cases",
         "name": "No default cases",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    Switches on enums and enum-like classes should not use a \n    <CODE>default</CODE>\n     clause.\n  </P>\n  <P>Enum-like classes are defined as concrete (non-abstract) classes that have:</P>\n  <UL>\n    <LI>only private non-factory constructors</LI>\n    <LI>two or more static const fields whose type is the enclosing class and</LI>\n    <LI>no subclasses of the class in the defining library</LI>\n  </UL>\n  <P>\n    <STRONG>DO</STRONG>\n     define default behavior outside switch statements.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">  switch (testEnum) {\n    case TestEnum.A:\n      return '123';\n    case TestEnum.B:\n      return 'abc';\n    default:\n      return null;\n  }\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">  switch (testEnum) {\n    case TestEnum.A:\n      return '123';\n    case TestEnum.B:\n      return 'abc';\n  }\n  // Default here.\n  return null;\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "no_leading_underscores_for_library_prefixes",
         "name": "No leading underscores for library prefixes",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     use a leading underscore for library prefixes.\nThere is no concept of \"private\" for library prefixes. When one of those has a\nname that starts with an underscore, it sends a confusing signal to the reader.\nTo avoid that, don't use leading underscores in those names.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">import 'dart:core' as _core;\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">import 'dart:core' as core;\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "no_leading_underscores_for_local_identifiers",
         "name": "No leading underscores for local identifiers",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DON'T</STRONG>\n     use a leading underscore for identifiers that aren't private. Dart\nuses a leading underscore in an identifier to mark members and top-level\ndeclarations as private. This trains users to associate a leading underscore\nwith one of those kinds of declarations. They see \n    <CODE>_</CODE>\n     and  think \"private\".\nThere is no concept of \"private\" for local variables or parameters.  When one of\nthose has a name that starts with an underscore, it sends a confusing signal to\nthe reader. To avoid that, don't use leading underscores in those names.\n  </P>\n  <P>\n    <STRONG>EXCEPTION:</STRONG>\n    : An unused parameter can be named \n    <CODE>_</CODE>\n    , \n    <CODE>__</CODE>\n    , \n    <CODE>___</CODE>\n    , etc.  This is\ncommon practice in callbacks where you are passed a value but you don't need\nto use it. Giving it a name that consists solely of underscores is the idiomatic\nway to indicate that the value isn't used.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void print(String _name) {\n  var _size = _name.length;\n  ...\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">void print(String name) {\n  var size = name.length;\n  ...\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>OK:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">[1,2,3].map((_) =&gt; print('Hello'));\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
         "key": "no_literal_bool_comparisons",
         "name": "No literal bool comparisons",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    From \n    <A href=\"https://dart.dev/guides/language/effective-dart/usage#dont-use-true-or-false-in-equality-operations\">Effective Dart</A>\n    :\n  </P>\n  <P>\n    <STRONG>DON'T</STRONG>\n     use \n    <CODE>true</CODE>\n     or \n    <CODE>false</CODE>\n     in equality operations.\n  </P>\n  <P>\n    This lint applies only if the expression is of a non-nullable \n    <CODE>bool</CODE>\n     type.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">if (someBool == true) {\n}\nwhile (someBool == false) {\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">if (someBool) {\n}\nwhile (!someBool) {\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": false
     },
     {
         "key": "no_runtimeType_toString",
         "name": "No runtimeType toString",
+        "severity": "MAJOR",
         "description": "<SECTION>\n  <P>\n    Calling \n    <CODE>toString</CODE>\n     on a runtime type is a non-trivial operation that can\nnegatively impact performance. It's better to avoid it.\n  </P>\n  <P>\n    <STRONG>BAD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  String toString() =&gt; '$runtimeType()';\n}\n</CODE>\n  </PRE>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">class A {\n  String toString() =&gt; 'A()';\n}\n</CODE>\n  </PRE>\n  <P>This lint has some exceptions where performance is not a problem or where real\ntype information is more important than performance:</P>\n  <UL>\n    <LI>in assertion</LI>\n    <LI>in throw expressions</LI>\n    <LI>in catch clauses</LI>\n    <LI>in mixin declaration</LI>\n    <LI>in abstract class</LI>\n  </UL>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "5min",
         "active": false
     },
     {
         "key": "non_constant_identifier_names",
         "name": "Non constant identifier names",
+        "severity": "MINOR",
         "description": "<SECTION>\n  <P>\n    <STRONG>DO</STRONG>\n     name non-constant identifiers using lowerCamelCase.\n  </P>\n  <P>Class members, top-level definitions, variables, parameters, named parameters\nand named constructors should capitalize the first letter of each word\nexcept the first word, and use no separators.</P>\n  <P>\n    <STRONG>GOOD:</STRONG>\n  </P>\n  <PRE>\n<CODE class=\"language-dart\">var item;\n\nHttpRequest httpRequest;\n\nalign(clearItems) {\n  // ...\n}\n</CODE>\n  </PRE>\n</SECTION>\n",
+        "type": "CODE_SMELL",
+        "debt": "1min",
         "active": true
     },
     {
