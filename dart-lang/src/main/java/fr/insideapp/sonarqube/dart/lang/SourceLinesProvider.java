@@ -56,7 +56,7 @@ public class SourceLinesProvider {
 
             }
             sourceLines.add(new SourceLine(totalLines, count, global - count, global));
-        } catch (final Throwable e) {
+        } catch (final Exception e) {
             LOGGER.warn("Error occurred reading file", e);
         }
 

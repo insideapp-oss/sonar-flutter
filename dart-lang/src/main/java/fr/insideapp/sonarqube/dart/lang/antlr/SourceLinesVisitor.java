@@ -57,11 +57,9 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
             for (final Token token : allTokens) {
                 int startLine = token.getLine();
                 int[] endLines = getLineAndColumn(lines, token.getStopIndex());
-                if (endLines.length == 0 || token.getStartIndex() >= token.getStopIndex()) {
-                    continue;
-                }
-                if (token.getType() == Dart2Parser.EOF || token.getType() == Dart2Parser.SINGLE_LINE_COMMENT
-                        || token.getType() == Dart2Parser.MULTI_LINE_COMMENT) {
+                boolean isCommentOrEOF = token.getType() == Dart2Parser.EOF || token.getType() == Dart2Parser.SINGLE_LINE_COMMENT
+                        || token.getType() == Dart2Parser.MULTI_LINE_COMMENT;
+                if (endLines.length == 0 || token.getStartIndex() >= token.getStopIndex() || isCommentOrEOF) {
                     continue;
                 }
                 for (int i = startLine - 1; i < endLines[0]; i++) {

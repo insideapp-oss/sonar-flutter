@@ -56,7 +56,7 @@ public class KeywordsProvider {
 
                 }
             }
-        } catch (final Throwable e) {
+        } catch (final Exception e) {
             LOGGER.warn(String.format("Error reading keywords file: %s", file), e);
         }
 
