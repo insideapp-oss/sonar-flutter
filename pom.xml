@@ -60,7 +60,7 @@
 
         <assertj.version>3.5.2</assertj.version>
         <guava.version>17.0</guava.version>
-        <junit.version>4.11</junit.version>
+        <junit.version>4.13.1</junit.version>
         <logback.version>1.0.13</logback.version>
         <mockito.version>4.4.0</mockito.version>
         <sslr.version>1.23</sslr.version>
