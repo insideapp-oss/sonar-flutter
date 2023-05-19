@@ -56,20 +56,16 @@
 
         <sonar.version>7.9</sonar.version>
 
-
-
         <assertj.version>3.5.2</assertj.version>
-        <guava.version>17.0</guava.version>
-        <junit.version>4.11</junit.version>
-        <logback.version>1.0.13</logback.version>
+        <junit.version>4.13.1</junit.version>
         <mockito.version>4.4.0</mockito.version>
         <sslr.version>1.23</sslr.version>
         <sslr-squid-bridge.version>2.7.1.392</sslr-squid-bridge.version>
         <ant.version>1.6</ant.version>
-        <analyzer-commons.version>1.10.2.456</analyzer-commons.version>
         <assertj.version>3.5.2</assertj.version>
         <jproc.version>2.2.3</jproc.version>
-        <apache-commons.version>2.6</apache-commons.version>
+        <apache-commons.version>2.12.0</apache-commons.version>
+        <apache-commons-lang3.version>3.12.0</apache-commons-lang3.version>
 
         <sonar.sources>src/main/java,src/main/js</sonar.sources>
         <sonar.exclusions>file:**/src/main/java/**/generated/**/*.java</sonar.exclusions>
@@ -86,41 +82,22 @@
             <version>${sonar.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.sonarsource.analyzer-commons</groupId>
-            <artifactId>sonar-analyzer-test-commons</artifactId>
-            <version>${analyzer-commons.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.sonarsource.analyzer-commons</groupId>
-            <artifactId>sonar-analyzer-commons</artifactId>
-            <version>${analyzer-commons.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.sonarsource.analyzer-commons</groupId>
-            <artifactId>sonar-xml-parsing</artifactId>
-            <version>${analyzer-commons.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${apache-commons.version}</version>
         </dependency>
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>${apache-commons.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache-commons-lang3.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
         </dependency>
         <dependency>
             <groupId>org.buildobjects</groupId>
