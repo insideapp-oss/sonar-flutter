@@ -1,6 +1,6 @@
-## Please check the Github releases for newer changelogs!
+# Changelog
 
-## develop
+## 0.5.0
 
 #### Breaking
 
@@ -28,7 +28,7 @@
 #### Enhancements
 
 - Add a `pubspec.yaml` sensor which adds the file to SonarQube and allow showing lints for this file
-- Add support for multi-module projects (`sonar.modules=mylib,mylib_generator,example`)
+- Add support for multi-module projects (`sonar.modules=mylib,mylib_generator,example`) 
 - Added missing dart keywords and corrected some
   - `try`
   - `hide`
@@ -43,6 +43,29 @@
   - `native`
 - Rules update
 - Better rules description
+
+#### Bug Fixes
+
+- [#160](https://github.com/insideapp-oss/sonar-flutter/issues/160) dart analysis with an exception of NumberFormatException
+
+
+## 0.4.0
+
+#### Breaking
+
+- None.
+
+#### Experimental
+
+- None.
+
+#### Enhancements
+
+- (#65) Support SonarQube 9 - (thanks to @kuhnroyal)
+- (#32) make perfer final issue type to CODE_SMELL - (thanks to @magaofei)
+- (#70) Automate changelog and releases - (thanks to @kuhnroyal)
+- (#66) CI improvements - (thanks to @kuhnroyal)
+- (#56) Update README.md - (thanks to @thiagoloureiro)
 
 #### Bug Fixes
 
