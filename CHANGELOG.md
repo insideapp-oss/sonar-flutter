@@ -16,7 +16,7 @@
 
 #### Bug Fixes
 
-- None.
+- [#177](https://github.com/insideapp-oss/sonar-flutter/issues/177) analyzer execution fails when errors detected.
 
 ## 0.5.0
 
