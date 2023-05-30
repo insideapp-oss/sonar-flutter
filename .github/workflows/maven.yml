@@ -42,11 +42,11 @@ jobs:
 
       - name: Upload snapshot release
         if: github.ref == 'refs/heads/develop'
-        uses: svenstaro/upload-release-action@v2
+        uses: svenstaro/upload-release-action@v3
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{github.workspace}}/sonar-flutter-plugin/target/*.jar
-          tag: ${{env.version}}
+          release_name: ${{env.version}}
           overwrite: true
           body: "Snapshot release"
           file_glob: true
