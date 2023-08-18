@@ -10,7 +10,7 @@
 
     <name>Flutter SonarQube Plugin</name>
     <description>Enables analysis of Dart and Flutter projects into SonarQube.</description>
-    <url>https://github.com/insideapp-oss/sonar-flutter</url>
+    <url>https://github.com/insideapp-oss/sonar-flutter/tree/master</url>
 
     <modules>
         <module>sonar-flutter-plugin</module>
@@ -29,6 +29,10 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <issueManagement>
+        <url>https://github.com/insideapp-oss/sonar-flutter/issues</url>
+    </issueManagement>
 
     <developers>
         <developer>
