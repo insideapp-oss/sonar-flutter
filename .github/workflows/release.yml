@@ -12,14 +12,14 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v3.5.3
 
       - name: Retrieve tag name
         uses: olegtarasov/get-tag@v2.1.2
         id: tag_name
 
       - name: Set up JDK 1.11
-        uses: actions/setup-java@v3.11.0
+        uses: actions/setup-java@v3.12.0
         with:
           distribution: 'adopt'
           java-version: '11'

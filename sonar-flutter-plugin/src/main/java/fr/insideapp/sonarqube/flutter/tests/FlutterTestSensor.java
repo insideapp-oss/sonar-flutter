@@ -46,21 +46,26 @@ public class FlutterTestSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-        File reportFile = sensorContext.fileSystem().resolvePath(reportPath(sensorContext));
 
         FlutterTestReportParser parser = new FlutterTestReportParser();
-        try {
-            List<FlutterUnitTestSuite> suites = parser.parse(reportFile);
-            suites.forEach(s -> saveSuite(s, sensorContext));
-        } catch (IOException e) {
-            throw new IllegalStateException("Failed to parse test report", e);
+        for (String reportPath : reportPaths(sensorContext)) {
+            File reportFile = new File(reportPath);
+            LOGGER.debug("Parsing test report: {}", reportPath);
+            try {
+                List<FlutterUnitTestSuite> suites = parser.parse(reportFile);
+                suites.forEach(s -> saveSuite(s, sensorContext));
+            } catch (IOException e) {
+                throw new IllegalStateException("Failed to parse test report", e);
+            }
+
         }
+
     }
 
-    private String reportPath(SensorContext sensorContext) {
+    private String[] reportPaths(SensorContext sensorContext) {
         return sensorContext.config()
                 .get(REPORT_PATH_KEY)
-                .orElse(DEFAULT_REPORT_PATH);
+                .orElse(DEFAULT_REPORT_PATH).split(",");
     }
 
     private void saveSuite(FlutterUnitTestSuite suite, SensorContext sensorContext) {
@@ -72,7 +77,7 @@ public class FlutterTestSensor implements Sensor {
             return;
         }
 
-        LOGGER.debug("Parsing tests from {}", suite.getPath());
+        LOGGER.debug("Parsing tests from {}, ({} test(s))", suite.getPath(), suite.getCount());
 
         saveMeasure(sensorContext, inputFile, CoreMetrics.SKIPPED_TESTS, (int) suite.getSkippedCount());
         saveMeasure(sensorContext, inputFile, CoreMetrics.TESTS, (int) (suite.getCount()));
