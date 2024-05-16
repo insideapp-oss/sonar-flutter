@@ -20,6 +20,7 @@
 - [#212](https://github.com/insideapp-oss/sonar-flutter/issues/212) source file not indexed with SonarQube 10.4+
 - [PR #201](https://github.com/insideapp-oss/sonar-flutter/pull/201) bump snakeyaml and jackson-databind to latest versions
 - Updated Apache Ivy to 2.5.2
+- Analyzer rules update (1 added)
 
 ## 0.5.0
 
