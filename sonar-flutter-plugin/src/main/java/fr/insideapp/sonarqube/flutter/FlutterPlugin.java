@@ -39,15 +39,29 @@ public class FlutterPlugin implements Plugin {
     public static final String DART_CATEGORY = "Dart";
     public static final String FLUTTER_CATEGORY = "Flutter";
     public static final String ANALYSIS_SUBCATEGORY = "Analysis";
+
+    public static final String GENERAL_SUBCATEGORY = "General";
     public static final String TESTS_SUBCATEGORY = "Tests";
 
     public static final String FLUTTER_TESTS_REPORT_PATH_KEY = "sonar.flutter.tests.reportPath";
     public static final String FLUTTER_LCOV_REPORT_PATH_KEY = "sonar.flutter.coverage.reportPath";
 
+
     public void define(Context context) {
 
         // Language support
         context.addExtensions(Dart.class, DartSensor.class, DartProfile.class);
+
+        context.addExtension(
+                PropertyDefinition.builder(Dart.FILE_SUFFIXES_KEY)
+                        .name("File Suffixes")
+                        .description("List of suffixes of Dart files to analyze.")
+                        .multiValues(true)
+                        .category(DART_CATEGORY)
+                        .subCategory(GENERAL_SUBCATEGORY)
+                        .onQualifiers(Qualifiers.PROJECT)
+                        .defaultValue(String.join(",", Dart.FILE_SUFFIXES))
+                        .build());
 
         // Add pubspec support
         context.addExtension(PubSpecSensor.class);
