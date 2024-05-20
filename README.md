@@ -78,6 +78,10 @@ sonar.projectVersion=1.0
 sonar.sources=lib,pubspec.yaml
 sonar.tests=test
 
+# Sets the expected file type and languge
+sonar.lang.patterns.dart=**/*.dart
+sonar.language=dart
+
 # Encoding of the source code. Default is default system encoding.
 sonar.sourceEncoding=UTF-8
 
