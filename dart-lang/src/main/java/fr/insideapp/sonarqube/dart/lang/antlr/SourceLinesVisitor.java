@@ -97,7 +97,7 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
                 }
             }
 
-            synchronized (context) {
+            synchronized (SourceLinesVisitor.class) {
 
                 try {
                     context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.NCLOC).withValue(locs).save();

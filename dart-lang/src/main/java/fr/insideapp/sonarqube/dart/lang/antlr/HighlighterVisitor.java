@@ -78,7 +78,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
 
             }
         }
-        synchronized (context) {
+        synchronized (HighlighterVisitor.class) {
 
             try {
                 newHighlightning.save();

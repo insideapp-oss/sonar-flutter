@@ -19,10 +19,6 @@ package fr.insideapp.sonarqube.dart.lang;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
@@ -38,15 +34,15 @@ import fr.insideapp.sonarqube.dart.lang.antlr.SourceLinesVisitor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 public class DartSensor implements Sensor {
 
     private static final Logger LOGGER = Loggers.get(DartSensor.class);
-    private static final int EXECUTOR_TIMEOUT = 10000;
 
     @Override
-    public void describe(SensorDescriptor sensorDescriptor) {
+    public void describe(@Nonnull SensorDescriptor sensorDescriptor) {
         sensorDescriptor
                 .onlyOnLanguage(Dart.KEY)
                 .name("Dart sensor")
@@ -63,46 +59,32 @@ public class DartSensor implements Sensor {
         FilePredicate dartAndTest = sensorContext.fileSystem().predicates().and(hasDart, isTest);
         final Charset charset = sensorContext.fileSystem().encoding();
 
-        final ExecutorService executorService = Executors.newWorkStealingPool();
+        for (InputFile inf : sensorContext.fileSystem().inputFiles(dartAndMain)) {
 
-        for(InputFile inf : sensorContext.fileSystem().inputFiles(dartAndMain)){
-
-            executorService.execute(() -> {
-                // Visit source files
-                try {
-                    final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
-                    ParseTreeItemVisitor visitor = new CustomTreeVisitor(new HighlighterVisitor(),
-                            new SourceLinesVisitor(), new CyclomaticComplexityVisitor());
-                    visitor.fillContext(sensorContext, antlrContext);
-                } catch (IOException e) {
-                    LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
-                }
-            });
+            // Visit source files
+            try {
+                final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
+                ParseTreeItemVisitor visitor = new CustomTreeVisitor(new HighlighterVisitor(),
+                        new SourceLinesVisitor(), new CyclomaticComplexityVisitor());
+                visitor.fillContext(sensorContext, antlrContext);
+            } catch (IOException e) {
+                LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
+            }
 
         }
 
-        for(InputFile inf : sensorContext.fileSystem().inputFiles(dartAndTest)){
+        for (InputFile inf : sensorContext.fileSystem().inputFiles(dartAndTest)) {
 
-            executorService.execute(() -> {
-                // Visit test files (for syntax highlighting only)
-                try {
-                    final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
-                    ParseTreeItemVisitor visitor = new CustomTreeVisitor(new HighlighterVisitor());
-                    visitor.fillContext(sensorContext, antlrContext);
-                } catch (IOException e) {
-                    LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
-                }
-            });
+            // Visit test files (for syntax highlighting only)
+            try {
+                final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
+                ParseTreeItemVisitor visitor = new CustomTreeVisitor(new HighlighterVisitor());
+                visitor.fillContext(sensorContext, antlrContext);
+            } catch (IOException e) {
+                LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
+            }
 
         }
 
-        try {
-            executorService.shutdown();
-            executorService.awaitTermination(EXECUTOR_TIMEOUT, TimeUnit.SECONDS);
-            executorService.shutdownNow();
-        } catch (final InterruptedException e) {
-            LOGGER.warn("Unexpected error while running waiting for executor service to finish", e);
-            Thread.currentThread().interrupt();
-        }
     }
 }

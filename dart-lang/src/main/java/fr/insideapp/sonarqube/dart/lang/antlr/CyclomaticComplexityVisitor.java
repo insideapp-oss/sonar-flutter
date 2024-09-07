@@ -50,8 +50,6 @@ public class CyclomaticComplexityVisitor implements ParseTreeItemVisitor {
         }
 
         if (Dart2Parser.ConditionalExpressionContext.class.equals(classz)) {
-            Dart2Parser.ConditionalExpressionContext conditionalExpressionContext = (Dart2Parser.ConditionalExpressionContext) tree;
-
             int countOr = ( tree.getText().split("\\|\\|", -1).length ) - 1;
             int countAnd = ( tree.getText().split("&&", -1).length ) - 1;
             complexity = complexity + countOr + countAnd;
@@ -63,7 +61,7 @@ public class CyclomaticComplexityVisitor implements ParseTreeItemVisitor {
     @Override
     public void fillContext(SensorContext context, AntlrContext antlrContext) {
         final InputFile file = antlrContext.getFile();
-        synchronized (context) {
+        synchronized (CyclomaticComplexityVisitor.class) {
             try {
                 context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.COMPLEXITY).withValue(complexity)
                         .save();
