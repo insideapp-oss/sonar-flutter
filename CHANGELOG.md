@@ -17,6 +17,7 @@
 #### Bug Fixes
 
 - [#187](https://github.com/insideapp-oss/sonar-flutter/issues/187) pubspec.yaml parser fails when no dependencies are declared
+- [#223](https://github.com/insideapp-oss/sonar-flutter/issues/223) some dartanalyzer rules disappeared
 
 ## 0.5.1
 
@@ -30,7 +31,7 @@
 
 #### Enhancements
 
-- Analyzer rules update (1 added)
+- Analyzer rules update: there are now 279 rules available
 
 #### Bug Fixes
 

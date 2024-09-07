@@ -46,14 +46,47 @@ String.mixin(ConsoleString)
  */
 def parseRuleDescription(String ruleKey) {
 
-    def http = new HTTPBuilder('https://dart-lang.github.io/linter/lints/' + ruleKey + '.html')
+    try {
+
+    def http = new HTTPBuilder('https://dart.dev/tools/linter-rules/' + ruleKey)
     def html = http.get([:])
 
-    def root = html."**".find { it.name() == "SECTION" }
+    def root = html."**".find { it.name() == "ARTICLE" }
 
-    String formatted = XmlUtil.serialize( new StreamingMarkupBuilder().bind { mkp.yield root } )
-    // Remove XML header and layout spaces
-    formatted.replace('<?xml version="1.0" encoding="UTF-8"?>', '').replace('<PRE>\n    ', '<PRE>\n')
+    def description = ""
+    def started = false
+    root."**".findAll { it.name() == "DIV" || it.name() == "P" || it.name() == "H2" || it.name() == "CODE" }.each {tag -> 
+        switch (tag.name()) {
+            
+            case 'DIV':
+                if (tag.text().startsWith("Details")) {
+                    started = true
+                }
+                break
+            case 'H2':
+                if (tag.text().startsWith("Usage")) {
+                    started = false
+                }
+                break
+            case 'P':
+                if (started) {
+                    description += XmlUtil.serialize(tag).replace('<?xml version="1.0" encoding="UTF-8"?>', '')
+                }
+                break
+            case 'CODE':
+                if (started) {
+                    description += XmlUtil.serialize(tag).replace('<?xml version="1.0" encoding="UTF-8"?>', '')
+                }
+                break
+        }
+    }
+
+
+    return '<SECTION>' + description + '</SECTION>'
+
+    } catch (Exception e) {
+        return null
+    }
 
 }
 
@@ -69,51 +102,41 @@ def parseRules(url) {
     def http = new HTTPBuilder(url)
     def html = http.get([:])
 
-    def root = html."**".find { it.name() == "SECTION" }
+    def root = html."**".find { it.name() == "ARTICLE" }
 
-    def currentCategory = ''
     def currentKey = ''
-    def currentDescription = ''
-    def currentActive = false
-    def started = false
-    root."**".findAll { it.name() == "STRONG" || it.name() == "H2" || it.name() == "P" || it.name() == "IMG" }.each { tag ->
+    def currentActive = true
 
-        switch (tag.name()) {
-            case 'STRONG':
-                def deprecated = currentKey.contains('(deprecated)')
-                currentKey = currentKey.split(' ')[0]
-                if (currentKey != '' && !deprecated && started) {
-                    def rule = new Rule(
-                            currentKey,
-                            parseRuleDescription(currentKey),
-                            null, // no severity
-                            null, // no type
-                            currentKey.replace("_", " ").capitalize(),
-                            null, // no debt
-                            currentActive
-                    )
-                    result.add(rule)
-                    currentActive = false
+
+    def ruleIds = []
+    root."**".findAll { it.name() == "P" }.each { pTag ->
+
+        currentActive = !pTag.text().contains("(Removed)")
+  
+        pTag."**".findAll { it.name() == "A" }.each { aTag ->
+            aTag."**".findAll { it.name() == "CODE" }.each { codeTag ->
+                if (!codeTag.text().contains(' ')) {
+                    currentKey = codeTag.text()
+                    def description = parseRuleDescription(currentKey)
+                    if (description != null) {
+                        def rule = new Rule(
+                                currentKey,
+                                description,
+                                null, // no severity
+                                null, // no type
+                                currentKey.replace("_", " ").capitalize(),
+                                null, // no debt
+                                currentActive
+                            )
+                        result.add(rule)
+                        currentActive = true
+                        currentKey = ''
+                    }
                 }
-                currentKey = tag.text()
-                break
-            case 'H2':
-                currentCategory = tag.text()
-                currentKey = ''
-                started = true
-                break
-            case 'P':
-                currentDescription = tag.text()
-                break
-            case 'IMG':
-                if (!currentActive) {
-                    currentActive = (tag.@alt == 'recommended')
-                }
-                break
+            }
         }
-
     }
-
+    
     result
 }
 
@@ -189,7 +212,7 @@ def writeAnalysisOptions(rls, file) {
 
 def updater = new RuleUpdater('dart-lang/src/main/resources/dartanalyzer/rules.json', {
 
-    def rules = parseRules('https://dart-lang.github.io/linter/lints/')
+    def rules = parseRules('https://dart.dev/tools/linter-rules')
     rules.addAll(parseRulesFromDiagnostic('https://dart.dev/tools/diagnostic-messages'))
 
     writeAnalysisOptions(rules, new File('dart-lang/src/main/resources/dartanalyzer/analysis_options.yaml'))
