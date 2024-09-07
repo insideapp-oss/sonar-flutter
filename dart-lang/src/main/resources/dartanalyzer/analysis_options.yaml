@@ -2,6 +2,7 @@ linter:
   rules:
     - abi_specific_integer_invalid
     - abstract_field_initializer
+    - argument_must_be_native
     - argument_type_not_assignable_to_error_handler
     - body_might_complete_normally
     - conflicting_constructor_and_static_member
@@ -50,6 +51,12 @@ linter:
     - undefined_super_member
     - unnecessary_final
     - unnecessary_null_comparison
+    - uri_does_not_exist
+    - uri_does_not_exist_in_doc_import
     - wrong_number_of_parameters_for_setter
     - wrong_number_of_type_arguments
     - yield_in_non_generator
+    - literal_only_boolean_expressions
+    - no_logic_in_create_state
+    - prefer_const_declarations
+    - sized_box_shrink_expand

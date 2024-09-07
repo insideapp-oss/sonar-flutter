@@ -18,6 +18,15 @@
         "active": true
     },
     {
+        "key": "argument_must_be_native",
+        "name": "Argument must be native",
+        "severity": "MAJOR",
+        "description": "The analyzer produces this diagnostic when the argument passed to Native.addressOf isn't annotated with the Native annotation.\n @see https://dart.dev/tools/diagnostic-messages#argument_must_be_native",
+        "type": "BUG",
+        "debt": "5min",
+        "active": true
+    },
+    {
         "key": "argument_type_not_assignable_to_error_handler",
         "name": "Argument type not assignable to error handler",
         "severity": "MINOR",
@@ -450,6 +459,24 @@
         "active": true
     },
     {
+        "key": "uri_does_not_exist",
+        "name": "Uri does not exist",
+        "severity": "BLOCKER",
+        "description": "The analyzer produces this diagnostic when an import, export, or part directive is found where the URI refers to a file that doesn't exist.\n @see https://dart.dev/tools/diagnostic-messages#uri_does_not_exist",
+        "type": "BUG",
+        "debt": "5min",
+        "active": true
+    },
+    {
+        "key": "uri_does_not_exist_in_doc_import",
+        "name": "Uri does not exist in doc import",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a doc-import is found where the URI refers to a file that doesn't exist.\n @see https://dart.dev/tools/diagnostic-messages#uri_does_not_exist_in_doc_import",
+        "type": "BUG",
+        "debt": "5min",
+        "active": true
+    },
+    {
         "key": "wrong_number_of_parameters_for_setter",
         "name": "Wrong number of parameters for setter",
         "severity": "MINOR",
@@ -473,6 +500,42 @@
         "severity": "MINOR",
         "description": "The analyzer produces this diagnostic when a yield or yield* statement appears in a function whose body isn't marked with one of the async* or sync* modifiers.\n @see https://dart.dev/tools/diagnostic-messages#yield_in_non_generator",
         "type": "BUG",
+        "debt": "5min",
+        "active": true
+    },
+    {
+        "key": "literal_only_boolean_expressions",
+        "name": "Literal only boolean expressions",
+        "severity": "MAJOR",
+        "description": "The analyzer produces this diagnostic when the value of the condition in an if or loop statement is known to be either always true or always false. An exception is made for a while loop whose condition is the Boolean literal true.\n @see https://dart.dev/tools/diagnostic-messages#literal_only_boolean_expressions",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true
+    },
+    {
+        "key": "no_logic_in_create_state",
+        "name": "No logic in create state",
+        "severity": "MAJOR",
+        "description": "The analyzer produces this diagnostic when an implementation of createState in a subclass of StatefulWidget contains any logic other than the return of the result of invoking a zero argument constructor.\n @see https://dart.dev/tools/diagnostic-messages#no_logic_in_create_state",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true
+    },
+    {
+        "key": "prefer_const_declarations",
+        "name": "Prefer const declarations",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a top-level variable, static field, or local variable is marked as final and is initialized to a constant value.\n @see https://dart.dev/tools/diagnostic-messages#prefer_const_declarations",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true
+    },
+    {
+        "key": "sized_box_shrink_expand",
+        "name": "Sized box shrink expand",
+        "severity": "MINOR",
+        "description": "The analyzer produces this diagnostic when a SizedBox constructor invocation specifies the values of both height and width as either 0.0 or double.infinity.\n @see https://dart.dev/tools/diagnostic-messages#sized_box_shrink_expand",
+        "type": "CODE_SMELL",
         "debt": "5min",
         "active": true
     }

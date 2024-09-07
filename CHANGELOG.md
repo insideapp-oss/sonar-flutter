@@ -12,7 +12,7 @@
 
 #### Enhancements
 
-- None.
+- Analyzer rules update (7 added)
 
 #### Bug Fixes
 
