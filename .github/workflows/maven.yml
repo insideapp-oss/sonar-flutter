@@ -8,15 +8,15 @@ jobs:
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v4.1.6
         with:
           fetch-depth: 0
 
       - name: Set up JDK 1.11
-        uses: actions/setup-java@v3.11.0
+        uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
-          java-version: '11'
+          java-version: '17'
           check-latest: true
           cache: 'maven'
 
@@ -47,6 +47,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{github.workspace}}/sonar-flutter-plugin/target/*.jar
           tag: ${{env.version}}
+          release_name: ${{env.version}}
           overwrite: true
           body: "Snapshot release"
           file_glob: true

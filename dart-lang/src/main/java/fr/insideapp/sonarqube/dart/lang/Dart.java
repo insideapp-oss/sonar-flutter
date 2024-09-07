@@ -17,13 +17,22 @@
  */
 package fr.insideapp.sonarqube.dart.lang;
 
+import org.apache.commons.lang3.StringUtils;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class Dart extends AbstractLanguage {
     public static final String KEY = "dart";
     private final Configuration config;
+
+    public static final List<String> FILE_SUFFIXES = List.of(".dart");
+
+    public static final String FILE_SUFFIXES_KEY = "sonar.dart.file.suffixes";
 
     public Dart(Configuration config) {
         super(KEY, "Dart");
@@ -31,6 +40,11 @@ public class Dart extends AbstractLanguage {
     }
 
     public String[] getFileSuffixes() {
-        return new String[]{"dart"};
+        final List<String> providedFilesSuffixes = Arrays.stream(config.getStringArray(FILE_SUFFIXES_KEY))
+                .map(String::trim)
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.toList());
+        final List<String> filesSuffixes = providedFilesSuffixes.isEmpty() ? FILE_SUFFIXES : providedFilesSuffixes;
+        return filesSuffixes.toArray(new String[0]);
     }
 }

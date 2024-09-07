@@ -99,7 +99,7 @@ public abstract class AnalyzerExecutable {
     }
 
     private void maybeThrowException(ProcResult result) {
-        if (result.getExitValue() != 0) {
+        if (result.getExitValue() != 0 && result.getOutputString().isEmpty()) {
             throw new IllegalStateException(String.format("Error while running '%s' (exit %s): %s", result.getProcString(), result.getExitValue(), result.getErrorString()));
         }
     }
@@ -137,6 +137,7 @@ public abstract class AnalyzerExecutable {
     private void createAnalysisOptionsFile(SensorContext sensorContext) throws IOException {
         File analysisOptionsFile = sensorContext.fileSystem().resolvePath(ANALYSIS_OPTIONS_FILENAME);
         URL inputUrl = DartAnalyzerSensor.class.getResource(ANALYSIS_OPTIONS_FILE);
+        assert inputUrl != null;
         Resources.asByteSource(inputUrl).copyTo(com.google.common.io.Files.asByteSink(analysisOptionsFile));
     }
 
@@ -193,7 +194,6 @@ public abstract class AnalyzerExecutable {
      * for the given analyzer mode.
      * If Dart SDK >=2.12 is found, and the executable is not Flutter
      * then it will use machine readable output.
-     *
      * Otherwise it will fall back to legacy output which is not guaranteed
      * to be parsable.
      *
