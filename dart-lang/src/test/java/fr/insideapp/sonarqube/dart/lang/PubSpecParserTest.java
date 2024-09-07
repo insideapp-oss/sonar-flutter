@@ -26,19 +26,26 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class PubSpecParserTest {
 
-    private static final String TEST_ROOT = "src/test/resources/pubspec";
-
     @Test
     public void parse() throws IOException {
-        SensorContext context = SensorContextTester.create(new File(TEST_ROOT));
+        SensorContext context = SensorContextTester.create(new File("src/test/resources/pubspec"));
         final PubSpec pubSpec = PubSpecParser.parse(context);
         assertThat(pubSpec.getProjectVersion()).isEqualTo("1.0.0");
         assertTrue(pubSpec.isFlutter());
 
+    }
+
+    @Test
+    public void parseNoDeps() throws IOException {
+        SensorContext context = SensorContextTester.create(new File("src/test/resources/pubspec_nodeps"));
+        final PubSpec pubSpec = PubSpecParser.parse(context);
+        assertThat(pubSpec.getProjectVersion()).isEqualTo("1.0.0");
+        assertFalse(pubSpec.isFlutter());
     }
 
     @Test
@@ -49,6 +56,5 @@ public class PubSpecParserTest {
             PubSpecParser.parse(context);
         });
     }
-    
-}
 
+}

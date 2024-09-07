@@ -16,7 +16,7 @@
 
 #### Bug Fixes
 
-- None.
+- [#187](https://github.com/insideapp-oss/sonar-flutter/issues/187) pubspec.yaml parser fails when no dependencies are declared
 
 ## 0.5.1
 
