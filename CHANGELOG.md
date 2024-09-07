@@ -12,7 +12,26 @@
 
 #### Enhancements
 
-- Analyzer rules update (7 added)
+- None.
+
+#### Bug Fixes
+
+- None.
+
+
+## 0.5.2
+
+#### Breaking
+
+- None.
+
+#### Experimental
+
+- None.
+
+#### Enhancements
+
+- Analyzer rules update: there are now 279 rules available
 
 #### Bug Fixes
 
@@ -31,7 +50,7 @@
 
 #### Enhancements
 
-- Analyzer rules update: there are now 279 rules available
+- Analyzer rules update (2 added)
 
 #### Bug Fixes
 
