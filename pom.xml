@@ -4,7 +4,7 @@
     
     <groupId>fr.insideapp.sonarqube</groupId>
     <artifactId>sonar-flutter</artifactId>
-    <version>0.5.2-SNAPSHOT</version>
+    <version>0.5.2</version>
 
     <packaging>pom</packaging>
 

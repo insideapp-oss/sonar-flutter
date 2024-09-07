@@ -1,6 +1,6 @@
 # Changelog
 
-## develop
+## 0.5.2
 
 #### Breaking
 
