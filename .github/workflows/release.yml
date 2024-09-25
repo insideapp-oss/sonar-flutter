@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.0
 
       - name: Retrieve tag name
         uses: olegtarasov/get-tag@2.1.3
