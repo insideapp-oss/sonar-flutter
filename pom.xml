@@ -68,7 +68,7 @@
         <ant.version>1.6</ant.version>
         <assertj.version>3.5.2</assertj.version>
         <jproc.version>2.2.3</jproc.version>
-        <apache-commons.version>2.12.0</apache-commons.version>
+        <apache-commons.version>2.14.0</apache-commons.version>
         <apache-commons-lang3.version>3.12.0</apache-commons-lang3.version>
 
         <sonar.sources>src/main/java,src/main/js</sonar.sources>
