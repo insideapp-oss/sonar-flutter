@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.6.0
+
+#### Breaking
+
+- **Removed `DARTANALYZER` analyzer mode.** The `dartanalyzer` command was deprecated in Dart 2.18 and removed in Dart 3. Use `DART` or `FLUTTER` mode instead. The `sonar.dart.analyzer.mode` option no longer accepts `DARTANALYZER`.
+
+#### Enhancements
+
+- **Dart 3.x linter rules:** Added 14 new rules — `avoid_futureor_void`, `omit_obvious_property_types`, `remove_deprecations_in_breaking_versions`, `simplify_variable_pattern`, `specify_nonobvious_local_variable_types`, `specify_nonobvious_property_types`, `strict_top_level_inference`, `switch_on_type`, `unnecessary_async`, `unnecessary_ignore`, `unnecessary_unawaited`, `unnecessary_underscores`, `unsafe_variance`, `use_null_aware_elements`
+- **Deprecated rules deactivated:** 13 rules removed in Dart 3 are now `active: false` — `always_require_non_null_named_parameters`, `avoid_as`, `avoid_returning_null`, `avoid_returning_null_for_future`, `invariant_booleans`, `prefer_bool_in_asserts`, `prefer_equal_for_default_values`, `super_goes_last`, `package_api_docs`, `enable_null_safety`, `deprecated_new_in_comment_reference`, `type_check_with_null`, `unsafe_html`
+- **ANTLR grammar updated for Dart 3:** `sealed`, `base`, `final`, `interface`, `mixin` class modifiers, record types/literals, switch expressions, pattern matching (type/variable/wildcard/constant patterns), if-case statements, `when` guard clauses, nullable type syntax
+- **State management detection:** PubSpec parser now detects BLoC (`flutter_bloc`, `bloc`), Riverpod (`flutter_riverpod`, `hooks_riverpod`, `riverpod`), and Provider dependencies
+- **24 new state management rules:** 9 BLoC rules + 15 Riverpod rules with MQR clean code attributes, registered under `flutter-state-management` repository
+- **New Dart keywords:** `base`, `sealed`, `when` added to syntax highlighter
+- **Total rules: 329** (305 dartanalyzer + 24 state management)
+
+#### Bug Fixes
+
+- None.
+
 ## 0.5.2
 
 #### Breaking

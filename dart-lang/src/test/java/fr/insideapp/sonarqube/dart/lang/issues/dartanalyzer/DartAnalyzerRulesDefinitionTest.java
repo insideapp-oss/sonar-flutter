@@ -18,6 +18,8 @@
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
 import org.junit.Test;
+import org.sonar.api.issue.impact.SoftwareQuality;
+import org.sonar.api.rules.CleanCodeAttribute;
 import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,7 +38,30 @@ public class DartAnalyzerRulesDefinitionTest {
         assertThat(dartAnalyzerRepository.name()).isEqualTo("dartanalyzer");
         assertThat(dartAnalyzerRepository.language()).isEqualTo("dart");
         assertThat(dartAnalyzerRepository.rules()).isNotEmpty();
+    }
 
+    @Test
+    public void rulesShouldHaveMqrAttributes() {
+        DartAnalyzerRulesDefinition rulesDefinition = new DartAnalyzerRulesDefinition();
+        RulesDefinition.Context context = new RulesDefinition.Context();
+        rulesDefinition.define(context);
 
+        RulesDefinition.Repository repo = context.repository("dartanalyzer");
+
+        // CODE_SMELL rule should map to MAINTAINABILITY + CONVENTIONAL
+        RulesDefinition.Rule codeSmellRule = repo.rule("always_declare_return_types");
+        assertThat(codeSmellRule).isNotNull();
+        assertThat(codeSmellRule.cleanCodeAttribute()).isEqualTo(CleanCodeAttribute.CONVENTIONAL);
+        assertThat(codeSmellRule.defaultImpacts()).containsKey(SoftwareQuality.MAINTAINABILITY);
+
+        // Verify all rules have clean code attribute and at least one impact
+        for (RulesDefinition.Rule rule : repo.rules()) {
+            assertThat(rule.cleanCodeAttribute())
+                    .as("Rule %s should have a CleanCodeAttribute", rule.key())
+                    .isNotNull();
+            assertThat(rule.defaultImpacts())
+                    .as("Rule %s should have at least one default impact", rule.key())
+                    .isNotEmpty();
+        }
     }
 }

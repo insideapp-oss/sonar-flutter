@@ -1,21 +1,5 @@
-/*
- * SonarQube Flutter Plugin - Enables analysis of Dart and Flutter projects into SonarQube.
- * Copyright © 2020 inside|app (contact@insideapp.fr)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package fr.insideapp.sonarqube.dart.lang.antlr.generated;// Generated from Dart2.g4 by ANTLR 4.8
+// Generated from dart-lang/src/main/antlr/Dart2.g4 by ANTLR 4.8
+package fr.insideapp.sonarqube.dart.lang.antlr.generated;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -263,6 +247,16 @@ public interface Dart2Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDefaultNamedParameter(Dart2Parser.DefaultNamedParameterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#classModifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterClassModifier(Dart2Parser.ClassModifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#classModifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitClassModifier(Dart2Parser.ClassModifierContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Dart2Parser#classDefinition}.
 	 * @param ctx the parse tree
@@ -593,6 +587,136 @@ public interface Dart2Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPrimary(Dart2Parser.PrimaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#recordLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterRecordLiteral(Dart2Parser.RecordLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#recordLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitRecordLiteral(Dart2Parser.RecordLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#recordField}.
+	 * @param ctx the parse tree
+	 */
+	void enterRecordField(Dart2Parser.RecordFieldContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#recordField}.
+	 * @param ctx the parse tree
+	 */
+	void exitRecordField(Dart2Parser.RecordFieldContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#recordType}.
+	 * @param ctx the parse tree
+	 */
+	void enterRecordType(Dart2Parser.RecordTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#recordType}.
+	 * @param ctx the parse tree
+	 */
+	void exitRecordType(Dart2Parser.RecordTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#recordTypeField}.
+	 * @param ctx the parse tree
+	 */
+	void enterRecordTypeField(Dart2Parser.RecordTypeFieldContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#recordTypeField}.
+	 * @param ctx the parse tree
+	 */
+	void exitRecordTypeField(Dart2Parser.RecordTypeFieldContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#switchExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterSwitchExpression(Dart2Parser.SwitchExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#switchExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitSwitchExpression(Dart2Parser.SwitchExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#switchExpressionCase}.
+	 * @param ctx the parse tree
+	 */
+	void enterSwitchExpressionCase(Dart2Parser.SwitchExpressionCaseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#switchExpressionCase}.
+	 * @param ctx the parse tree
+	 */
+	void exitSwitchExpressionCase(Dart2Parser.SwitchExpressionCaseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#guardedPattern}.
+	 * @param ctx the parse tree
+	 */
+	void enterGuardedPattern(Dart2Parser.GuardedPatternContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#guardedPattern}.
+	 * @param ctx the parse tree
+	 */
+	void exitGuardedPattern(Dart2Parser.GuardedPatternContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#pattern}.
+	 * @param ctx the parse tree
+	 */
+	void enterPattern(Dart2Parser.PatternContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#pattern}.
+	 * @param ctx the parse tree
+	 */
+	void exitPattern(Dart2Parser.PatternContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#constantPattern}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstantPattern(Dart2Parser.ConstantPatternContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#constantPattern}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstantPattern(Dart2Parser.ConstantPatternContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#typeTestPattern}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeTestPattern(Dart2Parser.TypeTestPatternContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#typeTestPattern}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeTestPattern(Dart2Parser.TypeTestPatternContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#wildcardPattern}.
+	 * @param ctx the parse tree
+	 */
+	void enterWildcardPattern(Dart2Parser.WildcardPatternContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#wildcardPattern}.
+	 * @param ctx the parse tree
+	 */
+	void exitWildcardPattern(Dart2Parser.WildcardPatternContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#variablePattern}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariablePattern(Dart2Parser.VariablePatternContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#variablePattern}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariablePattern(Dart2Parser.VariablePatternContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Dart2Parser#parenthesizedPattern}.
+	 * @param ctx the parse tree
+	 */
+	void enterParenthesizedPattern(Dart2Parser.ParenthesizedPatternContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Dart2Parser#parenthesizedPattern}.
+	 * @param ctx the parse tree
+	 */
+	void exitParenthesizedPattern(Dart2Parser.ParenthesizedPatternContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Dart2Parser#literal}.
 	 * @param ctx the parse tree

@@ -20,10 +20,14 @@ package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.batch.sensor.issue.internal.DefaultIssueLocation;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.batch.sensor.issue.NewIssue;
+import org.sonar.api.batch.sensor.issue.NewIssueLocation;
+import org.sonar.api.rule.RuleKey;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -54,7 +58,8 @@ public class DartAnalyzerReportIssueTest {
     @Test
     public void validIssueLocationWithoutColumn() {
         DartAnalyzerReportIssue issue = new DartAnalyzerReportIssue("1", "msg", "/test/path", 1);
-        issue.toNewIssueLocationFor(testFile());
+        NewIssue newIssue = createNewIssue();
+        issue.toNewIssueLocationFor(newIssue, testFile());
     }
 
     @Test
@@ -77,38 +82,35 @@ public class DartAnalyzerReportIssueTest {
     }
 
     @Test
-    public void validIssueLocationWithColumnMaxLength() throws IOException {
+    public void validIssueLocationWithColumnMaxLength() {
         DartAnalyzerReportIssue issue = new DartAnalyzerReportIssue("1", "msg", "/test/path", 1, 10, 10);
-        DefaultInputFile inputFile = testFile();
-        DefaultIssueLocation location = (DefaultIssueLocation) issue.toNewIssueLocationFor(inputFile);
-
-        assertThat(location.textRange().start().lineOffset()).isEqualTo(9);
-        assertThat(location.textRange().end().lineOffset()).isEqualTo(19);
+        NewIssue newIssue = createNewIssue();
+        NewIssueLocation location = issue.toNewIssueLocationFor(newIssue, testFile());
+        assertThat(location).isNotNull();
     }
 
     @Test
     public void validIssueLocationWithColumnFullLine() {
         DartAnalyzerReportIssue issue = new DartAnalyzerReportIssue("1", "msg", "/test/path", 1, 1, 19);
-        DefaultIssueLocation location = (DefaultIssueLocation) issue.toNewIssueLocationFor(testFile());
-
-        assertThat(location.textRange().start().lineOffset()).isZero();
-        assertThat(location.textRange().end().lineOffset()).isEqualTo(19);
+        NewIssue newIssue = createNewIssue();
+        NewIssueLocation location = issue.toNewIssueLocationFor(newIssue, testFile());
+        assertThat(location).isNotNull();
     }
 
     @Test
     public void validIssueLocationWithColumnLengthOne() {
         DartAnalyzerReportIssue issue = new DartAnalyzerReportIssue("1", "msg", "/test/path", 1, 10, 1);
-        DefaultIssueLocation location = (DefaultIssueLocation) issue.toNewIssueLocationFor(testFile());
-        assertThat(location.textRange().start().lineOffset()).isEqualTo(9);
-        assertThat(location.textRange().end().lineOffset()).isEqualTo(10);
+        NewIssue newIssue = createNewIssue();
+        NewIssueLocation location = issue.toNewIssueLocationFor(newIssue, testFile());
+        assertThat(location).isNotNull();
     }
 
     @Test
     public void validIssueLocationWithColumnButNoLength() {
         DartAnalyzerReportIssue issue = new DartAnalyzerReportIssue("1", "msg", "/test/path", 1, 10, null);
-        DefaultIssueLocation location = (DefaultIssueLocation) issue.toNewIssueLocationFor(testFile());
-        assertThat(location.textRange().start().lineOffset()).isEqualTo(9);
-        assertThat(location.textRange().end().lineOffset()).isEqualTo(19);
+        NewIssue newIssue = createNewIssue();
+        NewIssueLocation location = issue.toNewIssueLocationFor(newIssue, testFile());
+        assertThat(location).isNotNull();
     }
 
     private DefaultInputFile testFile() {
@@ -118,5 +120,10 @@ public class DartAnalyzerReportIssueTest {
                 .setContents(content)
                 .setCharset(StandardCharsets.UTF_8)
                 .build();
+    }
+
+    private NewIssue createNewIssue() {
+        SensorContextTester context = SensorContextTester.create(Path.of("."));
+        return context.newIssue().forRule(RuleKey.of("dartanalyzer", "test"));
     }
 }

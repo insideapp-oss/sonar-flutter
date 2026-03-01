@@ -19,16 +19,17 @@ package fr.insideapp.sonarqube.dart.lang.issues;
 
 import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer.DartAnalyzerRulesDefinition;
+import fr.insideapp.sonarqube.dart.lang.issues.statemanagement.FlutterStateManagementRulesDefinition;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
 
 public class DartProfile implements BuiltInQualityProfilesDefinition {
 
-    private static final Logger LOGGER = Loggers.get(DartProfile.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DartProfile.class);
 
     @Override
     public void define(BuiltInQualityProfilesDefinition.Context context) {
@@ -38,23 +39,29 @@ public class DartProfile implements BuiltInQualityProfilesDefinition {
         RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
 
         // dartanalyzer rules
-        try {
-            List<RepositoryRule> rules = repositoryRuleParser.parse(DartAnalyzerRulesDefinition.RULES_FILE);
-            for (RepositoryRule r: rules) {
+        loadRulesIntoProfile(repositoryRuleParser, profile, DartAnalyzerRulesDefinition.RULES_FILE, DartAnalyzerRulesDefinition.REPOSITORY_KEY);
 
-                if ( r.name == null || r.severity == null || r.type == null || r.description == null) {
-                    LOGGER.warn(String.format("Cannot add %s rule to dartanalyzer profile, rule data is missing in rules.json", r.key));
+        // state management rules
+        loadRulesIntoProfile(repositoryRuleParser, profile, FlutterStateManagementRulesDefinition.RULES_FILE, FlutterStateManagementRulesDefinition.REPOSITORY_KEY);
+
+        profile.done();
+    }
+
+    private void loadRulesIntoProfile(RepositoryRuleParser parser, NewBuiltInQualityProfile profile, String rulesFile, String repositoryKey) {
+        try {
+            List<RepositoryRule> rules = parser.parse(rulesFile);
+            for (RepositoryRule r : rules) {
+                if (r.name == null || r.severity == null || r.type == null || r.description == null) {
+                    LOGGER.warn("Cannot add {} rule to {} profile, rule data is missing in rules.json", r.key, repositoryKey);
                 } else {
                     if (r.active) {
-                        NewBuiltInActiveRule rule = profile.activateRule("dartanalyzer", r.key);
+                        NewBuiltInActiveRule rule = profile.activateRule(repositoryKey, r.key);
                         rule.overrideSeverity(r.severity.name());
                     }
                 }
             }
         } catch (IOException e) {
-            LOGGER.error("Failed to load dartanalyzer rules", e);
+            LOGGER.error("Failed to load {} rules", repositoryKey, e);
         }
-
-        profile.done();
     }
 }

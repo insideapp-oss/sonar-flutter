@@ -55,16 +55,14 @@
         <license.mailto>contact@insideapp.fr</license.mailto>
 
         <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-        <jdk.min.version>1.9</jdk.min.version>
+        <jdk.min.version>17</jdk.min.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <sonar.version>7.9</sonar.version>
+        <sonar.plugin.api.version>13.4.3.4290</sonar.plugin.api.version>
 
         <assertj.version>3.5.2</assertj.version>
         <junit.version>4.13.1</junit.version>
-        <mockito.version>4.4.0</mockito.version>
-        <sslr.version>1.23</sslr.version>
-        <sslr-squid-bridge.version>2.7.1.392</sslr-squid-bridge.version>
+        <mockito.version>5.11.0</mockito.version>
         <ant.version>1.6</ant.version>
         <assertj.version>3.5.2</assertj.version>
         <jproc.version>2.2.3</jproc.version>
@@ -81,9 +79,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.sonarsource.sonarqube</groupId>
+            <groupId>org.sonarsource.api.plugin</groupId>
             <artifactId>sonar-plugin-api</artifactId>
-            <version>${sonar.version}</version>
+            <version>${sonar.plugin.api.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -109,59 +107,29 @@
             <version>${jproc.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.sonarsource.sslr</groupId>
-            <artifactId>sslr-core</artifactId>
-            <version>${sslr.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.sonarsource.sslr-squid-bridge</groupId>
-            <artifactId>sslr-squid-bridge</artifactId>
-            <version>${sslr-squid-bridge.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.codehaus.sonar.sslr</groupId>
-                    <artifactId>sslr-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.sonar.sslr</groupId>
-                    <artifactId>sslr-xpath</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.sonar</groupId>
-                    <artifactId>sonar-plugin-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.picocontainer</groupId>
-                    <artifactId>picocontainer</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>jcl-over-slf4j</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Test dependencies -->
         <dependency>
+            <groupId>org.sonarsource.api.plugin</groupId>
+            <artifactId>sonar-plugin-api-test-fixtures</artifactId>
+            <version>${sonar.plugin.api.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.sonarsource.sonarqube</groupId>
-            <artifactId>sonar-testing-harness</artifactId>
-            <version>${sonar.version}</version>
+            <artifactId>sonar-plugin-api-impl</artifactId>
+            <version>10.3.0.82913</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.sonarsource.sslr</groupId>
-            <artifactId>sslr-testing-harness</artifactId>
-            <version>${sslr.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -185,10 +153,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.13.0</version>
                 <configuration>
-                    <source>${jdk.min.version}</source>
-                    <target>${jdk.min.version}</target>
+                    <release>${jdk.min.version}</release>
                     <compilerArgs>
                         <arg>-Xlint</arg>
                     </compilerArgs>
@@ -198,7 +165,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
+                <version>0.8.12</version>
                 <configuration>
                     <excludes>
                         <exclude>**/generated/**</exclude>

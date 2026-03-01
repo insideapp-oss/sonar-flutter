@@ -1,21 +1,5 @@
-/*
- * SonarQube Flutter Plugin - Enables analysis of Dart and Flutter projects into SonarQube.
- * Copyright © 2020 inside|app (contact@insideapp.fr)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package fr.insideapp.sonarqube.dart.lang.antlr.generated;// Generated from Dart2.g4 by ANTLR 4.8
+// Generated from dart-lang/src/main/antlr/Dart2.g4 by ANTLR 4.8
+package fr.insideapp.sonarqube.dart.lang.antlr.generated;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -170,6 +154,12 @@ public interface Dart2Visitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDefaultNamedParameter(Dart2Parser.DefaultNamedParameterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#classModifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassModifier(Dart2Parser.ClassModifierContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Dart2Parser#classDefinition}.
 	 * @param ctx the parse tree
@@ -368,6 +358,84 @@ public interface Dart2Visitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPrimary(Dart2Parser.PrimaryContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#recordLiteral}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRecordLiteral(Dart2Parser.RecordLiteralContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#recordField}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRecordField(Dart2Parser.RecordFieldContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#recordType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRecordType(Dart2Parser.RecordTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#recordTypeField}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRecordTypeField(Dart2Parser.RecordTypeFieldContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#switchExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSwitchExpression(Dart2Parser.SwitchExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#switchExpressionCase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSwitchExpressionCase(Dart2Parser.SwitchExpressionCaseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#guardedPattern}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGuardedPattern(Dart2Parser.GuardedPatternContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#pattern}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPattern(Dart2Parser.PatternContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#constantPattern}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConstantPattern(Dart2Parser.ConstantPatternContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#typeTestPattern}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeTestPattern(Dart2Parser.TypeTestPatternContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#wildcardPattern}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWildcardPattern(Dart2Parser.WildcardPatternContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#variablePattern}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariablePattern(Dart2Parser.VariablePatternContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Dart2Parser#parenthesizedPattern}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParenthesizedPattern(Dart2Parser.ParenthesizedPatternContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Dart2Parser#literal}.
 	 * @param ctx the parse tree

@@ -137,9 +137,19 @@ defaultNamedParameter
   | normalFormalParameter (':' expression)?
   ;
 
-// 10 Classes
+// 10 Classes (updated for Dart 3 class modifiers)
+classModifier
+  : 'sealed'
+  | 'base'
+  | 'final'
+  | 'interface'
+  | 'mixin'
+  ;
 classDefinition
-  : metadata 'abstract'? 'class' identifier typeParameters?
+  : metadata classModifier* 'abstract'? 'class' identifier typeParameters?
+    superclass? mixins? interfaces?
+    '{' (metadata classMemberDefinition)* '}'
+  | metadata 'abstract'? classModifier* 'class' identifier typeParameters?
     superclass? mixins? interfaces?
     '{' (metadata classMemberDefinition)* '}'
   | metadata 'abstract'? 'class' mixinApplicationClass
@@ -297,7 +307,59 @@ primary
   | identifier
   | nayaExpression
   | constObjectExpression
+  | recordLiteral
+  | switchExpression
   | '(' expression ')'
+  ;
+
+// Dart 3 Records
+recordLiteral
+  : '(' recordField ',' recordField (',' recordField)* ','? ')'
+  ;
+recordField
+  : (identifier ':')? expression
+  ;
+recordType
+  : '(' recordTypeField ',' recordTypeField (',' recordTypeField)* ','? ')'
+  ;
+recordTypeField
+  : (identifier ':')? dtype
+  ;
+
+// Dart 3 Switch Expressions
+switchExpression
+  : 'switch' '(' expression ')' '{' switchExpressionCase (',' switchExpressionCase)* ','? '}'
+  ;
+switchExpressionCase
+  : guardedPattern '=>' expression
+  ;
+guardedPattern
+  : pattern ('when' expression)?
+  ;
+pattern
+  : constantPattern
+  | typeTestPattern
+  | wildcardPattern
+  | variablePattern
+  | parenthesizedPattern
+  ;
+constantPattern
+  : literal
+  | identifier
+  | qualified
+  | constObjectExpression
+  ;
+typeTestPattern
+  : dtype identifier
+  ;
+wildcardPattern
+  : '_'
+  ;
+variablePattern
+  : ('var' | 'final' dtype? ) identifier
+  ;
+parenthesizedPattern
+  : '(' pattern ')'
   ;
 
 // 16.1 Constants
@@ -702,9 +764,10 @@ localVariableDeclaration
 localFunctionDeclaration
   : functionSignature functionBody
   ;
-// 17.5 If
+// 17.5 If (updated for Dart 3 if-case)
 ifStatement
   : 'if' '(' expression ')' statement ('else' statement)?
+  | 'if' '(' expression 'case' pattern ('when' expression)? ')' statement ('else' statement)?
   ;
 
 // 17.6 For for
@@ -730,12 +793,12 @@ whileStatement
 doStatement
   : 'do' statement 'while' '(' expression ')' ';'
   ;
-// 17.9 Switch
+// 17.9 Switch (updated for Dart 3 patterns and when guards)
 switchStatement
   : 'switch'  '(' expression ')' '{' switchCase* defaultCase? '}'
   ;
 switchCase
-  : label* 'case' expression ':' statements
+  : label* 'case' expression ('when' expression)? ':' statements
   ;
 defaultCase
   : label* 'default' ':' statements
@@ -885,7 +948,8 @@ uriTest
 
 // 19.1 Static Types
 dtype
-  : typeName typeArguments?
+  : typeName typeArguments? '?'?
+  | recordType '?'?
   ;
 typeName
   : qualified

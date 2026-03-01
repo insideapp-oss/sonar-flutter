@@ -1,0 +1,386 @@
+[
+    {
+        "key": "bloc_avoid_flutter_imports",
+        "name": "Avoid Flutter imports in BLoC",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>Avoid importing Flutter packages in BLoC classes. BLoC logic should be platform-independent and not depend on Flutter framework.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "10min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "bloc_avoid_public_methods",
+        "name": "Avoid public methods in BLoC",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>Avoid adding public methods to BLoC classes other than close(). Events should be the only way to communicate with a BLoC from the presentation layer.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "10min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "bloc_prefer_bloc",
+        "name": "Prefer BLoC over Cubit for complex logic",
+        "severity": "MINOR",
+        "description": "<SECTION><P>Consider using BLoC instead of Cubit when the component has complex event-driven logic. BLoC provides better traceability of state changes through events.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "15min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "bloc_prefer_cubit",
+        "name": "Prefer Cubit over BLoC for simple logic",
+        "severity": "MINOR",
+        "description": "<SECTION><P>Consider using Cubit instead of BLoC when the component has simple state transitions without complex event handling.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "10min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "bloc_avoid_returning_widgets",
+        "name": "Avoid returning widgets from BLoC",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>BLoC should not return or contain widget references. BLoC handles business logic only; the UI layer should build widgets based on state.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "15min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "bloc_avoid_bloc_in_bloc",
+        "name": "Avoid using BLoC inside another BLoC",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>Avoid directly depending on one BLoC inside another. Use events or a shared repository layer to coordinate between BLoCs.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "20min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "bloc_prefer_emit_over_yield",
+        "name": "Prefer emit over yield in BLoC",
+        "severity": "MINOR",
+        "description": "<SECTION><P>Prefer using emit() instead of yield for state transitions in modern BLoC. The yield-based API is deprecated.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "bloc_avoid_mutable_state",
+        "name": "Avoid mutable state in BLoC state classes",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>BLoC state classes should be immutable. Use final fields and create new state instances for transitions.</P></SECTION>",
+        "type": "BUG",
+        "debt": "10min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "RELIABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "bloc_close_bloc",
+        "name": "Ensure BLoC is closed when no longer needed",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>BLoC instances should be properly closed when no longer needed to prevent memory leaks. Use BlocProvider for automatic lifecycle management.</P></SECTION>",
+        "type": "BUG",
+        "debt": "10min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "RELIABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_missing_provider_scope",
+        "name": "Missing ProviderScope at root",
+        "severity": "CRITICAL",
+        "description": "<SECTION><P>Riverpod requires a ProviderScope widget at the root of the widget tree. Without it, providers will not work correctly.</P></SECTION>",
+        "type": "BUG",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "RELIABILITY",
+                "severity": "HIGH"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_provider_dependencies",
+        "name": "Declare provider dependencies",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>Providers that depend on other providers should explicitly declare their dependencies using the @Riverpod annotation's dependencies parameter.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "10min",
+        "active": true,
+        "cleanCodeAttribute": "CLEAR",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_avoid_build_context_in_providers",
+        "name": "Avoid BuildContext in providers",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>Providers should not depend on BuildContext. This creates tight coupling between the provider and the widget tree, making testing and reuse difficult.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "15min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_avoid_manual_providers_as_generated",
+        "name": "Avoid manually written providers when using codegen",
+        "severity": "MINOR",
+        "description": "<SECTION><P>When using Riverpod code generation, prefer @riverpod annotation over manually creating Provider/StateProvider instances.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_avoid_notifier_extends",
+        "name": "Avoid extending wrong Notifier base class",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>Ensure Notifier classes extend the correct base class. AsyncNotifier for async state, Notifier for sync state.</P></SECTION>",
+        "type": "BUG",
+        "debt": "10min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "RELIABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_prefer_final_provider",
+        "name": "Prefer final for provider declarations",
+        "severity": "MINOR",
+        "description": "<SECTION><P>Provider declarations should be final to prevent accidental reassignment.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "1min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_avoid_read_inside_build",
+        "name": "Avoid ref.read inside build method",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>Avoid using ref.read inside the build method. Use ref.watch instead to ensure the widget rebuilds when the provider state changes.</P></SECTION>",
+        "type": "BUG",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "RELIABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_avoid_watch_outside_build",
+        "name": "Avoid ref.watch outside build method",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>Avoid using ref.watch outside the build method. Use ref.read for one-time reads in callbacks and event handlers.</P></SECTION>",
+        "type": "BUG",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "RELIABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_prefer_consumer_widget",
+        "name": "Prefer ConsumerWidget over Consumer",
+        "severity": "MINOR",
+        "description": "<SECTION><P>Prefer extending ConsumerWidget instead of using a Consumer widget inside a StatelessWidget for cleaner code.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_dispose_provider",
+        "name": "Ensure autoDispose for scoped providers",
+        "severity": "MINOR",
+        "description": "<SECTION><P>Consider using autoDispose modifier for providers that are scoped to specific pages or features to prevent memory leaks.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_missing_error_handling",
+        "name": "Missing error handling in AsyncValue",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>When consuming AsyncValue from an async provider, always handle error and loading states in addition to data.</P></SECTION>",
+        "type": "BUG",
+        "debt": "10min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "RELIABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_stateless_provider",
+        "name": "Prefer stateless providers when possible",
+        "severity": "MINOR",
+        "description": "<SECTION><P>Use Provider instead of StateProvider or StateNotifierProvider when the provider does not need to manage mutable state.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_avoid_global_state",
+        "name": "Avoid global mutable state in providers",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>Avoid using global mutable variables accessed by providers. Use proper state management through Riverpod's state mechanisms.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "15min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_functional_ref",
+        "name": "Use functional_ref parameter correctly",
+        "severity": "MINOR",
+        "description": "<SECTION><P>When using code generation, ensure the ref parameter is correctly typed as the generated Ref type.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "riverpod_avoid_public_notifier_properties",
+        "name": "Avoid public properties in Notifier",
+        "severity": "MAJOR",
+        "description": "<SECTION><P>Notifier properties should be private. Expose state changes only through the state property and public methods.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "10min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    }
+]

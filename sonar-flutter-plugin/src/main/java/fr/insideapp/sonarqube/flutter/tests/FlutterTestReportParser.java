@@ -19,8 +19,8 @@ package fr.insideapp.sonarqube.flutter.tests;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +35,7 @@ import java.util.Scanner;
  * Test event types are based on https://github.com/dart-lang/test/blob/master/pkgs/test/doc/json_reporter.md
  */
 public class FlutterTestReportParser {
-    private static final Logger LOGGER = Loggers.get(FlutterTestReportParser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FlutterTestReportParser.class);
 
     List<FlutterUnitTestSuite> parse(File reportFile) throws IOException {
         if (reportFile.exists()) {

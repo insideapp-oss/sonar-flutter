@@ -25,8 +25,8 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.CheckForNull;
 import java.io.File;
@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FlutterCoverageSensor implements Sensor {
-    private static final Logger LOGGER = Loggers.get(FlutterCoverageSensor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FlutterCoverageSensor.class);
     public static final String REPORT_PATH_KEY = "sonar.flutter.coverage.reportPath";
     public static final String DEFAULT_REPORT_PATH = "coverage/lcov.info";
 

@@ -18,8 +18,8 @@
 package fr.insideapp.sonarqube.dart.lang;
 
 import org.apache.commons.io.input.BOMInputStream;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SourceLinesProvider {
-    private static final Logger LOGGER = Loggers.get(SourceLinesProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SourceLinesProvider.class);
 
     public SourceLine[] getLines(final InputStream inputStream, final Charset charset) {
         if (inputStream == null) {

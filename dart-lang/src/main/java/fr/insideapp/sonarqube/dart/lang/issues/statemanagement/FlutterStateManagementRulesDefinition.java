@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
+package fr.insideapp.sonarqube.dart.lang.issues.statemanagement;
 
 import fr.insideapp.sonarqube.dart.lang.Dart;
 import fr.insideapp.sonarqube.dart.lang.issues.RepositoryRule;
@@ -31,11 +31,11 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.List;
 
-public class DartAnalyzerRulesDefinition implements RulesDefinition {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DartAnalyzerRulesDefinition.class);
-    public static final String REPOSITORY_KEY = "dartanalyzer";
-    public static final String REPOSITORY_NAME = REPOSITORY_KEY;
-    public static final String RULES_FILE = "/dartanalyzer/rules.json";
+public class FlutterStateManagementRulesDefinition implements RulesDefinition {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FlutterStateManagementRulesDefinition.class);
+    public static final String REPOSITORY_KEY = "flutter-state-management";
+    public static final String REPOSITORY_NAME = "Flutter State Management";
+    public static final String RULES_FILE = "/flutter-state-management/rules.json";
 
     @Override
     public void define(Context context) {
@@ -45,9 +45,8 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
         try {
             List<RepositoryRule> rules = repositoryRuleParser.parse(RULES_FILE);
             for (RepositoryRule rule : rules) {
-
                 if (rule.name == null || rule.severity == null || rule.type == null || rule.description == null) {
-                    LOGGER.warn(String.format("Cannot load %s rule from dartanalyzer, rule data is missing in rules.json", rule.key));
+                    LOGGER.warn("Cannot load {} rule from {}, rule data is missing", rule.key, REPOSITORY_KEY);
                 } else {
                     RulesDefinition.NewRule newRule = repository.createRule(rule.key)
                             .setName(rule.name)
@@ -57,19 +56,14 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
                             .setHtmlDescription(rule.description);
                     newRule.setDebtRemediationFunction(newRule.debtRemediationFunctions().constantPerIssue(rule.debt));
 
-                    // MQR Mode: Set clean code attribute
                     if (rule.cleanCodeAttribute != null) {
                         try {
                             newRule.setCleanCodeAttribute(CleanCodeAttribute.valueOf(rule.cleanCodeAttribute));
                         } catch (IllegalArgumentException e) {
-                            LOGGER.warn("Unknown CleanCodeAttribute '{}' for rule {}, using default", rule.cleanCodeAttribute, rule.key);
+                            LOGGER.warn("Unknown CleanCodeAttribute '{}' for rule {}", rule.cleanCodeAttribute, rule.key);
                         }
-                    } else {
-                        // Default based on type
-                        newRule.setCleanCodeAttribute(mapTypeToCleanCodeAttribute(rule.type));
                     }
 
-                    // MQR Mode: Set impacts
                     if (rule.impacts != null && !rule.impacts.isEmpty()) {
                         for (RepositoryRule.Impact impact : rule.impacts) {
                             try {
@@ -78,64 +72,16 @@ public class DartAnalyzerRulesDefinition implements RulesDefinition {
                                         Severity.valueOf(impact.severity)
                                 );
                             } catch (IllegalArgumentException e) {
-                                LOGGER.warn("Invalid impact definition for rule {}: {} / {}", rule.key, impact.softwareQuality, impact.severity);
+                                LOGGER.warn("Invalid impact for rule {}: {} / {}", rule.key, impact.softwareQuality, impact.severity);
                             }
                         }
-                    } else {
-                        // Auto-map from legacy type/severity
-                        newRule.addDefaultImpact(
-                                mapTypeToSoftwareQuality(rule.type),
-                                mapSeverityToImpactSeverity(rule.severity)
-                        );
                     }
                 }
             }
         } catch (IOException e) {
-            LOGGER.error("Failed to load dartanalyzer rules", e);
+            LOGGER.error("Failed to load state management rules", e);
         }
 
         repository.done();
-    }
-
-    private static CleanCodeAttribute mapTypeToCleanCodeAttribute(RepositoryRule.Type type) {
-        switch (type) {
-            case BUG:
-                return CleanCodeAttribute.LOGICAL;
-            case VULNERABILITY:
-            case SECURITY_HOTSPOT:
-                return CleanCodeAttribute.TRUSTWORTHY;
-            case CODE_SMELL:
-            default:
-                return CleanCodeAttribute.CONVENTIONAL;
-        }
-    }
-
-    private static SoftwareQuality mapTypeToSoftwareQuality(RepositoryRule.Type type) {
-        switch (type) {
-            case BUG:
-                return SoftwareQuality.RELIABILITY;
-            case VULNERABILITY:
-            case SECURITY_HOTSPOT:
-                return SoftwareQuality.SECURITY;
-            case CODE_SMELL:
-            default:
-                return SoftwareQuality.MAINTAINABILITY;
-        }
-    }
-
-    private static Severity mapSeverityToImpactSeverity(RepositoryRule.Severity severity) {
-        switch (severity) {
-            case BLOCKER:
-                return Severity.BLOCKER;
-            case CRITICAL:
-                return Severity.HIGH;
-            case MAJOR:
-                return Severity.MEDIUM;
-            case MINOR:
-                return Severity.LOW;
-            case INFO:
-            default:
-                return Severity.INFO;
-        }
     }
 }

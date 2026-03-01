@@ -858,7 +858,7 @@
         "key": "lines_longer_than_80_chars",
         "name": "Lines longer than 80 chars",
         "severity": "MINOR",
-        "description": "<SECTION><P>\n  <STRONG>AVOID</STRONG>\n   lines longer than 80 characters\n</P>\n<P>Readability studies show that long lines of text are harder to read because your eye has to travel farther when moving to the beginning of the next line. This is why newspapers and magazines use multiple columns of text.</P>\n<P>\n  If you really find yourself wanting lines longer than 80 characters, our experience is that your code is likely too verbose and could be a little more compact. The main offender is usually \n  <CODE>VeryLongCamelCaseClassNames</CODE>\n  . Ask yourself, \u201cDoes each word in that type name tell me something critical or prevent a name collision?\u201d If not, consider omitting it.\n</P>\n<CODE>VeryLongCamelCaseClassNames</CODE>\n<P>\n  Note that \n  <CODE>dart format</CODE>\n   does 99% of this for you, but the last 1% is you. It does not split long string literals to fit in 80 columns, so you have to do that manually.\n</P>\n<CODE>dart format</CODE>\n<P>We make an exception for URIs and file paths. When those occur in comments or strings (usually in imports and exports), they may remain on a single line even if they go over the line limit. This makes it easier to search source files for a given path.</P>\n</SECTION>",
+        "description": "<SECTION><P>\n  <STRONG>AVOID</STRONG>\n   lines longer than 80 characters\n</P>\n<P>Readability studies show that long lines of text are harder to read because your eye has to travel farther when moving to the beginning of the next line. This is why newspapers and magazines use multiple columns of text.</P>\n<P>\n  If you really find yourself wanting lines longer than 80 characters, our experience is that your code is likely too verbose and could be a little more compact. The main offender is usually \n  <CODE>VeryLongCamelCaseClassNames</CODE>\n  . Ask yourself, “Does each word in that type name tell me something critical or prevent a name collision?” If not, consider omitting it.\n</P>\n<CODE>VeryLongCamelCaseClassNames</CODE>\n<P>\n  Note that \n  <CODE>dart format</CODE>\n   does 99% of this for you, but the last 1% is you. It does not split long string literals to fit in 80 columns, so you have to do that manually.\n</P>\n<CODE>dart format</CODE>\n<P>We make an exception for URIs and file paths. When those occur in comments or strings (usually in imports and exports), they may remain on a single line even if they go over the line limit. This makes it easier to search source files for a given path.</P>\n</SECTION>",
         "type": "CODE_SMELL",
         "debt": "1min",
         "active": true
@@ -1086,7 +1086,7 @@
         "description": "<SECTION><P>\n  <STRONG>DO</STRONG>\n   provide doc comments for all public APIs.\n</P>\n<P>\n  As described in the \n  <A href=\"https://dart.dev/tools/pub/package-layout#implementation-files\">pub package layout doc</A>\n  , public APIs consist in everything in your package's \n  <CODE>lib</CODE>\n   folder, minus implementation files in \n  <CODE>lib/src</CODE>\n  , adding elements explicitly exported with an \n  <CODE>export</CODE>\n   directive.\n</P>\n<CODE>lib</CODE>\n<CODE>lib/src</CODE>\n<CODE>export</CODE>\n<P>\n  For example, given \n  <CODE>lib/foo.dart</CODE>\n  :\n</P>\n<CODE>lib/foo.dart</CODE>\n<CODE>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#D43324\">export</SPAN>\n    <SPAN style=\"color:#11796D\"> 'src/bar.dart'</SPAN>\n    <SPAN style=\"color:#D43324\"> show</SPAN>\n    <SPAN style=\"color:#222222\"> Bar;</SPAN>\n  </SPAN>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#D43324\">export</SPAN>\n    <SPAN style=\"color:#11796D\"> 'src/baz.dart'</SPAN>\n    <SPAN style=\"color:#222222\">;</SPAN>\n  </SPAN>\n  <SPAN class=\"line\"/>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#D43324\">class</SPAN>\n    <SPAN style=\"color:#0468D7\"> Foo</SPAN>\n    <SPAN style=\"color:#222222\"> { }</SPAN>\n  </SPAN>\n  <SPAN class=\"line\"/>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#D43324\">class</SPAN>\n    <SPAN style=\"color:#0468D7\"> _Foo</SPAN>\n    <SPAN style=\"color:#222222\"> { }</SPAN>\n  </SPAN>\n</CODE>\n<P>its API includes:</P>\n<CODE>Foo</CODE>\n<CODE>_Foo</CODE>\n<CODE>Bar</CODE>\n<CODE>src/baz.dart</CODE>\n<P>\n  All public API members should be documented with \n  <CODE>///</CODE>\n   doc-style comments.\n</P>\n<CODE>///</CODE>\n<P>\n  <STRONG>BAD:</STRONG>\n</P>\n<CODE>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#D43324\">class</SPAN>\n    <SPAN style=\"color:#0468D7\"> Bar</SPAN>\n    <SPAN style=\"color:#222222\"> {</SPAN>\n  </SPAN>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#D43324\">  void</SPAN>\n    <SPAN style=\"color:#6200EE\"> bar</SPAN>\n    <SPAN style=\"color:#222222\">();</SPAN>\n  </SPAN>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#222222\">}</SPAN>\n  </SPAN>\n</CODE>\n<P>\n  <STRONG>GOOD:</STRONG>\n</P>\n<CODE>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#6E6E70\">/// A Foo.</SPAN>\n  </SPAN>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#D43324\">abstract</SPAN>\n    <SPAN style=\"color:#D43324\"> class</SPAN>\n    <SPAN style=\"color:#0468D7\"> Foo</SPAN>\n    <SPAN style=\"color:#222222\"> {</SPAN>\n  </SPAN>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#6E6E70\">  /// Start foo-ing.</SPAN>\n  </SPAN>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#D43324\">  void</SPAN>\n    <SPAN style=\"color:#6200EE\"> start</SPAN>\n    <SPAN style=\"color:#222222\">() =&gt; </SPAN>\n    <SPAN style=\"color:#6200EE\">_start</SPAN>\n    <SPAN style=\"color:#222222\">();</SPAN>\n  </SPAN>\n  <SPAN class=\"line\"/>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#6200EE\">  _start</SPAN>\n    <SPAN style=\"color:#222222\">();</SPAN>\n  </SPAN>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#222222\">}</SPAN>\n  </SPAN>\n</CODE>\n<P>\n  Advice for writing good doc comments can be found in the \n  <A href=\"https://dart.dev/effective-dart/documentation\">Doc Writing Guidelines</A>\n  .\n</P>\n</SECTION>",
         "type": "CODE_SMELL",
         "debt": "10min",
-        "active": true
+        "active": false
     },
     {
         "key": "package_names",
@@ -1923,7 +1923,7 @@
         "description": "<SECTION><P>\n  <STRONG>AVOID</STRONG>\n</P>\n<CODE>href</CODE>\n<CODE>src</CODE>\n<CODE>srcdoc</CODE>\n<CODE>createFragment</CODE>\n<CODE>open</CODE>\n<CODE>setInnerHtml</CODE>\n<CODE>Element.html</CODE>\n<CODE>DocumentFragment.html</CODE>\n<P>\n  <STRONG>BAD:</STRONG>\n</P>\n<CODE>\n  <SPAN class=\"line\">\n    <SPAN style=\"color:#D43324\">var</SPAN>\n    <SPAN style=\"color:#222222\"> script = </SPAN>\n    <SPAN style=\"color:#0468D7\">ScriptElement</SPAN>\n    <SPAN style=\"color:#222222\">()..src = </SPAN>\n    <SPAN style=\"color:#11796D\">'foo.js'</SPAN>\n    <SPAN style=\"color:#222222\">;</SPAN>\n  </SPAN>\n</CODE>\n</SECTION>",
         "type": "CODE_SMELL",
         "debt": "5min",
-        "active": true
+        "active": false
     },
     {
         "key": "use_build_context_synchronously",
@@ -2202,7 +2202,7 @@
         "description": "The analyzer produces this diagnostic when a comment reference (the name of a declaration enclosed in square brackets in a documentation comment) uses the keyword new to refer to a constructor. This form is deprecated.\n @see https://dart.dev/tools/diagnostic-messages#deprecated_new_in_comment_reference",
         "type": "CODE_SMELL",
         "debt": "5min",
-        "active": true
+        "active": false
     },
     {
         "key": "duplicate_constructor",
@@ -2499,7 +2499,7 @@
         "description": "The analyzer produces this diagnostic when there's a type check (using the as operator) where the type is Null. There's only one value whose type is Null, so the code is both more readable and more performant when it tests for null explicitly.\n @see https://dart.dev/tools/diagnostic-messages#type_check_with_null",
         "type": "CODE_SMELL",
         "debt": "5min",
-        "active": true
+        "active": false
     },
     {
         "key": "type_parameter_supertype_of_its_bound",
@@ -2617,5 +2617,229 @@
         "type": "BUG",
         "debt": "5min",
         "active": true
+    },
+    {
+        "key": "avoid_futureor_void",
+        "name": "Avoid FutureOr void",
+        "severity": "MAJOR",
+        "description": "<SECTION><P><STRONG>AVOID</STRONG> using <CODE>FutureOr&lt;void&gt;</CODE> as the type of a result. This type is problematic because it may appear to encode that a result is either a <CODE>Future&lt;void&gt;</CODE> or <CODE>void</CODE>, but it actually just means <CODE>void</CODE>. Use <CODE>Future&lt;void&gt;?</CODE> to encode a result that is either a <CODE>Future&lt;void&gt;</CODE> or <CODE>null</CODE>.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "omit_obvious_property_types",
+        "name": "Omit obvious property types",
+        "severity": "MINOR",
+        "description": "<SECTION><P><STRONG>DON'T</STRONG> type annotate initialized properties when the type is obvious. If a property is initialized to a literal, a constructor invocation, or a static method invocation of the same type, the type annotation is unnecessary.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "1min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "remove_deprecations_in_breaking_versions",
+        "name": "Remove deprecations in breaking versions",
+        "severity": "MAJOR",
+        "description": "<SECTION><P><STRONG>DO</STRONG> remove deprecated members when a breaking version increment is made. Keeping deprecated members around increases the maintenance cost and API surface of your codebase.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "10min",
+        "active": true,
+        "cleanCodeAttribute": "CLEAR",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "simplify_variable_pattern",
+        "name": "Simplify variable pattern",
+        "severity": "MINOR",
+        "description": "<SECTION><P><STRONG>DO</STRONG> use simpler variable patterns where possible. In Dart 3, patterns allow destructuring and binding, but some patterns can be simplified for readability.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "1min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "specify_nonobvious_local_variable_types",
+        "name": "Specify nonobvious local variable types",
+        "severity": "MINOR",
+        "description": "<SECTION><P><STRONG>DO</STRONG> specify the type of a local variable when it is not obvious from the initializer. When the type of a local variable is not obvious from the initializer expression, specify the type explicitly.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "1min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "specify_nonobvious_property_types",
+        "name": "Specify nonobvious property types",
+        "severity": "MINOR",
+        "description": "<SECTION><P><STRONG>DO</STRONG> specify the type of a property when it is not obvious from the initializer. When the type of a property is not obvious from the initializer expression, specify the type explicitly for better readability.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "1min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "strict_top_level_inference",
+        "name": "Strict top level inference",
+        "severity": "MAJOR",
+        "description": "<SECTION><P><STRONG>DO</STRONG> add explicit type annotations for top-level declarations when the type cannot be inferred. Top-level declarations without explicit types make it harder for readers and tools to understand code.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "switch_on_type",
+        "name": "Switch on type",
+        "severity": "MINOR",
+        "description": "<SECTION><P><STRONG>DO</STRONG> use switch on types instead of chains of <CODE>is</CODE> checks. In Dart 3, you can use switch expressions with type patterns instead of a long chain of <CODE>if-else</CODE> with <CODE>is</CODE> checks.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "5min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "unnecessary_async",
+        "name": "Unnecessary async",
+        "severity": "MINOR",
+        "description": "<SECTION><P><STRONG>AVOID</STRONG> marking a function as <CODE>async</CODE> when it has no meaningful <CODE>await</CODE> expressions. Adding <CODE>async</CODE> to a function that doesn't use <CODE>await</CODE> is unnecessary and adds overhead.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "1min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "unnecessary_ignore",
+        "name": "Unnecessary ignore",
+        "severity": "MINOR",
+        "description": "<SECTION><P><STRONG>AVOID</STRONG> unnecessary <CODE>// ignore:</CODE> comments. If the diagnostic being ignored is not actually produced, the ignore comment is unnecessary and should be removed.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "1min",
+        "active": true,
+        "cleanCodeAttribute": "CLEAR",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "unnecessary_unawaited",
+        "name": "Unnecessary unawaited",
+        "severity": "MINOR",
+        "description": "<SECTION><P><STRONG>AVOID</STRONG> wrapping a non-<CODE>Future</CODE> expression in <CODE>unawaited()</CODE>. The <CODE>unawaited()</CODE> function is intended to mark <CODE>Future</CODE>s that are intentionally not awaited. Wrapping non-Future expressions is unnecessary.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "1min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "unnecessary_underscores",
+        "name": "Unnecessary underscores",
+        "severity": "MINOR",
+        "description": "<SECTION><P><STRONG>AVOID</STRONG> unnecessary underscores in variable names. In Dart 3, wildcard variables use a single underscore <CODE>_</CODE>. Multiple underscores like <CODE>__</CODE> or <CODE>___</CODE> are unnecessary.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "1min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
+    },
+    {
+        "key": "unsafe_variance",
+        "name": "Unsafe variance",
+        "severity": "MAJOR",
+        "description": "<SECTION><P><STRONG>AVOID</STRONG> using the <CODE>@unsafeVariance</CODE> annotation to suppress variance-related errors. Using this annotation can lead to runtime type errors that the type system would normally prevent.</P></SECTION>",
+        "type": "BUG",
+        "debt": "10min",
+        "active": true,
+        "cleanCodeAttribute": "LOGICAL",
+        "impacts": [
+            {
+                "softwareQuality": "RELIABILITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    {
+        "key": "use_null_aware_elements",
+        "name": "Use null aware elements",
+        "severity": "MINOR",
+        "description": "<SECTION><P><STRONG>DO</STRONG> use null-aware elements in collections. In Dart 3, you can use <CODE>?element</CODE> in list and set literals to conditionally include elements that might be null.</P></SECTION>",
+        "type": "CODE_SMELL",
+        "debt": "1min",
+        "active": true,
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "impacts": [
+            {
+                "softwareQuality": "MAINTAINABILITY",
+                "severity": "LOW"
+            }
+        ]
     }
 ]

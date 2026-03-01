@@ -1,4 +1,5 @@
 abstract
+base
 as
 assert
 async
@@ -50,6 +51,7 @@ patch
 required
 rethrow
 return
+sealed
 set
 show
 source
@@ -64,6 +66,7 @@ try
 typedef
 var
 void
+when
 while
 with
 yield

@@ -3,13 +3,12 @@ linter:
     - always_declare_return_types
     - always_put_control_body_on_new_line
     - always_put_required_named_parameters_first
-    - always_require_non_null_named_parameters
+    - avoid_futureor_void
     - always_specify_types
     - always_use_package_imports
     - annotate_overrides
     - annotate_redeclares
     - avoid_annotating_with_dynamic
-    - avoid_as
     - avoid_bool_literals_in_conditional_expressions
     - avoid_catches_without_on_clauses
     - avoid_catching_errors
@@ -34,8 +33,6 @@ linter:
     - avoid_relative_lib_imports
     - avoid_renaming_method_parameters
     - avoid_return_types_on_setters
-    - avoid_returning_null
-    - avoid_returning_null_for_future
     - avoid_returning_null_for_void
     - avoid_returning_this
     - avoid_setters_without_getters
@@ -76,7 +73,6 @@ linter:
     - empty_catches
     - empty_constructor_bodies
     - empty_statements
-    - enable_null_safety
     - eol_at_end_of_file
     - exhaustive_cases
     - file_names
@@ -87,7 +83,6 @@ linter:
     - implicit_reopen
     - invalid_case_patterns
     - invalid_runtime_check_with_js_interop_types
-    - invariant_booleans
     - iterable_contains_unrelated_type
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
@@ -120,14 +115,13 @@ linter:
     - one_member_abstracts
     - only_throw_errors
     - overridden_fields
-    - package_api_docs
+    - omit_obvious_property_types
     - package_names
     - package_prefixed_library_names
     - parameter_assignments
     - prefer_adjacent_string_concatenation
     - prefer_asserts_in_initializer_lists
     - prefer_asserts_with_message
-    - prefer_bool_in_asserts
     - prefer_collection_literals
     - prefer_conditional_assignment
     - prefer_const_constructors
@@ -137,7 +131,6 @@ linter:
     - prefer_constructors_over_static_methods
     - prefer_contains
     - prefer_double_quotes
-    - prefer_equal_for_default_values
     - prefer_expression_function_bodies
     - prefer_final_fields
     - prefer_final_in_for_each
@@ -168,8 +161,10 @@ linter:
     - provide_deprecation_message
     - public_member_api_docs
     - recursive_getters
+    - remove_deprecations_in_breaking_versions
     - require_trailing_commas
     - secure_pubspec_urls
+    - simplify_variable_pattern
     - sized_box_for_whitespace
     - sized_box_shrink_expand
     - slash_for_doc_comments
@@ -177,7 +172,10 @@ linter:
     - sort_constructors_first
     - sort_pub_dependencies
     - sort_unnamed_constructors_first
-    - super_goes_last
+    - specify_nonobvious_local_variable_types
+    - specify_nonobvious_property_types
+    - strict_top_level_inference
+    - switch_on_type
     - test_types_in_equals
     - throw_in_finally
     - tighten_type_of_initializing_formals
@@ -213,7 +211,12 @@ linter:
     - unnecessary_to_list_in_spreads
     - unreachable_from_main
     - unrelated_type_equality_checks
-    - unsafe_html
+    - unnecessary_async
+    - unnecessary_ignore
+    - unnecessary_unawaited
+    - unnecessary_underscores
+    - unsafe_variance
+    - use_null_aware_elements
     - use_build_context_synchronously
     - use_colored_box
     - use_decorated_box
@@ -244,7 +247,6 @@ linter:
     - conflicting_constructor_and_static_member
     - const_map_key_not_primitive_equality
     - dead_null_aware_expression
-    - deprecated_new_in_comment_reference
     - duplicate_constructor
     - duplicate_field_name
     - duplicate_ignore
@@ -277,7 +279,6 @@ linter:
     - return_in_generator
     - subtype_of_disallowed_type
     - super_formal_parameter_without_associated_positional
-    - type_check_with_null
     - type_parameter_supertype_of_its_bound
     - undefined_constructor_in_initializer
     - undefined_enum_constructor

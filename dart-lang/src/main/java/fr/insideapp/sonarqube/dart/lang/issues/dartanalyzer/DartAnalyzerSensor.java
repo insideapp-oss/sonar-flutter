@@ -28,8 +28,8 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
@@ -41,7 +41,7 @@ import java.util.Objects;
 import static java.util.Arrays.asList;
 
 public class DartAnalyzerSensor implements Sensor {
-    private static final Logger LOGGER = Loggers.get(DartAnalyzerSensor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DartAnalyzerSensor.class);
 
     public static final String ANALYZER_MODE = "sonar.dart.analyzer.mode";
     public static final List<AnalyzerExecutable.Mode> ANALYZER_MODE_OPTIONS = asList(AnalyzerExecutable.Mode.values());
@@ -95,9 +95,9 @@ public class DartAnalyzerSensor implements Sensor {
                 LOGGER.warn("File not included in SonarQube {}", file.getAbsoluteFile());
             } else {
                 final InputFile inputFile = Objects.requireNonNull(sensorContext.fileSystem().inputFile(fp));
-                sensorContext.newIssue()
-                        .forRule(RuleKey.of(DartAnalyzerRulesDefinition.REPOSITORY_KEY, issue.getRuleId().toLowerCase(Locale.ROOT)))
-                        .at(issue.toNewIssueLocationFor(inputFile))
+                final org.sonar.api.batch.sensor.issue.NewIssue newIssue = sensorContext.newIssue()
+                        .forRule(RuleKey.of(DartAnalyzerRulesDefinition.REPOSITORY_KEY, issue.getRuleId().toLowerCase(Locale.ROOT)));
+                newIssue.at(issue.toNewIssueLocationFor(newIssue, inputFile))
                         .save();
             }
         });

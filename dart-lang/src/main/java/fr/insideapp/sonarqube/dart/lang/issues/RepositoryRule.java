@@ -19,6 +19,8 @@ package fr.insideapp.sonarqube.dart.lang.issues;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class RepositoryRule {
 
     public enum Severity {
@@ -34,6 +36,14 @@ public class RepositoryRule {
         BUG,
         VULNERABILITY,
         SECURITY_HOTSPOT
+    }
+
+    public static class Impact {
+        @JsonProperty("softwareQuality")
+        public String softwareQuality;
+
+        @JsonProperty("severity")
+        public String severity;
     }
 
     @JsonProperty("key")
@@ -56,4 +66,10 @@ public class RepositoryRule {
 
     @JsonProperty("active")
     public boolean active;
+
+    @JsonProperty("cleanCodeAttribute")
+    public String cleanCodeAttribute;
+
+    @JsonProperty("impacts")
+    public List<Impact> impacts;
 }

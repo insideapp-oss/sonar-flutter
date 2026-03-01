@@ -34,7 +34,7 @@ public class FlutterPluginTest {
     @Test
     public void define() {
 
-        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
+        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(10, 1), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
         Plugin.Context context = new Plugin.Context(sonarRuntime);
 
 
@@ -42,7 +42,7 @@ public class FlutterPluginTest {
         plugin.define(context);
 
         List<?> extensions = context.getExtensions();
-        assertThat(extensions).hasSize(15);
+        assertThat(extensions).hasSize(16);
 
 
     }

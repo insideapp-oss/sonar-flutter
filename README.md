@@ -1,144 +1,163 @@
-![CI](https://github.com/insideapp-oss/sonar-flutter/workflows/CI/badge.svg)
+# SonarQube Plugin for Flutter / Dart
 
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=insideapp-oss_sonar-flutter&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=insideapp-oss_sonar-flutter)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=insideapp-oss_sonar-flutter&metric=coverage)](https://sonarcloud.io/summary/new_code?id=insideapp-oss_sonar-flutter)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=insideapp-oss_sonar-flutter&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=insideapp-oss_sonar-flutter)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=insideapp-oss_sonar-flutter&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=insideapp-oss_sonar-flutter)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=insideapp-oss_sonar-flutter&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=insideapp-oss_sonar-flutter)
+> Static code analysis for Dart and Flutter projects in SonarQube — with Dart 3.x support, 329 rules, and state management linting.
 
 
-# SonarQube plugin for Flutter / Dart
-
-A plugin to enable analysis of Dart and Flutter projects into SonarQube.
-
-<p style="text-align: center">
-	<img src="screenshots/main.png" alt="main.png" width="80%"/>
+<p align="center">
+  <img src="screenshots/main.png" alt="SonarQube Flutter Plugin" width="80%"/>
 </p>
 
-## Features
+---
 
-| Feature    | Supported                                                       |
-|------------|-----------------------------------------------------------------|
-| Size       | YES                                                             |
-| Issues     | YES ([dartanalyzer](https://dart.dev/tools/dartanalyzer) rules) |
-| Tests      | YES                                                             |
-| Coverage   | YES                                                             |
-| Complexity | YES                                                             |
-| Syntax     | YES                                                             |
+## What Does It Do?
 
-The plugin is compatible with sonarQube 7.9+.
+| Feature | Status | Details |
+|---------|--------|---------|
+| **Issues** | Supported | 305 dartanalyzer rules + 24 state management rules |
+| **Dart 3.x** | Supported | sealed classes, records, patterns, switch expressions |
+| **State Management** | Supported | BLoC (9 rules), Riverpod (15 rules) auto-detected from `pubspec.yaml` |
+| **Coverage** | Supported | LCOV format |
+| **Tests** | Supported | JSON test reports |
+| **Complexity** | Supported | Cyclomatic complexity |
+| **Syntax** | Supported | Highlighting & CPD tokens |
+| **MQR Mode** | Supported | Clean Code attributes & software quality impacts (SonarQube v26+) |
 
-## Download
+**Compatible with:** SonarQube 7.9+ (MQR mode requires v26+)
 
-Checkout the [Releases](https://github.com/insideapp-oss/sonar-flutter/releases) page.
+---
 
-Changelog is available [here](https://github.com/insideapp-oss/sonar-flutter/blob/develop/CHANGELOG.md).
+## Quick Start
 
-## Prerequisites
+### 1. Prerequisites
 
-### Flutter SDK (when analyzing a Flutter project)
+| Tool | Required For | Installation |
+|------|-------------|-------------|
+| **Flutter SDK** | Flutter projects | [flutter.dev/docs/get-started/install](https://flutter.dev/docs/get-started/install) |
+| **Dart SDK** | All projects | [dart.dev/get-dart](https://dart.dev/get-dart) |
+| **sonar-scanner** | Running analysis | [docs.sonarqube.org](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/) |
+| **Java** | sonar-scanner | Bundled with scanner or install separately |
 
-Install Flutter as explained on the official documentation page.
+### 2. Install the Plugin
 
-[Flutter Installation instructions](https://flutter.dev/docs/get-started/install)
+1. Download the latest JAR from [Releases](https://github.com/insideapp-oss/sonar-flutter/releases)
+2. Copy it to `$SONARQUBE_HOME/extensions/plugins/`
+3. Restart SonarQube
 
-### Dart
+### 3. Configure Your Project
 
-Dart is downloaded by the Flutter SDK in **$FLUTTER_HOME/bin/cache/dart-sdk**, however command lines are not on the path by default (dart must be on the path).
-
-It is recommended to install Dart SDK separately as explained here : [Install the Dart SDK](https://dart.dev/get-dart) for more reliability in a CI/CD environment.
-
-### sonar-scanner (requires Java)
-
-Install sonar-scanner as explained in the official documentation.
-
-[Installation instructions](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)
-
-
-## Installation (on the server)
-
-- Download the plugin binary into the **$SONARQUBE_HOME/extensions/plugins** directory.
-- Restart the server.
-
-## Project configuration
-
-Create a **sonar-project.properties** file at the root with this content :
+Create `sonar-project.properties` in your project root:
 
 ```properties
-# Project identification
-sonar.projectKey=flutter_rocks
-sonar.projectName=Flutter Rocks
-sonar.projectVersion=1.0
-	
-# Source code location.
-# Path is relative to the sonar-project.properties file. Defaults to .
-# Use commas to specify more than one file/folder.
-# It is good practice to add pubspec.yaml to the sources as the analyzer
-# may produce warnings for this file as well.
+sonar.projectKey=my_flutter_app
+sonar.projectName=My Flutter App
+sonar.projectVersion=1.0.0
+
 sonar.sources=lib,pubspec.yaml
 sonar.tests=test
-
-# Encoding of the source code. Default is default system encoding.
 sonar.sourceEncoding=UTF-8
-
-# Analyzer mode
-# Can be:
-# - DETECT (attempt to detect automatically) - default
-# - MANUAL (an existing report needs to be provided)
-# - FLUTTER (flutter analyze)
-# - DART (dart analyze)
-# - DARTANALYZER (dartanalyzer)
-# sonar.dart.analyzer.mode= 
-
-# Allows reuse of an existing analyzer report when mode is MANUAL
-# sonar.dart.analyzer.report.path=
-
-# Analyzer report output mode
-# Can be:
-# - DETECT (attempt to detect automatically, requires Dart SDK on the PATH) - default
-# - MACHINE (a new machine readable output that is available for Dart 2.12+)
-# - LEGACY (attempts to parse human readable output from dart/flutter) - default
-# sonar.dart.analyzer.report.mode= 
 ```
 
-*For a complete list of available options, please refer to the [SonarQube documentation](https://docs.sonarqube.org/latest/analysis/analysis-parameters/).*
+### 4. Run Analysis
 
-### Use existing analysis options
+```bash
+# Install dependencies
+flutter pub get
 
-The plugin uses its own analysis options file.
-If `analysis_options.yaml` file already exists under the project root, it will be saved during the analysis and then restored to its initial state.
+# Run tests with coverage
+flutter test --machine --coverage > tests.output
 
-To disable this behavior and use the existing`analysis_options.yaml` file instead, add the following line to `sonar-project.properties` file :
-
+# Analyze and publish to SonarQube
+sonar-scanner
 ```
-# Use existing options to perform dartanalyzer analysis
-sonar.dart.analyzer.options.override=true
+
+That's it! Open your SonarQube dashboard to see the results.
+
+---
+
+## Configuration Options
+
+All options can be set in `sonar-project.properties`, SonarQube UI, or via `-D` parameters.
+
+| Option | Values | Default | Description |
+|--------|--------|---------|-------------|
+| `sonar.dart.analyzer.mode` | `DETECT` `DART` `FLUTTER` `MANUAL` | `DETECT` | Which analyzer to use. `DETECT` picks automatically based on `pubspec.yaml`. Use `MANUAL` for pre-existing reports. |
+| `sonar.dart.analyzer.options.override` | `true` / `false` | `true` | Replace local `analysis_options.yaml` with the plugin's version during analysis. Set to `false` to keep yours. |
+| `sonar.dart.analyzer.report.mode` | `DETECT` `MACHINE` `LEGACY` | `DETECT` | Output format. Auto-detected from Dart SDK version when set to `DETECT`. |
+| `sonar.dart.analyzer.report.path` | file path | - | Path to existing report file. Only used with `MANUAL` mode. |
+| `sonar.flutter.tests.reportPath` | file path(s) | `tests.output` | Path to test report JSON file(s). Comma-separated, no wildcards. |
+| `sonar.flutter.coverage.reportPath` | file path | `coverage/lcov.info` | Path to LCOV coverage report. |
+
+> **Note:** The legacy `DARTANALYZER` mode has been removed. It was deprecated in Dart 2.18 and no longer exists in Dart 3.x. Use `DART` or `FLUTTER` mode instead.
+
+---
+
+## Rules
+
+### Dart Analyzer Rules (305)
+
+The plugin bundles 305 rules from `dart analyze` / `flutter analyze`:
+- Lint rules (style, best practices, error prevention)
+- Analyzer diagnostics (type errors, null safety, etc.)
+- 14 new Dart 3.x rules: `avoid_futureor_void`, `switch_on_type`, `unnecessary_async`, `unsafe_variance`, and more
+
+### State Management Rules (24)
+
+Automatically activated when BLoC or Riverpod is detected in `pubspec.yaml`:
+
+**BLoC (9 rules)** — `flutter_bloc` / `bloc` dependency detected:
+- `bloc_avoid_flutter_imports` — Keep BLoC platform-independent
+- `bloc_avoid_public_methods` — Use events, not public methods
+- `bloc_avoid_mutable_state` — State classes must be immutable
+- `bloc_close_bloc` — Prevent memory leaks
+- and 5 more...
+
+**Riverpod (15 rules)** — `flutter_riverpod` / `riverpod` dependency detected:
+- `riverpod_missing_provider_scope` — ProviderScope required at root
+- `riverpod_avoid_read_inside_build` — Use ref.watch in build
+- `riverpod_avoid_watch_outside_build` — Use ref.read in callbacks
+- `riverpod_avoid_build_context_in_providers` — Keep providers decoupled
+- and 11 more...
+
+---
+
+## Dart 3.x Grammar Support
+
+The ANTLR parser understands Dart 3 syntax:
+
+- **Class modifiers:** `sealed`, `base`, `final`, `interface`, `mixin class`
+- **Records:** `(int, String)` types and `(1, 'hello')` literals
+- **Patterns:** `switch` expressions, `if-case`, variable/type/wildcard patterns
+- **Guards:** `when` clause in switch cases and if-case
+- **Nullable types:** `String?`, `int?` in type positions
+
+---
+
+## Advanced Usage
+
+### Use Your Own `analysis_options.yaml`
+
+```properties
+sonar.dart.analyzer.options.override=false
 ```
 
-### Multi-module sample
-
-It is possible to analyze a project with multiple modules. For example a Dart generator library with an example.
+### Multi-Module Projects
 
 ```properties
 sonar.projectKey=mylib
 sonar.sourceEncoding=UTF-8
-
 sonar.modules=mylib,mylib_generator,example
 
-# mylib
 mylib.sonar.sources=lib,pubspec.yaml
 mylib.sonar.dart.analyzer.mode=MANUAL
 mylib.sonar.dart.analyzer.report.mode=LEGACY
 mylib.sonar.dart.analyzer.report.path=build/reports/analysis-results.txt
 
-# mylib_generator
 mylib_generator.sonar.sources=lib,pubspec.yaml
 mylib_generator.sonar.dart.analyzer.options.override=false
 mylib_generator.sonar.dart.analyzer.mode=MANUAL
 mylib_generator.sonar.dart.analyzer.report.mode=MACHINE
 mylib_generator.sonar.dart.analyzer.report.path=build/reports/analysis-results.txt
 
-# example
 example.sonar.sources=lib,pubspec.yaml
 example.sonar.tests=test
 example.sonar.exclusions=**/*/*.g.dart
@@ -148,60 +167,45 @@ example.sonar.dart.analyzer.report.mode=LEGACY
 example.sonar.dart.analyzer.report.path=build/reports/analysis-results.txt
 ```
 
-## Run analysis
+### Using `dart_test.yaml`
 
-Use the following commands from the root folder to start an analysis: 
-
-```console
-# Download dependencies 
-flutter pub get 
-# Run tests with User feedback (in case some test are failing)
-flutter test
-# Run tests without user feedback regeneration tests.output and coverage/lcov.info
-flutter test --machine --coverage > tests.output 
-
-# Run the analysis and publish to the SonarQube server
-sonar-scanner
-```
-
-## Using `dart_test.yaml`
-
-Dart/Flutter support the use of a `dart_test.yaml` file to configure test behavior.
-This file can be used to configure the test output format and location. More information can be found [here](https://github.com/dart-lang/test/blob/master/pkgs/test/doc/configuration.md).
+Configure test output in `dart_test.yaml` instead of `--machine` flag:
 
 ```yaml
 file_reporters:
   json: build/reports/test-results.json
 ```
 
-With this, it is no longer use the `--machine` switch or redirect the output.
-It is currently not possible to configure the coverage out in this file.
-You may follow and upvote these related issue if interested:
-* Configuration option - https://github.com/dart-lang/test/issues/1361
-* Dart coverage support - https://github.com/dart-lang/test/issues/1265
+Then point `sonar.flutter.tests.reportPath` to `build/reports/test-results.json`.
 
+---
 
-## Available options
+## Building from Source
 
-All options are configurable in the SonarQube UI, via `sonar-project.properties` or `-D` parameters.
+```bash
+# Compile
+mvn clean compile
 
-| Name                                   | Options                                                                  | Default              | Description                                                                                                                                                                                                                                                                                         |
-|----------------------------------------|--------------------------------------------------------------------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `sonar.dart.analyzer.mode`             | <code>DETECT&#124;DART&#124;FLUTTER&#124;MANUAL&#124;DARTANALYZER</code> | `DETECT`             | By default the plugin attempts to detect a fitting analyzer (`flutter analyze` or `dart analyze`) by parsing the `environment` from `pubspec.yaml`. This can be set to `MANUAL` to provide and existing report file. For compatibility with older Dart versions, this can be set to `DARTANALYZER`. |
-| `sonar.dart.analyzer.options.override` | <code>true&#124;false</code>                                             | `true`               | By default any local `analysis_options.yaml` will be replaced for the analysis. This can be prevented by setting this to `false`.                                                                                                                                                                   |
-| `sonar.dart.analyzer.report.mode`      | <code>DETECT&#124;MACHINE&#124;LEGACY</code>                             | `DETECT`             | The new machine readable output can be automatically detected if Dart SDK is available on the $PATH.                                                                                                                                                                                                |
-| `sonar.dart.analyzer.report.path`      | A file path                                                              | -                    | This is required if the analyzer mode is set to `MANUAL`.                                                                                                                                                                                                                                           |
-| `sonar.flutter.tests.reportPath`       | Comma separated list of file paths (wildcard not supported)              | `tests.output`       | The path to the test report JSON file.                                                                                                                                                                                                                                                              |
-| `sonar.flutter.coverage.reportPath`    | A file path                                                              | `coverage/lcov.info` | The path to the test coverage file in LCOV format.                                                                                                                                                                                                                                                  |
+# Run tests
+mvn test
 
+# Build plugin JAR
+mvn clean package
+# Output: sonar-flutter-plugin/target/sonar-flutter-plugin-*.jar
+```
+
+**Requirements:** Java 17+, Maven 3.8+
+
+---
 
 ## Contributing
 
-Any help is welcome, and PRs will be greatly appreciated!
-
-Please read [CONTRIBUTING](https://github.com/insideapp-oss/sonar-flutter/blob/develop/CONTRIBUTING.md) for more information.
-
+PRs are welcome! Please read [CONTRIBUTING](CONTRIBUTING.md) for guidelines.
 
 ## License
 
-SonarQube Plugin for Flutter / Dart is released under the GNU LGPL v3 license. See the [LICENSE](https://github.com/insideapp-oss/sonar-flutter/blob/develop/LICENSE) file for more information.
+GNU LGPL v3 — see [LICENSE](LICENSE) for details.
+
+---
+
+*Forked from [insideapp-oss/sonar-flutter](https://github.com/insideapp-oss/sonar-flutter). Extended with Dart 3.x support, state management rules, and MQR mode.*

@@ -29,11 +29,13 @@
             <plugin>
                 <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
                 <artifactId>sonar-packaging-maven-plugin</artifactId>
-                <version>1.18.0.372</version>
+                <version>1.23.0.740</version>
                 <extensions>true</extensions>
                 <configuration>
                     <pluginClass>fr.insideapp.sonarqube.flutter.FlutterPlugin</pluginClass>
                     <pluginName>Flutter</pluginName>
+                    <pluginApiMinVersion>10.8</pluginApiMinVersion>
+                    <requireForLanguages>dart</requireForLanguages>
                 </configuration>
             </plugin>
 

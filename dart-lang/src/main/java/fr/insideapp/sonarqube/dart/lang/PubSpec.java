@@ -25,9 +25,18 @@ public class PubSpec {
 
     private final String version;
 
-    PubSpec(boolean flutter, String version) {
+    private final boolean usesBloc;
+
+    private final boolean usesRiverpod;
+
+    private final boolean usesProvider;
+
+    PubSpec(boolean flutter, String version, boolean usesBloc, boolean usesRiverpod, boolean usesProvider) {
         this.flutter = flutter;
         this.version = version;
+        this.usesBloc = usesBloc;
+        this.usesRiverpod = usesRiverpod;
+        this.usesProvider = usesProvider;
     }
 
     public boolean isFlutter() {
@@ -36,5 +45,21 @@ public class PubSpec {
 
     public String getProjectVersion() {
         return version;
+    }
+
+    public boolean usesBloc() {
+        return usesBloc;
+    }
+
+    public boolean usesRiverpod() {
+        return usesRiverpod;
+    }
+
+    public boolean usesProvider() {
+        return usesProvider;
+    }
+
+    public boolean usesStateManagement() {
+        return usesBloc || usesRiverpod || usesProvider;
     }
 }

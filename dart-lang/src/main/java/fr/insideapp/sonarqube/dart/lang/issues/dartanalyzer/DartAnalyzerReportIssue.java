@@ -18,11 +18,9 @@
 package fr.insideapp.sonarqube.dart.lang.issues.dartanalyzer;
 
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
-import org.sonar.api.batch.sensor.issue.internal.DefaultIssueLocation;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
 public class DartAnalyzerReportIssue {
@@ -95,10 +93,10 @@ public class DartAnalyzerReportIssue {
         return Objects.hash(ruleId, message, filePath, lineNumber, colNumber, length);
     }
 
-    @Nonnull
-    @ParametersAreNonnullByDefault
-    public NewIssueLocation toNewIssueLocationFor(final InputFile inputFile) {
-        final NewIssueLocation location = new DefaultIssueLocation().on(inputFile).message(message);
+    public NewIssueLocation toNewIssueLocationFor(final NewIssue newIssue, final InputFile inputFile) {
+        final NewIssueLocation location = newIssue.newLocation()
+                .on(inputFile)
+                .message(message);
         if (colNumber != null) {
             // This is a machine readable issue with column and length information
             // In Dart columns are 1-based but in Sonar they are 0-based, so need to subtract 1

@@ -18,8 +18,8 @@
 package fr.insideapp.sonarqube.dart.lang;
 
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 import javax.annotation.Nonnull;
@@ -32,9 +32,17 @@ import java.nio.file.Path;
 import java.util.Map;
 
 public class PubSpecParser {
-    private static final Logger LOGGER = Loggers.get(PubSpecParser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PubSpecParser.class);
 
     private PubSpecParser() {
+    }
+
+    private static boolean containsAnyKey(Map<String, Object> map, String... keys) {
+        if (map == null) return false;
+        for (String key : keys) {
+            if (map.containsKey(key)) return true;
+        }
+        return false;
     }
 
     @Nonnull
@@ -58,9 +66,21 @@ public class PubSpecParser {
 
         final String projectVersion = ((String) data.get("version"));
         final Map<String, Object> dependencies = ((Map<String, Object>) data.get("dependencies"));
+        final Map<String, Object> devDependencies = ((Map<String, Object>) data.get("dev_dependencies"));
         final boolean flutter = dependencies != null && dependencies.containsKey("flutter");
-        LOGGER.info("Detected {} project with version {}", flutter ? "Flutter" : "Dart", projectVersion);
 
-        return new PubSpec(flutter, projectVersion);
+        // Detect state management libraries
+        final boolean usesBloc = containsAnyKey(dependencies, "flutter_bloc", "bloc") ||
+                containsAnyKey(devDependencies, "bloc_lint");
+        final boolean usesRiverpod = containsAnyKey(dependencies, "flutter_riverpod", "hooks_riverpod", "riverpod") ||
+                containsAnyKey(devDependencies, "riverpod_lint");
+        final boolean usesProvider = !usesRiverpod && containsAnyKey(dependencies, "provider");
+
+        LOGGER.info("Detected {} project with version {}", flutter ? "Flutter" : "Dart", projectVersion);
+        if (usesBloc) LOGGER.info("Detected BLoC state management");
+        if (usesRiverpod) LOGGER.info("Detected Riverpod state management");
+        if (usesProvider) LOGGER.info("Detected Provider state management");
+
+        return new PubSpec(flutter, projectVersion, usesBloc, usesRiverpod, usesProvider);
     }
 }

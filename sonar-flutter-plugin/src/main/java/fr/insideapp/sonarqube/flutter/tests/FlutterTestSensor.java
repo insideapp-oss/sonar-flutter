@@ -24,8 +24,8 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +33,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class FlutterTestSensor implements Sensor {
-    private static final Logger LOGGER = Loggers.get(FlutterTestSensor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FlutterTestSensor.class);
     public static final String REPORT_PATH_KEY = "sonar.flutter.tests.reportPath";
     public static final String DEFAULT_REPORT_PATH = "tests.output";
 

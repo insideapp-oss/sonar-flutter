@@ -31,15 +31,15 @@ import fr.insideapp.sonarqube.dart.lang.antlr.CyclomaticComplexityVisitor;
 import fr.insideapp.sonarqube.dart.lang.antlr.HighlighterVisitor;
 import fr.insideapp.sonarqube.dart.lang.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.dart.lang.antlr.SourceLinesVisitor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 public class DartSensor implements Sensor {
 
-    private static final Logger LOGGER = Loggers.get(DartSensor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DartSensor.class);
 
     @Override
     public void describe(@Nonnull SensorDescriptor sensorDescriptor) {

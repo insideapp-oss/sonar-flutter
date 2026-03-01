@@ -17,15 +17,8 @@
  */
 package fr.insideapp.sonarqube.dart.lang.antlr;
 
-import com.google.common.io.Files;
-import fr.insideapp.sonarqube.dart.lang.Dart;
 import org.antlr.v4.runtime.Token;
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-
-import java.nio.charset.Charset;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

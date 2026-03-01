@@ -20,8 +20,8 @@ package fr.insideapp.sonarqube.flutter.coverage;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.CheckForNull;
 import java.io.File;
@@ -44,7 +44,7 @@ public class LCOVParser {
     private final FileLocator fileLocator;
     private int inconsistenciesCounter = 0;
 
-    private static final Logger LOGGER = Loggers.get(LCOVParser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LCOVParser.class);
 
     private LCOVParser(List<String> lines, SensorContext context, FileLocator fileLocator) {
         this.context = context;

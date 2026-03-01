@@ -24,12 +24,12 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CyclomaticComplexityVisitor implements ParseTreeItemVisitor {
 
-    private static final Logger LOGGER = Loggers.get(CyclomaticComplexityVisitor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CyclomaticComplexityVisitor.class);
 
     private int complexity = 0;
 
@@ -44,7 +44,8 @@ public class CyclomaticComplexityVisitor implements ParseTreeItemVisitor {
                 Dart2Parser.SwitchCaseContext.class.equals(classz) ||
                 Dart2Parser.DefaultCaseContext.class.equals(classz) ||
                 Dart2Parser.DoStatementContext.class.equals(classz) ||
-                Dart2Parser.FunctionBodyContext.class.equals(classz)
+                Dart2Parser.FunctionBodyContext.class.equals(classz) ||
+                Dart2Parser.SwitchExpressionCaseContext.class.equals(classz)
         ) {
             complexity++;
         }
