@@ -4,7 +4,7 @@
     
     <groupId>fr.insideapp.sonarqube</groupId>
     <artifactId>sonar-flutter</artifactId>
-    <version>0.5.2</version>
+    <version>0.5.3</version>
 
     <packaging>pom</packaging>
 
@@ -58,7 +58,7 @@
         <jdk.min.version>1.9</jdk.min.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <sonar.version>7.9</sonar.version>
+        <sonar.version>11.3.0.2824</sonar.version>
 
         <assertj.version>3.5.2</assertj.version>
         <junit.version>4.13.1</junit.version>
@@ -81,7 +81,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.sonarsource.sonarqube</groupId>
+            <groupId>org.sonarsource.api.plugin</groupId>
             <artifactId>sonar-plugin-api</artifactId>
             <version>${sonar.version}</version>
             <scope>provided</scope>
@@ -149,8 +149,14 @@
         <dependency>
             <groupId>org.sonarsource.sonarqube</groupId>
             <artifactId>sonar-testing-harness</artifactId>
-            <version>${sonar.version}</version>
+            <version>25.3.0.104237</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.sonarqube</groupId>
+            <artifactId>sonar-plugin-api-impl</artifactId>
+            <version>25.3.0.104237</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
